@@ -12,6 +12,8 @@
 
 下表按实际作物季映射市场年度。`平均绝对差`是该机构所列作物相对 PSD 的简单平均，仅用于查看来源分歧，不用于计算全球组合权重。全球组合必须按吨数求和。
 
+巴西、印度和南非表中的最新本土值对应 2025/26，应与 PSD 2025/26 比较；它们不能替换 PSD 2026/27 全球组件。所有全球同比必须在市场年度映射后进行本年/上年成对替换。
+
 | 国家/地区 | 本土来源 | 同口径作物数 | 相对 PSD 平均有符号差 | 平均绝对差 | 最大单项差 | 当前判断 |
 |---|---|---:|---:|---:|---:|---|
 | 中国 | CASDE | 3 | +0.42% | 0.79% | 1.81% | 当前高度接近；尚无充分历史胜负样本 |
@@ -111,4 +113,3 @@
 - [乌克兰 UGA 2026 预测](https://uga.ua/en/news/ukraine-could-potentially-export-52-mmt-in-my-2026-2027-if-the-harvest-reaches-84-6-mmt-of-grains-and-oilseeds/)
 - [USDA NASS Crop Production Historical Track Records 2025](https://www.nass.usda.gov/Publications/Todays_Reports/reports/croptr25.pdf)
 - [USDA 与 CONAB 巴西大豆口径差异研究](https://farmdocdaily.illinois.edu/2024/04/what-explains-the-disparity-between-usda-and-conab-over-brazils-soybean-crop-size.html)
-
