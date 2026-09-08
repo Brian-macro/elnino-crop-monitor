@@ -1,23 +1,28 @@
 {
-  "started_at": "20260908T153003Z",
+  "started_at": "20260908T153638Z",
   "policy_version": "2026-09-08-regions-v1",
   "offline": false,
-  "group": "build",
+  "group": "climate",
   "steps": [
+    {
+      "step": "noaa",
+      "returncode": 0,
+      "seconds": 1.16
+    },
     {
       "step": "validate",
       "returncode": 0,
-      "seconds": 0.72
+      "seconds": 0.69
     },
     {
       "step": "publish",
       "returncode": 0,
-      "seconds": 24.65
+      "seconds": 27.93
     },
     {
       "step": "parquet",
       "returncode": 0,
-      "seconds": 0.69
+      "seconds": 0.64
     }
   ],
   "publication_complete": true,
