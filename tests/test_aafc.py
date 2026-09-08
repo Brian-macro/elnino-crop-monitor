@@ -28,7 +28,7 @@ def test_official_aafc_forecast_and_previous_year_pair():
     assert {k: r['value'] for k, r in previous.items()} == {'wheat': 39.955, 'corn': 14.867, 'soybean': 6.918}
     for crop, row in forecast.items():
         assert row['target_year'] == 2026 and row['year_basis'] == 'marketing_year'
-        assert row['commodity_basis'] == 'grain' and row['unit'] == 'Mt'
+        assert row['commodity_basis'] == ('oilseed' if crop == 'soybean' else 'grain') and row['unit'] == 'Mt'
         assert row['publication_date'] == '2026-07-20' and row['available_date'] == '2026-07-23'
         assert ('August-July' if crop == 'wheat' else 'September-August') in row['methodology']
         assert 'Statistics Canada' in previous[crop]['methodology']

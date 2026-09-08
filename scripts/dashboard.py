@@ -45,6 +45,25 @@ def dashboard_bundle(con,crop):
             for country in members:units.pop(country,None)
             units[name]=members
         summary=summarize_counts(current_counts,previous_counts,units)
+        # Until a validated local pair exists, expose an explicit PSD baseline
+        # contract. The frontend can render the comparison fields without
+        # mistaking a missing local source for a zero-difference result.
+        summary['mode'] = 'psd_baseline'
+        summary['local_coverage_pct'] = 0.0
+        summary['baseline'] = dict(
+            source='usda_psd',
+            value=summary['world']['value'],
+            previous=summary['world']['previous'],
+            yoy=summary['world']['yoy'],
+        )
+        summary['world']['baseline_yoy'] = summary['world']['yoy']
+        summary['world']['yoy_spread_pp'] = 0.0
+        for row in summary['ranking']:
+            row['contribution_pp'] = (
+                row['change'] / summary['world']['previous'] * 100
+                if row.get('change') is not None and summary['world']['previous']
+                else None
+            )
         # Compact regional details remain available on click; the default shows only six rows.
         summary.update(target_year=int(year),status=latest.status,source='usda_psd',source_url=latest.source_url,
             available_date=str(latest.available_date)[:10],publication_date=str(latest.publication_date)[:10] if str(latest.publication_date)!='NaT' else None,

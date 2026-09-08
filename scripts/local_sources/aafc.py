@@ -5,7 +5,7 @@ SOURCE='aafc'; URL='https://agriculture.canada.ca/en/sector/crops/reports-statis
 def discover(): return [dict(url=URL,publication_date='2026-07-20',available_date='2026-07-23',date_basis='page date modified',title='AAFC Outlook July 20 2026',suffix='.html')]
 def parse(doc):
  s=BeautifulSoup(content(doc),'html.parser'); out={'forecast':[],'estimate':[]}
- maps={'All Wheat':('wheat','grain','August-July'),'Corn':('corn','grain','September-August'),'Soybeans':('soybean','grain','September-August')}
+ maps={'All Wheat':('wheat','grain','August-July'),'Corn':('corn','grain','September-August'),'Soybeans':('soybean','oilseed','September-August')}
  for t in s.find_all('table'):
   cap=t.find('caption'); name=cap.get_text(' ',strip=True).split(':')[0] if cap else ''
   key=next((k for k in maps if k.lower() in name.lower()),None)
