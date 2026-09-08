@@ -6,6 +6,10 @@
 
 首次部署：[Deploy to GitHub Pages](https://github.com/Brian-macro/elnino-crop-monitor/actions/runs/34243621193)，成功。
 
+云端更新闭环：[Update Research Data](https://github.com/Brian-macro/elnino-crop-monitor/actions/runs/34245791900)，成功。该次运行完成数据库恢复、NOAA更新、数据校验、快照提交以及Pages再部署。
+
+曾有一次更新后的Pages产物上传与并行部署同名，返回403。工作流现为每次运行生成唯一产物名；修复后的直接部署和完整数据更新均已验证成功。
+
 ## 运行方式
 
 数据库文件存放在GitHub仓库，Actions是执行器，不是持久数据库。持久化内容包含schema、Parquet表快照、不可变原始资料及预测版本。每次运行恢复为临时DuckDB，完成校验和更新后重新导出、提交，并发布静态网站。
