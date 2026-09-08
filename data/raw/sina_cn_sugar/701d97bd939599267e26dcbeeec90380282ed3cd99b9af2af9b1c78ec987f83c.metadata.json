@@ -1,0 +1,12 @@
+{
+  "document_id": "92008b7addaba9b307805c1eaff7d80b07198fa329efa7a8e0dc345284c80e2b",
+  "source": "sina_cn_sugar",
+  "source_url": "https://stock2.finance.sina.com.cn/futures/api/jsonp.php/var%20_V21052021_4_12=/InnerFuturesNewService.getDailyKLine?symbol=SR0&type=2021_04_12",
+  "raw_path": "data/raw/sina_cn_sugar/701d97bd939599267e26dcbeeec90380282ed3cd99b9af2af9b1c78ec987f83c.jsonp",
+  "sha256": "701d97bd939599267e26dcbeeec90380282ed3cd99b9af2af9b1c78ec987f83c",
+  "publication_date": null,
+  "available_date": "2026-09-08",
+  "download_timestamp": "2026-09-08T13:39:25.753212+00:00",
+  "publication_date_basis": "Source publication timestamp unavailable; first observed archive date",
+  "title": "郑州白糖主连"
+}

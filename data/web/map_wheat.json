@@ -1,0 +1,111 @@
+{
+ "crop": "wheat",
+ "target_year": 2026,
+ "countries": [
+  {
+   "country": "China",
+   "forecast": 141.0,
+   "yoy": 0.7
+  },
+  {
+   "country": "European Union",
+   "forecast": 134.2,
+   "yoy": -7.5
+  },
+  {
+   "country": "India",
+   "forecast": 121.0,
+   "yoy": 2.6
+  },
+  {
+   "country": "Russia",
+   "forecast": 88.5,
+   "yoy": -2.0
+  },
+  {
+   "country": "United States",
+   "forecast": 41.66,
+   "yoy": -22.9
+  },
+  {
+   "country": "Canada",
+   "forecast": 35.0,
+   "yoy": -12.4
+  },
+  {
+   "country": "Pakistan",
+   "forecast": 29.0,
+   "yoy": 2.1
+  },
+  {
+   "country": "Australia",
+   "forecast": 28.0,
+   "yoy": -22.2
+  },
+  {
+   "country": "Ukraine",
+   "forecast": 25.4,
+   "yoy": 5.4
+  },
+  {
+   "country": "Turkey",
+   "forecast": 22.5,
+   "yoy": 33.9
+  },
+  {
+   "country": "Argentina",
+   "forecast": 21.0,
+   "yoy": -24.7
+  },
+  {
+   "country": "Kazakhstan",
+   "forecast": 16.0,
+   "yoy": -17.2
+  },
+  {
+   "country": "Brazil",
+   "forecast": 6.1,
+   "yoy": -22.5
+  },
+  {
+   "country": "Mexico",
+   "forecast": 2.0,
+   "yoy": 14.3
+  },
+  {
+   "country": "South Africa",
+   "forecast": 1.94,
+   "yoy": 1.8
+  },
+  {
+   "country": "Paraguay",
+   "forecast": 1.1,
+   "yoy": -8.3
+  },
+  {
+   "country": "Bangladesh",
+   "forecast": 1.05,
+   "yoy": 0.0
+  },
+  {
+   "country": "Indonesia",
+   "forecast": 0.0,
+   "yoy": null
+  },
+  {
+   "country": "Thailand",
+   "forecast": 0.0,
+   "yoy": null
+  },
+  {
+   "country": "Philippines",
+   "forecast": 0.0,
+   "yoy": null
+  },
+  {
+   "country": "Vietnam",
+   "forecast": 0.0,
+   "yoy": null
+  }
+ ]
+}

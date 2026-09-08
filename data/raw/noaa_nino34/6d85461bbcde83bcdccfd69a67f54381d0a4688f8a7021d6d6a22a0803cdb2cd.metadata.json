@@ -1,0 +1,12 @@
+{
+  "document_id": "1368cce87db9249e1f4fcb16f78505c225d795c71d1794b1b44e5bb6a9b0b20b",
+  "source": "noaa_nino34",
+  "source_url": "https://www.cpc.ncep.noaa.gov/data/indices/sstoi.indices",
+  "raw_path": "data/raw/noaa_nino34/6d85461bbcde83bcdccfd69a67f54381d0a4688f8a7021d6d6a22a0803cdb2cd.txt",
+  "sha256": "6d85461bbcde83bcdccfd69a67f54381d0a4688f8a7021d6d6a22a0803cdb2cd",
+  "publication_date": null,
+  "available_date": "2026-09-08",
+  "download_timestamp": "2026-09-08T06:54:35.237198+00:00",
+  "publication_date_basis": "unknown; first observed",
+  "title": ""
+}

@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta http-equiv="Content-Type" Content="text/html;charset=utf8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CropWatch Cloud</title>
+    <link rel="stylesheet" href="/web/layui-v2.8.11/css/layui.css">
+    <link rel="stylesheet" href="/web/style/common.min.css">
+    <link rel="stylesheet" href="/web/style/css.min.css">
+    <link rel="stylesheet" href="/web/style/add.min.css">
+</head>
+
+<body class="page kuaibao">
+    
+	<script> var ctx = "\/"; var captchaType = null; </script>
+	<header class="pa w100p" style="z-index: 100;">
+		<div class="layui-container">
+			<div class="logo--box df aic jcsb">
+				<a href="/"><img src="/web/images/logo.webp" class="db h100p" alt=""></a>
+				<div class="r df fdc aife jcsb f1">
+					<div class="df aic fs13">
+						<a class="df aic mr25" href="/web/login/">
+							<svg t="1692522806508" class="icon" viewBox="0 0 1024 1024" version="1.1"
+								 xmlns="http://www.w3.org/2000/svg" p-id="2912" width="16" height="16">
+								<path
+										d="M870.314316 877.390274 870.314316 877.390274C870.314316 877.390274 870.314316 877.390274 870.314316 877.390274 777.938121 967.974532 651.551687 1024 512 1024 229.239611 1024 0.017919 794.741738 0.017919 511.98135 0.017919 229.22096 229.239611-0.000731 512-0.000731 794.760389-0.000731 1023.982081 229.22096 1023.982081 511.98135 1023.982081 655.190051 965.067572 784.465527 870.314316 877.390274ZM512 950.859703C615.932362 950.859703 711.30731 914.545545 786.495536 854.131659 746.451223 740.398497 639.446968 658.261944 512 658.261944 384.553032 658.261944 277.548777 740.398497 237.504464 854.131659 312.69269 914.545545 408.067638 950.859703 512 950.859703ZM512 73.176136C269.649625 73.176136 73.158216 269.667545 73.158216 512.017919 73.158216 621.545515 113.53166 721.41859 179.869911 798.325613 237.723886 672.597442 364.512591 585.158216 512 585.158216 659.450839 585.158216 786.276114 672.597442 844.130089 798.325613 910.46834 721.45516 950.841784 621.545515 950.841784 512.017919 950.841784 269.667545 754.350375 73.176136 512 73.176136ZM512 548.588068C410.993249 548.588068 329.149257 466.707505 329.149257 365.737325 329.149257 264.730574 410.993249 182.886582 512 182.886582 612.97018 182.886582 694.850743 264.730574 694.850743 365.737325 694.850743 466.707505 612.97018 548.588068 512 548.588068ZM512 256.026879C451.403264 256.026879 402.289554 305.140589 402.289554 365.700754 402.289554 426.297491 451.403264 475.411201 512 475.411201 572.596736 475.411201 621.710446 426.297491 621.710446 365.700754 621.710446 305.140589 572.596736 256.026879 512 256.026879Z"
+										fill="#ffffff" p-id="2913"></path>
+							</svg>
+							<span class="ml6 white">Login</span>
+						</a>
+						
+						
+						<div class="pr">
+							<a href="javascript:;" class="white active  df aic" onclick="showDrop(this)"><img style="margin-right:5px;height:24px!important;" src="/profile/avatar/2023/04/15/us_20230415184657A001.png" >English</a>
+							<div class="drop bg-white br5 pa">
+								<a class="df aic" style="padding-left: 10px;cursor: pointer;" onclick="changeLanguage(&quot;en_US&quot;)"><img style="margin-right:5px;height:20px!important;" src="/profile/avatar/2023/04/15/us_20230415184657A001.png" >English</a><a class="df aic" style="padding-left: 10px;cursor: pointer;" onclick="changeLanguage(&quot;zh_CN&quot;)"><img style="margin-right:5px;height:20px!important;" src="/profile/avatar/2023/04/15/zh_20230415184706A002.png" >中文</a>
+							</div>
+						</div>
+<!--						<em class="h10 w1 bg-white ml10 mr10"></em>-->
+<!--						<a href="javascript:;" class="white">EN</a>-->
+						<span class="menu ml25 layui-hide-sm" onclick="showNav(this)"></span>
+					</div>
+					<div class="nav df aic jcsb fs15">
+						<a href="/">Home</a>
+						<a href="/web/about">About</a>
+						<a href="/web/report/kuai">Update</a>
+						<a href="/web/report" class="active">Bulletin</a>
+						<a href="/web/method">Methodology</a>
+						<a href="/web/publications">Publications</a>
+						<a href="/web/contact">Contact Us</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<script src="/web/js/jquery-2.1.1.min.js"></script>
+	<script>
+		function showDrop(is){
+			$('.drop').toggleClass('open')
+		}
+
+		function changeLanguage(lang) {
+			console.log(lang)
+			$.ajax({
+				type: "post",
+				url: ctx + "web/common/changeLang",
+				data: {
+					"lang": lang
+				},
+				success: function(result) {
+					window.location.reload();
+				}
+			});
+		}
+	</script>
+
+    <main>
+        <div class="b">
+            <img src="/web/images/bg-kb.jpg" class="w100p db" alt="">
+            <div class="tac white df aic jcc fdc info pa">
+                <h2>Bulletin</h2>
+                <strong>CropWatch bulletin</strong>
+            </div>
+        </div>
+        <div class="box1">
+            <div class="layui-container">
+                <div class="layui-row aifs layui-col-space25">
+                    <div class="layui-col-md3">
+                        <h3 class="fs18 fw500 lh24">Menu</h3>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Key Message</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7817" class="db bbse c6">
+                                        Key Message
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Chapter 1: Global Outlook</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7776" class="db bbse c6">
+                                        1.1 Global Crop Production Situation and Stress
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7777" class="db bbse c6">
+                                        1.2 Global Crop Production Situation
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7778" class="db bbse c6">
+                                        1.3 Wheat production in the Northern Hemisphere
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7779" class="db bbse c6">
+                                        1.4 Maize production in the Southern Hemisphere
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7780" class="db bbse c6">
+                                        1.5 Rice production in the equatorial region
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7781" class="db bbse c6">
+                                        1.6 Soybeans production in Southern Hemisphere
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7812" class="db bbse c6">
+                                        1.7 Outlook
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Chapter 2: Countries Outlook</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7782" class="db bbse c6">
+                                        2.1 Argentina
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7783" class="db bbse c6">
+                                        2.2 Australia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7784" class="db bbse c6">
+                                        2.3 Bangladesh
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7785" class="db bbse c6">
+                                        2.4 Brazil
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7786" class="db bbse c6">
+                                        2.5 Canada
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7787" class="db bbse c6">
+                                        2.6 China
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7788" class="db bbse c6">
+                                        2.7 Ethiopia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7789" class="db bbse c6">
+                                        2.8 France
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7790" class="db bbse c6">
+                                        2.9 German
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7791" class="db bbse c6">
+                                        2.10 India
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7792" class="db bbse c6">
+                                        2.11 Indonesia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7793" class="db bbse c6">
+                                        2.12 Mexico
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7794" class="db bbse c6">
+                                        2.13 Nigeria
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7795" class="db bbse c6">
+                                        2.14 Pakistan
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7796" class="db bbse c6">
+                                        2.15 Russia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7797" class="db bbse c6">
+                                        2.16 South Africa
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7798" class="db bbse c6">
+                                        2.17 Ukraine
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7799" class="db bbse c6">
+                                        2.18 USA
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7800" class="db bbse c6">
+                                        2.19 Vietnam
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7801" class="db bbse c6">
+                                        2.20 Thailand
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Online Country Analysis</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7802" class="db bbse c6">
+                                        3.1 Online Resouces for Country Analysis
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7803" class="db bbse c6">
+                                        3.2 CropWatch GPT for Analysis
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Appendix A: Indicators</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7804" class="db bbse c6">
+                                        A.1 Global Crop Production
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7805" class="db bbse c6">
+                                        A.2 Agro-climatic indicators
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7806" class="db bbse c6">
+                                        A.3 Agronomic Indicators
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Appendix B. Methodology, Data and Online Resources</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7807" class="db bbse c6">
+                                        The CropWatch Monitoring System
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7808" class="db bbse c6">
+                                        Indicators and Methods
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7809" class="db bbse c6">
+                                        Online Resources
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Afterword</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7818" class="db bbse c6">
+                                        Afterword
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Acknowledgments</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7810" class="db bbse c6">
+                                        Acknowledgements
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7811" class="db bbse c6">
+                                        Disclaimer
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">AI</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="layui-col-md9">
+                        <div class="t df aifs jcsb lh24">
+                            <strong class="fs18">2.6 China<span class="bsc fs14 fw400 ml10 dib lh20 pl6 pr6 c6 br4">Chapter 2: Countries Outlook</span>
+                            </strong>
+                        </div>
+                        <p class="fs13 c8 lh20 mt12">
+                        <span class="secClass" data="7787" data2="2.6 China">
+                            Authors: Miao | Edit: lirui
+                            
+                        </span>
+						<div class="df jcfe aic"><a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25 mt15"
+                                 style="height: 20px;margin-left: auto" lay-on="showForm">
+                                <span>Subscribe</span>
+                            </a></div>
+                            <!--<span class="ml15">编辑:yangld</span>-->
+                            </p>
+                        <div class="bg-white fs15 content pr25 pl25 pb20 pt20 mt15" style="line-height: 2;"><p><span style="font-family: arial, helvetica, sans-serif;">From January to March 2026, China was generally characterized by warmer temperatures and reduced rainfall. Compared with the average of the same period over the past 15 years, the national average temperature was 0.4°C higher, photosynthetically active radiation (PAR) was 8% lower, and cumulative precipitation was 21% lower (only 62 mm). As a result, potential cumulative biomass was 10% lower (233 g DM/m²). CropWatch monitoring shows that the Maximum Vegetation Condition Index (VCIx) was 0.90, and the Crop Production Situation Index (CroPI) was 0.94, slightly below the baseline value 1.0 and the recent 5-year average 1.02, but clearly higher than the same period last year (Fig. 2.7). This indicates that the overall production outlook for winter crops is better than last year.</span></p><p style="text-align: center;"><span style="font-family: 宋体; background: white;"><img src="http://cloud.cropwatch.com.cn/profile/upload/2026/04/27/CPI_CHN_202604_20260427050555A299.png" width="500"/></span></p><p><span style="font-family: 宋体, SimSun;"><span style="box-sizing: border-box; font-weight: bolder; color: #FFFFFF; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; background-color: #383C4B;"></span></span></p><p style="text-align: center;">Figure 2.7 Time series of China&#39;s Crop Production Situation Index (CroPI), 2026</p><p><span style="background-color: white; font-family: 宋体, SimSun;"></span></p><p>By integrating multi-source remote sensing data, such as ESA Sentinel-1/2, US Landsat-8/9, and the national 10 m cropland map, together with massive in situ samples collected using the GVG smart-phone APP, and applying AI approaches including Random Forest and transfer learning, the planted areas of&nbsp;winter crops&nbsp;and winter wheat were monitored. Combined with the latest agro-meteorological information and remote-sensing-based yield models, this year&#39;s winter crops output (Table 2.1) and winter wheat output (Table 2.2) were predicted as follows.</p><p>(1) Winter crops production prediction</p><p>Total national winter crops production in 2026 is projected at 146.85 million tons, an increase of 1.69 million tons year-on-year (+1.2%), larger than the 0.8% growth in 2025. The nine major producing provinces are expected to produce 121.55 million tons winter crops, up 1.45 million tons (+1.2%). Production in other producing provinces are projected to increase by 0.9% (+0.24 million tons). National winter crops planted area is expected to increase by 1.0%, and yield per unit area to increase by 0.2%; the simultaneous increase in area and yield supports a steady rise in total output (Table 2.1).</p><p>Provinces such as Jiangsu, Henan, Hebei, and Shandong are leading the production increase. Specifically, Jiangsu shows a 2.8% increase in planted area and a 0.8% increase in yield, with total production reaching 14.37 million tons, up 0.50 million tons (+3.6%). Henan shows a 1.6% increase in area and a 0.2% increase in yield, with output reaching 34.29 million tons, up 0.62 million tons (+1.8%). Hebei shows a 2.3% area increase; although yield slightly decreases by 0.4%, total production still rises by 0.26 million tons (+1.9%). Shandong has unchanged area but a 1.4% yield increase, with output reaching 27.98 million tons, up 0.39 million tons (+1.4%).</p><p>In contrast, winter crops production declines in Shanxi, Shaanxi, and Gansu. Shanxi records a 3.8% reduction in area and a 3.1% drop in yield, leading to a decrease of 0.16 million tons, the largest decline in percentage among provinces (-6.8%). Shaanxi has stable area but a sharp 4.2% yield reduction, with output down 0.17 million tons (-4.2%), mainly due to persistent winter–spring drought. Gansu shows a 1.6% area decrease, with output slightly down by 0.03 million tons (-0.8%). Anhui maintains stable area and a slight 0.1% yield decrease, resulting in near-stable output (-0.1%).</p><p style="text-align: center;">Table 2.1 Prediction of yield and production for major winter crops producing provinces, 2026<span style="font-family: 等线;"></span></p><table cellspacing="0" cellpadding="0" style="width: 852px;" align="center"><tbody><tr style=";height:19px" class="firstRow"><td nowrap="" valign="top" style="border-width: 1px medium medium; border-style: solid none none; border-color: rgb(148, 198, 0) currentcolor currentcolor; border-image: initial; background: rgb(146, 208, 80); padding: 0px 7px; word-break: break-all;" height="19"><p style=";text-align:left;text-indent:   0">　<span style="font-size:14px;font-family:&#39;Century Gothic&#39;,sans-serif;color:black">Area</span></p></td><td nowrap="" style="border-width: 1px medium medium; border-style: solid none none; border-color: rgb(148, 198, 0) currentcolor currentcolor; border-image: initial; background: rgb(146, 208, 80); padding: 0px 7px;" height="19"><p style=";text-align:center;text-indent:0"><strong><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif;color:black">2025</span></strong></p></td><td nowrap="" colspan="5" style="background: rgb(146, 208, 80); padding: 0px 7px;" height="19"><p style=";text-align:center;text-indent:0"><strong><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif;color:black">2026</span></strong></p></td></tr><tr style=";height:19px"><td nowrap="" valign="top" style="background: rgb(146, 208, 80); padding: 0px 7px;" height="19"><br/></td><td nowrap="" style="background: rgb(146, 208, 80); padding: 0px 7px;" height="19"><p style=";text-align:left;text-indent:   0"><strong><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif;color:black">production (thousand ton)</span></strong></p></td><td nowrap="" style="background: rgb(146, 208, 80); padding: 0px 7px;" height="19"><p style=";text-align:left;text-indent:   0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif;color:black">Area change (%)</span></p></td><td nowrap="" style="background: rgb(146, 208, 80); padding: 0px 7px;" height="19"><p style=";text-align:left;text-indent:   0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif;color:black">Yield change (%)</span></p></td><td nowrap="" style="background: rgb(146, 208, 80); padding: 0px 7px;" height="19"><p style=";text-align:center;text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif;color:black">Production (thousand ton)</span></p></td><td nowrap="" style="background: rgb(146, 208, 80); padding: 0px 7px;" height="19"><p style=";text-align:left;text-indent:   0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif;color:black">Production change (thousand ton)</span></p></td><td nowrap="" style="background: rgb(146, 208, 80); padding: 0px 7px;" height="19"><p style=";text-align:left;text-indent:   0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif;color:black">Production change (%)</span></p></td></tr><tr style=";height:19px"><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">Hebei</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">13879</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">2.3</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">-0.4</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">14140</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">261</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">1.9</span></p></td></tr><tr style=";height:19px"><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-align:left;text-indent:   0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">Shanxi</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">2338</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">-3.8</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">-3.1</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">2179</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">-159</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">-6.8</span></p></td></tr><tr style=";height:19px"><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-align:left;text-indent:   0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">Jiangsu</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">13866</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">2.8</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">0.8</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">14366</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">500</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">3.6</span></p></td></tr><tr style=";height:19px"><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-align:left;text-indent:   0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">Anhui</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">15533</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">0.0</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">-0.1</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">15513</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">-20</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">-0.1</span></p></td></tr><tr style=";height:19px"><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-align:left;text-indent:   0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">Shandong</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">27594</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">0.0</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">1.4</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">27982</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">388</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">1.4</span></p></td></tr><tr style=";height:19px"><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-align:left;text-indent:   0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">Henan</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">33672</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">1.6</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">0.2</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">34293</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">621</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">1.8</span></p></td></tr><tr style=";height:19px"><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-align:left;text-indent:   0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">Hubei</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">5878</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">-0.6</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">1.6</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">5934</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">56</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">0.9</span></p></td></tr><tr style=";height:19px"><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-align:left;text-indent:   0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">Shaanxi</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">4005</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">0.0</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">-4.2</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">3836</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">-169</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">-4.2</span></p></td></tr><tr style=";height:19px"><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-align:left;text-indent:   0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">Gansu</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">3331</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">-1.6</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">0.8</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">3304</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">-26</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">-0.8</span></p></td></tr><tr style=";height:19px"><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-align:left;text-indent:   0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">Sub &nbsp; total</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">120095</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">0.0</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">0.0</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">121548</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">1453</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">1.2</span></p></td></tr><tr style=";height:19px"><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-align:left;text-indent:   0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">Other &nbsp; provinces</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">25061</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">0.0</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">0.0</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">25298</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">238</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">0.9</span></p></td></tr><tr style=";height:19px"><td nowrap="" style="border-width: medium medium 1px; border-style: none none solid; border-color: currentcolor currentcolor rgb(148, 198, 0); border-image: initial; padding: 0px 7px; word-break: break-all;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">National total*</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">145155</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">1.0</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">0.2</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">146846</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">1691</span></p></td><td nowrap="" style="padding: 0px 7px;" height="19"><p style=";text-indent:0"><span style="font-size:12px;font-family:&#39;Calibri&#39;,sans-serif">1.2</span></p></td></tr></tbody></table><p>(2) Winter wheat production prediction</p><p>In 2026, China&#39;s winter wheat planted area, yield, and total production are all expected to increase slightly. Winter wheat planted area is projected at 24,534 thousand hectares, up 1.0% year-on-year. The national average yield is projected at 5,446 kg/ha, up 0.3%. With both area expansion and yield improvement, total production is expected to increase 1.3% year-on-year to 133.62 million tons. In the Huang-Huai-Hai main producing region, area remains stable to slightly higher; soil moisture at overwintering is favorable. Since the green-up stage, the overall match of radiation and temperature is suitable, supporting continued steady growth in total output (Table 2.2; Fig. 2.1).</p><p style="text-align: center;"><img src="http://cloud.cropwatch.com.cn/profile/upload/2026/04/27/Winterwheat2026_20260427050745A300.png" width="500"/></p><p style="text-align: center;"><span style="text-indent: 32px;">Figure 2.8 Spatial distribution of winter wheat in North China and the Huang-Huai-Hai wheat producing region, 2026</span></p><p><span style="text-indent: 32px;">Among them, the nine major producing provinces account for 21,102 thousand hectares, up 1.1%, representing 86.0% of the national winter wheat area. The Huang-Huai-Hai region (Hebei, Jiangsu, Anhui, Shandong, Henan) is the core production zone, accounting for about 72% of planted area, though changes differ within the region: Jiangsu rebounds sharply with a 4.7% increase of planted area to 2,805 thousand hectares; Henan increases by 1.6% to 5,562 thousand hectares; and Hebei increases by 2.3% to 2,310 thousand hectares. Planted areas in Shandong, Anhui, and Shaanxi are unchanged at 4,412, 3,133, and 818 thousand hectares, respectively. Shanxi and Gansu decrease by 3.8% and 1.6%, respectively.</span></p><p>The national average winter wheat yield is projected at 5,446 kg/ha (+0.3%). Major producing provinces show a better yield increase (+0.4%) than other provinces (-0.9%), highlighting the production stability and agricultural resillence in main producing areas.</p><p>Jiangsu, Henan, Shandong, and Gansu lead the production increase. In Jiangsu, yield increases by 0.8%, and total output rises by 0.75 million tons (+5.5%), the largest increase in terms of inter-annual production changes in percentage among major producing provinces. Henan shows a 0.2% yield increase, with output reaching 34.14 million tons, up 0.62 million tons (+1.8%). Shandong shows a 1.4% yield increase, with output rising by 0.38 million tons (+1.4%), contributing 23% of the national production increase. In Gansu, although area decreases by 1.6%, yield rises sharply by 3.6%, resulting in an output increase of 0.04 million tons (+2.0%).</p><p>Winter wheat output declines in Shanxi and Shaanxi. Shanxi records a 3.8% area decrease and a 3.1% yield drop, with output down 0.16 million tons (-6.8%). Shaanxi has stable area but a 3.7% yield drop, with output down 0.11 million tons (-3.7%), mainly due to the drought conditions. Anhui remains stable in area with a slight 0.1% yield decrease, resulting in nearly stable output (-0.1%).</p><p>Although persistent cloudy and rainy conditions during the 2025 summer crops harvest affected winter wheat sowing in North China and delayed sowing dates in parts of the main producing areas, the overall meteorological conditions during the 2025–2026 overwintering period were normal, with good soil moisture and weaker-than-normal cold wave intensity, enabling safe overwintering in northern regions. After green-up, light–temperature–water conditions generally match well; weather conditions are sufficient and both radiation and soil moisture are favorable in most winter wheat areas, indicating a good production outlook. However, attention should be paid to the following adverse factors: (1) higher winter temperatures in 2025/2026 may increase overwintering pest and disease; (2) higher spring precipitation in the Huang-Huai-Hai wheat regions increases the risk of outbreaks of moisture-favoring diseases such as Fusarium head blight (FHB) and stripe rust. It is recommended that the Huang-Huai-Hai regions strengthen pest and diseases control; areas such as southern/central Henan, southwestern Shandong, northern Jiangsu, northern Anhui (Huaibei), and the Guanzhong Plain of Shaanxi should enhance flowering-stage management and guard against hazardous weather such as strong winds that can cause lodging.</p><p style="text-align: center;">Table 2.2 Prediction of winter wheat planted area, yield, and production for major producing provinces, 2026</p><table cellpadding="0" cellspacing="0" width="764" align="center"><colgroup><col width="85" style=";width:85px"/><col width="62" style=";width:63px"/><col width="60" style=";width:60px"/><col width="63" style=";width:64px"/><col width="71" span="2" style=";width:71px"/><col width="73" style=";width:73px"/><col width="60" style=";width:60px"/><col width="142" style=";width:143px"/><col width="75" style=";width:75px"/></colgroup><tbody><tr height="19" style="height:19px" class="firstRow"><td height="19" width="85" style=""><br/></td><td colspan="3" width="187" style="">Area (kha)</td><td colspan="3" width="215" style="">Yield (kg/ha)</td><td colspan="3" width="277" style="">Production (thousand ton)</td></tr><tr height="20" style="height:20px"><td height="20" style="">Provinces</td><td>2025</td><td style="border-left:none">2026</td><td width="64" style="">Δ(%)</td><td>2025</td><td style="border-left:none">2026</td><td width="73" style="">Δ(%)</td><td>2025</td><td style="border-left:none">2026</td><td width="75" style="">Δ(%)</td></tr><tr height="19" style="height:19px"><td height="19" width="85" style="">Hebei</td><td width="63" style="">2258</td><td width="60" style="">2310</td><td width="64" style="">2.3</td><td width="71" style="">5968</td><td width="71" style="">5944</td><td width="73" style="">-0.4</td><td width="60" style="">13476</td><td width="143" style="">13730</td><td width="75" style="">1.9</td></tr><tr height="19" style="height:19px"><td height="19" width="85" style="">Shanxi</td><td width="63" style="">422</td><td width="60" style="">406</td><td width="64" style="">-3.8</td><td width="71" style="">5483</td><td width="71" style="">5313</td><td width="73" style="">-3.1</td><td width="60" style="">2314</td><td width="143" style="">2157</td><td width="75" style="">-6.8</td></tr><tr height="19" style="height:19px"><td height="19" width="85" style="">Jiangsu</td><td width="63" style="">2679</td><td width="60" style="">2805</td><td width="64" style="">4.7</td><td width="71" style="">5068</td><td width="71" style="">5109</td><td width="73" style="">0.8</td><td width="60" style="">13579</td><td width="143" style="">14331</td><td width="75" style="">5.5</td></tr><tr height="19" style="height:19px"><td height="19" width="85" style="">Anhui</td><td width="63" style="">3134</td><td width="60" style="">3133</td><td width="64" style="">0.0</td><td width="71" style="">4788</td><td width="71" style="">4783</td><td width="73" style="">-0.1</td><td width="60" style="">15007</td><td width="143" style="">14987</td><td width="75" style="">-0.1</td></tr><tr height="19" style="height:19px"><td height="19" width="85" style="">Shandong</td><td width="63" style="">4412</td><td width="60" style="">4412</td><td width="64" style="">0.0</td><td width="71" style="">6179</td><td width="71" style="">6266</td><td width="73" style="">1.4</td><td width="60" style="">27261</td><td width="143" style="">27645</td><td width="75" style="">1.4</td></tr><tr height="19" style="height:19px"><td height="19" width="85" style="">Henan</td><td width="63" style="">5472</td><td width="60" style="">5562</td><td width="64" style="">1.6</td><td width="71" style="">6126</td><td width="71" style="">6138</td><td width="73" style="">0.2</td><td width="60" style="">33522</td><td width="143" style="">34140</td><td width="75" style="">1.8</td></tr><tr height="19" style="height:19px"><td height="19" width="85" style="">Hubei</td><td width="63" style="">1139</td><td width="60" style="">1132</td><td width="64" style="">-0.6</td><td width="71" style="">3860</td><td width="71" style="">3926</td><td width="73" style="">1.7</td><td width="60" style="">4396</td><td width="143" style="">4443</td><td width="75" style="">1.1</td></tr><tr height="19" style="height:19px"><td height="19" width="85" style="">Shaanxi</td><td width="63" style="">818</td><td width="60" style="">524</td><td width="64" style="">-1.6</td><td width="71" style="">4309</td><td width="71" style="">4464</td><td width="73" style="">3.6</td><td width="60" style="">3042</td><td width="143" style="">2929</td><td width="75" style="">-3.7</td></tr><tr height="19" style="height:19px"><td height="19" width="85" style="">Gansu</td><td width="63" style="">533</td><td width="60" style="">524</td><td width="64" style="">-2</td><td width="71" style="">4309</td><td width="71" style="">4464</td><td width="73" style="">4</td><td width="60" style="">2295</td><td width="143" style="">2340</td><td width="75" style="">2.0</td></tr><tr height="19" style="height:19px"><td height="19" width="85" style="">Sub total</td><td width="63" style="">20867</td><td width="60" style="">21102</td><td width="64" style="">1.1</td><td width="71" style="">5506</td><td width="71" style="">5530</td><td width="73" style="">0.4</td><td width="60" style="">114893</td><td width="143" style="">116702</td><td width="75" style="">1.6</td></tr><tr height="19" style="height:19px"><td height="19" width="85" style="">Other &nbsp; provinces</td><td width="63" style="">3431</td><td width="60" style="">3432</td><td width="64" style="">0.0</td><td width="71" style="">4975</td><td width="71" style="">4930</td><td width="73" style="">-0.9</td><td width="60" style="">17070</td><td width="143" style="">16921</td><td width="75" style="">-0.9</td></tr><tr height="19" style="height:19px"><td height="19" width="85" style="">National &nbsp; total*</td><td width="63" style="">24298</td><td width="60" style="">24534</td><td width="64" style="">1.0</td><td width="71" style="">5431</td><td width="71" style="">5446</td><td width="73" style="">0.3</td><td width="60" style="">131962</td><td width="143" style="">133623</td><td width="75" style="">1.3</td></tr></tbody></table><p><strong><span style="background: white;">&nbsp;</span></strong><br/></p><p><br/></p><p><br/></p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+	<footer>
+		<div class="layui-container" style="padding: 4vh 0 4vh;">
+			<div class="df box">
+				<a href="" class="mt15">
+					<img src="/web/images/logo.webp" alt="">
+				</a>
+				<div class="w120 layui-hide-xs layui-show-md-block"></div>
+				<div class="white f1 mt15">
+					<h3>Contact Us</h3>
+					<p>Olympic Village Science Park, West Beichen Road, Chaoyang District, Beijing</p>
+					<p>+8610-64842375/6</p>
+					<p>+8610-64858721(Fax)</p>
+					<p>cropwatch@aircas.ac.cn</p>
+				</div>
+				<a href="" target="_blank" class="white mt15">
+					<div class="df aic jcc">
+						<img src="/web/images/icon-5.jpg" class="h56 w56 br-3xl" alt="">
+						<div class="w30"></div>
+						<img src="/web/images/icon-6.jpg" class="h56 w56 br-3xl" alt="">
+					</div>
+					<p class="mt10">中国科学院空天信息创新研究院(AIRCAS)</p>
+				</a>
+			</div>
+		</div>
+		<div class="beian">
+			<div class="layui-container df aic jcsb">
+				<span>Copyright © 2025 中国科学院空天信息创新研究院生态系统遥感研究室</span>
+				<!--<a class="white" href="https://beian.miit.gov.cn/" target="_blank">京ICP备05080539号-16</a>-->
+			</div>
+		</div>
+	</footer>
+
+    <script src="/web/js/jquery-2.1.1.min.js"></script>
+    <script src="/web/js/js.js"></script>
+    <script src="/web/layui-v2.8.11/layui.js"></script>
+    <script> var ctx = "\/"; var captchaType = null; </script>
+    <script>
+        var language = "en_US"
+        function showUl(is) {
+            $(is).toggleClass('open')
+        }
+
+        layui.use(function () {
+            const $ = layui.$;
+            const form = layui.form;
+            const layer = layui.layer;
+            const util = layui.util;
+
+            // 提交事件
+            form.on('submit(dingyue)', function (data) {
+                var field = data.field; // 获取表单字段值
+
+                let userName = data.field.username;
+                let email = data.field.email;
+                let org = data.field.company;
+                let lang = "en_US" ;
+                let sectionId = data.field.sectionId;
+
+                // let check = isEmail(email);
+                // // 验证通过
+                // if(!check){
+                //     layer.msg("请输入正确邮箱格式", { icon: 5, anim: 6 });
+                // }
+                $.ajax({
+                    type: "post",
+                    url: ctx + "web/webSubscribe/add",
+                    data: {"userName":userName,"email":email,"org":org,"type":2,"language":lang,"sectionId":sectionId},
+                    success: function(result) {
+                        if(result.code !=0){
+                            layer.msg(result.msg, { icon: 5, anim: 6 });
+                        }else{
+                            layer.msg("Subscribe Successfully", { icon: 6, anim: 6 });
+                            setTimeout(function(){
+                                layer.closeAll();
+                            },800)
+                        }
+                    }
+                });
+
+
+
+                // 此处可执行 Ajax 等操作
+                // …
+                return false; // 阻止默认 form 跳转
+            });
+
+            util.on('lay-on', {
+                "closeLayer": function () {
+                    layer.closeAll()
+                },
+                "showForm": function (othis) {
+                    var subscribe = "Subscribe";
+                    var Fill = "Fill In Your Information\uFF0CSubscribe To Receive Our Latest Newsletters And Other Information";
+                    var userName = "UserName";
+                    var pu = "Please Enter Your Username Or Email";
+                    var email = "Email";
+                    var Email = "Please Enter Email";
+                    var organization = "Organization";
+                    var Organization = "Please Enter Organization";
+                    console.log($(othis).parent().attr("data"))
+
+                        layer.open({
+                            type: 1,
+                            title: false,
+                            closeBtn: 0,
+                            skin: 'dingyue',
+                            //area: ['420px', '240px'], // 宽高
+                            content: `<div class="df jcfe p15">
+                                        <i class="layui-icon layui-icon-close fs18 cp" lay-on="closeLayer"></i>
+                                    </div>
+                                    <div class="box">
+                                        <div class="title">
+                                            <strong class="fs16">${subscribe}</strong>
+                                            <p class="fs13 c5 mt10 mb15" id="sectionName" style="text-align: center"></p>
+                                            <p class="fs13 c5 mt10 mb15">${Fill}</p>
+                                        </div>
+                                        <form class="layui-form">
+                                            <div class="login-container">
+                                                <div class="layui-form-item mb20">
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="username" id="username" value="" lay-verify="required" placeholder="${userName}"
+                                                            lay-reqtext="${pu}"  autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item mb20">
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="email" id="email" value="" lay-verify="email|required" placeholder="${email}"
+                                                            lay-reqtext="${Email}"  autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item mb20">
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="company" value="" lay-verify="required" placeholder="${organization}"
+                                                            lay-reqtext="${Organization}" autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+
+                                                <div class="layui-form-item mb20" hidden>
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="sectionId" id="sectionId" value="" lay-verify="required"
+                                                            autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+<!--                                                <div class="layui-form-item mb20">-->
+<!--                                                    <div class="layui-input-wrap">-->
+<!--                                                        <select name="country" lay-verify="required" lay-search lay-reqtext="请选择您感兴趣的国家">-->
+<!--                                                            <option value="">请选择您感兴趣的国家</option>-->
+<!--                                                            <option value="1">中国</option>-->
+<!--                                                            <option value="2">美国</option>-->
+<!--                                                            <option value="3">英国</option>-->
+<!--                                                            <option value="4">法国</option>-->
+<!--                                                        </select>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+                                                <div class="layui-form-item mb0">
+                                                    <button class="layui-btn layui-btn-fluid bg-c h42 lh42" lay-submit
+                                                        lay-filter="dingyue">${subscribe}</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>`,
+                            success: function (layero, index, that) {
+
+                                // $('#reportId').val($(othis).parent().find(".sectiondingyue").attr("data"));
+                                $('#sectionId').val($(othis).parent().attr("data"));
+                                $('#sectionName').text($(othis).parent().attr("data2"));
+                                form.render();
+                            }
+                        });
+                }
+            })
+        })
+
+
+    </script>
+</body>
+
+</html>

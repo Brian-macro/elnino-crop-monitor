@@ -1,0 +1,12 @@
+{
+  "document_id": "6f03a12bed55b1022a95c6b8c7dd755f639ceda065ac2fc606073f9ed4c3b877",
+  "source": "noaa_oni",
+  "source_url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v6/",
+  "raw_path": "data/raw/noaa_oni/e4eefa858ffa8a38b47c58a226a9e4801d27918bd1524d26c7108b47838ac477.html",
+  "sha256": "e4eefa858ffa8a38b47c58a226a9e4801d27918bd1524d26c7108b47838ac477",
+  "publication_date": null,
+  "available_date": "2026-09-08",
+  "download_timestamp": "2026-09-08T14:19:56.419776+00:00",
+  "publication_date_basis": "unknown; first observed",
+  "title": "NOAA published ONI ERSSTv6 table (one decimal)"
+}

@@ -1,0 +1,12 @@
+{
+  "document_id": "c5c72322b66880b3a87801706643df6db0bb420fd18c7b86d0e6aeba9b82004e",
+  "source": "sina_cn_soybean",
+  "source_url": "https://stock2.finance.sina.com.cn/futures/api/jsonp.php/var%20_V21052021_4_12=/InnerFuturesNewService.getDailyKLine?symbol=B0&type=2021_04_12",
+  "raw_path": "data/raw/sina_cn_soybean/90e190f0401560f53136ae7586e4bbb6f347ca3877c5b3f5c892edfe474469c0.jsonp",
+  "sha256": "90e190f0401560f53136ae7586e4bbb6f347ca3877c5b3f5c892edfe474469c0",
+  "publication_date": null,
+  "available_date": "2026-09-08",
+  "download_timestamp": "2026-09-08T13:39:24.313607+00:00",
+  "publication_date_basis": "Source publication timestamp unavailable; first observed archive date",
+  "title": "大连豆二主连"
+}

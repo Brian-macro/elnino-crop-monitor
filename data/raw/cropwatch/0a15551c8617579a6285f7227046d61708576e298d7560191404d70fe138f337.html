@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta http-equiv="Content-Type" Content="text/html;charset=utf8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CropWatch Cloud</title>
+    <link rel="stylesheet" href="/web/layui-v2.8.11/css/layui.css">
+    <link rel="stylesheet" href="/web/style/common.min.css">
+    <link rel="stylesheet" href="/web/style/css.min.css">
+    <link rel="stylesheet" href="/web/style/add.min.css">
+</head>
+
+<body class="page kuaibao">
+    
+	<script> var ctx = "\/"; var captchaType = null; </script>
+	<header class="pa w100p" style="z-index: 100;">
+		<div class="layui-container">
+			<div class="logo--box df aic jcsb">
+				<a href="/"><img src="/web/images/logo.webp" class="db h100p" alt=""></a>
+				<div class="r df fdc aife jcsb f1">
+					<div class="df aic fs13">
+						<a class="df aic mr25" href="/web/login/">
+							<svg t="1692522806508" class="icon" viewBox="0 0 1024 1024" version="1.1"
+								 xmlns="http://www.w3.org/2000/svg" p-id="2912" width="16" height="16">
+								<path
+										d="M870.314316 877.390274 870.314316 877.390274C870.314316 877.390274 870.314316 877.390274 870.314316 877.390274 777.938121 967.974532 651.551687 1024 512 1024 229.239611 1024 0.017919 794.741738 0.017919 511.98135 0.017919 229.22096 229.239611-0.000731 512-0.000731 794.760389-0.000731 1023.982081 229.22096 1023.982081 511.98135 1023.982081 655.190051 965.067572 784.465527 870.314316 877.390274ZM512 950.859703C615.932362 950.859703 711.30731 914.545545 786.495536 854.131659 746.451223 740.398497 639.446968 658.261944 512 658.261944 384.553032 658.261944 277.548777 740.398497 237.504464 854.131659 312.69269 914.545545 408.067638 950.859703 512 950.859703ZM512 73.176136C269.649625 73.176136 73.158216 269.667545 73.158216 512.017919 73.158216 621.545515 113.53166 721.41859 179.869911 798.325613 237.723886 672.597442 364.512591 585.158216 512 585.158216 659.450839 585.158216 786.276114 672.597442 844.130089 798.325613 910.46834 721.45516 950.841784 621.545515 950.841784 512.017919 950.841784 269.667545 754.350375 73.176136 512 73.176136ZM512 548.588068C410.993249 548.588068 329.149257 466.707505 329.149257 365.737325 329.149257 264.730574 410.993249 182.886582 512 182.886582 612.97018 182.886582 694.850743 264.730574 694.850743 365.737325 694.850743 466.707505 612.97018 548.588068 512 548.588068ZM512 256.026879C451.403264 256.026879 402.289554 305.140589 402.289554 365.700754 402.289554 426.297491 451.403264 475.411201 512 475.411201 572.596736 475.411201 621.710446 426.297491 621.710446 365.700754 621.710446 305.140589 572.596736 256.026879 512 256.026879Z"
+										fill="#ffffff" p-id="2913"></path>
+							</svg>
+							<span class="ml6 white">Login</span>
+						</a>
+						
+						
+						<div class="pr">
+							<a href="javascript:;" class="white active  df aic" onclick="showDrop(this)"><img style="margin-right:5px;height:24px!important;" src="/profile/avatar/2023/04/15/us_20230415184657A001.png" >English</a>
+							<div class="drop bg-white br5 pa">
+								<a class="df aic" style="padding-left: 10px;cursor: pointer;" onclick="changeLanguage(&quot;en_US&quot;)"><img style="margin-right:5px;height:20px!important;" src="/profile/avatar/2023/04/15/us_20230415184657A001.png" >English</a><a class="df aic" style="padding-left: 10px;cursor: pointer;" onclick="changeLanguage(&quot;zh_CN&quot;)"><img style="margin-right:5px;height:20px!important;" src="/profile/avatar/2023/04/15/zh_20230415184706A002.png" >中文</a>
+							</div>
+						</div>
+<!--						<em class="h10 w1 bg-white ml10 mr10"></em>-->
+<!--						<a href="javascript:;" class="white">EN</a>-->
+						<span class="menu ml25 layui-hide-sm" onclick="showNav(this)"></span>
+					</div>
+					<div class="nav df aic jcsb fs15">
+						<a href="/">Home</a>
+						<a href="/web/about">About</a>
+						<a href="/web/report/kuai">Update</a>
+						<a href="/web/report" class="active">Bulletin</a>
+						<a href="/web/method">Methodology</a>
+						<a href="/web/publications">Publications</a>
+						<a href="/web/contact">Contact Us</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<script src="/web/js/jquery-2.1.1.min.js"></script>
+	<script>
+		function showDrop(is){
+			$('.drop').toggleClass('open')
+		}
+
+		function changeLanguage(lang) {
+			console.log(lang)
+			$.ajax({
+				type: "post",
+				url: ctx + "web/common/changeLang",
+				data: {
+					"lang": lang
+				},
+				success: function(result) {
+					window.location.reload();
+				}
+			});
+		}
+	</script>
+
+    <main>
+        <div class="b">
+            <img src="/web/images/bg-kb.jpg" class="w100p db" alt="">
+            <div class="tac white df aic jcc fdc info pa">
+                <h2>Bulletin</h2>
+                <strong>CropWatch bulletin</strong>
+            </div>
+        </div>
+        <div class="box1">
+            <div class="layui-container">
+                <div class="layui-row aifs layui-col-space25">
+                    <div class="layui-col-md3">
+                        <h3 class="fs18 fw500 lh24">Menu</h3>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Key Message</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7940" class="db bbse c6">
+                                        Key Message
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Chapter 1: Global Outlook</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7942" class="db bbse c6">
+                                        Global Agrometeorological Conditions and Outlook
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7943" class="db bbse c6">
+                                        Global Agrometeorological Stress
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7941" class="db bbse c6">
+                                        Global Crop Production Situation
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7944" class="db bbse c6">
+                                        Global Production of Major Grain and Oil Crops
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7945" class="db bbse c6">
+                                        Maize production in the Northern Hemisphere
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7946" class="db bbse c6">
+                                        Soybean production in the North Hemisphere
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7981" class="db bbse c6">
+                                        Rice production in the equatorial region
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7947" class="db bbse c6">
+                                        Wheat production in the Northern Hemisphere
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7948" class="db bbse c6">
+                                        Outlook
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Chapter 2: Countries Outlook</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7949" class="db bbse c6">
+                                        2.1 Argentina
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7950" class="db bbse c6">
+                                        2.2 Australia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7951" class="db bbse c6">
+                                        2.3 Bangladesh
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7952" class="db bbse c6">
+                                        2.4 Brazil
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7953" class="db bbse c6">
+                                        2.5 Canada
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7954" class="db bbse c6">
+                                        2.6 China
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7955" class="db bbse c6">
+                                        2.7 Ethiopia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7956" class="db bbse c6">
+                                        2.8 France
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7957" class="db bbse c6">
+                                        2.9 German
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7958" class="db bbse c6">
+                                        2.10 India
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7959" class="db bbse c6">
+                                        2.11 Indonesia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7960" class="db bbse c6">
+                                        2.12 Mexico
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7961" class="db bbse c6">
+                                        2.13 Nigeria
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7962" class="db bbse c6">
+                                        2.14 Pakistan
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7963" class="db bbse c6">
+                                        2.15 Russia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7964" class="db bbse c6">
+                                        2.16 South Africa
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7969" class="db bbse c6">
+                                        2.17 Thailand
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7965" class="db bbse c6">
+                                        2.18 Ukraine
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7966" class="db bbse c6">
+                                        2.19 USA
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7967" class="db bbse c6">
+                                        2.20 Vietnam
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Online Country Analysis</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7970" class="db bbse c6">
+                                        3.1 Online Resouces for Country Analysis
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7971" class="db bbse c6">
+                                        3.2 CropWatch GPT for Analysis
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Appendix A: Indicators</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7972" class="db bbse c6">
+                                        A.1 Global Crop Production
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7973" class="db bbse c6">
+                                        A.2 Agro-climatic indicators
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7974" class="db bbse c6">
+                                        A.3 Agronomic Indicators
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Appendix B. Methodology, Data and Online Resources</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7975" class="db bbse c6">
+                                        B.1 The CropWatch Monitoring System
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7976" class="db bbse c6">
+                                        B.2 Indicators and Methods
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7977" class="db bbse c6">
+                                        B.3 Online Resources
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Afterword</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7978" class="db bbse c6">
+                                        Afterword
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Acknowledgments</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7979" class="db bbse c6">
+                                        Acknowledgments
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7980" class="db bbse c6">
+                                        Disclaimer
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">AI</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="layui-col-md9">
+                        <div class="t df aifs jcsb lh24">
+                            <strong class="fs18">Global Production of Major Grain and Oil Crops<span class="bsc fs14 fw400 ml10 dib lh20 pl6 pr6 c6 br4">Chapter 1: Global Outlook</span>
+                            </strong>
+                        </div>
+                        <p class="fs13 c8 lh20 mt12">
+                        <span class="secClass" data="7944" data2="Global Production of Major Grain and Oil Crops">
+                            Authors: Miao,fan,chentianle | Edit: zhuweiwei
+                            
+                        </span>
+						<div class="df jcfe aic"><a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25 mt15"
+                                 style="height: 20px;margin-left: auto" lay-on="showForm">
+                                <span>Subscribe</span>
+                            </a></div>
+                            <!--<span class="ml15">编辑:yangld</span>-->
+                            </p>
+                        <div class="bg-white fs15 content pr25 pl25 pb20 pt20 mt15" style="line-height: 2;"><p style="text-align: justify;">In 2026, the production of the four major global grain and oil crops—maize, rice, wheat, and soybeans—maintained an overall stable and positive trend. Global total output continued to grow steadily, though the pace of increase moderated somewhat. The supply resilience of major producing countries remained generally strong, and the global grain and oil supply landscape stayed broadly stable and loose. Compared with the June forecast, the latest remote sensing monitoring and trend prediction data in August slightly revised global production expectations: maize, wheat, and soybeans maintained an increasing trend, while rice showed only marginal growth. The narrower production increase in this report relative to the June forecast is mainly attributed to the ongoing disruption caused by the super El Niño event, which has triggered frequent extreme weather events in major production regions worldwide. This has put pressure on the growth of some grain-producing areas and led to downward adjustments in yield expectations, representing the key factor behind the smaller-than-expected crop production increment in this round.</p><p>In 2026, total global production of major grain and oil crops reached 3.32016 billion tons, an increase of 50.83 million tons compared with 2025, representing a growth rate of 1.5%, as global grain production capacity continued to expand. By crop type, wheat and soybeans led in terms of production increase, maize grew steadily; and rice production declined. Specifically, global maize production reached 1.22148 billion tons, an increase of 25.19 million tons year-on-year, up 2.1%; rice production reached 759.78 million tons, a decrease of 18.92 million tons year-on-year, down 2.3%; wheat production reached 846.70 million tons, an increase of 24.04 million tons year-on-year, up 2.9%; and soybean production reached 456.20 million tons, an increase of 20.06 million tons year-on-year, up 4.6%.</p><p>The 20 core major producing countries under focused monitoring in this report (see Chapter 2 for details) remain the central pillars of global grain supply, firmly dominating global major grain and oil production, and representing the key areas for global food security monitoring and early warning. The latest data for August show that monitored production in major producing countries remained generally stable, with some countries seeing slight downward adjustments in forecast yields.</p><p>Maize production was generally favorable, with increased output from major producing countries supporting the rise in global production. Among the 48 monitored countries (see Appendix A.1 for the list), the monitored maize production of the 20 major producing countries reached 1.08960 billion tons, up 3.0% from 2025. The stable production situation in core major producing countries has solidified the fundamental base of global maize supply. Among the 48 monitored countries, maize production in countries other than the 20 major producers, obtained through remote sensing monitoring models, totaled 49.54 million tons, down 2.1% year-on-year. Production in countries outside the 48 monitored countries, obtained through trend prediction, was 82.34 million tons, down 6.4% year-on-year, partially offsetting the production increase from major producing countries. The monitored rice production of the 20 major producing countries was 651.88 million tons, down 2.5% year-on-year; monitored production in other countries was 71.82 million tons, down 2.9% year-on-year, mainly affected by the ongoing super El Niño event.</p><p>Global wheat showed strong momentum for production increase, with steady and slight growth in the 20 major producing countries and significant increases in other countries. Among the 20 major producing countries, remotely monitored wheat production was 639.13 million tons, down slightly by 0.9% year-on-year; monitored production in other countries was 149.69 million tons, up significantly by 24.1% year-on-year. Non-traditional production regions such as the Middle East and North Africa continued to gain momentum, becoming an important source of incremental global wheat production, driving the overall global wheat increase to 3.3%, making it one of the best-performing crops in terms of production growth among the four major crops. Predicted production in countries outside the 48 monitored countries was 56.44 million tons, up 7.4%.</p><p>The production increase trend for soybeans among major producing countries was clear, and global production capacity continued to improve. Global monitored soybean production in major producing countries reached 409.42 million tons, up 4.8% year-on-year. Core production regions in South America showed favorable soybean growth and significant production increases, serving as the core driving force behind global soybean production growth. Predicted production in countries outside the 48 monitored countries was 46.78 million tons, up 2.6% year-on-year, jointly pushing total global soybean production up 4.6% year-on-year, as oil and oilseed supply capacity continued to improve.</p><p>The global major grain and oil trade pattern remained stable, with overall robust export supply capacity and continuously improving self-sufficiency on the import side. From the export dimension, the top 10 exporting countries maintained steady growth in maize and soybean production, while rice and wheat production saw slight declines. Specifically, maize production was 698.70 million tons (+2.6%), soybean production was 401.28 million tons (+5.1%), rice production was 547.80 million tons (−3.8%), and wheat production was 375.36 million tons (+0.6%). The production increase structure of the top 5 core exporting countries was generally consistent with that of the top 10 exporting countries: maize reached 639.80 million tons (+2.5%), soybeans reached 377.39 million tons (+5.3%), wheat reached 230.11 million tons (+1.6%), all showing steady growth, while rice reached 304.68 million tons, down 5.8% year-on-year. Core exporting countries demonstrated strong supply resilience for oilseeds and grains.</p><p>From the import dimension, the self-sufficiency capacity of major global importing countries continued to improve, with production increases achieved for most crops. The top 10 importing countries recorded maize production of 316.56 million tons (+1.1%), rice production of 358.99 million tons (+0.8%), wheat production of 196.48 million tons (+6.8%), and soybean production of 69.18 million tons (+10.7%), with only a few crops maintaining slight fluctuations. The production trends of the top 5 importing countries were similarly positive, with particularly outstanding increases for wheat and soybeans at 4.5% and 10.8%, respectively. Maize grew slightly by 1.3%, while only rice production saw a small decline of 0.8%. The continuous improvement in grain self-sufficiency levels among major importing countries has effectively alleviated pressure on global grain and oil trade supply.</p><p>Overall, in 2026, global production and supply of major grain and oil crops were ample, with crop structure continuing to optimize. Wheat and soybeans became the core drivers of production increase, maize grew steadily, while rice performance was relatively weak. Major producing countries maintained stable or increased production, and the supply-demand structure of major trading countries remained stable, continuously strengthening global food security assurance capacity and providing strong support for the stable operation of international grain and oil markets. At the same time, climate uncertainty remains the primary risk. Periodic extreme weather events and regional drought stress may still disrupt later-stage crop growth and yields. Going forward, satellite remote sensing data will continue to be relied upon to dynamically track crop growth in major global production regions and update yield forecasts in a timely manner.</p><p><br/></p><p>Table 1.1 Remote sensing monitoring and forecasting of major cereals and oil crop production for major exporting and importing countries (production in million tonnes)</p><table cellspacing="0" cellpadding="0" width="100"><tbody><tr style=";height:18px" class="firstRow"><td width="13" nowrap="" style="border: 1px solid windowtext; background: rgb(223, 247, 173); padding: 0px 7px;" height="18"><br/></td><td width="22" nowrap="" colspan="3" style="border-width: 1px 1px 1px medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentcolor; border-image: none; background: rgb(223, 247, 173); padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size: 12px; line-height: 130%; color: black; font-family: &quot;times new roman&quot;;">Maize production</span></p></td><td width="21" nowrap="" colspan="3" style="border-width: 1px 1px 1px medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentcolor; border-image: none; background: rgb(223, 247, 173); padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size: 12px; font-family: &quot;times new roman&quot;;">Rice&nbsp;<span style="font-family: &quot;times new roman&quot;; font-size: 12px; text-align: center; background-color: #DFF7AD;">production</span></span></p></td><td nowrap="" colspan="3" style="border-width: 1px 1px 1px medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentcolor; border-image: none; background: rgb(223, 247, 173); padding: 0px 7px; word-break: break-all;" height="18" width="123.33333333333333"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size: 12px; font-family: &quot;times new roman&quot;;">Wheat&nbsp;<span style="font-family: &quot;times new roman&quot;; font-size: 12px; text-align: center; background-color: #DFF7AD;">production</span></span></p></td><td width="21" nowrap="" colspan="3" style="border-width: 1px 1px 1px medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentcolor; border-image: none; background: rgb(223, 247, 173); padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size: 12px; font-family: &quot;times new roman&quot;;">Soybean&nbsp;<span style="font-family: &quot;times new roman&quot;; font-size: 12px; text-align: center; background-color: #DFF7AD;">production</span></span></p></td></tr><tr style=";height:18px"><td width="13" nowrap="" style="border-width: medium 1px 1px; border-style: none solid solid; border-color: currentcolor windowtext windowtext; border-image: none; background: rgb(223, 247, 173); padding: 0px 7px;" height="18"><br/></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; background: rgb(223, 247, 173); padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">2025</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; background: rgb(223, 247, 173); padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">2026</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; background: rgb(223, 247, 173); padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">Δ(%)</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; background: rgb(223, 247, 173); padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">2025</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; background: rgb(223, 247, 173); padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">2026</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; background: rgb(223, 247, 173); padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">Δ(%)</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; background: rgb(223, 247, 173); padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">2025</span></p></td><td nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; background: rgb(223, 247, 173); padding: 0px 7px;" height="18" width="30.333333333333332"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">2026</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; background: rgb(223, 247, 173); padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">Δ(%)</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; background: rgb(223, 247, 173); padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">2025</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; background: rgb(223, 247, 173); padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">2026</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; background: rgb(223, 247, 173); padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">Δ(%)</span></p></td></tr><tr style=";height:18px"><td width="13" nowrap="" style="border-width: medium 1px 1px; border-style: none solid solid; border-color: currentcolor windowtext windowtext; border-image: none; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><strong><span style="font-size: 12px; line-height: 130%; font-family: arial, helvetica, sans-serif; color: #000000;">Monitored production (Monitored)</span></strong></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">1057.72</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">1089.60</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">3.0</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">668.44</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">651.88</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">-2.5</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">644.80</span></p></td><td nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18" width="30.333333333333332"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size: 12px;">639.13</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">-0.9</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">390.55</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">409.42</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">4.8</span></p></td></tr><tr style=";height:18px"><td width="13" nowrap="" style="border-width: medium 1px 1px; border-style: none solid solid; border-color: currentcolor windowtext windowtext; border-image: none; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-family: arial, helvetica, sans-serif; font-size: 12px;"><strong>Major Producers (Forecast)</strong></span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><br/></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><br/></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><br/></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><br/></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><br/></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><br/></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">4.70</span></p></td><td nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18" width="30.333333333333332"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size: 12px;">4.86</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size: 12px;">3.4</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><br/></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><br/></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><br/></td></tr><tr style=";height:18px"><td width="13" nowrap="" style="border-width: medium 1px 1px; border-style: none solid solid; border-color: currentcolor windowtext windowtext; border-image: none; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><strong><span style="font-size: 12px; line-height: 130%; font-family: arial, helvetica, sans-serif;">Other Producer</span></strong><strong><span style="font-size: 12px; line-height: 130%; font-family: arial, helvetica, sans-serif;">s<span style="font-size: 12px; line-height: 15.6px; font-family: arial, helvetica, sans-serif;">&nbsp;(Monitored)</span></span></strong></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">50.61</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">49.54</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">-2.1</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">73.97</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size: 12px;">71.82</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size: 12px;">-2.9</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">120.60</span></p></td><td nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18" width="30.333333333333332"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">149.69</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size: 12px;">24.1</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><br/></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><br/></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><br/></td></tr><tr style=";height:18px"><td width="13" nowrap="" style="border-width: medium 1px 1px; border-style: none solid solid; border-color: currentcolor windowtext windowtext; border-image: none; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="line-height: 130%; font-weight: 600; color: #000000; font-family: arial, helvetica, sans-serif; font-size: 12px;"></span><strong style="text-align: center; white-space: nowrap;"><span style="font-size: 12px; line-height: 15.6px; font-family: arial, helvetica, sans-serif;">Other Producer</span></strong><strong style="text-align: center; white-space: nowrap;"><span style="font-size: 12px; line-height: 15.6px; font-family: arial, helvetica, sans-serif;">s<span style="line-height: 15.6px;"></span></span></strong><strong><span style="font-size: 12px; font-family: arial, helvetica, sans-serif; line-height: 15.6px;"> (Forecast)</span></strong></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">87.96</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">82.34</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">-6.4</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">72.29</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">72.08</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">-0.3</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">52.56</span></p></td><td nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18" width="30.333333333333332"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">56.44</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">7.4</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">45.59</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">46.78</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">2.6</span></p></td></tr><tr style=";height:18px"><td width="13" nowrap="" style="border-width: medium 1px 1px; border-style: none solid solid; border-color: currentcolor windowtext windowtext; border-image: none; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size: 12px;"><strong><span style="color: #000000; font-family: arial, helvetica, sans-serif; font-size: 12px;"><span style="font-weight: 600; color: #000000; font-family: arial, helvetica, sans-serif; font-size: 12px;">Top ten exporters</span><span style="line-height: 130%; color: #000000; font-family: arial, helvetica, sans-serif; font-size: 12px;"></span></span></strong></span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">681.19</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">698.70</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">2.6</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">569.73</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">547.80</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">-3.8</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">373.20</span></p></td><td nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18" width="30.333333333333332"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">375.36</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">0.6</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">381.74</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">401.28</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">5.1</span></p></td></tr><tr style=";height:18px"><td width="13" nowrap="" style="border-width: medium 1px 1px; border-style: none solid solid; border-color: currentcolor windowtext windowtext; border-image: none; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><strong><span style="color: #000000; font-family: arial, helvetica, sans-serif;"><span style="font-size: 12px; line-height: 130%; color: #000000; font-family: arial, helvetica, sans-serif;"></span><span style="font-weight: 600; color: #000000; font-family: arial, helvetica, sans-serif; font-size: 12px;">Top ten importers</span><span style="font-size: 12px; line-height: 130%; color: #000000; font-family: arial, helvetica, sans-serif;"></span></span></strong></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">313.00</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">316.56</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">1.1</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">356.26</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">358.99</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">0.8</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">183.98</span></p></td><td nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18" width="30.333333333333332"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">196.48</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">6.8</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">62.47</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">69.18</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">10.7</span></p></td></tr><tr style=";height:18px"><td width="13" nowrap="" style="border-width: medium 1px 1px; border-style: none solid solid; border-color: currentcolor windowtext windowtext; border-image: none; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="color: #000000; font-family: arial, helvetica, sans-serif;"><span style="font-size: 12px; line-height: 130%; color: #000000; font-family: arial, helvetica, sans-serif;"></span><span style="font-weight: 600; color: #000000; font-size: 12px; font-family: arial, helvetica, sans-serif;">Top five exporters</span><span style="font-size: 12px; line-height: 130%; color: #000000; font-family: arial, helvetica, sans-serif;"></span></span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">623.90</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">639.80</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">2.5</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">323.45</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">304.68</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">-5.8</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">226.40</span></p></td><td nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18" width="30.333333333333332"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">230.11</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">1.6</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">358.23</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">377.39</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">5.3</span></p></td></tr><tr style=";height:18px"><td width="13" nowrap="" style="border-width: medium 1px 1px; border-style: none solid solid; border-color: currentcolor windowtext windowtext; border-image: none; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="color: #000000; font-family: arial, helvetica, sans-serif;"><span style="font-size: 12px; line-height: 130%; color: #000000; font-family: arial, helvetica, sans-serif;"></span><span style="font-weight: 600; color: #000000; font-family: arial, helvetica, sans-serif; font-size: 12px;">Top five importers</span><span style="font-size: 12px; line-height: 130%; color: #000000; font-family: arial, helvetica, sans-serif;"></span></span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">295.78</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">299.67</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">1.3</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">236.60</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">234.74</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">-0.8</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">169.90</span></p></td><td nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18" width="30.333333333333332"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">177.49</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">4.5</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">62.15</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">68.85</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">10.8</span></p></td></tr><tr style=";height:18px"><td width="13" nowrap="" style="border-width: medium 1px 1px; border-style: none solid solid; border-color: currentcolor windowtext windowtext; border-image: none; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-family: arial, helvetica, sans-serif;"><strong><span style="font-weight: 600; font-size: 12px; line-height: 130%; color: black;">Global</span></strong></span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">1196.29</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">1221.48</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">2.1</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">814.70</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">795.78</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">-2.3</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">822.66</span></p></td><td nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18" width="30.333333333333332"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">850.12</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">3.3</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">436.14</span></p></td><td width="7" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px; word-break: break-all;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">456.20</span></p></td><td width="6" nowrap="" style="border-width: medium 1px 1px medium; border-style: none solid solid none; border-color: currentcolor windowtext windowtext currentcolor; padding: 0px 7px;" height="18"><p style=";text-align:center;text-indent:0;line-height:130%"><span style="font-size:12px;line-height:130%;color:black">4.6</span></p></td></tr></tbody></table><p><strong style="font-family: arial, helvetica, sans-serif;"><span style="font-size: 15px;">Note:</span></strong><span style="font-family: arial, helvetica, sans-serif; font-size: 15px;">Major producing countries include Argentina, Australia, Bangladesh, Brazil, Canada, China, Ethiopia, France, Germany, India, Indonesia, Mexico, Nigeria, Pakistan, Russia, South Africa, Thailand, Ukraine, the United States, and Vietnam. All countries other than the above 20 major producers are collectively referred to as other countries. Monitored data include yield data obtained based on the biomass-harvest index model and remote sensing index model; predicted data are obtained using the trend yield method, updated only once at the beginning of each year.</span></p><p><br/></p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+	<footer>
+		<div class="layui-container" style="padding: 4vh 0 4vh;">
+			<div class="df box">
+				<a href="" class="mt15">
+					<img src="/web/images/logo.webp" alt="">
+				</a>
+				<div class="w120 layui-hide-xs layui-show-md-block"></div>
+				<div class="white f1 mt15">
+					<h3>Contact Us</h3>
+					<p>Olympic Village Science Park, West Beichen Road, Chaoyang District, Beijing</p>
+					<p>+8610-64842375/6</p>
+					<p>+8610-64858721(Fax)</p>
+					<p>cropwatch@aircas.ac.cn</p>
+				</div>
+				<a href="" target="_blank" class="white mt15">
+					<div class="df aic jcc">
+						<img src="/web/images/icon-5.jpg" class="h56 w56 br-3xl" alt="">
+						<div class="w30"></div>
+						<img src="/web/images/icon-6.jpg" class="h56 w56 br-3xl" alt="">
+					</div>
+					<p class="mt10">中国科学院空天信息创新研究院(AIRCAS)</p>
+				</a>
+			</div>
+		</div>
+		<div class="beian">
+			<div class="layui-container df aic jcsb">
+				<span>Copyright © 2025 中国科学院空天信息创新研究院生态系统遥感研究室</span>
+				<!--<a class="white" href="https://beian.miit.gov.cn/" target="_blank">京ICP备05080539号-16</a>-->
+			</div>
+		</div>
+	</footer>
+
+    <script src="/web/js/jquery-2.1.1.min.js"></script>
+    <script src="/web/js/js.js"></script>
+    <script src="/web/layui-v2.8.11/layui.js"></script>
+    <script> var ctx = "\/"; var captchaType = null; </script>
+    <script>
+        var language = "en_US"
+        function showUl(is) {
+            $(is).toggleClass('open')
+        }
+
+        layui.use(function () {
+            const $ = layui.$;
+            const form = layui.form;
+            const layer = layui.layer;
+            const util = layui.util;
+
+            // 提交事件
+            form.on('submit(dingyue)', function (data) {
+                var field = data.field; // 获取表单字段值
+
+                let userName = data.field.username;
+                let email = data.field.email;
+                let org = data.field.company;
+                let lang = "en_US" ;
+                let sectionId = data.field.sectionId;
+
+                // let check = isEmail(email);
+                // // 验证通过
+                // if(!check){
+                //     layer.msg("请输入正确邮箱格式", { icon: 5, anim: 6 });
+                // }
+                $.ajax({
+                    type: "post",
+                    url: ctx + "web/webSubscribe/add",
+                    data: {"userName":userName,"email":email,"org":org,"type":2,"language":lang,"sectionId":sectionId},
+                    success: function(result) {
+                        if(result.code !=0){
+                            layer.msg(result.msg, { icon: 5, anim: 6 });
+                        }else{
+                            layer.msg("Subscribe Successfully", { icon: 6, anim: 6 });
+                            setTimeout(function(){
+                                layer.closeAll();
+                            },800)
+                        }
+                    }
+                });
+
+
+
+                // 此处可执行 Ajax 等操作
+                // …
+                return false; // 阻止默认 form 跳转
+            });
+
+            util.on('lay-on', {
+                "closeLayer": function () {
+                    layer.closeAll()
+                },
+                "showForm": function (othis) {
+                    var subscribe = "Subscribe";
+                    var Fill = "Fill In Your Information\uFF0CSubscribe To Receive Our Latest Newsletters And Other Information";
+                    var userName = "UserName";
+                    var pu = "Please Enter Your Username Or Email";
+                    var email = "Email";
+                    var Email = "Please Enter Email";
+                    var organization = "Organization";
+                    var Organization = "Please Enter Organization";
+                    console.log($(othis).parent().attr("data"))
+
+                        layer.open({
+                            type: 1,
+                            title: false,
+                            closeBtn: 0,
+                            skin: 'dingyue',
+                            //area: ['420px', '240px'], // 宽高
+                            content: `<div class="df jcfe p15">
+                                        <i class="layui-icon layui-icon-close fs18 cp" lay-on="closeLayer"></i>
+                                    </div>
+                                    <div class="box">
+                                        <div class="title">
+                                            <strong class="fs16">${subscribe}</strong>
+                                            <p class="fs13 c5 mt10 mb15" id="sectionName" style="text-align: center"></p>
+                                            <p class="fs13 c5 mt10 mb15">${Fill}</p>
+                                        </div>
+                                        <form class="layui-form">
+                                            <div class="login-container">
+                                                <div class="layui-form-item mb20">
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="username" id="username" value="" lay-verify="required" placeholder="${userName}"
+                                                            lay-reqtext="${pu}"  autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item mb20">
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="email" id="email" value="" lay-verify="email|required" placeholder="${email}"
+                                                            lay-reqtext="${Email}"  autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item mb20">
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="company" value="" lay-verify="required" placeholder="${organization}"
+                                                            lay-reqtext="${Organization}" autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+
+                                                <div class="layui-form-item mb20" hidden>
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="sectionId" id="sectionId" value="" lay-verify="required"
+                                                            autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+<!--                                                <div class="layui-form-item mb20">-->
+<!--                                                    <div class="layui-input-wrap">-->
+<!--                                                        <select name="country" lay-verify="required" lay-search lay-reqtext="请选择您感兴趣的国家">-->
+<!--                                                            <option value="">请选择您感兴趣的国家</option>-->
+<!--                                                            <option value="1">中国</option>-->
+<!--                                                            <option value="2">美国</option>-->
+<!--                                                            <option value="3">英国</option>-->
+<!--                                                            <option value="4">法国</option>-->
+<!--                                                        </select>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+                                                <div class="layui-form-item mb0">
+                                                    <button class="layui-btn layui-btn-fluid bg-c h42 lh42" lay-submit
+                                                        lay-filter="dingyue">${subscribe}</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>`,
+                            success: function (layero, index, that) {
+
+                                // $('#reportId').val($(othis).parent().find(".sectiondingyue").attr("data"));
+                                $('#sectionId').val($(othis).parent().attr("data"));
+                                $('#sectionName').text($(othis).parent().attr("data2"));
+                                form.render();
+                            }
+                        });
+                }
+            })
+        })
+
+
+    </script>
+</body>
+
+</html>

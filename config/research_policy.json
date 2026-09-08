@@ -1,0 +1,344 @@
+{
+  "version": "2026-09-08-regions-v1",
+  "source_priority": {
+    "overseas": {
+      "primary": "usda_psd",
+      "reference": [
+        "usda_wasde",
+        "cropwatch"
+      ],
+      "history": "usda_psd",
+      "actual": null
+    },
+    "china": {
+      "near_term": "cropwatch",
+      "long_term": "china_outlook",
+      "history_reference": "usda_psd",
+      "actual": "nbs",
+      "horizon_boundary": 2
+    }
+  },
+  "excluded_entities": [
+    "Hong Kong",
+    "Macau",
+    "Singapore",
+    "Brunei",
+    "Timor-Leste"
+  ],
+  "materiality": {
+    "source": "usda_psd",
+    "baseline_years": [
+      2020,
+      2024
+    ],
+    "minimum_average_mt": {
+      "wheat": 0.5,
+      "corn": 0.5,
+      "rice": 0.5,
+      "soybean": 0.1,
+      "sugar": 0.25
+    },
+    "rule": "Fixed membership; five complete baseline years required; changes require an explicit policy version, never daily refresh."
+  },
+  "active_countries": {
+    "wheat": [
+      "China",
+      "United States",
+      "Brazil",
+      "Argentina",
+      "India",
+      "European Union",
+      "Russia",
+      "Ukraine",
+      "Australia",
+      "Canada",
+      "Mexico",
+      "South Africa",
+      "Kazakhstan",
+      "Paraguay",
+      "Bangladesh",
+      "Pakistan",
+      "Turkey",
+      "Japan",
+      "United Kingdom"
+    ],
+    "corn": [
+      "China",
+      "United States",
+      "Brazil",
+      "Argentina",
+      "India",
+      "European Union",
+      "Russia",
+      "Ukraine",
+      "Canada",
+      "Thailand",
+      "Vietnam",
+      "Mexico",
+      "South Africa",
+      "Kazakhstan",
+      "Paraguay",
+      "Indonesia",
+      "Bangladesh",
+      "Philippines",
+      "Pakistan",
+      "Turkey",
+      "Korea, North",
+      "Burma",
+      "Laos",
+      "Cambodia"
+    ],
+    "rice": [
+      "China",
+      "United States",
+      "Brazil",
+      "Argentina",
+      "India",
+      "European Union",
+      "Russia",
+      "Thailand",
+      "Vietnam",
+      "Paraguay",
+      "Indonesia",
+      "Bangladesh",
+      "Philippines",
+      "Pakistan",
+      "Turkey",
+      "Japan",
+      "Korea, South",
+      "Korea, North",
+      "Taiwan",
+      "Burma",
+      "Laos",
+      "Cambodia",
+      "Malaysia"
+    ],
+    "soybean": [
+      "China",
+      "United States",
+      "Brazil",
+      "Argentina",
+      "India",
+      "European Union",
+      "Russia",
+      "Ukraine",
+      "Canada",
+      "Mexico",
+      "South Africa",
+      "Kazakhstan",
+      "Paraguay",
+      "Indonesia",
+      "Bangladesh",
+      "Turkey",
+      "Japan",
+      "Korea, South",
+      "Korea, North",
+      "Burma"
+    ],
+    "sugar": [
+      "China",
+      "United States",
+      "Brazil",
+      "Argentina",
+      "India",
+      "European Union",
+      "Russia",
+      "Ukraine",
+      "Australia",
+      "Thailand",
+      "Vietnam",
+      "Mexico",
+      "South Africa",
+      "Indonesia",
+      "Philippines",
+      "Pakistan",
+      "Turkey",
+      "Japan",
+      "Burma",
+      "United Kingdom"
+    ]
+  },
+  "regions": {
+    "Southeast Asia": {
+      "label": "东南亚",
+      "primary": "usda_psd",
+      "reference": [],
+      "map_members": [
+        "Burma",
+        "Thailand",
+        "Vietnam",
+        "Laos",
+        "Cambodia",
+        "Malaysia",
+        "Indonesia",
+        "Philippines",
+        "Singapore",
+        "Brunei",
+        "Timor-Leste"
+      ],
+      "members_by_crop": {
+        "wheat": [],
+        "corn": [
+          "Thailand",
+          "Vietnam",
+          "Indonesia",
+          "Philippines",
+          "Burma",
+          "Laos",
+          "Cambodia"
+        ],
+        "rice": [
+          "Thailand",
+          "Vietnam",
+          "Indonesia",
+          "Philippines",
+          "Burma",
+          "Laos",
+          "Cambodia",
+          "Malaysia"
+        ],
+        "soybean": [
+          "Indonesia",
+          "Burma"
+        ],
+        "sugar": [
+          "Thailand",
+          "Vietnam",
+          "Indonesia",
+          "Philippines",
+          "Burma"
+        ]
+      },
+      "aggregation": "sum_complete_same_document",
+      "year_basis": "marketing_year",
+      "history_start": 1960
+    }
+  },
+  "consensus": {
+    "default": "disabled",
+    "rule": "Reference only; >=2 independent institutions, same definition and target, within 45 days. No default mean or level splice."
+  },
+  "splicing": {
+    "overseas": "PSD history and forecast, same definition and fixed region membership; keep Estimate/Forecast separate. WASDE vintages are a separate reference series.",
+    "china": "NBS CY Actual and CropWatch CY forecasts shown separately; China Outlook long-term separate; PSD MY history is a reference series, no CY/MY join.",
+    "missing": "N/A; no country proxies, no interpolation, no shrinking basket, no source fallback."
+  },
+  "schedule": [
+    {
+      "id": "noaa",
+      "group": "climate",
+      "script": "fetch_noaa.py",
+      "args": [],
+      "sources": [
+        "noaa_oni",
+        "noaa_nino34"
+      ],
+      "interval_days": 1
+    },
+    {
+      "id": "psd",
+      "group": "crops",
+      "script": "fetch_usda.py",
+      "args": [],
+      "sources": [
+        "usda_psd"
+      ],
+      "interval_days": 1
+    },
+    {
+      "id": "wasde",
+      "group": "reference",
+      "script": "fetch_wasde.py",
+      "args": [
+        "--months",
+        "3"
+      ],
+      "sources": [
+        "usda_wasde"
+      ],
+      "interval_days": 7
+    },
+    {
+      "id": "cropwatch",
+      "group": "crops",
+      "script": "fetch_cropwatch.py",
+      "args": [
+        "--reports",
+        "4"
+      ],
+      "sources": [
+        "cropwatch"
+      ],
+      "interval_days": 7
+    },
+    {
+      "id": "china_outlook",
+      "group": "crops",
+      "script": "fetch_china_outlook.py",
+      "args": [],
+      "sources": [
+        "china_outlook"
+      ],
+      "interval_days": 30
+    },
+    {
+      "id": "worldbank",
+      "group": "prices",
+      "script": "fetch_prices.py",
+      "args": [],
+      "sources": [
+        "worldbank"
+      ],
+      "interval_days": 7
+    },
+    {
+      "id": "nbs",
+      "group": "prices",
+      "script": "fetch_nbs.py",
+      "args": [
+        "--pages",
+        "2"
+      ],
+      "sources": [
+        "nbs",
+        "china_prices"
+      ],
+      "interval_days": 7
+    },
+    {
+      "id": "futures",
+      "group": "prices",
+      "script": "fetch_futures.py",
+      "args": [],
+      "sources": [
+        "sina_cn_corn",
+        "sina_cn_soybean",
+        "sina_cn_soybean_a",
+        "sina_cn_sugar",
+        "sina_cn_rice",
+        "sina_cn_wheat",
+        "sina_us_corn",
+        "sina_us_soybean",
+        "sina_us_sugar",
+        "sina_us_wheat"
+      ],
+      "interval_days": 1
+    }
+  ],
+  "dashboard": {
+    "source": "usda_psd",
+    "top_n": 5,
+    "others": "same_snapshot_complement",
+    "china": "PSD comparable map; CropWatch/NBS/China Outlook retained in separate details",
+    "presentation": "Chinese-first map; historical price/revision disclosure removed from homepage"
+  },
+  "quality": {
+    "futures_monthly": {
+      "min_observed_days": 10,
+      "min_domestic_volume": 100,
+      "exclude_open_month": true,
+      "exclude_inconsistent_ohlc": true,
+      "interpretation": "minimum research sample screen, not guaranteed session completeness or investable liquidity"
+    }
+  }
+}

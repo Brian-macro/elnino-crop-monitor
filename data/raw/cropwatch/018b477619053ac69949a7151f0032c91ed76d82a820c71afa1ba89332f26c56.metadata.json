@@ -1,0 +1,12 @@
+{
+  "document_id": "01a94a502f9c5c9b61102494d9b637795fb608459be8b933c818136d6b30d5c6",
+  "source": "cropwatch",
+  "source_url": "http://cloud.cropwatch.com.cn/web/report/detail?id=309",
+  "raw_path": "data/raw/cropwatch/018b477619053ac69949a7151f0032c91ed76d82a820c71afa1ba89332f26c56.html",
+  "sha256": "018b477619053ac69949a7151f0032c91ed76d82a820c71afa1ba89332f26c56",
+  "publication_date": null,
+  "available_date": "2026-09-08",
+  "download_timestamp": "2026-09-08T08:29:06.114046+00:00",
+  "publication_date_basis": "Issue month only; availability conservatively month-end",
+  "title": "June 2025 CropWatch Bulletin"
+}

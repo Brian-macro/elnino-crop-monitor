@@ -1,0 +1,12 @@
+{
+  "document_id": "68006c2b0f98f1634f0d2179a2650e9aa425201b37be1fd90767235c9c8993cb",
+  "source": "sina_cn_wheat",
+  "source_url": "https://stock2.finance.sina.com.cn/futures/api/jsonp.php/var%20_V21052021_4_12=/InnerFuturesNewService.getDailyKLine?symbol=WH0&type=2021_04_12",
+  "raw_path": "data/raw/sina_cn_wheat/68c11b758bf8fa15243d0fe8cb5ff7b11de801ee8f999040be0c5ab3b607c41e.jsonp",
+  "sha256": "68c11b758bf8fa15243d0fe8cb5ff7b11de801ee8f999040be0c5ab3b607c41e",
+  "publication_date": null,
+  "available_date": "2026-09-08",
+  "download_timestamp": "2026-09-08T13:39:26.906035+00:00",
+  "publication_date_basis": "Source publication timestamp unavailable; first observed archive date",
+  "title": "郑州强麦主连"
+}

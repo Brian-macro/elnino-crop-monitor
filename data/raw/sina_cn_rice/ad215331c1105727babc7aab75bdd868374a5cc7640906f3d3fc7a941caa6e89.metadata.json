@@ -1,0 +1,12 @@
+{
+  "document_id": "2469aa9071d85d85adc0598a61ac4e8d5e65ae42f31d192a230f05eb3daba654",
+  "source": "sina_cn_rice",
+  "source_url": "https://stock2.finance.sina.com.cn/futures/api/jsonp.php/var%20_V21052021_4_12=/InnerFuturesNewService.getDailyKLine?symbol=RR0&type=2021_04_12",
+  "raw_path": "data/raw/sina_cn_rice/ad215331c1105727babc7aab75bdd868374a5cc7640906f3d3fc7a941caa6e89.jsonp",
+  "sha256": "ad215331c1105727babc7aab75bdd868374a5cc7640906f3d3fc7a941caa6e89",
+  "publication_date": null,
+  "available_date": "2026-09-08",
+  "download_timestamp": "2026-09-08T13:39:26.329592+00:00",
+  "publication_date_basis": "Source publication timestamp unavailable; first observed archive date",
+  "title": "大连粳米主连"
+}

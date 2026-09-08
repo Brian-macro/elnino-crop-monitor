@@ -1,0 +1,111 @@
+{
+ "crop": "soybean",
+ "target_year": 2026,
+ "countries": [
+  {
+   "country": "Brazil",
+   "forecast": 186.0,
+   "yoy": 3.0
+  },
+  {
+   "country": "United States",
+   "forecast": 122.99,
+   "yoy": 6.0
+  },
+  {
+   "country": "Argentina",
+   "forecast": 50.0,
+   "yoy": 1.0
+  },
+  {
+   "country": "China",
+   "forecast": 21.0,
+   "yoy": 0.5
+  },
+  {
+   "country": "India",
+   "forecast": 11.5,
+   "yoy": 4.3
+  },
+  {
+   "country": "Paraguay",
+   "forecast": 11.1,
+   "yoy": -8.3
+  },
+  {
+   "country": "Russia",
+   "forecast": 8.0,
+   "yoy": -11.1
+  },
+  {
+   "country": "Canada",
+   "forecast": 7.4,
+   "yoy": 7.0
+  },
+  {
+   "country": "Ukraine",
+   "forecast": 5.0,
+   "yoy": -9.1
+  },
+  {
+   "country": "European Union",
+   "forecast": 2.95,
+   "yoy": 3.4
+  },
+  {
+   "country": "South Africa",
+   "forecast": 2.8,
+   "yoy": -8.2
+  },
+  {
+   "country": "Mexico",
+   "forecast": 0.32,
+   "yoy": 3.3
+  },
+  {
+   "country": "Indonesia",
+   "forecast": 0.29,
+   "yoy": -9.4
+  },
+  {
+   "country": "Kazakhstan",
+   "forecast": 0.22,
+   "yoy": 3.3
+  },
+  {
+   "country": "Bangladesh",
+   "forecast": 0.18,
+   "yoy": 2.9
+  },
+  {
+   "country": "Turkey",
+   "forecast": 0.16,
+   "yoy": 6.7
+  },
+  {
+   "country": "Australia",
+   "forecast": 0.06,
+   "yoy": 15.4
+  },
+  {
+   "country": "Thailand",
+   "forecast": 0.05,
+   "yoy": 0.0
+  },
+  {
+   "country": "Vietnam",
+   "forecast": 0.04,
+   "yoy": -2.4
+  },
+  {
+   "country": "Philippines",
+   "forecast": 0.0,
+   "yoy": 0.0
+  },
+  {
+   "country": "Pakistan",
+   "forecast": 0.0,
+   "yoy": 0.0
+  }
+ ]
+}

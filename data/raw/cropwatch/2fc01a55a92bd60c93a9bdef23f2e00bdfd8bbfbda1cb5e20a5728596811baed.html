@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta http-equiv="Content-Type" Content="text/html;charset=utf8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CropWatch Cloud</title>
+    <link rel="stylesheet" href="/web/layui-v2.8.11/css/layui.css">
+    <link rel="stylesheet" href="/web/style/common.min.css">
+    <link rel="stylesheet" href="/web/style/css.min.css">
+    <link rel="stylesheet" href="/web/style/add.min.css">
+</head>
+
+<body class="page kuaibao">
+    
+	<script> var ctx = "\/"; var captchaType = null; </script>
+	<header class="pa w100p" style="z-index: 100;">
+		<div class="layui-container">
+			<div class="logo--box df aic jcsb">
+				<a href="/"><img src="/web/images/logo.webp" class="db h100p" alt=""></a>
+				<div class="r df fdc aife jcsb f1">
+					<div class="df aic fs13">
+						<a class="df aic mr25" href="/web/login/">
+							<svg t="1692522806508" class="icon" viewBox="0 0 1024 1024" version="1.1"
+								 xmlns="http://www.w3.org/2000/svg" p-id="2912" width="16" height="16">
+								<path
+										d="M870.314316 877.390274 870.314316 877.390274C870.314316 877.390274 870.314316 877.390274 870.314316 877.390274 777.938121 967.974532 651.551687 1024 512 1024 229.239611 1024 0.017919 794.741738 0.017919 511.98135 0.017919 229.22096 229.239611-0.000731 512-0.000731 794.760389-0.000731 1023.982081 229.22096 1023.982081 511.98135 1023.982081 655.190051 965.067572 784.465527 870.314316 877.390274ZM512 950.859703C615.932362 950.859703 711.30731 914.545545 786.495536 854.131659 746.451223 740.398497 639.446968 658.261944 512 658.261944 384.553032 658.261944 277.548777 740.398497 237.504464 854.131659 312.69269 914.545545 408.067638 950.859703 512 950.859703ZM512 73.176136C269.649625 73.176136 73.158216 269.667545 73.158216 512.017919 73.158216 621.545515 113.53166 721.41859 179.869911 798.325613 237.723886 672.597442 364.512591 585.158216 512 585.158216 659.450839 585.158216 786.276114 672.597442 844.130089 798.325613 910.46834 721.45516 950.841784 621.545515 950.841784 512.017919 950.841784 269.667545 754.350375 73.176136 512 73.176136ZM512 548.588068C410.993249 548.588068 329.149257 466.707505 329.149257 365.737325 329.149257 264.730574 410.993249 182.886582 512 182.886582 612.97018 182.886582 694.850743 264.730574 694.850743 365.737325 694.850743 466.707505 612.97018 548.588068 512 548.588068ZM512 256.026879C451.403264 256.026879 402.289554 305.140589 402.289554 365.700754 402.289554 426.297491 451.403264 475.411201 512 475.411201 572.596736 475.411201 621.710446 426.297491 621.710446 365.700754 621.710446 305.140589 572.596736 256.026879 512 256.026879Z"
+										fill="#ffffff" p-id="2913"></path>
+							</svg>
+							<span class="ml6 white">Login</span>
+						</a>
+						
+						
+						<div class="pr">
+							<a href="javascript:;" class="white active  df aic" onclick="showDrop(this)"><img style="margin-right:5px;height:24px!important;" src="/profile/avatar/2023/04/15/us_20230415184657A001.png" >English</a>
+							<div class="drop bg-white br5 pa">
+								<a class="df aic" style="padding-left: 10px;cursor: pointer;" onclick="changeLanguage(&quot;en_US&quot;)"><img style="margin-right:5px;height:20px!important;" src="/profile/avatar/2023/04/15/us_20230415184657A001.png" >English</a><a class="df aic" style="padding-left: 10px;cursor: pointer;" onclick="changeLanguage(&quot;zh_CN&quot;)"><img style="margin-right:5px;height:20px!important;" src="/profile/avatar/2023/04/15/zh_20230415184706A002.png" >中文</a>
+							</div>
+						</div>
+<!--						<em class="h10 w1 bg-white ml10 mr10"></em>-->
+<!--						<a href="javascript:;" class="white">EN</a>-->
+						<span class="menu ml25 layui-hide-sm" onclick="showNav(this)"></span>
+					</div>
+					<div class="nav df aic jcsb fs15">
+						<a href="/">Home</a>
+						<a href="/web/about">About</a>
+						<a href="/web/report/kuai">Update</a>
+						<a href="/web/report" class="active">Bulletin</a>
+						<a href="/web/method">Methodology</a>
+						<a href="/web/publications">Publications</a>
+						<a href="/web/contact">Contact Us</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<script src="/web/js/jquery-2.1.1.min.js"></script>
+	<script>
+		function showDrop(is){
+			$('.drop').toggleClass('open')
+		}
+
+		function changeLanguage(lang) {
+			console.log(lang)
+			$.ajax({
+				type: "post",
+				url: ctx + "web/common/changeLang",
+				data: {
+					"lang": lang
+				},
+				success: function(result) {
+					window.location.reload();
+				}
+			});
+		}
+	</script>
+
+    <main>
+        <div class="b">
+            <img src="/web/images/bg-kb.jpg" class="w100p db" alt="">
+            <div class="tac white df aic jcc fdc info pa">
+                <h2>Bulletin</h2>
+                <strong>CropWatch bulletin</strong>
+            </div>
+        </div>
+        <div class="box1">
+            <div class="layui-container">
+                <div class="layui-row aifs layui-col-space25">
+                    <div class="layui-col-md3">
+                        <h3 class="fs18 fw500 lh24">Menu</h3>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Key Message</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7520" class="db bbse c6">
+                                        Key Message
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Chapter 1: Global Outlook</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7521" class="db bbse c6">
+                                        Global Crop Production Situation
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7522" class="db bbse c6">
+                                        Maize Production for North Hemisphere
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7523" class="db bbse c6">
+                                        Soybean Production for North Hemisphere
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7524" class="db bbse c6">
+                                        Rice Production for the Equatorial Region
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7579" class="db bbse c6">
+                                        Wheat Production for South Hemisphere
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7525" class="db bbse c6">
+                                        Outlook
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Chapter 2: Countries Outlook</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7526" class="db bbse c6">
+                                        China
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7534" class="db bbse c6">
+                                         Argentina
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7536" class="db bbse c6">
+                                        Australia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7535" class="db bbse c6">
+                                        Brazil
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7532" class="db bbse c6">
+                                        Cambodia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7533" class="db bbse c6">
+                                        Egypt
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7528" class="db bbse c6">
+                                        India
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7527" class="db bbse c6">
+                                        United States
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7548" class="db bbse c6">
+                                        South Africa
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7530" class="db bbse c6">
+                                        Thailand
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7529" class="db bbse c6">
+                                        Ukraine
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7531" class="db bbse c6">
+                                        Vietnam
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7549" class="db bbse c6">
+                                        Agricultural Anomalies: Hotspots &amp; Events
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Online Country Analysis</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7539" class="db bbse c6">
+                                        Online Resouces for Country Analysis
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7580" class="db bbse c6">
+                                        CropWatch GPT for Analysis
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Appendix A: Indicators</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7541" class="db bbse c6">
+                                        Global Crop Production
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7542" class="db bbse c6">
+                                        Agro-climatic Indicators
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7543" class="db bbse c6">
+                                        Agronomic Indicators
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Appendix B: Methodology, Data and Online Resources</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7544" class="db bbse c6">
+                                        The CropWatch Cloud Platform
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7545" class="db bbse c6">
+                                        Indicators and Methods
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7546" class="db bbse c6">
+                                        Online Resources
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Acknoeledgments</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7547" class="db bbse c6">
+                                        Acknowledgements
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=313&amp;sectionId=7583" class="db bbse c6">
+                                        Disclaimer
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">AI</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="layui-col-md9">
+                        <div class="t df aifs jcsb lh24">
+                            <strong class="fs18">Global Crop Production Situation<span class="bsc fs14 fw400 ml10 dib lh20 pl6 pr6 c6 br4">Chapter 1: Global Outlook</span>
+                            </strong>
+                        </div>
+                        <p class="fs13 c8 lh20 mt12">
+                        <span class="secClass" data="7521" data2="Global Crop Production Situation">
+                            Authors: qinxl,lirui | Edit: zenghongwei
+                            
+                        </span>
+						<div class="df jcfe aic"><a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25 mt15"
+                                 style="height: 20px;margin-left: auto" lay-on="showForm">
+                                <span>Subscribe</span>
+                            </a></div>
+                            <!--<span class="ml15">编辑:yangld</span>-->
+                            </p>
+                        <div class="bg-white fs15 content pr25 pl25 pb20 pt20 mt15" style="line-height: 2;"><p style="margin: 0in; font-size: 10.5pt; font-family: &quot;HarmonyOS Sans&quot;; color: rgb(8, 8, 8); text-indent: 0em;"><span style="background-color: white; font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; font-size: 16px; font-weight: 600; letter-spacing: 0.28px;">1.1.1 Global Crop Production Index</span></p><p dir="ltr" style="margin: 0in; font-size: 10.5pt; color: rgb(8, 8, 8); text-align: left; text-indent: 2em;"><span style="text-indent: 2em; font-size: 14px; font-family: 微软雅黑, &quot;Microsoft YaHei&quot;;">From&nbsp;July&nbsp;to&nbsp;September&nbsp;2025,&nbsp;the&nbsp;Global&nbsp;Crop&nbsp;Production&nbsp;Index&nbsp;(CroPI)&nbsp;reached&nbsp;1.06,&nbsp;significantly&nbsp;higher&nbsp;than&nbsp;the&nbsp;baseline&nbsp;of&nbsp;1.0&nbsp;and&nbsp;marking&nbsp;the&nbsp;second‑highest&nbsp;value&nbsp;in&nbsp;the&nbsp;past&nbsp;five&nbsp;years,&nbsp;second&nbsp;only&nbsp;to&nbsp;1.08&nbsp;observed&nbsp;in&nbsp;2020.&nbsp;This&nbsp;indicates&nbsp;that&nbsp;global&nbsp;agricultural&nbsp;production&nbsp;conditions&nbsp;were&nbsp;generally&nbsp;better&nbsp;than&nbsp;average,&nbsp;with&nbsp;agricultural&nbsp;systems&nbsp;showing&nbsp;strong&nbsp;resilience&nbsp;and&nbsp;adaptability&nbsp;under&nbsp;complex&nbsp;climatic&nbsp;conditions&nbsp;(Figure&nbsp;1.1).</span></p><p dir="ltr" style="margin: 0in; font-size: 10.5pt; color: rgb(8, 8, 8); text-align: left; text-indent: 2em;"><span style="font-size: 10.5pt; text-indent: 2em; font-family: 微软雅黑, &quot;Microsoft YaHei&quot;;">In&nbsp;the&nbsp;2020-2<span style="font-size: 10.5pt; text-indent: 2em; letter-spacing: 0.28px; background-color: #FFFFFF; font-family: 微软雅黑, &quot;Microsoft YaHei&quot;;">025&nbsp;</span>time&nbsp;series,&nbsp;the&nbsp;global&nbsp;CroPI&nbsp;followed&nbsp;a&nbsp;&quot;decline&nbsp;followed&nbsp;by&nbsp;recovery&quot;&nbsp;pattern:&nbsp;after&nbsp;bottoming&nbsp;out&nbsp;during&nbsp;2021- 2023,&nbsp;it&nbsp;began&nbsp;to&nbsp;rebound&nbsp;in&nbsp;2024&nbsp;and&nbsp;maintained&nbsp;a&nbsp;steady&nbsp;upward&nbsp;trend&nbsp;through&nbsp;2025.</span></p><p style="margin: 0in; font-size: 10.5pt; font-family: &quot;HarmonyOS Sans&quot;; color: rgb(8, 8, 8); text-align: left;"><span style="background: white;"><img src="http://cloud.cropwatch.com.cn/profile/upload/2025/10/26/CroPItimeseriesJASGlobalNorthernSouthernTropical_20251026130904A024.jpg" width="500"/></span></p><p style="text-align: left;"><em style="background-color: rgb(255, 255, 255); color: rgb(8, 8, 8); font-weight: 600; letter-spacing: 0.28px; box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;;"><em style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; letter-spacing: 0.28px;">Figure 1.1 Time Series Trends of Regional CroPI, July–September 2020–2025</em></em></p><p style="margin: 0in; font-size: 10.5pt; font-family: &quot;HarmonyOS Sans&quot;; color: rgb(8, 8, 8);"><span style="background: white;"></span></p><p style="margin: 0in; font-size: 10.5pt; font-family: &quot;HarmonyOS Sans&quot;; color: rgb(8, 8, 8); text-indent: 2em;"><span style="background-color: #FFFFFF; font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; font-size: 10.5pt; letter-spacing: 0.28px; text-indent: 2em;">By region, the CroPI for the Northern Hemisphere was 1.04, slightly higher than the same period last year and remaining at normal to favorable levels; the Southern Hemisphere CroPI reached 1.19, the highest in the past five years; and the tropical CroPI was 1.09, an increase of 0.06 over last year. This formed an overall pattern of &quot;strong South, stable North, and generally positive&quot; (Figure 1.2).</span></p><p style="margin: 0in; font-size: 10.5pt; font-family: &quot;HarmonyOS Sans&quot;; color: rgb(8, 8, 8); text-align: left;"><span style="background: white;"><img src="http://cloud.cropwatch.com.cn/profile/upload/2025/10/26/CroPIforBulletiin2025October_20251026130904A026.jpg" width="500"/></span></p><p style="text-align: left;"><em style="background-color: rgb(255, 255, 255); color: rgb(8, 8, 8); font-weight: 600; letter-spacing: 0.28px; box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;;">Figure 1.2 Global CroPI Distribution Map, July–September 2025</em></p><p><br/></p><p style="margin: 0in; font-family: &quot;HarmonyOS Sans&quot;; font-size: 11.8pt; color: rgb(8, 8, 8);"><strong style="font-family: arial, helvetica, sans-serif; font-size: 11.8pt;"><span style="background: white; box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; font-size: 16px; letter-spacing: 0.28px;">1.1.2 Agro-climatic<span style="vertical-align: baseline; letter-spacing: 0.28px;">&nbsp;condition</span></span></strong></p><p style="margin: 0in; font-size: 10.5pt; font-family: &quot;HarmonyOS Sans&quot;; color: rgb(8, 8, 8); text-indent: 2em;"><span style="background-color: #FFFFFF; font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; letter-spacing: 0.02em; text-indent: 2em;">During the monitoring period, global climate was generally warmer and drier than average. Compared with the 15‑year average for the same period, approximately 70% of agricultural areas received over 10% less precipitation, with more than 30% of areas experiencing deficits greater than 30%. In contrast, some localities in East Asia, southern South America, and southeastern Australia saw notable increases in precipitation (+10–30%). Average temperatures were 0.5–1.5°C above the 15‑year average in most regions, with only a few high‑latitude and coastal areas slightly cooler (±0.5°C). Photosynthetically Active Radiation (RADPAR) was 5–10% higher than average in most areas, exceeding +10% locally—overall, light conditions were favorable.</span></p><p style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; margin-top: 0px; margin-bottom: 1em; margin-block: 7px; line-height: 1.6; letter-spacing: 0.02em; color: rgb(8, 8, 8); font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; background-color: rgb(255, 255, 255); text-indent: 2em;">Imbalances in water and heat led to marked spatial differentiation in Potential Biomass (BIOMSS): declines of ≥10% occurred in central North America, northeastern South America, northern Africa, and northern South Asia, while increases of more than +10% were observed in southern South America, East Asia, and southeastern Australia. These patterns reflect a global agricultural landscape where &quot;drought–heat stress coexists with local improvements&quot; (Figure 1.3).</p><p style="margin: 0in; font-size: 10.5pt; font-family: &quot;HarmonyOS Sans&quot;; color: rgb(8, 8, 8);"><span style="background: white;"></span></p><p style="text-align: left;"><img src="http://cloud.cropwatch.com.cn/profile/upload/2025/10/26/RAINDepatureMap_20251026130904A023.jpg" width="400" height="200" border="0" vspace="0" alt="" style="width: 400px; height: 200px;"/><img src="http://cloud.cropwatch.com.cn/profile/upload/2025/10/26/TempDepatureMap_20251026130904A025.jpg" width="400" height="200" border="0" vspace="0" alt="" style="width: 400px; height: 200px;"/></p><p style="text-align: left;"><span style="background: white;"><img src="http://cloud.cropwatch.com.cn/profile/upload/2025/10/26/RADPARDepartureMap_20251026130904A022.jpg" width="400" height="200" border="0" vspace="0" alt="" style="width: 400px; height: 200px;"/><img src="http://cloud.cropwatch.com.cn/profile/upload/2025/10/26/BIOMSSDepartureMap_20251026130904A027.jpg" width="400" height="200" border="0" vspace="0" alt="" style="width: 400px; height: 200px;"/></span></p><p style="margin: 0in; font-size: 10.5pt; font-family: &quot;HarmonyOS Sans&quot;; color: rgb(8, 8, 8); text-align: left;"><em style="font-weight: 600; letter-spacing: 0.28px; font-size: 10.5pt; box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; background-color: rgb(255, 255, 255);">Figure 1.3 Departure Anomalies of Global Agrometeorological Indicators Compared to the 15-year Average, July–September 2025 (Cumulative Precipitation, Average Temperature, Photosynthetically Active Radiation, Potential Biomass)</em><span style="font-family: Calibri; font-size: 11pt; text-indent: 2em;">&nbsp;</span></p><p style="margin: 0in; font-size: 10.5pt; font-family: &quot;HarmonyOS Sans&quot;; color: rgb(8, 8, 8); text-indent: 2em;"><span style="background: white;"></span></p><p style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; margin-top: 0px; margin-bottom: 1em; margin-block: 7px; line-height: 1.6; letter-spacing: 0.02em; color: rgb(8, 8, 8); font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; background-color: rgb(255, 255, 255); text-indent: 2em;"><span style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; font-weight: 600;">North America: Drought Stress, Overall Stable</span></p><p style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; margin-top: 0px; margin-bottom: 1em; margin-block: 7px; line-height: 1.6; letter-spacing: 0.02em; color: rgb(8, 8, 8); font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; background-color: rgb(255, 255, 255); text-indent: 2em;">In the central United States and main producing areas of Canada, CroPI values ranged from 0.93 to 1.11, indicating normal production conditions. However, significant drought was observed on both the northern and southern edges of the Great Plains, with localized precipitation deficits of ≥30% and potential biomass declines of ≥10%. While high temperatures and strong sunlight favored crop maturity, they may shorten the grain‑filling period. Yield prospects varied considerably between regions.</p><p style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; margin-top: 0px; margin-bottom: 1em; margin-block: 7px; line-height: 1.6; letter-spacing: 0.02em; color: rgb(8, 8, 8); font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; background-color: rgb(255, 255, 255); text-indent: 2em;"><span style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; font-weight: 600;">South America: Strong South, Restricted North</span></p><p style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; margin-top: 0px; margin-bottom: 1em; margin-block: 7px; line-height: 1.6; letter-spacing: 0.02em; color: rgb(8, 8, 8); font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; background-color: rgb(255, 255, 255); text-indent: 2em;">CroPI showed pronounced spatial differences. Northern Argentina, southern Brazil, and Uruguay had CroPI values ≥1.29, supported by precipitation increases of 10–30% and ample sunlight,&nbsp;<strong><span style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; font-weight: 600;">favoring</span></strong>&nbsp;yield increases for winter wheat and early‑planted crops. In contrast, northeastern Brazil and the eastern edge of the Amazon had CroPI values of 0.76–0.93, where drought combined with high temperatures suppressed crop growth. Overall, the &quot;southern gains, northern losses&quot; pattern supported the Southern Hemisphere&#39;s grain supply.</p><p style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; margin-top: 0px; margin-bottom: 1em; margin-block: 7px; line-height: 1.6; letter-spacing: 0.02em; color: rgb(8, 8, 8); font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; background-color: rgb(255, 255, 255); text-indent: 2em;"><span style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; font-weight: 600;">Western Europe: Stable and Positive</span></p><p style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; margin-top: 0px; margin-bottom: 1em; margin-block: 7px; line-height: 1.6; letter-spacing: 0.02em; color: rgb(8, 8, 8); font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; background-color: rgb(255, 255, 255); text-indent: 2em;">Most agricultural areas in Western and Central Europe had CroPI values between 0.93 and 1.11, indicating stable production conditions. RADPAR was 5–10% above normal, while precipitation deficits were mild (within –10%). Agricultural activities in regions such as northern France, northern Germany, and western Poland proceeded normally, with potential biomass anomalies close to average or slightly positive (+≤5%), demonstrating favorable growing environments. Overall, Western Europe remained in a climate‑balanced state, with stable prospects for autumn grain production.</p><p style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; margin-top: 0px; margin-bottom: 1em; margin-block: 7px; line-height: 1.6; letter-spacing: 0.02em; color: rgb(8, 8, 8); font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; background-color: rgb(255, 255, 255); text-indent: 2em;"><span style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; font-weight: 600;">Eastern Europe: Weak South, Strong North</span></p><p style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; margin-top: 0px; margin-bottom: 1em; margin-block: 7px; line-height: 1.6; letter-spacing: 0.02em; color: rgb(8, 8, 8); font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; background-color: rgb(255, 255, 255); text-indent: 2em;">CroPI in Eastern Europe showed significant spatial variation. Northern areas (northern Ukraine, Belarus, and the Baltic coastal region) had CroPI values ≥1.1, with suitable water–heat conditions and potential biomass increases of 5–10%, indicating strong performance. Conversely, southern Eastern Europe and the north coast of the Black Sea experienced persistent drought and high temperatures, with precipitation deficits ≥30% and CroPI only 0.76–0.93. Grain‑filling of wheat, maize, and other crops was hindered, posing high yield reduction risks. The overall pattern was &quot;north strong, south weak.&quot;</p><p style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; margin-top: 0px; margin-bottom: 1em; margin-block: 7px; line-height: 1.6; letter-spacing: 0.02em; color: rgb(8, 8, 8); font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; background-color: rgb(255, 255, 255); text-indent: 2em;"><span style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; font-weight: 600;">Africa: Persistent Drought, Local Improvement</span></p><p style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; margin-top: 0px; margin-bottom: 1em; margin-block: 7px; line-height: 1.6; letter-spacing: 0.02em; color: rgb(8, 8, 8); font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; background-color: rgb(255, 255, 255); text-indent: 2em;">CroPI across Africa ranged from 0.76 to 1.11, with a patchy distribution. Northern Africa, the Sahel, and the Horn of Africa suffered from insufficient rainfall (≤–30%), leading to notable declines in potential biomass. In contrast, parts of East and southern Africa saw CroPI values above 1.1, supported by increased rainfall and adequate sunlight, indicating recovering production conditions. Overall, drought remained the dominant factor across the continent.</p><p style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; margin-top: 0px; margin-bottom: 1em; margin-block: 7px; line-height: 1.6; letter-spacing: 0.02em; color: rgb(8, 8, 8); font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; background-color: rgb(255, 255, 255); text-indent: 2em;"><span style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; font-weight: 600;">Asia: Strong East, Pressured South</span></p><p style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; margin-top: 0px; margin-bottom: 1em; margin-block: 7px; line-height: 1.6; letter-spacing: 0.02em; color: rgb(8, 8, 8); font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; background-color: rgb(255, 255, 255); text-indent: 2em;">CroPI in Asian agricultural areas varied widely from 0.76 to 1.29. Northeastern and northern China, as well as Japan and South Korea, recorded CroPI &gt;1.1, with well‑matched water–heat conditions and significant potential biomass increases. Southern China, northern India, and Pakistan had CroPI ≤0.93 due to pronounced drought. In Central and Western Asia, high temperatures worsened water deficits, limiting crop growth. The overall pattern was &quot;strong East, weak West; strong North, weak South.&quot;</p><p style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; margin-top: 0px; margin-bottom: 1em; margin-block: 7px; line-height: 1.6; letter-spacing: 0.02em; color: rgb(8, 8, 8); font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; background-color: rgb(255, 255, 255); text-indent: 2em;"><span style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; font-weight: 600;">Oceania: Southeastern Highlight</span></p><p style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; margin-top: 0px; margin-bottom: 1em; margin-block: 7px; line-height: 1.6; letter-spacing: 0.02em; color: rgb(8, 8, 8); font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; background-color: rgb(255, 255, 255); text-indent: 2em;">In southwestern and southeastern coastal Australia, precipitation rose by 10–30%, with CroPI values &gt;1.11, supporting strong growth of winter wheat and canola. The central–western and northern regions remained relatively dry, with modest biomass declines. Agricultural regions in New Zealand remained stable, and overall conditions were positive.</p><p style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; margin-top: 0px; margin-bottom: 1em; margin-block: 7px; line-height: 1.6; letter-spacing: 0.02em; color: rgb(8, 8, 8); font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; background-color: rgb(255, 255, 255); text-indent: 2em;">Overall, from July to September 2025, regional differences in global agrometeorological conditions led to uneven production distribution: southern South America, East Asia, and southeastern Australia were the main sources of increased production potential, while central North America, South Asia, and drought belts in Africa still faced water–heat stress. Looking ahead, if spring rainfall in the Southern Hemisphere persists and temperatures in the Northern Hemisphere remain moderate, global grain output is expected to maintain upward momentum overall.</p><p style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; margin-top: 0px; margin-bottom: 1em; margin-block: 7px; line-height: 1.6; letter-spacing: 0.02em; color: rgb(8, 8, 8); font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; background-color: rgb(255, 255, 255);"><span style="font-size: 16px;"><strong><span style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; font-weight: 600;">1.1.3 Global Production of Major Grain and Oil Crops</span></strong></span></p><p style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; margin-top: 0px; margin-bottom: 1em; margin-block: 7px; line-height: 1.6; letter-spacing: 0.02em; color: rgb(8, 8, 8); font-family: &quot;HarmonyOS Sans&quot;, &quot;Segoe UI&quot;, &quot;SF Pro Display&quot;, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif, &quot;HarmonyOS Sans SC&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei UI&quot;, &quot;Microsoft Yahei&quot;, &quot;Source Han Sans CN&quot;, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Apple Color Emoji&quot;, &quot;Twemoji Mozilla&quot;, &quot;Noto Color Emoji&quot;, &quot;Android Emoji&quot;; background-color: rgb(255, 255, 255);">From July to September 2025, autumn crops in the Northern Hemisphere exhibited generally favorable growth, while summer crops in the Southern Hemisphere entered their peak growing stages, with overall good conditions for wheat production. Based on multi‑source satellite remote‑sensing data collected up to October 15, 2025, CropWatch monitoring indicates that the total global production of major grain and oil crops is forecasted at&nbsp;<span style="box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; font-weight: 600;">3,249.51 million tons<span style="vertical-align: baseline;">, representing a year‑on‑year increase of&nbsp;</span>49.17 million tons&nbsp;<span style="vertical-align: baseline;">, or&nbsp;</span>about 1.5%</span>&nbsp;(Appendix A.1). Specifically:</p><ul class=" list-paddingleft-2" style="list-style-type: disc;"><li><p><strong>Global wheat production</strong>&nbsp;is estimated at&nbsp;803.88 million tons&nbsp;, a&nbsp;decrease of 1.96 million tons&nbsp;year on year (–0.2%). Thanks to higher output in the Southern Hemisphere—namely in Australia, Argentina, Brazil, and South Africa—the decline narrowed compared with the August estimate, improving by 0.3 percentage points.</p></li><li><p><strong>Global maize production</strong>&nbsp;is projected to reach&nbsp;1,196.87 million tons&nbsp;, an&nbsp;increase of 20.29 million tons&nbsp;(+1.7% year on year). Favorable agrometeorological conditions during the late growing stage in the United States boosted yields, making it the primary contributor to global maize expansion.</p></li><li><p><strong>Global rice production</strong>&nbsp;is expected to total&nbsp;811.28 million tons&nbsp;, an&nbsp;increase of 17.40 million tons&nbsp;(+2.2% year on year).</p></li><li><p><strong>Global soybean production</strong>&nbsp;is forecasted at&nbsp;437.48 million tons&nbsp;, a&nbsp;year‑on‑year increase of 13.45 million tons&nbsp;(+3.2%), slightly higher than the August estimate.</p></li></ul><p style="text-indent: 0em;"><br/></p><p style="text-indent: 0em;"><span style="font-size: 16px;"><strong><span style="font-size: 16px; box-sizing: border-box; scrollbar-color: rgba(0, 0, 0, 0.12) transparent; scrollbar-width: thin; vertical-align: baseline; font-weight: 600;">1.1.4 Evaluation of Global Extreme Weather Event Impacts</span></strong></span></p><p><strong><span style="color: rgba(0, 0, 0, 0.9); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, Roboto, Ubuntu, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans CN&quot;, sans-serif; font-size: 15px; background-color: #FCFCFC;">The impact of extreme weather events on the production of major grain and oilseed crops in 2025 was weaker than in the previous year.</span></strong></p><p><strong style="color: rgb(50, 50, 50); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, Arial, Roboto, &quot;PingFang SC&quot;, miui, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei&quot;, sans-serif; font-size: 15px; background-color: rgb(255, 255, 255);">（1）<span style="margin: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-variant-alternates: inherit; font-variant-position: inherit; font-variant-emoji: inherit; font-weight: 600; font-stretch: inherit; font-size: 15px; line-height: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;; vertical-align: baseline; color: rgba(0, 0, 0, 0.9); background-color: #FCFCFC;">Widespread drought in croplands, and the situation remains severe</span></strong></p><p>Global cropland water stress risk during July to September showed a trend of &quot;initial increase followed by a decrease&quot;, with the overall level equivalent to a once-in-two-year mild drought scenario.The area affected by drought with a return period of ≥5 years accounted for 18.35% in late July, slightly increased to 18.87% in late August, and then decreased to 16.3% by late September. In contrast, the proportion of area experiencing drought with a return period of 2–5 years showed a steady upward trend, rising from 27.97% in late July to 30.32% in late August, and further increasing to 32.35% by late September.Regions including the Asian continent, central Africa, eastern North America, and Brazil in South America faced relatively high crop water stress risk. Notably, crops in North China underwent a typical &quot;abrupt shift from drought to waterlogging&quot; process, where periodic drought rapidly transitioned to waterlogging in the later growth stage.</p><p style="margin: 0in; font-size: 10.5pt; font-family: &quot;HarmonyOS Sans&quot;; color: rgb(8, 8, 8); text-indent: 2em;"><span style="background: white;"><img src="http://cloud.cropwatch.com.cn//profile/avatar/2025/10/27/image_20251027154047A037.png" alt="image.png" width="625" height="300" style="width: 625px; height: 300.9px;"/></span></p><p style="margin: 0in; font-size: 10.5pt; font-family: &quot;HarmonyOS Sans&quot;; color: rgb(8, 8, 8); text-indent: 2em;"><span style="background: #FFFFFF; color: #080808; font-family: &quot;HarmonyOS Sans&quot;; text-indent: 28px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(a) July, 20th-&nbsp;July, 27th,2025</span></p><p style="margin: 0in; font-size: 10.5pt; font-family: &quot;HarmonyOS Sans&quot;; color: rgb(8, 8, 8); text-indent: 2em;"><span style="background: white;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></p><p style="margin: 0in; font-size: 10.5pt; font-family: &quot;HarmonyOS Sans&quot;; color: rgb(8, 8, 8); text-indent: 2em;"><img src="http://cloud.cropwatch.com.cn//profile/avatar/2025/10/27/image_20251027154112A038.png" alt="image.png" width="632" height="304" style="color: rgb(8, 8, 8); font-family: &quot;HarmonyOS Sans&quot;; text-indent: 28px; width: 632px; height: 304.197px;"/></p><p style="margin: 0in; font-size: 10.5pt; font-family: &quot;HarmonyOS Sans&quot;; color: rgb(8, 8, 8); text-indent: 2em;"><span style="color: #080808; font-family: &quot;HarmonyOS Sans&quot;; text-indent: 28px; background-color: #FFFFFF;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(b) August, 21th-&nbsp;August, 28th,2025&nbsp;</span></p><p style="margin: 0in; font-size: 10.5pt; font-family: &quot;HarmonyOS Sans&quot;; color: rgb(8, 8, 8); text-indent: 2em;"><br/></p><p style="margin: 0in; font-size: 10.5pt; font-family: &quot;HarmonyOS Sans&quot;; color: rgb(8, 8, 8); text-indent: 2em;"><span style="background: white;"><img src="http://cloud.cropwatch.com.cn//profile/avatar/2025/10/27/image_20251027154138A039.png" alt="image.png" width="636" height="305" style="width: 636px; height: 305.769px;"/></span></p><p><span style="color: #080808; font-family: &quot;HarmonyOS Sans&quot;; text-indent: 28px; background-color: #FFFFFF;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(c) Sep., 22th-&nbsp;Sep., 29th,2025&nbsp;</span></p><p><strong><em>Figure 1.4 Risk of Crop Water Stress Index in croplands by Global Agro-Ecological Zone during July-September, 2025&nbsp;</em></strong></p><p>CropWatch precipitation data for September indicates that regions including the northeastern United States, southern Brazil, northeastern China, and West Africa received below-average precipitation(Figure 1.5). In contrast, croplands in eastern China experienced significantly above-average rainfall. Specifically, areas such as most of Henan, western Shandong, northeastern Hubei, and the region from eastern Sichuan to Chongqing recorded precipitation exceeding 100 mm more than the multi-year average. Parts of India and Southeast Asia also saw above-average rainfall.&nbsp;CropWatch soil moisture monitoring reveals a significant declining trend in soil moisture levels from August to September across most of the United States, Europe, Brazil, and southern Africa(Figure 1.6). By September, nearly one-third (31.3%) of global croplands had soil moisture levels 0-0.02 m³/m³ lower than the multi-year average. Soils were drier than average across most of the United States, Europe, Brazil, and southern Africa, while conditions were wetter than average in most of North China and western India.</p><ul class="auto-hide-last-sibling-br list-paddingleft-2" style="list-style-type: none;"><li><p><img src="http://cloud.cropwatch.com.cn//profile/avatar/2025/10/27/image_20251027155953A044.png" alt="image.png" width="655" height="245" style="width: 655px; height: 245.282px;"/><br/></p></li></ul><p><span style="margin: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-variant-alternates: inherit; font-variant-position: inherit; font-variant-emoji: inherit; font-weight: 600; font-stretch: inherit; line-height: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;; vertical-align: baseline; color: rgba(0, 0, 0, 0.9);">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Figure 1.5 Precipitation Anomaly in September 2025&nbsp;</span></p><p><img src="http://cloud.cropwatch.com.cn//profile/avatar/2025/10/27/image_20251027160028A046.png" alt="image.png" width="633" height="285" style="width: 633px; height: 285.598px;"/></p><p><span style="color:rgba(0, 0, 0, 0.9);font-family:-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Microsoft YaHei"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (a)&nbsp;<span style="color: rgba(0, 0, 0, 0.9); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;; font-weight: 600;">Root Zone Soil Moisture Anomaly Variation (August-September 2025)</span></strong></span></p><p><img src="http://cloud.cropwatch.com.cn//profile/avatar/2025/10/27/image_20251027160016A045.png" alt="image.png" width="628" height="283" style="width: 628px; height: 283.138px;"/></p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (b)&nbsp;<span style="margin: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-variant-alternates: inherit; font-variant-position: inherit; font-variant-emoji: inherit; font-weight: 600; font-stretch: inherit; line-height: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;; vertical-align: baseline; color: rgba(0, 0, 0, 0.9);">Root Zone Soil Moisture Anomaly in September 2025</span></p><p><span style="color: rgba(0, 0, 0, 0.9); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;; font-weight: 600;">Figure 1.5 Root Zone Soil Moisture Anomaly Variation</span></p><p><span style="color: rgba(0, 0, 0, 0.9); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;; font-weight: 600;"><strong style="color: rgb(50, 50, 50); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, Arial, Roboto, &quot;PingFang SC&quot;, miui, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei&quot;, sans-serif; font-size: 15px; background-color: rgb(255, 255, 255);">(2)&nbsp;</strong><strong><span style="margin: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-variant-alternates: inherit; font-variant-position: inherit; font-variant-emoji: inherit; font-weight: 600; font-stretch: inherit; line-height: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;; vertical-align: baseline; color: rgba(0, 0, 0, 0.9);">Mid- and high-latitude regions are seeing colder temperatures and an earlier start to winter</span></strong></span></p><p>According to an early warning issued by the U.S. National Oceanic and Atmospheric Administration (NOAA), a weak La Niña event is expected to develop during the autumn and winter of this year, which is projected to have a temporary cooling effect on global temperatures. Remote sensing monitoring of cropland surface temperature by CropWatch (Figure 1.6) indicates that since mid-September, temperatures over croplands in mid- to high-latitude regions—including the northeastern United States, southern Canada, eastern Europe, and northeastern China—have been lower than the multi-year average.The start date of winter is defined as the first day when the 5-day running mean temperature stabilizes below 10°C. In 2025, the winter onset date for most high-latitude regions showed a negative anomaly, meaning it arrived earlier compared to the 2010-2024 average. Notably, areas north of 60°N experienced a winter onset nearly one month earlier than usual (Figure 1.7).Monitoring highlighted in the previous bulletin indicated that in July, regions including central North America, areas from Eastern Europe to West Asia, and western India and Pakistan experienced persistent heatwaves. However, since September, temperatures in some of these aforementioned regions have shifted to below the multi-year average for the same period, reflecting significant anomalous fluctuations during the seasonal transition in mid- to high-latitude areas.</p><p><img src="http://cloud.cropwatch.com.cn//profile/avatar/2025/10/27/image_20251027160117A048.png" alt="image.png" width="586" height="325" style="width: 586px; height: 325.718px;"/></p><p>Figure 1.6&nbsp;Temperature Condition Index (TCI) Derived from Remote Sensing for September 2025 (Weeks 36-39)</p><p><span style="color: rgba(0, 0, 0, 0.9); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;; font-weight: 600;"><img src="http://cloud.cropwatch.com.cn//profile/avatar/2025/10/27/image_20251027160131A049.png" alt="image.png" width="603" height="201" style="width: 603px; height: 201.41px;"/></span></p><p>Figure&nbsp;1.7&nbsp;Map of Winter Onset Dates across the Northern Hemisphere from ERA5-Land Pentad Average Temperatures, July-September, 2025</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+	<footer>
+		<div class="layui-container" style="padding: 4vh 0 4vh;">
+			<div class="df box">
+				<a href="" class="mt15">
+					<img src="/web/images/logo.webp" alt="">
+				</a>
+				<div class="w120 layui-hide-xs layui-show-md-block"></div>
+				<div class="white f1 mt15">
+					<h3>Contact Us</h3>
+					<p>Olympic Village Science Park, West Beichen Road, Chaoyang District, Beijing</p>
+					<p>+8610-64842375/6</p>
+					<p>+8610-64858721(Fax)</p>
+					<p>cropwatch@aircas.ac.cn</p>
+				</div>
+				<a href="" target="_blank" class="white mt15">
+					<div class="df aic jcc">
+						<img src="/web/images/icon-5.jpg" class="h56 w56 br-3xl" alt="">
+						<div class="w30"></div>
+						<img src="/web/images/icon-6.jpg" class="h56 w56 br-3xl" alt="">
+					</div>
+					<p class="mt10">中国科学院空天信息创新研究院(AIRCAS)</p>
+				</a>
+			</div>
+		</div>
+		<div class="beian">
+			<div class="layui-container df aic jcsb">
+				<span>Copyright © 2025 中国科学院空天信息创新研究院生态系统遥感研究室</span>
+				<!--<a class="white" href="https://beian.miit.gov.cn/" target="_blank">京ICP备05080539号-16</a>-->
+			</div>
+		</div>
+	</footer>
+
+    <script src="/web/js/jquery-2.1.1.min.js"></script>
+    <script src="/web/js/js.js"></script>
+    <script src="/web/layui-v2.8.11/layui.js"></script>
+    <script> var ctx = "\/"; var captchaType = null; </script>
+    <script>
+        var language = "en_US"
+        function showUl(is) {
+            $(is).toggleClass('open')
+        }
+
+        layui.use(function () {
+            const $ = layui.$;
+            const form = layui.form;
+            const layer = layui.layer;
+            const util = layui.util;
+
+            // 提交事件
+            form.on('submit(dingyue)', function (data) {
+                var field = data.field; // 获取表单字段值
+
+                let userName = data.field.username;
+                let email = data.field.email;
+                let org = data.field.company;
+                let lang = "en_US" ;
+                let sectionId = data.field.sectionId;
+
+                // let check = isEmail(email);
+                // // 验证通过
+                // if(!check){
+                //     layer.msg("请输入正确邮箱格式", { icon: 5, anim: 6 });
+                // }
+                $.ajax({
+                    type: "post",
+                    url: ctx + "web/webSubscribe/add",
+                    data: {"userName":userName,"email":email,"org":org,"type":2,"language":lang,"sectionId":sectionId},
+                    success: function(result) {
+                        if(result.code !=0){
+                            layer.msg(result.msg, { icon: 5, anim: 6 });
+                        }else{
+                            layer.msg("Subscribe Successfully", { icon: 6, anim: 6 });
+                            setTimeout(function(){
+                                layer.closeAll();
+                            },800)
+                        }
+                    }
+                });
+
+
+
+                // 此处可执行 Ajax 等操作
+                // …
+                return false; // 阻止默认 form 跳转
+            });
+
+            util.on('lay-on', {
+                "closeLayer": function () {
+                    layer.closeAll()
+                },
+                "showForm": function (othis) {
+                    var subscribe = "Subscribe";
+                    var Fill = "Fill In Your Information\uFF0CSubscribe To Receive Our Latest Newsletters And Other Information";
+                    var userName = "UserName";
+                    var pu = "Please Enter Your Username Or Email";
+                    var email = "Email";
+                    var Email = "Please Enter Email";
+                    var organization = "Organization";
+                    var Organization = "Please Enter Organization";
+                    console.log($(othis).parent().attr("data"))
+
+                        layer.open({
+                            type: 1,
+                            title: false,
+                            closeBtn: 0,
+                            skin: 'dingyue',
+                            //area: ['420px', '240px'], // 宽高
+                            content: `<div class="df jcfe p15">
+                                        <i class="layui-icon layui-icon-close fs18 cp" lay-on="closeLayer"></i>
+                                    </div>
+                                    <div class="box">
+                                        <div class="title">
+                                            <strong class="fs16">${subscribe}</strong>
+                                            <p class="fs13 c5 mt10 mb15" id="sectionName" style="text-align: center"></p>
+                                            <p class="fs13 c5 mt10 mb15">${Fill}</p>
+                                        </div>
+                                        <form class="layui-form">
+                                            <div class="login-container">
+                                                <div class="layui-form-item mb20">
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="username" id="username" value="" lay-verify="required" placeholder="${userName}"
+                                                            lay-reqtext="${pu}"  autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item mb20">
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="email" id="email" value="" lay-verify="email|required" placeholder="${email}"
+                                                            lay-reqtext="${Email}"  autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item mb20">
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="company" value="" lay-verify="required" placeholder="${organization}"
+                                                            lay-reqtext="${Organization}" autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+
+                                                <div class="layui-form-item mb20" hidden>
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="sectionId" id="sectionId" value="" lay-verify="required"
+                                                            autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+<!--                                                <div class="layui-form-item mb20">-->
+<!--                                                    <div class="layui-input-wrap">-->
+<!--                                                        <select name="country" lay-verify="required" lay-search lay-reqtext="请选择您感兴趣的国家">-->
+<!--                                                            <option value="">请选择您感兴趣的国家</option>-->
+<!--                                                            <option value="1">中国</option>-->
+<!--                                                            <option value="2">美国</option>-->
+<!--                                                            <option value="3">英国</option>-->
+<!--                                                            <option value="4">法国</option>-->
+<!--                                                        </select>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+                                                <div class="layui-form-item mb0">
+                                                    <button class="layui-btn layui-btn-fluid bg-c h42 lh42" lay-submit
+                                                        lay-filter="dingyue">${subscribe}</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>`,
+                            success: function (layero, index, that) {
+
+                                // $('#reportId').val($(othis).parent().find(".sectiondingyue").attr("data"));
+                                $('#sectionId').val($(othis).parent().attr("data"));
+                                $('#sectionName').text($(othis).parent().attr("data2"));
+                                form.render();
+                            }
+                        });
+                }
+            })
+        })
+
+
+    </script>
+</body>
+
+</html>

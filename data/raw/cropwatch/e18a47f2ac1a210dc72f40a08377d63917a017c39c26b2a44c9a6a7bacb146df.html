@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta http-equiv="Content-Type" Content="text/html;charset=utf8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CropWatch Cloud</title>
+    <link rel="stylesheet" href="/web/layui-v2.8.11/css/layui.css">
+    <link rel="stylesheet" href="/web/style/common.min.css">
+    <link rel="stylesheet" href="/web/style/css.min.css">
+    <link rel="stylesheet" href="/web/style/add.min.css">
+</head>
+
+<body class="page kuaibao">
+    
+	<script> var ctx = "\/"; var captchaType = null; </script>
+	<header class="pa w100p" style="z-index: 100;">
+		<div class="layui-container">
+			<div class="logo--box df aic jcsb">
+				<a href="/"><img src="/web/images/logo.webp" class="db h100p" alt=""></a>
+				<div class="r df fdc aife jcsb f1">
+					<div class="df aic fs13">
+						<a class="df aic mr25" href="/web/login/">
+							<svg t="1692522806508" class="icon" viewBox="0 0 1024 1024" version="1.1"
+								 xmlns="http://www.w3.org/2000/svg" p-id="2912" width="16" height="16">
+								<path
+										d="M870.314316 877.390274 870.314316 877.390274C870.314316 877.390274 870.314316 877.390274 870.314316 877.390274 777.938121 967.974532 651.551687 1024 512 1024 229.239611 1024 0.017919 794.741738 0.017919 511.98135 0.017919 229.22096 229.239611-0.000731 512-0.000731 794.760389-0.000731 1023.982081 229.22096 1023.982081 511.98135 1023.982081 655.190051 965.067572 784.465527 870.314316 877.390274ZM512 950.859703C615.932362 950.859703 711.30731 914.545545 786.495536 854.131659 746.451223 740.398497 639.446968 658.261944 512 658.261944 384.553032 658.261944 277.548777 740.398497 237.504464 854.131659 312.69269 914.545545 408.067638 950.859703 512 950.859703ZM512 73.176136C269.649625 73.176136 73.158216 269.667545 73.158216 512.017919 73.158216 621.545515 113.53166 721.41859 179.869911 798.325613 237.723886 672.597442 364.512591 585.158216 512 585.158216 659.450839 585.158216 786.276114 672.597442 844.130089 798.325613 910.46834 721.45516 950.841784 621.545515 950.841784 512.017919 950.841784 269.667545 754.350375 73.176136 512 73.176136ZM512 548.588068C410.993249 548.588068 329.149257 466.707505 329.149257 365.737325 329.149257 264.730574 410.993249 182.886582 512 182.886582 612.97018 182.886582 694.850743 264.730574 694.850743 365.737325 694.850743 466.707505 612.97018 548.588068 512 548.588068ZM512 256.026879C451.403264 256.026879 402.289554 305.140589 402.289554 365.700754 402.289554 426.297491 451.403264 475.411201 512 475.411201 572.596736 475.411201 621.710446 426.297491 621.710446 365.700754 621.710446 305.140589 572.596736 256.026879 512 256.026879Z"
+										fill="#ffffff" p-id="2913"></path>
+							</svg>
+							<span class="ml6 white">Login</span>
+						</a>
+						
+						
+						<div class="pr">
+							<a href="javascript:;" class="white active  df aic" onclick="showDrop(this)"><img style="margin-right:5px;height:24px!important;" src="/profile/avatar/2023/04/15/us_20230415184657A001.png" >English</a>
+							<div class="drop bg-white br5 pa">
+								<a class="df aic" style="padding-left: 10px;cursor: pointer;" onclick="changeLanguage(&quot;en_US&quot;)"><img style="margin-right:5px;height:20px!important;" src="/profile/avatar/2023/04/15/us_20230415184657A001.png" >English</a><a class="df aic" style="padding-left: 10px;cursor: pointer;" onclick="changeLanguage(&quot;zh_CN&quot;)"><img style="margin-right:5px;height:20px!important;" src="/profile/avatar/2023/04/15/zh_20230415184706A002.png" >中文</a>
+							</div>
+						</div>
+<!--						<em class="h10 w1 bg-white ml10 mr10"></em>-->
+<!--						<a href="javascript:;" class="white">EN</a>-->
+						<span class="menu ml25 layui-hide-sm" onclick="showNav(this)"></span>
+					</div>
+					<div class="nav df aic jcsb fs15">
+						<a href="/">Home</a>
+						<a href="/web/about">About</a>
+						<a href="/web/report/kuai">Update</a>
+						<a href="/web/report" class="active">Bulletin</a>
+						<a href="/web/method">Methodology</a>
+						<a href="/web/publications">Publications</a>
+						<a href="/web/contact">Contact Us</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<script src="/web/js/jquery-2.1.1.min.js"></script>
+	<script>
+		function showDrop(is){
+			$('.drop').toggleClass('open')
+		}
+
+		function changeLanguage(lang) {
+			console.log(lang)
+			$.ajax({
+				type: "post",
+				url: ctx + "web/common/changeLang",
+				data: {
+					"lang": lang
+				},
+				success: function(result) {
+					window.location.reload();
+				}
+			});
+		}
+	</script>
+
+    <main>
+        <div class="b">
+            <img src="/web/images/bg-kb.jpg" class="w100p db" alt="">
+            <div class="tac white df aic jcc fdc info pa">
+                <h2>Bulletin</h2>
+                <strong>CropWatch bulletin</strong>
+            </div>
+        </div>
+        <div class="box1">
+            <div class="layui-container">
+                <div class="layui-row aifs layui-col-space25">
+                    <div class="layui-col-md3">
+                        <h3 class="fs18 fw500 lh24">Menu</h3>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Key Message</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7940" class="db bbse c6">
+                                        Key Message
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Chapter 1: Global Outlook</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7942" class="db bbse c6">
+                                        Global Agrometeorological Conditions and Outlook
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7943" class="db bbse c6">
+                                        Global Agrometeorological Stress
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7941" class="db bbse c6">
+                                        Global Crop Production Situation
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7944" class="db bbse c6">
+                                        Global Production of Major Grain and Oil Crops
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7945" class="db bbse c6">
+                                        Maize production in the Northern Hemisphere
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7946" class="db bbse c6">
+                                        Soybean production in the North Hemisphere
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7981" class="db bbse c6">
+                                        Rice production in the equatorial region
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7947" class="db bbse c6">
+                                        Wheat production in the Northern Hemisphere
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7948" class="db bbse c6">
+                                        Outlook
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Chapter 2: Countries Outlook</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7949" class="db bbse c6">
+                                        2.1 Argentina
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7950" class="db bbse c6">
+                                        2.2 Australia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7951" class="db bbse c6">
+                                        2.3 Bangladesh
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7952" class="db bbse c6">
+                                        2.4 Brazil
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7953" class="db bbse c6">
+                                        2.5 Canada
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7954" class="db bbse c6">
+                                        2.6 China
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7955" class="db bbse c6">
+                                        2.7 Ethiopia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7956" class="db bbse c6">
+                                        2.8 France
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7957" class="db bbse c6">
+                                        2.9 German
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7958" class="db bbse c6">
+                                        2.10 India
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7959" class="db bbse c6">
+                                        2.11 Indonesia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7960" class="db bbse c6">
+                                        2.12 Mexico
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7961" class="db bbse c6">
+                                        2.13 Nigeria
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7962" class="db bbse c6">
+                                        2.14 Pakistan
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7963" class="db bbse c6">
+                                        2.15 Russia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7964" class="db bbse c6">
+                                        2.16 South Africa
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7969" class="db bbse c6">
+                                        2.17 Thailand
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7965" class="db bbse c6">
+                                        2.18 Ukraine
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7966" class="db bbse c6">
+                                        2.19 USA
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7967" class="db bbse c6">
+                                        2.20 Vietnam
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Online Country Analysis</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7970" class="db bbse c6">
+                                        3.1 Online Resouces for Country Analysis
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7971" class="db bbse c6">
+                                        3.2 CropWatch GPT for Analysis
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Appendix A: Indicators</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7972" class="db bbse c6">
+                                        A.1 Global Crop Production
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7973" class="db bbse c6">
+                                        A.2 Agro-climatic indicators
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7974" class="db bbse c6">
+                                        A.3 Agronomic Indicators
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Appendix B. Methodology, Data and Online Resources</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7975" class="db bbse c6">
+                                        B.1 The CropWatch Monitoring System
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7976" class="db bbse c6">
+                                        B.2 Indicators and Methods
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7977" class="db bbse c6">
+                                        B.3 Online Resources
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Afterword</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7978" class="db bbse c6">
+                                        Afterword
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Acknowledgments</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7979" class="db bbse c6">
+                                        Acknowledgments
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=325&amp;sectionId=7980" class="db bbse c6">
+                                        Disclaimer
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">AI</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="layui-col-md9">
+                        <div class="t df aifs jcsb lh24">
+                            <strong class="fs18">Global Crop Production Situation<span class="bsc fs14 fw400 ml10 dib lh20 pl6 pr6 c6 br4">Chapter 1: Global Outlook</span>
+                            </strong>
+                        </div>
+                        <p class="fs13 c8 lh20 mt12">
+                        <span class="secClass" data="7941" data2="Global Crop Production Situation">
+                            Authors: qinxl | Edit: zhuweiwei
+                            
+                        </span>
+						<div class="df jcfe aic"><a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25 mt15"
+                                 style="height: 20px;margin-left: auto" lay-on="showForm">
+                                <span>Subscribe</span>
+                            </a></div>
+                            <!--<span class="ml15">编辑:yangld</span>-->
+                            </p>
+                        <div class="bg-white fs15 content pr25 pl25 pb20 pt20 mt15" style="line-height: 2;"><p style="text-indent: 32px; text-align: justify; font-family: &quot;Times New Roman&quot;; font-size: 16px; line-height: 18.24px;"><span style="font-family: arial, helvetica, sans-serif; color: #1A1A1A; font-size: 14px;">May–July 2026 coincides with the maturity–harvest period of winter wheat in the Northern Hemisphere, the jointing–grain-filling period of spring wheat, the tasseling–silking period of maize, and the tillering–heading period of rice; in the Southern Hemisphere, soybean and maize are approaching the end of harvest, winter wheat in Argentina and Australia is at emergence–tillering–overwintering, and wet-season rice in the tropics has entered its peak growth phase. Based on CroPI-5 (May–July 2026), the global crop production situation remained overall above the baseline, with a global composite mean of 1.06, higher than the previous monitoring period (about 1.05); spatially, the pattern is characterized by markedly favorable conditions in the Southern Hemisphere, near-average conditions in the Northern Hemisphere, and slightly weak conditions in the tropics. Southern Hemisphere CroPI-5 has been significantly above average for two consecutive years (1.18 in 2025 and 1.15 in 2026); the Northern Hemisphere stands at 1.04 and the tropics at 0.96. Regionally, the pronounced divergence concentrates in three belts: most of South Asia–Southeast Asia under significant pressure (India 0.61, Thailand 0.79, Laos 0.75); West Africa–the Gulf of Guinea markedly weak owing to the late onset of the rainy season (Senegal 0.65, Togo 0.66); and the Mediterranean coast, North Africa, southern South America, and Australia significantly favorable (Turkey 1.50, Argentina 1.43, Australia 1.22) (Figures 1.8 and 1.9).</span><span style="font-family: arial, helvetica, sans-serif; box-sizing: border-box;"><br/></span></p><p cid="n264" mdtype="paragraph" class="md-end-block md-p md-focus" style="margin: 0.8em 0px; box-sizing: border-box; line-height: inherit; orphans: 4; white-space: pre-wrap; position: relative; caret-color: rgb(0, 122, 255); color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, &quot;SF Pro&quot;, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><span style="box-sizing: border-box; font-family: arial, helvetica, sans-serif;"><img src="http://cloud.cropwatch.com.cn/profile/upload/2026/08/25/CroPI_MJJ_Global_Northern_Southern_Tropical_V4_caliberC_20260825111328A036.png" width="500"/></span></p><p cid="n264" mdtype="paragraph" class="md-end-block md-p md-focus" style="margin: 0.8em 0px; box-sizing: border-box; line-height: inherit; orphans: 4; white-space: pre-wrap; position: relative; caret-color: rgb(0, 122, 255); color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, &quot;SF Pro&quot;, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><span style="color: #333333; font-size: 14.08px; font-weight: 700; box-sizing: border-box; font-family: arial, helvetica, sans-serif;">Figure 1.8&nbsp;&nbsp;Global and zonal CroPI-5 time series, 2021–2026 (May–July)</span></p><p cid="n264" mdtype="paragraph" class="md-end-block md-p md-focus" style="margin: 0.8em 0px; box-sizing: border-box; line-height: inherit; orphans: 4; white-space: pre-wrap; position: relative; caret-color: rgb(0, 122, 255); color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, &quot;SF Pro&quot;, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><span style="box-sizing: border-box; font-family: arial, helvetica, sans-serif;"><img src="http://cloud.cropwatch.com.cn/profile/upload/2026/08/25/CroPI_p4_20260825111634A037.jpg" width="500"/></span></p><p cid="n266" mdtype="paragraph" class="md-end-block md-p" style="margin: 0.8em 0px; box-sizing: border-box; line-height: inherit; orphans: 4; white-space: pre-wrap; position: relative; caret-color: rgb(0, 122, 255); color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, &quot;SF Pro&quot;, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><span style="color: #333333; font-size: 14.08px; font-weight: 700; box-sizing: border-box; font-family: arial, helvetica, sans-serif;">Figure 1.9&nbsp;&nbsp;Spatial distribution of global CroPI-5, May–July 2026</span></p><p cid="n267" mdtype="paragraph" class="md-end-block md-p" style="margin: 0.8em 0px; box-sizing: border-box; line-height: inherit; orphans: 4; white-space: pre-wrap; position: relative; caret-color: rgb(0, 122, 255); color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, &quot;SF Pro&quot;, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><span style="box-sizing: border-box; font-family: arial, helvetica, sans-serif;"><strong style="box-sizing: border-box;"></strong></span></p><p cid="n596" mdtype="paragraph" class="md-end-block md-p md-focus" style="margin: 0.8em 0px; box-sizing: border-box; line-height: inherit; orphans: 4; white-space: pre-wrap; position: relative; caret-color: rgb(0, 122, 255); color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, &quot;SF Pro&quot;, sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"><span style="box-sizing: border-box; font-family: arial, helvetica, sans-serif;"><strong style="box-sizing: border-box;"></strong></span></p><p style="text-indent: 32px; text-align: justify; font-family: &quot;Times New Roman&quot;; font-size: 16px; line-height: 18.24px;"><span style="font-family: arial, helvetica, sans-serif;"></span></p><p style="font-weight: bold; margin-top: 1.4rem; color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">East Africa: main-season drought pressure, weakening situation</span></p><p style="color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">CroPI-5 across the Ethiopian Plateau, Kenya, and Tanzania mostly ranged between 0.84 and 1.07; Ethiopia fell as low as 0.84, as severe main-season rainfall deficits directly stressed the jointing–heading of highland cereals, and the regional situation weakened markedly relative to the previous monitoring period; Uganda and Kenya remained near the baseline (1.03 and 1.01). Uganda recorded rainfall of −26% and biomass of −15%, yet its production situation stays near the baseline, indicating a degree of resilience. The main (Meher) sowing season in Ethiopia has opened; if rainfall deficits persist through August–September, downside risks will grow further.</span></p><p style="font-weight: bold; margin-top: 1.4rem; color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">West Africa and the Sahel: late rainy season, delayed planting</span></p><p style="color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">CroPI-5 in Senegal, Togo, Mali, Burkina Faso, and Ghana was as low as 0.65–0.85, with CALF 11%–20% below the 5-year average, as the sluggish onset of the rainy season delayed sowing; Nigeria stood at 0.94, while irrigated areas supported Niger&#39;s CroPI-5 at 1.65. The region constitutes the most concentrated below-average belt in the Northern Hemisphere tropics this period, and August rainfall will determine the final outcome. Regional CALF is generally only 13%–70%, and rainfed agriculture amplifies the impact of the rainfall deficit; Nigeria&#39;s biomass is −22%, with mid-season growth already suppressed.</span></p><p style="font-weight: bold; margin-top: 1.4rem; color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">Southern Africa: generally stable dry season</span></p><p style="color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">Mozambique was favorable at 1.17; Malawi (0.79) and Madagascar (0.86) were below average. Summer crops have been harvested, and the below-average signals mainly reflect insufficient dry-season rainfall; the implications for next season&#39;s soil moisture reserves warrant continued attention. Zambia, Zimbabwe, and South Africa posted significantly high CroPI-5 values of 1.41, 1.48, and 1.50, respectively, with the main-season maize harvest complete and planted fractions above the 5-year average; moisture conditions for winter wheat sowing in South Africa were favorable (rainfall +35%). Madagascar recorded rainfall of −34% and biomass of −16%, carrying relatively greater production pressure.</span></p><p style="font-weight: bold; margin-top: 1.4rem; color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">North America: Corn Belt broadly normal, West Coast under pressure</span></p><p style="color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">The United States registered CroPI-5 of 1.03, with most of the central Corn Belt at 0.95–1.15 under fair tasseling–silking conditions; the West Coast–Southwest fell below 0.85. The Canadian Prairie provinces stood at 1.07, with favorable conditions for spring wheat grain filling. Mexico was favorable at 1.17. Canada&#39;s CALF was 100% (+4%), with well-matched water and heat during spring wheat grain filling; Mexico&#39;s CALF was 82% (+10%), with spring maize growing steadily.</span></p><p style="font-weight: bold; margin-top: 1.4rem; color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">South America: Brazil steady, Argentina favorable but moisture tightening</span></p><p style="color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">Brazil posted CroPI-5 of 1.06, with main producing areas in the central–west at 0.95–1.15 and a smooth second-season maize harvest; Argentina reached 1.43, the highest among major producing countries globally, with normal winter wheat emergence–tillering and a markedly higher planted fraction, though Pampas rainfall was 17% below average and supplementary moisture will be needed in late tillering; Uruguay stood at 1.13 and Paraguay at 1.10. The dry pattern in central–eastern Brazil may affect soil moisture reserves for soybean sowing (September–November); Argentine winter wheat is entering the water-demand-critical tillering stage, Uruguay&#39;s rainfall is −30%, and early-season moisture supply for winter crops is tight.</span></p><p style="font-weight: bold; margin-top: 1.4rem; color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">Caribbean: stable</span></p><p style="color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">CroPI-5 across the Caribbean was generally 0.95–1.10 (Cuba 1.04), indicating a stable production situation. Cuba&#39;s CALF was 100% (+5%), with normal planting intensity and crop condition; under below-average rainfall, stable production relies mainly on irrigation support.</span></p><p style="font-weight: bold; margin-top: 1.4rem; color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">Northeast Asia: Northeast favorable, central China weaker</span></p><p style="color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">China registered CroPI-5 of 1.03; the Northeast Plain maize–rice zone benefited from well-matched rainfall and heat, with CroPI-5 mostly 1.05–1.25; North China–Huanghuai and the middle–lower Yangtze, affected by episodic drought and reduced sunshine, were mostly 0.85–1.05. Japan stood at 1.02 and Mongolia at 1.57. China&#39;s CALF was 97% (+5%); autumn crops are in a critical growth period, with condition mainly dragged down by drought and low sunshine in the Huanghuai–middle and lower Yangtze. Mongolia&#39;s rainfall was +11%, with favorable water–heat matching for rainfed farming; Japan&#39;s rainfall was +18%, with good conditions for rice heading–grain filling.</span></p><p style="font-weight: bold; margin-top: 1.4rem; color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">Southeast Asia: peninsula weak, archipelago normal</span></p><p style="color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">Thailand 0.79, Laos 0.75, Cambodia 0.89, Myanmar 0.87 (cloudy with low sunshine), the Philippines 0.91, and Indonesia 0.97. Early wet-season rice condition was weak in parts of the peninsula. Vietnam&#39;s CroPI-5 was 0.90, with summer–autumn rice slightly weak; persistent cloudiness and low sunshine markedly affected rice tillering in Myanmar, and transplanting–tillering progress in Laos was slow. Regional rice has entered the tillering–jointing peak; subsequent typhoons and rainfall fluctuations will dominate the production outlook.</span></p><p style="font-weight: bold; margin-top: 1.4rem; color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">South Asia: lowest values globally, severely delayed summer sowing</span></p><p style="color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">India&#39;s CroPI-5 of 0.61 was the lowest among major countries globally, with CALF at only 46% (−26%); the late-advancing monsoon markedly delayed summer sowing, and a contrast is evident between western–central rainfall deficits and near-average conditions in the eastern Ganges Plain; Pakistan stood at 0.87 and Bangladesh at 0.84. In terms of moisture, the CWSI of India and Bangladesh was 0.44 and 0.42, respectively — below the global mean and consistent with the late monsoon — while Pakistan&#39;s 0.52 was near the mean. Subsequent monsoon rainfall and compensatory sowing will determine the Kharif-season yield ceiling. Nepal posted CroPI-5 of 1.19 and CALF of 91% (+17%), with rapid rice transplanting — the region&#39;s only bright spot; Sri Lanka, at 0.96, was near normal.</span></p><p style="font-weight: bold; margin-top: 1.4rem; color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">Central Asia: north favorable</span></p><p style="color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">Kazakhstan stood at 1.15, with above-average rainfall and biomass +11% in the northern spring wheat zone. Uzbekistan (1.56), Afghanistan (1.71), and Turkmenistan (1.93) saw markedly improved water and heat conditions in irrigated zones, with the production situation clearly better than during the droughts of the previous two years.</span></p><p style="font-weight: bold; margin-top: 1.4rem; color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">Western Europe: heat–drought strikes summer crops, winter wheat largely secured</span></p><p style="color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">France 1.02, Germany 1.09, Spain 1.17, Italy 1.16, and the United Kingdom 1.03. Heat and drought mainly struck summer crops such as maize and sunflower at jointing–tasseling; the winter wheat harvest is essentially complete, and heat-accelerated ripening adversely affected grain weight — the lagged effect of regional biomass 10%–22% below average is discussed in the next section. In Northern Europe, Sweden, Finland, and Denmark posted CroPI-5 of 1.08, 1.03, and 1.07, respectively, with heat–drought disturbances concentrated south of 50°N.</span></p><p style="font-weight: bold; margin-top: 1.4rem; color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">Eastern Europe: Black Sea steady, interior favorable</span></p><p style="color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">Ukraine 1.13, Romania 1.14, Poland 1.13, Belarus 1.10, and Russia 1.07. Cool–dry conditions along the northern Black Sea coast slightly suppressed summer crops; the Russian interior recorded rainfall +17% and biomass +6%, with favorable conditions for spring wheat heading–grain filling. Combined with the winter wheat classification and yield remote-sensing monitoring results for the Caucasus, Russia&#39;s winter wheat production situation is overall stable (see the dedicated Russia section). Hungary recorded rainfall of −38% and biomass of −20%, suppressing summer crop growth, yet its CroPI-5 of 1.00 remains near the baseline; Serbia 1.17 and Bulgaria 1.08 — the Balkans fared better than the Carpathian Basin.</span></p><p style="font-weight: bold; margin-top: 1.4rem; color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">Mediterranean: eastern shores markedly favorable</span></p><p style="color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">Turkey stood at 1.50, with CWSI reaching 0.70 — the highest level globally this period — under an excellent water–heat match; Morocco, Algeria, and Tunisia in North Africa ranged 1.58–1.82, mainly reflecting a restorative rebound in the post-season assessment of winter crops; Egypt 1.19. Winter crops in the eastern Mediterranean–West Asia have been harvested, with markedly favorable production assessments: Syria 1.98 (rainfall +37%), Lebanon 1.78, and Greece 1.23; Iraq 1.93 and Iran 1.66, with markedly improved moisture conditions in irrigated zones. North Africa&#39;s high CroPI is driven mainly by a restorative rebound in CALF (Morocco +66%, Algeria +63%).</span></p><p style="font-weight: bold; margin-top: 1.4rem; color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">Oceania: southeast favorable</span></p><p style="color: rgb(26, 26, 26); font-family: Georgia, &quot;Times New Roman&quot;, serif; font-size: 15.5px; text-indent: 2em;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">Australia posted CroPI-5 of 1.22, with above-average rainfall in the southeastern grain belt and favorable moisture conditions; locally dry in the far southwest, the overall situation was favorable. Australia&#39;s CALF was 91% (+6%); winter wheat sowing is complete and the crop has entered tillering–jointing, with rainfall +13% providing ample soil moisture reserves; subsequent spring rainfall will be key to yield levels in the wheat belt.</span></p><p style="text-indent: 32px; text-align: justify; font-family: &quot;Times New Roman&quot;; font-size: 16px; line-height: 18.24px;"><span style="box-sizing: border-box; font-family: arial, helvetica, sans-serif;"><br/></span></p><p><br/></p><p><br/></p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+	<footer>
+		<div class="layui-container" style="padding: 4vh 0 4vh;">
+			<div class="df box">
+				<a href="" class="mt15">
+					<img src="/web/images/logo.webp" alt="">
+				</a>
+				<div class="w120 layui-hide-xs layui-show-md-block"></div>
+				<div class="white f1 mt15">
+					<h3>Contact Us</h3>
+					<p>Olympic Village Science Park, West Beichen Road, Chaoyang District, Beijing</p>
+					<p>+8610-64842375/6</p>
+					<p>+8610-64858721(Fax)</p>
+					<p>cropwatch@aircas.ac.cn</p>
+				</div>
+				<a href="" target="_blank" class="white mt15">
+					<div class="df aic jcc">
+						<img src="/web/images/icon-5.jpg" class="h56 w56 br-3xl" alt="">
+						<div class="w30"></div>
+						<img src="/web/images/icon-6.jpg" class="h56 w56 br-3xl" alt="">
+					</div>
+					<p class="mt10">中国科学院空天信息创新研究院(AIRCAS)</p>
+				</a>
+			</div>
+		</div>
+		<div class="beian">
+			<div class="layui-container df aic jcsb">
+				<span>Copyright © 2025 中国科学院空天信息创新研究院生态系统遥感研究室</span>
+				<!--<a class="white" href="https://beian.miit.gov.cn/" target="_blank">京ICP备05080539号-16</a>-->
+			</div>
+		</div>
+	</footer>
+
+    <script src="/web/js/jquery-2.1.1.min.js"></script>
+    <script src="/web/js/js.js"></script>
+    <script src="/web/layui-v2.8.11/layui.js"></script>
+    <script> var ctx = "\/"; var captchaType = null; </script>
+    <script>
+        var language = "en_US"
+        function showUl(is) {
+            $(is).toggleClass('open')
+        }
+
+        layui.use(function () {
+            const $ = layui.$;
+            const form = layui.form;
+            const layer = layui.layer;
+            const util = layui.util;
+
+            // 提交事件
+            form.on('submit(dingyue)', function (data) {
+                var field = data.field; // 获取表单字段值
+
+                let userName = data.field.username;
+                let email = data.field.email;
+                let org = data.field.company;
+                let lang = "en_US" ;
+                let sectionId = data.field.sectionId;
+
+                // let check = isEmail(email);
+                // // 验证通过
+                // if(!check){
+                //     layer.msg("请输入正确邮箱格式", { icon: 5, anim: 6 });
+                // }
+                $.ajax({
+                    type: "post",
+                    url: ctx + "web/webSubscribe/add",
+                    data: {"userName":userName,"email":email,"org":org,"type":2,"language":lang,"sectionId":sectionId},
+                    success: function(result) {
+                        if(result.code !=0){
+                            layer.msg(result.msg, { icon: 5, anim: 6 });
+                        }else{
+                            layer.msg("Subscribe Successfully", { icon: 6, anim: 6 });
+                            setTimeout(function(){
+                                layer.closeAll();
+                            },800)
+                        }
+                    }
+                });
+
+
+
+                // 此处可执行 Ajax 等操作
+                // …
+                return false; // 阻止默认 form 跳转
+            });
+
+            util.on('lay-on', {
+                "closeLayer": function () {
+                    layer.closeAll()
+                },
+                "showForm": function (othis) {
+                    var subscribe = "Subscribe";
+                    var Fill = "Fill In Your Information\uFF0CSubscribe To Receive Our Latest Newsletters And Other Information";
+                    var userName = "UserName";
+                    var pu = "Please Enter Your Username Or Email";
+                    var email = "Email";
+                    var Email = "Please Enter Email";
+                    var organization = "Organization";
+                    var Organization = "Please Enter Organization";
+                    console.log($(othis).parent().attr("data"))
+
+                        layer.open({
+                            type: 1,
+                            title: false,
+                            closeBtn: 0,
+                            skin: 'dingyue',
+                            //area: ['420px', '240px'], // 宽高
+                            content: `<div class="df jcfe p15">
+                                        <i class="layui-icon layui-icon-close fs18 cp" lay-on="closeLayer"></i>
+                                    </div>
+                                    <div class="box">
+                                        <div class="title">
+                                            <strong class="fs16">${subscribe}</strong>
+                                            <p class="fs13 c5 mt10 mb15" id="sectionName" style="text-align: center"></p>
+                                            <p class="fs13 c5 mt10 mb15">${Fill}</p>
+                                        </div>
+                                        <form class="layui-form">
+                                            <div class="login-container">
+                                                <div class="layui-form-item mb20">
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="username" id="username" value="" lay-verify="required" placeholder="${userName}"
+                                                            lay-reqtext="${pu}"  autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item mb20">
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="email" id="email" value="" lay-verify="email|required" placeholder="${email}"
+                                                            lay-reqtext="${Email}"  autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item mb20">
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="company" value="" lay-verify="required" placeholder="${organization}"
+                                                            lay-reqtext="${Organization}" autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+
+                                                <div class="layui-form-item mb20" hidden>
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="sectionId" id="sectionId" value="" lay-verify="required"
+                                                            autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+<!--                                                <div class="layui-form-item mb20">-->
+<!--                                                    <div class="layui-input-wrap">-->
+<!--                                                        <select name="country" lay-verify="required" lay-search lay-reqtext="请选择您感兴趣的国家">-->
+<!--                                                            <option value="">请选择您感兴趣的国家</option>-->
+<!--                                                            <option value="1">中国</option>-->
+<!--                                                            <option value="2">美国</option>-->
+<!--                                                            <option value="3">英国</option>-->
+<!--                                                            <option value="4">法国</option>-->
+<!--                                                        </select>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+                                                <div class="layui-form-item mb0">
+                                                    <button class="layui-btn layui-btn-fluid bg-c h42 lh42" lay-submit
+                                                        lay-filter="dingyue">${subscribe}</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>`,
+                            success: function (layero, index, that) {
+
+                                // $('#reportId').val($(othis).parent().find(".sectiondingyue").attr("data"));
+                                $('#sectionId').val($(othis).parent().attr("data"));
+                                $('#sectionName').text($(othis).parent().attr("data2"));
+                                form.render();
+                            }
+                        });
+                }
+            })
+        })
+
+
+    </script>
+</body>
+
+</html>

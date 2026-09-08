@@ -1,0 +1,12 @@
+{
+  "document_id": "842167dd26b9545a85b25ede04240afc7973cc46600229c99eff097f472dfd48",
+  "source": "sina_us_soybean",
+  "source_url": "https://stock2.finance.sina.com.cn/futures/api/jsonp.php/var%20_S2026_9_8=/GlobalFuturesService.getGlobalFuturesDailyKLine?symbol=S&source=web",
+  "raw_path": "data/raw/sina_us_soybean/db42f3af4687b495229aeb4aedc848a6e9f13790659778538020b0a62e7a3809.jsonp",
+  "sha256": "db42f3af4687b495229aeb4aedc848a6e9f13790659778538020b0a62e7a3809",
+  "publication_date": null,
+  "available_date": "2026-09-08",
+  "download_timestamp": "2026-09-08T13:39:28.150503+00:00",
+  "publication_date_basis": "Source publication timestamp unavailable; first observed archive date",
+  "title": "CBOT大豆"
+}

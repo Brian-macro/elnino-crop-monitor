@@ -1,0 +1,12 @@
+{
+  "document_id": "e521ce613503be37250ac27533e000f8422e7045fda59c73426e3cf250520cac",
+  "source": "cropwatch",
+  "source_url": "http://cloud.cropwatch.com.cn/web/report/detail?id=318&sectionId=7709",
+  "raw_path": "data/raw/cropwatch/de4b4566c15e316c61a47d006b3e7f6839face88d55ba05164223ec3dad5c8ee.html",
+  "sha256": "de4b4566c15e316c61a47d006b3e7f6839face88d55ba05164223ec3dad5c8ee",
+  "publication_date": null,
+  "available_date": "2026-09-08",
+  "download_timestamp": "2026-09-08T08:28:00.202933+00:00",
+  "publication_date_basis": "Issue month only; availability conservatively month-end",
+  "title": "February 2026 CropWatch Bulletin"
+}

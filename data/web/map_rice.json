@@ -1,0 +1,111 @@
+{
+ "crop": "rice",
+ "target_year": 2026,
+ "countries": [
+  {
+   "country": "India",
+   "forecast": 150.0,
+   "yoy": -2.6
+  },
+  {
+   "country": "China",
+   "forecast": 147.0,
+   "yoy": 0.5
+  },
+  {
+   "country": "Bangladesh",
+   "forecast": 37.4,
+   "yoy": -0.7
+  },
+  {
+   "country": "Indonesia",
+   "forecast": 33.6,
+   "yoy": -0.6
+  },
+  {
+   "country": "Vietnam",
+   "forecast": 26.1,
+   "yoy": -0.4
+  },
+  {
+   "country": "Thailand",
+   "forecast": 20.3,
+   "yoy": -1.9
+  },
+  {
+   "country": "Philippines",
+   "forecast": 12.4,
+   "yoy": 0.4
+  },
+  {
+   "country": "Pakistan",
+   "forecast": 9.6,
+   "yoy": -4.0
+  },
+  {
+   "country": "Brazil",
+   "forecast": 7.4,
+   "yoy": -2.6
+  },
+  {
+   "country": "United States",
+   "forecast": 5.03,
+   "yoy": -23.4
+  },
+  {
+   "country": "European Union",
+   "forecast": 1.73,
+   "yoy": -2.5
+  },
+  {
+   "country": "Paraguay",
+   "forecast": 0.97,
+   "yoy": 8.0
+  },
+  {
+   "country": "Russia",
+   "forecast": 0.76,
+   "yoy": -6.2
+  },
+  {
+   "country": "Argentina",
+   "forecast": 0.71,
+   "yoy": -22.3
+  },
+  {
+   "country": "Turkey",
+   "forecast": 0.58,
+   "yoy": 3.6
+  },
+  {
+   "country": "Kazakhstan",
+   "forecast": 0.27,
+   "yoy": -21.1
+  },
+  {
+   "country": "Mexico",
+   "forecast": 0.19,
+   "yoy": 4.3
+  },
+  {
+   "country": "Australia",
+   "forecast": 0.08,
+   "yoy": -38.3
+  },
+  {
+   "country": "Ukraine",
+   "forecast": 0.01,
+   "yoy": 0.0
+  },
+  {
+   "country": "Canada",
+   "forecast": 0.0,
+   "yoy": null
+  },
+  {
+   "country": "South Africa",
+   "forecast": 0.0,
+   "yoy": null
+  }
+ ]
+}

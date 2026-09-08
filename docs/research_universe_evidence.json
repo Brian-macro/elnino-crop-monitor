@@ -1,0 +1,1117 @@
+{
+  "source_documents": [
+    [
+      "38d355c5c9e7333fc57038668a5b4cde62e28209f83fcf25b83a7672d7a14e7f",
+      "135047822fe8c95067229d8ec9b22b789582b1578f6d9bd669832b488c3b4227",
+      "2026-09-08"
+    ]
+  ],
+  "policy_version": "2026-09-08-regions-v1",
+  "baseline": {
+    "source": "usda_psd",
+    "baseline_years": [
+      2020,
+      2024
+    ],
+    "minimum_average_mt": {
+      "wheat": 0.5,
+      "corn": 0.5,
+      "rice": 0.5,
+      "soybean": 0.1,
+      "sugar": 0.25
+    },
+    "rule": "Fixed membership; five complete baseline years required; changes require an explicit policy version, never daily refresh."
+  },
+  "evidence": {
+    "wheat": [
+      {
+        "country": "China",
+        "average_mt": 137.1216,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "United States",
+        "average_mt": 48.4342,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Brazil",
+        "average_mt": 8.0908,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Argentina",
+        "average_mt": 17.34,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "India",
+        "average_mt": 109.0584,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "European Union",
+        "average_mt": 131.217,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Russia",
+        "average_mt": 85.122,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Ukraine",
+        "average_mt": 25.2654,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Australia",
+        "average_mt": 33.755,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Canada",
+        "average_mt": 32.4182,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Thailand",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Vietnam",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Mexico",
+        "average_mt": 3.2012,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "South Africa",
+        "average_mt": 2.0934,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Kazakhstan",
+        "average_mt": 14.6324,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Paraguay",
+        "average_mt": 1.0134,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Indonesia",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Bangladesh",
+        "average_mt": 1.113,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Philippines",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Pakistan",
+        "average_mt": 27.7792,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Turkey",
+        "average_mt": 18.3,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Japan",
+        "average_mt": 1.0802,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Korea, South",
+        "average_mt": 0.0334,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Korea, North",
+        "average_mt": 0.065,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Mongolia",
+        "average_mt": 0.4428,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Taiwan",
+        "average_mt": 0.0042,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Hong Kong",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Macau",
+        "average_mt": null,
+        "years": 0,
+        "included": false
+      },
+      {
+        "country": "Burma",
+        "average_mt": 0.078,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Laos",
+        "average_mt": null,
+        "years": 0,
+        "included": false
+      },
+      {
+        "country": "Cambodia",
+        "average_mt": null,
+        "years": 0,
+        "included": false
+      },
+      {
+        "country": "Malaysia",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Singapore",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Brunei",
+        "average_mt": null,
+        "years": 0,
+        "included": false
+      },
+      {
+        "country": "Timor-Leste",
+        "average_mt": null,
+        "years": 0,
+        "included": false
+      },
+      {
+        "country": "United Kingdom",
+        "average_mt": 12.8624,
+        "years": 5,
+        "included": true
+      }
+    ],
+    "corn": [
+      {
+        "country": "China",
+        "average_mt": 278.8362,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "United States",
+        "average_mt": 370.7924,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Brazil",
+        "average_mt": 119.0,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Argentina",
+        "average_mt": 48.92,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "India",
+        "average_mt": 36.9072,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "European Union",
+        "average_mt": 62.6058,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Russia",
+        "average_mt": 15.1058,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Ukraine",
+        "average_mt": 31.7446,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Australia",
+        "average_mt": 0.3774,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Canada",
+        "average_mt": 14.6958,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Thailand",
+        "average_mt": 5.35,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Vietnam",
+        "average_mt": 4.4532,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Mexico",
+        "average_mt": 25.767,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "South Africa",
+        "average_mt": 16.177,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Kazakhstan",
+        "average_mt": 1.076,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Paraguay",
+        "average_mt": 4.76,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Indonesia",
+        "average_mt": 12.7,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Bangladesh",
+        "average_mt": 5.07,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Philippines",
+        "average_mt": 8.2936,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Pakistan",
+        "average_mt": 9.6452,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Turkey",
+        "average_mt": 7.12,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Japan",
+        "average_mt": 0.01,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Korea, South",
+        "average_mt": 0.0922,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Korea, North",
+        "average_mt": 2.28,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Mongolia",
+        "average_mt": null,
+        "years": 0,
+        "included": false
+      },
+      {
+        "country": "Taiwan",
+        "average_mt": 0.0938,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Hong Kong",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Macau",
+        "average_mt": null,
+        "years": 0,
+        "included": false
+      },
+      {
+        "country": "Burma",
+        "average_mt": 2.86,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Laos",
+        "average_mt": 0.506,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Cambodia",
+        "average_mt": 1.053,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Malaysia",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Singapore",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Brunei",
+        "average_mt": null,
+        "years": 0,
+        "included": false
+      },
+      {
+        "country": "Timor-Leste",
+        "average_mt": null,
+        "years": 0,
+        "included": false
+      },
+      {
+        "country": "United Kingdom",
+        "average_mt": 0.025,
+        "years": 5,
+        "included": false
+      }
+    ],
+    "rice": [
+      {
+        "country": "China",
+        "average_mt": 146.6262,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "United States",
+        "average_mt": 6.4656,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Brazil",
+        "average_mt": 7.6068,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Argentina",
+        "average_mt": 0.8748,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "India",
+        "average_mt": 135.5206,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "European Union",
+        "average_mt": 1.5632,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Russia",
+        "average_mt": 0.7054,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Ukraine",
+        "average_mt": 0.0182,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Australia",
+        "average_mt": 0.3986,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Canada",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Thailand",
+        "average_mt": 20.0986,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Vietnam",
+        "average_mt": 27.0482,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Mexico",
+        "average_mt": 0.173,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "South Africa",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Kazakhstan",
+        "average_mt": 0.324,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Paraguay",
+        "average_mt": 0.8406,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Indonesia",
+        "average_mt": 33.984,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Bangladesh",
+        "average_mt": 36.08,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Philippines",
+        "average_mt": 12.4552,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Pakistan",
+        "average_mt": 8.9294,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Turkey",
+        "average_mt": 0.5714,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Japan",
+        "average_mt": 7.4554,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Korea, South",
+        "average_mt": 3.688,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Korea, North",
+        "average_mt": 1.4038,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Mongolia",
+        "average_mt": null,
+        "years": 0,
+        "included": false
+      },
+      {
+        "country": "Taiwan",
+        "average_mt": 1.104,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Hong Kong",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Macau",
+        "average_mt": null,
+        "years": 0,
+        "included": false
+      },
+      {
+        "country": "Burma",
+        "average_mt": 12.2,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Laos",
+        "average_mt": 1.908,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Cambodia",
+        "average_mt": 7.2742,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Malaysia",
+        "average_mt": 1.6504,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Singapore",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Brunei",
+        "average_mt": 0.001,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Timor-Leste",
+        "average_mt": null,
+        "years": 0,
+        "included": false
+      },
+      {
+        "country": "United Kingdom",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      }
+    ],
+    "soybean": [
+      {
+        "country": "China",
+        "average_mt": 19.5542,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "United States",
+        "average_mt": 116.9588,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Brazil",
+        "average_mt": 151.8,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Argentina",
+        "average_mt": 42.8836,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "India",
+        "average_mt": 11.9026,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "European Union",
+        "average_mt": 2.753,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Russia",
+        "average_mt": 5.7826,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Ukraine",
+        "average_mt": 4.66,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Australia",
+        "average_mt": 0.053,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Canada",
+        "average_mt": 6.7778,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Thailand",
+        "average_mt": 0.052,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Vietnam",
+        "average_mt": 0.0492,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Mexico",
+        "average_mt": 0.2372,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "South Africa",
+        "average_mt": 2.309,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Kazakhstan",
+        "average_mt": 0.2322,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Paraguay",
+        "average_mt": 9.055,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Indonesia",
+        "average_mt": 0.403,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Bangladesh",
+        "average_mt": 0.147,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Philippines",
+        "average_mt": 0.001,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Pakistan",
+        "average_mt": 0.001,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Turkey",
+        "average_mt": 0.134,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Japan",
+        "average_mt": 0.2398,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Korea, South",
+        "average_mt": 0.1236,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Korea, North",
+        "average_mt": 0.192,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Mongolia",
+        "average_mt": null,
+        "years": 0,
+        "included": false
+      },
+      {
+        "country": "Taiwan",
+        "average_mt": 0.0052,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Hong Kong",
+        "average_mt": null,
+        "years": 0,
+        "included": false
+      },
+      {
+        "country": "Macau",
+        "average_mt": null,
+        "years": 0,
+        "included": false
+      },
+      {
+        "country": "Burma",
+        "average_mt": 0.1374,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Laos",
+        "average_mt": null,
+        "years": 0,
+        "included": false
+      },
+      {
+        "country": "Cambodia",
+        "average_mt": null,
+        "years": 0,
+        "included": false
+      },
+      {
+        "country": "Malaysia",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Singapore",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Brunei",
+        "average_mt": null,
+        "years": 0,
+        "included": false
+      },
+      {
+        "country": "Timor-Leste",
+        "average_mt": null,
+        "years": 0,
+        "included": false
+      },
+      {
+        "country": "United Kingdom",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      }
+    ],
+    "sugar": [
+      {
+        "country": "China",
+        "average_mt": 10.056,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "United States",
+        "average_mt": 8.4096,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Brazil",
+        "average_mt": 40.9588,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Argentina",
+        "average_mt": 1.748,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "India",
+        "average_mt": 33.028,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "European Union",
+        "average_mt": 15.516,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Russia",
+        "average_mt": 6.215,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Ukraine",
+        "average_mt": 1.528,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Australia",
+        "average_mt": 4.12,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Canada",
+        "average_mt": 0.122,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Thailand",
+        "average_mt": 9.5702,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Vietnam",
+        "average_mt": 0.992,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Mexico",
+        "average_mt": 5.6388,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "South Africa",
+        "average_mt": 2.0046,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Kazakhstan",
+        "average_mt": 0.055,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Paraguay",
+        "average_mt": 0.139,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Indonesia",
+        "average_mt": 2.306,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Bangladesh",
+        "average_mt": 0.038,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Philippines",
+        "average_mt": 1.9542,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Pakistan",
+        "average_mt": 6.669,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Turkey",
+        "average_mt": 3.03,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Japan",
+        "average_mt": 0.752,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Korea, South",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Korea, North",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Mongolia",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Taiwan",
+        "average_mt": 0.052,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Hong Kong",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Macau",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Burma",
+        "average_mt": 0.396,
+        "years": 5,
+        "included": true
+      },
+      {
+        "country": "Laos",
+        "average_mt": 0.192,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Cambodia",
+        "average_mt": 0.224,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Malaysia",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Singapore",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Brunei",
+        "average_mt": 0.0,
+        "years": 5,
+        "included": false
+      },
+      {
+        "country": "Timor-Leste",
+        "average_mt": null,
+        "years": 0,
+        "included": false
+      },
+      {
+        "country": "United Kingdom",
+        "average_mt": 1.038,
+        "years": 5,
+        "included": true
+      }
+    ]
+  }
+}

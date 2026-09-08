@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CropWatch Cloud</title>
+    <link rel="stylesheet" href="/web/layui-v2.8.11/css/layui.css">
+    <link rel="stylesheet" href="/web/style/common.min.css">
+    <link rel="stylesheet" href="/web/style/css.min.css">
+    <link rel="stylesheet" href="/web/style/add.min.css">
+</head>
+
+<body class="page tongbao">
+    
+	<script> var ctx = "\/"; var captchaType = null; </script>
+	<header class="pa w100p" style="z-index: 100;">
+		<div class="layui-container">
+			<div class="logo--box df aic jcsb">
+				<a href="/"><img src="/web/images/logo.webp" class="db h100p" alt=""></a>
+				<div class="r df fdc aife jcsb f1">
+					<div class="df aic fs13">
+						<a class="df aic mr25" href="/web/login/">
+							<svg t="1692522806508" class="icon" viewBox="0 0 1024 1024" version="1.1"
+								 xmlns="http://www.w3.org/2000/svg" p-id="2912" width="16" height="16">
+								<path
+										d="M870.314316 877.390274 870.314316 877.390274C870.314316 877.390274 870.314316 877.390274 870.314316 877.390274 777.938121 967.974532 651.551687 1024 512 1024 229.239611 1024 0.017919 794.741738 0.017919 511.98135 0.017919 229.22096 229.239611-0.000731 512-0.000731 794.760389-0.000731 1023.982081 229.22096 1023.982081 511.98135 1023.982081 655.190051 965.067572 784.465527 870.314316 877.390274ZM512 950.859703C615.932362 950.859703 711.30731 914.545545 786.495536 854.131659 746.451223 740.398497 639.446968 658.261944 512 658.261944 384.553032 658.261944 277.548777 740.398497 237.504464 854.131659 312.69269 914.545545 408.067638 950.859703 512 950.859703ZM512 73.176136C269.649625 73.176136 73.158216 269.667545 73.158216 512.017919 73.158216 621.545515 113.53166 721.41859 179.869911 798.325613 237.723886 672.597442 364.512591 585.158216 512 585.158216 659.450839 585.158216 786.276114 672.597442 844.130089 798.325613 910.46834 721.45516 950.841784 621.545515 950.841784 512.017919 950.841784 269.667545 754.350375 73.176136 512 73.176136ZM512 548.588068C410.993249 548.588068 329.149257 466.707505 329.149257 365.737325 329.149257 264.730574 410.993249 182.886582 512 182.886582 612.97018 182.886582 694.850743 264.730574 694.850743 365.737325 694.850743 466.707505 612.97018 548.588068 512 548.588068ZM512 256.026879C451.403264 256.026879 402.289554 305.140589 402.289554 365.700754 402.289554 426.297491 451.403264 475.411201 512 475.411201 572.596736 475.411201 621.710446 426.297491 621.710446 365.700754 621.710446 305.140589 572.596736 256.026879 512 256.026879Z"
+										fill="#ffffff" p-id="2913"></path>
+							</svg>
+							<span class="ml6 white">Login</span>
+						</a>
+						
+						
+						<div class="pr">
+							<a href="javascript:;" class="white active  df aic" onclick="showDrop(this)"><img style="margin-right:5px;height:24px!important;" src="/profile/avatar/2023/04/15/us_20230415184657A001.png" >English</a>
+							<div class="drop bg-white br5 pa">
+								<a class="df aic" style="padding-left: 10px;cursor: pointer;" onclick="changeLanguage(&quot;en_US&quot;)"><img style="margin-right:5px;height:20px!important;" src="/profile/avatar/2023/04/15/us_20230415184657A001.png" >English</a><a class="df aic" style="padding-left: 10px;cursor: pointer;" onclick="changeLanguage(&quot;zh_CN&quot;)"><img style="margin-right:5px;height:20px!important;" src="/profile/avatar/2023/04/15/zh_20230415184706A002.png" >中文</a>
+							</div>
+						</div>
+<!--						<em class="h10 w1 bg-white ml10 mr10"></em>-->
+<!--						<a href="javascript:;" class="white">EN</a>-->
+						<span class="menu ml25 layui-hide-sm" onclick="showNav(this)"></span>
+					</div>
+					<div class="nav df aic jcsb fs15">
+						<a href="/">Home</a>
+						<a href="/web/about">About</a>
+						<a href="/web/report/kuai">Update</a>
+						<a href="/web/report" class="active">Bulletin</a>
+						<a href="/web/method">Methodology</a>
+						<a href="/web/publications">Publications</a>
+						<a href="/web/contact">Contact Us</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<script src="/web/js/jquery-2.1.1.min.js"></script>
+	<script>
+		function showDrop(is){
+			$('.drop').toggleClass('open')
+		}
+
+		function changeLanguage(lang) {
+			console.log(lang)
+			$.ajax({
+				type: "post",
+				url: ctx + "web/common/changeLang",
+				data: {
+					"lang": lang
+				},
+				success: function(result) {
+					window.location.reload();
+				}
+			});
+		}
+	</script>
+
+    <main>
+        <div class="b">
+            <img src="/web/images/bg-tb.jpg" class="w100p db" alt="">
+            <div class="tac white df aic jcc fdc info pa">
+                <h3 class="fs20 pl15 pr15" style="line-height: 1.6;">CropWatch Global Crop Monitoring Bulletin (English-Chinese Bilingual Edition)</h3>
+                <p class="mt10 dn layui-show-md-block" style="font-size:16px;">As of 2024, the Global Crop Monitoring Bulletin has been published four times a year. Starting from 2025, the frequency of CropWatch bulletins will be adjusted from quarterly to bimonthly, with publications at the end of February, April, June, August, October, and December, aiming to improve the timeliness of information.
+                </p>
+            </div>
+        </div>
+        <div class="box1">
+            <div class="layui-container">
+                <div class="df ais bbse col pb25">
+                    <img src="/profile/avatar/2026/08/31/2026_08_英文_20260831150806A107.jpg" class="db br10 mr25" alt="">
+                    <div class="info f1 df fdc aifs jcsb">
+                        <div>
+                            <h3 class="df aic jcsb fs18">
+                                <a href="/web/report/detail?id=325">August 2026 CropWatch Bulletin</a>
+                                <span>08 / 31</span>
+                            </h3>
+                            <p class="mt25 lh28">
+                                This bulletin focuses on analyzing the dynamic changes in the production situation of major grain and oil crops in 86 countries worldwide from May to July 2026. It pays particular attention to current production conditions of maize and soybeans in the Northern Hemisphere and rice in equatorial regions, and assessing the impacts of meteorological conditions. For 20 major producing countries—covering the world’s top 20 in grain output and the top 15 in population—high-resolution remote sensing monitoring and re-verification were conducted for major crops, including planted area, yield per unit area, and total production. The report aims to provide a comprehensive overview of the current state and evolving trends in global food production, offering a reference for related decision-making.
+                            </p>
+                        </div>
+                        <div class="df jcfe w100p mt15">
+                            <a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25"
+                               style="margin-right: 15px" lay-on="showForm">
+                                <span class="tongbaodingyue" data="325" data2="August 2026 CropWatch Bulletin">Subscribe</span>
+                            </a>
+                            <a onclick="downloadPdf(325, &quot;August 2026 CropWatch Bulletin&quot;)" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25" >
+                                <span>Download</span>
+                                <i class="layui-icon layui-icon-return fs13 ml5" style="transform: rotate(-90deg);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="df ais bbse col pb25">
+                    <img src="/profile/avatar/2026/06/30/英文封面_20260630113148A101.jpg" class="db br10 mr25" alt="">
+                    <div class="info f1 df fdc aifs jcsb">
+                        <div>
+                            <h3 class="df aic jcsb fs18">
+                                <a href="/web/report/detail?id=323">June 2026 CropWatch Bulletin</a>
+                                <span>06 / 30</span>
+                            </h3>
+                            <p class="mt25 lh28">
+                                This report focuses on analyzing the dynamic changes in the production situation of major grain and oil crops in 85 countries worldwide from March to May 2026. Special attention is given to the current production situation of major grain and oil crops in the Southern Hemisphere and winter wheat in the Northern Hemisphere, with an assessment of agro-meteorological conditions. It also focused on fine-scale remote sensing monitoring and verification of crop area, yield, production in 20 major producing countries. The report aims to provide a comprehensive overview of the current state and evolving trends in global food production, offering a reference for related decision-making.
+                            </p>
+                        </div>
+                        <div class="df jcfe w100p mt15">
+                            <a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25"
+                               style="margin-right: 15px" lay-on="showForm">
+                                <span class="tongbaodingyue" data="323" data2="June 2026 CropWatch Bulletin">Subscribe</span>
+                            </a>
+                            <a onclick="downloadPdf(323, &quot;June 2026 CropWatch Bulletin&quot;)" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25" >
+                                <span>Download</span>
+                                <i class="layui-icon layui-icon-return fs13 ml5" style="transform: rotate(-90deg);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="df ais bbse col pb25">
+                    <img src="/profile/avatar/2026/04/30/202604_EN_SMALL_20260430151122A363.jpg" class="db br10 mr25" alt="">
+                    <div class="info f1 df fdc aifs jcsb">
+                        <div>
+                            <h3 class="df aic jcsb fs18">
+                                <a href="/web/report/detail?id=320">April 2026 CropWatch Bulletin</a>
+                                <span>04 / 30</span>
+                            </h3>
+                            <p class="mt25 lh28">
+                                This report focuses on analyzing the dynamic changes in the production situation of major grain and oil crops in 85 countries worldwide from January to March 2026. Special attention is given to the current production situation of major grain and oil crops in the Southern Hemisphere and winter wheat in the Northern Hemisphere, with an assessment of agro-meteorological conditions. It also focused on fine-scale remote sensing monitoring and verification of crop area, yield, production in 20 major producing countries. The report aims to provide a comprehensive overview of the current state and evolving trends in global food production, offering a reference for related decision-making.
+                            </p>
+                        </div>
+                        <div class="df jcfe w100p mt15">
+                            <a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25"
+                               style="margin-right: 15px" lay-on="showForm">
+                                <span class="tongbaodingyue" data="320" data2="April 2026 CropWatch Bulletin">Subscribe</span>
+                            </a>
+                            <a onclick="downloadPdf(320, &quot;April 2026 CropWatch Bulletin&quot;)" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25" >
+                                <span>Download</span>
+                                <i class="layui-icon layui-icon-return fs13 ml5" style="transform: rotate(-90deg);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="df ais bbse col pb25">
+                    <img src="/profile/avatar/2026/02/28/CropWatch-202602-EN_20260228145234A242.jpg" class="db br10 mr25" alt="">
+                    <div class="info f1 df fdc aifs jcsb">
+                        <div>
+                            <h3 class="df aic jcsb fs18">
+                                <a href="/web/report/detail?id=318">February 2026 CropWatch Bulletin</a>
+                                <span>02 / 28</span>
+                            </h3>
+                            <p class="mt25 lh28">
+                                CropWatch Bulletin, February 2026 (Volume 26, No.1) focuses on the global production situation of major staple grain and oil crops from November 2025 to January 2026, with particular emphasis on the current production status in the Southern Hemisphere. It conducts fine-scale remote sensing monitoring and validation of the planting area, yield, and total output of major staple grain and oil crops in 20 major producing countries, including the world&#39;s top 20 grain producers and the top 15 most populous nations. This report aims to comprehensively grasp the current status and future trends of global crop production during this monitoring period, offering a reference for related decision-making.
+                            </p>
+                        </div>
+                        <div class="df jcfe w100p mt15">
+                            <a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25"
+                               style="margin-right: 15px" lay-on="showForm">
+                                <span class="tongbaodingyue" data="318" data2="February 2026 CropWatch Bulletin">Subscribe</span>
+                            </a>
+                            <a onclick="downloadPdf(318, &quot;February 2026 CropWatch Bulletin&quot;)" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25" >
+                                <span>Download</span>
+                                <i class="layui-icon layui-icon-return fs13 ml5" style="transform: rotate(-90deg);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="df ais bbse col pb25">
+                    <img src="/profile/avatar/2025/12/31/ENs_20251231144245A159.jpg" class="db br10 mr25" alt="">
+                    <div class="info f1 df fdc aifs jcsb">
+                        <div>
+                            <h3 class="df aic jcsb fs18">
+                                <a href="/web/report/detail?id=316">December 2025 CropWatch Bulletin</a>
+                                <span>12 / 31</span>
+                            </h3>
+                            <p class="mt25 lh28">
+                                CropWatch Bulletin, December 2025 (Volume 25, No.6) systematically assessed the dynamic changes of major cereal and oilseed crops in 89 countries worldwide from September to November 2025, summarized the global major and oilseed crop production, and food security status for the year 2025, and analyzed the impact of extreme weather events which significantly influence agricultural production. It also focused on fine-scale remote sensing monitoring and verification of crop area, yield, production and annual summarization in key countries, including Argentina, Brazil, China, India, Russia, the United States, and other major producing countries. Additionally, the report also provided forecasts for rice in equatorial regions and wheat in the Southern Hemisphere. The report aims to provide a comprehensive overview of the current state and evolving trends in global food production, offering a reference for related decision-making.
+                            </p>
+                        </div>
+                        <div class="df jcfe w100p mt15">
+                            <a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25"
+                               style="margin-right: 15px" lay-on="showForm">
+                                <span class="tongbaodingyue" data="316" data2="December 2025 CropWatch Bulletin">Subscribe</span>
+                            </a>
+                            <a onclick="downloadPdf(316, &quot;December 2025 CropWatch Bulletin&quot;)" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25" >
+                                <span>Download</span>
+                                <i class="layui-icon layui-icon-return fs13 ml5" style="transform: rotate(-90deg);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="df ais bbse col pb25">
+                    <img src="/profile/avatar/2025/10/31/EN_20251031173050A004.jpg" class="db br10 mr25" alt="">
+                    <div class="info f1 df fdc aifs jcsb">
+                        <div>
+                            <h3 class="df aic jcsb fs18">
+                                <a href="/web/report/detail?id=313">October 2025 CropWatch Bulletin</a>
+                                <span>10 / 31</span>
+                            </h3>
+                            <p class="mt25 lh28">
+                                CropWatch Bulletin, October 2025 (Volume 25, No.5) focuses on analyzing the impact of extreme weather events on major cereal and oilseed crop production from July to September 2025. It systematically assesses the production dynamics of major cereal and oilseed crops in 85 countries worldwide and conducts remote sensing-based monitoring, verification, and forecasting of crop planting area, yield, and total production for 12 major crop producing countries, including China, the United States, and India. In addition, the report reviews maize and soybean production in the Northern Hemisphere, estimates rainy season rice yields in representative equatorial countries, and forecasts wheat production in major Southern Hemisphere wheat-producing countries. The report aims to provide a comprehensive overview of the current state and evolving trends in global food production, offering a reference for related decision-making.
+                            </p>
+                        </div>
+                        <div class="df jcfe w100p mt15">
+                            <a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25"
+                               style="margin-right: 15px" lay-on="showForm">
+                                <span class="tongbaodingyue" data="313" data2="October 2025 CropWatch Bulletin">Subscribe</span>
+                            </a>
+                            <a onclick="downloadPdf(313, &quot;October 2025 CropWatch Bulletin&quot;)" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25" >
+                                <span>Download</span>
+                                <i class="layui-icon layui-icon-return fs13 ml5" style="transform: rotate(-90deg);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="df ais bbse col pb25">
+                    <img src="/profile/avatar/2025/08/31/2025年8月英文封面_20250831183826A105.jpg" class="db br10 mr25" alt="">
+                    <div class="info f1 df fdc aifs jcsb">
+                        <div>
+                            <h3 class="df aic jcsb fs18">
+                                <a href="/web/report/detail?id=311">August 2025 CropWatch Bulletin</a>
+                                <span>08 / 31</span>
+                            </h3>
+                            <p class="mt25 lh28">
+                                This report provides a comprehensive assessment of the global production situation of major grain and oil crops in 2025, utilizing multi-source satellite remote sensing, ground observations, and meteorological data through the CropWatch cloud platform. It focuses on analysing the impacts of extreme weather events on agricultural production and conducts remote sensing-based monitoring of crop planted area, yield, and total production in eight key grain-producing countries, including China, the United States, and India, etc. Furthermore, the report includes a review of wheat production in the Northern Hemisphere and offers yield forecasts for maize and soybeans in the same region, as well as for rice in equatorial regions.
+                            </p>
+                        </div>
+                        <div class="df jcfe w100p mt15">
+                            <a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25"
+                               style="margin-right: 15px" lay-on="showForm">
+                                <span class="tongbaodingyue" data="311" data2="August 2025 CropWatch Bulletin">Subscribe</span>
+                            </a>
+                            <a onclick="downloadPdf(311, &quot;August 2025 CropWatch Bulletin&quot;)" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25" >
+                                <span>Download</span>
+                                <i class="layui-icon layui-icon-return fs13 ml5" style="transform: rotate(-90deg);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="df ais bbse col pb25">
+                    <img src="/profile/avatar/2025/06/30/英文25~2_20250630212600A060.png" class="db br10 mr25" alt="">
+                    <div class="info f1 df fdc aifs jcsb">
+                        <div>
+                            <h3 class="df aic jcsb fs18">
+                                <a href="/web/report/detail?id=309">June 2025 CropWatch Bulletin</a>
+                                <span>06 / 30</span>
+                            </h3>
+                            <p class="mt25 lh28">
+                                Based on the latest remote sensing data, meteorological data, and ground observation data, CropWatch provides an outlook on the global production situation of major grain. This June bulletin specifically focuses on the production assessment of winter wheat and rice in major production areas of the Northern Hemisphere during harvest season, Planting progress and sowing areas in North America and northeastern China, the impact of drought on global production, striving to provide more precise data support and professional analysis for global agriculture.
+                            </p>
+                        </div>
+                        <div class="df jcfe w100p mt15">
+                            <a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25"
+                               style="margin-right: 15px" lay-on="showForm">
+                                <span class="tongbaodingyue" data="309" data2="June 2025 CropWatch Bulletin">Subscribe</span>
+                            </a>
+                            <a onclick="downloadPdf(309, &quot;June 2025 CropWatch Bulletin&quot;)" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25" >
+                                <span>Download</span>
+                                <i class="layui-icon layui-icon-return fs13 ml5" style="transform: rotate(-90deg);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="df ais bbse col pb25">
+                    <img src="/profile/avatar/2025/04/30/英文封面25~2_20250430173313A029.jpg" class="db br10 mr25" alt="">
+                    <div class="info f1 df fdc aifs jcsb">
+                        <div>
+                            <h3 class="df aic jcsb fs18">
+                                <a href="/web/report/detail?id=307">April 2025 CropWatch Bulletin</a>
+                                <span>04 / 30</span>
+                            </h3>
+                            <p class="mt25 lh28">
+                                Based on the latest remote sensing data, meteorological data, and ground observation data, CropWatch provides an outlook on the global production situation of major grain and oil crops. This April bulletin specifically focuses on the distribution and growth assessment of winter wheat in major production areas of the Northern Hemisphere, production assessment of maize and soybeans during harvest season in South America, production assessment and planting progress monitoring of dry-season rice in equatorial countries, as well as the planting area and growth momentum of rapeseed in southern China, striving to provide more precise data support and analysis for global agriculture.
+                            </p>
+                        </div>
+                        <div class="df jcfe w100p mt15">
+                            <a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25"
+                               style="margin-right: 15px" lay-on="showForm">
+                                <span class="tongbaodingyue" data="307" data2="April 2025 CropWatch Bulletin">Subscribe</span>
+                            </a>
+                            <a onclick="downloadPdf(307, &quot;April 2025 CropWatch Bulletin&quot;)" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25" >
+                                <span>Download</span>
+                                <i class="layui-icon layui-icon-return fs13 ml5" style="transform: rotate(-90deg);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="df ais bbse col pb25">
+                    <img src="/profile/avatar/2025/02/28/英文24~1_20250228160547A030.jpg" class="db br10 mr25" alt="">
+                    <div class="info f1 df fdc aifs jcsb">
+                        <div>
+                            <h3 class="df aic jcsb fs18">
+                                <a href="/web/report/detail?id=305">February 2025 CropWatch Bulletin</a>
+                                <span>02 / 28</span>
+                            </h3>
+                            <p class="mt25 lh28">
+                                The February 2025 CropWatch Bulletin (Volume 25, Issue 1) forecasts the production situation of global staple food and oil crops based on the latest remote sensing data, meteorological data, and ground observation data. Starting from 2025, the frequency of CropWatch bulletins will be adjusted from quarterly to bimonthly, with releases scheduled at the end of February, April, June, August, October, and December each year. This change aims to enhance the timeliness of information and better meet the urgent needs of global users and friends who follow CropWatch for agricultural information. In addition, the structure of the CropWatch bulletin has been innovatively adjusted. Each issue will focus on the dynamic changes in the production situation and yields of global staple food and oil crops, with particular attention to major producing countries and hotspots that significantly impact global food supply during the monitoring period. The February bulletin specifically highlights the production of maize and soybeans in the Southern Hemisphere, as well as the dynamic changes in rice production in equatorial countries, striving to provide more precise data support and analysis for global agriculture.
+                            </p>
+                        </div>
+                        <div class="df jcfe w100p mt15">
+                            <a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25"
+                               style="margin-right: 15px" lay-on="showForm">
+                                <span class="tongbaodingyue" data="305" data2="February 2025 CropWatch Bulletin">Subscribe</span>
+                            </a>
+                            <a onclick="downloadPdf(305, &quot;February 2025 CropWatch Bulletin&quot;)" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25" >
+                                <span>Download</span>
+                                <i class="layui-icon layui-icon-return fs13 ml5" style="transform: rotate(-90deg);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="df ais bbse col pb25">
+                    <img src="/profile/avatar/2024/11/30/英文24~4_draft1_20241130161513A199.jpg" class="db br10 mr25" alt="">
+                    <div class="info f1 df fdc aifs jcsb">
+                        <div>
+                            <h3 class="df aic jcsb fs18">
+                                <a href="/web/report/detail?id=302">November 2024 CropWatch Bulletin</a>
+                                <span>11 / 30</span>
+                            </h3>
+                            <p class="mt25 lh28">
+                                November 2024 CropWatch Bulletin is based mainly on current remote sensing inputs in addition to detailed and spatially accurate reference data about crops and their management. Focusing on the months of July to October 2024, chapters cover global, national, and regional level agroclimatic conditions and the condition of crops that were growing during this time. For China, the bulletin presents crop conditions for each of seven key agro-ecological zones. The focus section reports on the global crop production index, the estimate by CropWatch for maize, rice, wheat and soybeans production in 2024, recent conflicts and disaster events with an impact on agriculture, the possibility of an El Niño conditions event and the impact of drought on world food supply.
+                            </p>
+                        </div>
+                        <div class="df jcfe w100p mt15">
+                            <a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25"
+                               style="margin-right: 15px" lay-on="showForm">
+                                <span class="tongbaodingyue" data="302" data2="November 2024 CropWatch Bulletin">Subscribe</span>
+                            </a>
+                            <a onclick="downloadPdf(302, &quot;November 2024 CropWatch Bulletin&quot;)" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25" >
+                                <span>Download</span>
+                                <i class="layui-icon layui-icon-return fs13 ml5" style="transform: rotate(-90deg);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="df ais bbse col pb25">
+                    <img src="/profile/avatar/2024/08/31/封面_英文24~3_20240831105119A065.png" class="db br10 mr25" alt="">
+                    <div class="info f1 df fdc aifs jcsb">
+                        <div>
+                            <h3 class="df aic jcsb fs18">
+                                <a href="/web/report/detail?id=299">August 2024 CropWatch Bulletin</a>
+                                <span>08 / 31</span>
+                            </h3>
+                            <p class="mt25 lh28">
+                                August 2024 CropWatch Bulletin is based mainly on current remote sensing inputs in addition to detailed and spatially accurate reference data about crops and their management. Focusing on the months of April to July 2024, chapters cover global, national, and regional level agroclimatic conditions and the condition of crops that were growing during this time. For China, the bulletin presents crop conditions for each of seven key agro-ecological zones. The focus section reports on the global crop production index, the estimate by CropWatch for maize, rice, wheat and soybeans production in 2024, recent conflicts and disaster events with an impact on agriculture, the possibility of an El Niño conditions event and the impact of drought on world food supply.
+                            </p>
+                        </div>
+                        <div class="df jcfe w100p mt15">
+                            <a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25"
+                               style="margin-right: 15px" lay-on="showForm">
+                                <span class="tongbaodingyue" data="299" data2="August 2024 CropWatch Bulletin">Subscribe</span>
+                            </a>
+                            <a onclick="downloadPdf(299, &quot;August 2024 CropWatch Bulletin&quot;)" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25" >
+                                <span>Download</span>
+                                <i class="layui-icon layui-icon-return fs13 ml5" style="transform: rotate(-90deg);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="df ais bbse col pb25">
+                    <img src="/profile/avatar/2024/05/31/英文通报封面_20240531155553A008.jpg" class="db br10 mr25" alt="">
+                    <div class="info f1 df fdc aifs jcsb">
+                        <div>
+                            <h3 class="df aic jcsb fs18">
+                                <a href="/web/report/detail?id=296">May 2024 CropWatch Bulletin</a>
+                                <span>05 / 31</span>
+                            </h3>
+                            <p class="mt25 lh28">
+                                May 2024 CropWatch Bulletin is based mainly on current remote sensing inputs in addition to detailed and spatially accurate reference data about crops and their management. Focusing on the months of January to April 2024, chapters cover global, national, and regional level agroclimatic conditions and the condition of crops that were growing during this time. For China, the bulletin presents crop conditions for each of seven key agro-ecological zones. The focus section reports on the global crop production index, the estimate by CropWatch for maize, rice, wheat and soybeans production in 2024, recent conflicts and disaster events with an impact on agriculture, the possibility of an El Niño conditions event and the impact of drought on world food supply.
+                            </p>
+                        </div>
+                        <div class="df jcfe w100p mt15">
+                            <a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25"
+                               style="margin-right: 15px" lay-on="showForm">
+                                <span class="tongbaodingyue" data="296" data2="May 2024 CropWatch Bulletin">Subscribe</span>
+                            </a>
+                            <a onclick="downloadPdf(296, &quot;May 2024 CropWatch Bulletin&quot;)" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25" >
+                                <span>Download</span>
+                                <i class="layui-icon layui-icon-return fs13 ml5" style="transform: rotate(-90deg);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="df ais bbse col pb25">
+                    <img src="/profile/avatar/2024/02/29/EN-final_20240229162211A013.jpg" class="db br10 mr25" alt="">
+                    <div class="info f1 df fdc aifs jcsb">
+                        <div>
+                            <h3 class="df aic jcsb fs18">
+                                <a href="/web/report/detail?id=290">February 2024 CropWatch Bulletin</a>
+                                <span>02 / 29</span>
+                            </h3>
+                            <p class="mt25 lh28">
+                                February 2024 CropWatch Bulletin is based mainly on current remote sensing inputs in addition to detailed and spatially accurate reference data about crops and their management. Focusing on the months of October 2023 to January 2024, chapters cover global, national, and regional level agroclimatic conditions and the condition of crops that were growing during this time. For China, the bulletin presents crop conditions for each of seven key agro-ecological zones. The focus section reports on the global crop production index, the estimate by CropWatch for maize, rice, wheat and soybeans production in 2024, recent conflicts and disaster events with an impact on agriculture, the possibility of an El Niño conditions event and the impact of drought on world food supply.
+                            </p>
+                        </div>
+                        <div class="df jcfe w100p mt15">
+                            <a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25"
+                               style="margin-right: 15px" lay-on="showForm">
+                                <span class="tongbaodingyue" data="290" data2="February 2024 CropWatch Bulletin">Subscribe</span>
+                            </a>
+                            <a onclick="downloadPdf(290, &quot;February 2024 CropWatch Bulletin&quot;)" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25" >
+                                <span>Download</span>
+                                <i class="layui-icon layui-icon-return fs13 ml5" style="transform: rotate(-90deg);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="df ais bbse col pb25">
+                    <img src="/profile/avatar/2024/02/21/CropWatch_Cover_EN_20240221172620A081.jpg" class="db br10 mr25" alt="">
+                    <div class="info f1 df fdc aifs jcsb">
+                        <div>
+                            <h3 class="df aic jcsb fs18">
+                                <a href="/web/report/detail?id=288">November 2023 CropWatch Bulletin</a>
+                                <span>02 / 21</span>
+                            </h3>
+                            <p class="mt25 lh28">
+                                November 2023 CropWatch Bulletin is based mainly on current remote sensing inputs in addition to detailed and spatially accurate reference data about crops and their management. Focusing on the months of July to November 2023, chapters cover global, national, and regional level agroclimatic conditions and the condition of crops that were growing during this time. For China, the bulletin presents crop conditions for each of seven key agro-ecological zones, an updated estimate of trade prospects (import/export) of major crops. The focus section reports on the estimate by CropWatch for maize, rice, wheat and soybeans production in 2023, recent disaster events with an impact on agriculture, the possibility of an El Niño conditions event and the impact of drought on world food supply.
+                            </p>
+                        </div>
+                        <div class="df jcfe w100p mt15">
+                            <a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25"
+                               style="margin-right: 15px" lay-on="showForm">
+                                <span class="tongbaodingyue" data="288" data2="November 2023 CropWatch Bulletin">Subscribe</span>
+                            </a>
+                            <a onclick="downloadPdf(288, &quot;November 2023 CropWatch Bulletin&quot;)" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25" >
+                                <span>Download</span>
+                                <i class="layui-icon layui-icon-return fs13 ml5" style="transform: rotate(-90deg);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="df ais bbse col pb25">
+                    <img src="/profile/upload/2023/08/1698380156.jpg" class="db br10 mr25" alt="">
+                    <div class="info f1 df fdc aifs jcsb">
+                        <div>
+                            <h3 class="df aic jcsb fs18">
+                                <a href="/web/report/detail?id=235">August 2023 CropWatch Bulletin</a>
+                                <span>08 / 31</span>
+                            </h3>
+                            <p class="mt25 lh28">
+                                August 2023 CropWatch Bulletin is based mainly on current remote sensing inputs in addition to detailed and spatially accurate reference data about crops and their management. Focusing on the months of April to July 2023, chapters cover global, national, and regional level agroclimatic conditions and the condition of crops that were growing during this time. For China, the bulletin presents crop conditions for each of seven key agro-ecological zones, an updated estimate of trade prospects (import/export) of major crops. The focus section reports on the estimate by CropWatch for maize, rice, wheat and soybeans production in 2023, recent disaster events with an impact on agriculture, the possibility of an El Niño conditions event and the impact of drought on world food supply.
+                            </p>
+                        </div>
+                        <div class="df jcfe w100p mt15">
+                            <a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25"
+                               style="margin-right: 15px" lay-on="showForm">
+                                <span class="tongbaodingyue" data="235" data2="August 2023 CropWatch Bulletin">Subscribe</span>
+                            </a>
+                            <a onclick="downloadPdf(235, &quot;August 2023 CropWatch Bulletin&quot;)" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25" >
+                                <span>Download</span>
+                                <i class="layui-icon layui-icon-return fs13 ml5" style="transform: rotate(-90deg);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="df ais bbse col pb25">
+                    <img src="/profile/upload/2023/05/709804769.jpg" class="db br10 mr25" alt="">
+                    <div class="info f1 df fdc aifs jcsb">
+                        <div>
+                            <h3 class="df aic jcsb fs18">
+                                <a href="/web/report/detail?id=229">May 2023 CropWatch Bulletin</a>
+                                <span>05 / 31</span>
+                            </h3>
+                            <p class="mt25 lh28">
+                                May 2023 CropWatch Bulletin is based mainly on current remote sensing inputs in addition to detailed and spatially accurate reference data about crops and their management. Focusing on the months of January to April 2023, chapters cover global, national, and regional level agroclimatic conditions and the condition of crops that were growing during this time. For China, the bulletin presents crop conditions for each of seven key agro-ecological zones, an updated estimate of trade prospects (import/export) of major crops. The focus section reports on the production outlook of major cereal and oil crops countries in the Southern Hemisphere and some tropical and sub-tropical countries, the impact of recent disaster events , regional conflict on global food security is analyzed and an update on El Niño or La Niña.
+                            </p>
+                        </div>
+                        <div class="df jcfe w100p mt15">
+                            <a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25"
+                               style="margin-right: 15px" lay-on="showForm">
+                                <span class="tongbaodingyue" data="229" data2="May 2023 CropWatch Bulletin">Subscribe</span>
+                            </a>
+                            <a onclick="downloadPdf(229, &quot;May 2023 CropWatch Bulletin&quot;)" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25" >
+                                <span>Download</span>
+                                <i class="layui-icon layui-icon-return fs13 ml5" style="transform: rotate(-90deg);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="df ais bbse col pb25">
+                    <img src="/profile/upload/2023/02/4141247861.jpg" class="db br10 mr25" alt="">
+                    <div class="info f1 df fdc aifs jcsb">
+                        <div>
+                            <h3 class="df aic jcsb fs18">
+                                <a href="/web/report/detail?id=227">February 2023 CropWatch Bulletin</a>
+                                <span>02 / 28</span>
+                            </h3>
+                            <p class="mt25 lh28">
+                                February 2023 CropWatch Bulletin is based mainly on current remote sensing inputs in addition to detailed and spatially accurate reference data about crops and their management. Focusing on the months of October 2022 to January 2023, chapters cover global, national, and regional level agroclimatic conditions and the condition of crops that were growing during this time. For China, the bulletin presents crop conditions for each of seven key agro-ecological zones. The focus section reports on global crop production index, the production outlook of major cereal and oil crops countries in the Southern Hemisphere and some tropical and sub-tropical countries, regional conflict and recent disaster events and an update on El Niño or La Niña.
+                            </p>
+                        </div>
+                        <div class="df jcfe w100p mt15">
+                            <a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25"
+                               style="margin-right: 15px" lay-on="showForm">
+                                <span class="tongbaodingyue" data="227" data2="February 2023 CropWatch Bulletin">Subscribe</span>
+                            </a>
+                            <a onclick="downloadPdf(227, &quot;February 2023 CropWatch Bulletin&quot;)" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25" >
+                                <span>Download</span>
+                                <i class="layui-icon layui-icon-return fs13 ml5" style="transform: rotate(-90deg);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="df ais bbse col pb25">
+                    <img src="/profile/upload/2022/12/3296117147.jpg" class="db br10 mr25" alt="">
+                    <div class="info f1 df fdc aifs jcsb">
+                        <div>
+                            <h3 class="df aic jcsb fs18">
+                                <a href="/web/report/detail?id=219">November 2022 CropWatch Bulletin</a>
+                                <span>11 / 30</span>
+                            </h3>
+                            <p class="mt25 lh28">
+                                November 2022 CropWatch Bulletin is based mainly on current remote sensing inputs in addition to detailed and spatially accurate reference data about crops and their management. Focusing on the months of July to October 2022, chapters cover global, national, and regional level agroclimatic conditions and the condition of crops that were growing during this time. For China, the bulletin presents crop conditions for each of seven key agro-ecological zones, an updated estimate of trade prospects (import/export) of major crops. The focus section reports on the estimate by CropWatch for maize, rice, wheat and soybeans production in 2022, recent disaster events with an impact on agriculture, and the possibility of an El Niño event.
+                            </p>
+                        </div>
+                        <div class="df jcfe w100p mt15">
+                            <a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25"
+                               style="margin-right: 15px" lay-on="showForm">
+                                <span class="tongbaodingyue" data="219" data2="November 2022 CropWatch Bulletin">Subscribe</span>
+                            </a>
+                            <a onclick="downloadPdf(219, &quot;November 2022 CropWatch Bulletin&quot;)" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25" >
+                                <span>Download</span>
+                                <i class="layui-icon layui-icon-return fs13 ml5" style="transform: rotate(-90deg);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="df ais bbse col pb25">
+                    <img src="/profile/upload/2022/09/1058685674.jpg" class="db br10 mr25" alt="">
+                    <div class="info f1 df fdc aifs jcsb">
+                        <div>
+                            <h3 class="df aic jcsb fs18">
+                                <a href="/web/report/detail?id=217">August 2022 CropWatch Bulletin</a>
+                                <span>11 / 28</span>
+                            </h3>
+                            <p class="mt25 lh28">
+                                August 2022 CropWatch Bulletin is based mainly on current remote sensing inputs in addition to detailed and spatially accurate reference data about crops and their management. Focusing on the months of April to July 2022, chapters cover global, national, and regional level agroclimatic conditions and the condition of crops that were growing during this time. For China, the bulletin presents crop conditions for each of seven key agro-ecological zones, an updated estimate of trade prospects (import/export) of major crops. The focus section reports on the estimate by CropWatch for maize, rice, wheat and soybeans production in 2022, recent disaster events with an impact on agriculture, the possibility of an La Niña conditions event and the impact of drought on world food supply.
+                            </p>
+                        </div>
+                        <div class="df jcfe w100p mt15">
+                            <a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25"
+                               style="margin-right: 15px" lay-on="showForm">
+                                <span class="tongbaodingyue" data="217" data2="August 2022 CropWatch Bulletin">Subscribe</span>
+                            </a>
+                            <a onclick="downloadPdf(217, &quot;August 2022 CropWatch Bulletin&quot;)" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25" >
+                                <span>Download</span>
+                                <i class="layui-icon layui-icon-return fs13 ml5" style="transform: rotate(-90deg);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="df aic fww jcsb mt15 pag">
+                    <span>In All&nbsp;&nbsp;55&nbsp;&nbsp;Data</span>
+                    <ul class="df aic">
+                        <li>
+                            <a href="/web/report/p&amp;!1">
+                                <i class="layui-icon layui-icon-prev fs12"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="active" href="/web/report/p&amp;!1">1</a>
+                        </li>
+                        <li>
+                            <a href="/web/report/p&amp;!2">2</a>
+                        </li>
+                        <li>
+                            <a href="/web/report/p&amp;!3">3</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/web/report/p&amp;!2">
+                                <i class="layui-icon layui-icon-next fs12"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    
+	<footer>
+		<div class="layui-container" style="padding: 4vh 0 4vh;">
+			<div class="df box">
+				<a href="" class="mt15">
+					<img src="/web/images/logo.webp" alt="">
+				</a>
+				<div class="w120 layui-hide-xs layui-show-md-block"></div>
+				<div class="white f1 mt15">
+					<h3>Contact Us</h3>
+					<p>Olympic Village Science Park, West Beichen Road, Chaoyang District, Beijing</p>
+					<p>+8610-64842375/6</p>
+					<p>+8610-64858721(Fax)</p>
+					<p>cropwatch@aircas.ac.cn</p>
+				</div>
+				<a href="" target="_blank" class="white mt15">
+					<div class="df aic jcc">
+						<img src="/web/images/icon-5.jpg" class="h56 w56 br-3xl" alt="">
+						<div class="w30"></div>
+						<img src="/web/images/icon-6.jpg" class="h56 w56 br-3xl" alt="">
+					</div>
+					<p class="mt10">中国科学院空天信息创新研究院(AIRCAS)</p>
+				</a>
+			</div>
+		</div>
+		<div class="beian">
+			<div class="layui-container df aic jcsb">
+				<span>Copyright © 2025 中国科学院空天信息创新研究院生态系统遥感研究室</span>
+				<!--<a class="white" href="https://beian.miit.gov.cn/" target="_blank">京ICP备05080539号-16</a>-->
+			</div>
+		</div>
+	</footer>
+
+    <script src="/web/js/jquery-2.1.1.min.js"></script>
+    <script src="/web/js/js.js"></script>
+    <script src="/web/layui-v2.8.11/layui.js"></script>
+    <script> var ctx = "\/"; var captchaType = null; </script>
+    <script>
+        var language = "en_US"
+        layui.use(function () {
+            const $ = layui.$;
+            const form = layui.form;
+            const layer = layui.layer;
+            const util = layui.util;
+
+            // 提交事件
+            form.on('submit(dingyue)', function (data) {
+                var field = data.field; // 获取表单字段值
+
+                let userName = data.field.username;
+                let email = data.field.email;
+                let org = data.field.company;
+                let reportId = data.field.reportId;
+                let lang = "en_US"
+
+
+
+                $.ajax({
+                    type: "post",
+                    url: ctx + "web/webSubscribe/add",
+                    data: {"userName":userName,"email":email,"org":org,"type":2,"language":lang,"reportId":reportId},
+                    success: function(result) {
+                        if(result.code !=0){
+                            let msg = result.msg
+                            layer.msg(msg, { icon: 5, anim: 6 });
+                        }else{
+                            layer.msg("Subscribe Successfully", { icon: 6, anim: 6 });
+                            setTimeout(function(){
+                                layer.closeAll();
+                            },800)
+
+                        }
+                    }
+                });
+
+
+
+                // 此处可执行 Ajax 等操作
+                // …
+                return false; // 阻止默认 form 跳转
+            });
+
+            util.on('lay-on', {
+                "closeLayer": function () {
+                    layer.closeAll()
+                },
+                "showForm": function (othis) {
+
+                    var subscribe = "Subscribe";
+                    var Fill = "Fill In Your Information\uFF0CSubscribe To Receive Our Latest Newsletters And Other Information";
+                    var userName = "UserName";
+                    var pu = "Please Enter Your Username Or Email";
+                    var email = "Email";
+                    var Email = "Please Enter Email";
+                    var organization = "Organization";
+                    var Organization = "Please Enter Organization";
+
+                        layer.open({
+                            type: 1,
+                            title: false,
+                            closeBtn: 0,
+                            skin: 'dingyue',
+                            //area: ['420px', '240px'], // 宽高
+                            content: `<div class="df jcfe p15">
+                                        <i class="layui-icon layui-icon-close fs18 cp" lay-on="closeLayer"></i>
+                                    </div>
+                                    <div class="box">
+                                        <div class="title">
+                                            <strong class="fs16">${subscribe}</strong>
+                                            <p class="fs13 c5 mt10 mb15" id="reportName"  style="text-align: center"></p>
+                                            <p class="fs13 c5 mt10 mb15">${Fill}</p>
+
+                                        </div>
+                                        <form class="layui-form">
+                                            <div class="login-container">
+                                                <div class="layui-form-item mb20">
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="username" id="username" value="" lay-verify="required" placeholder="${userName}"
+                                                            lay-reqtext="${pu}"  autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item mb20">
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="email" id="email" value="" lay-verify="email|required" placeholder="${email}"
+                                                            lay-reqtext="${Email}"  autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item mb20">
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="company" value="" lay-verify="required" placeholder="${organization}"
+                                                            lay-reqtext="${Organization}" autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item mb20" hidden>
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="reportId" id="reportId"  value="" lay-verify="required"
+                                                         autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+<!--                                                <div class="layui-form-item mb20">-->
+<!--                                                    <div class="layui-input-wrap">-->
+<!--                                                        <select name="country" lay-verify="required" lay-search lay-reqtext="请选择您感兴趣的国家">-->
+<!--                                                            <option value="">请选择您感兴趣的国家</option>-->
+<!--                                                            <option value="1">中国</option>-->
+<!--                                                            <option value="2">美国</option>-->
+<!--                                                            <option value="3">英国</option>-->
+<!--                                                            <option value="4">法国</option>-->
+<!--                                                        </select>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+                                                <div class="layui-form-item mb0">
+                                                    <button class="layui-btn layui-btn-fluid bg-c h42 lh42" lay-submit
+                                                        lay-filter="dingyue">${subscribe}</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>`,
+                            success: function (layero, index, that) {
+                                $('#reportId').val($(othis).parent().find(".tongbaodingyue").attr("data"));
+                                $('#reportName').text($(othis).parent().find(".tongbaodingyue").attr("data2"));
+                                form.render();
+                            }
+                        });
+                }
+            })
+        })
+
+        function downloadPdf(reportId, reportName) {
+            var fileName = reportName + '.pdf';
+            var loading = layer.msg('正在下载', {icon: 16, shade: 0.3, time: 0});
+            $.ajax({
+                type: "post",
+                url: ctx + "web/report/downloadPdf",
+                data: {
+                    "reportId": reportId,
+                    "way": 2
+                },
+                success: function(result) {
+                    layer.close(loading);
+                    if (result.code == 0) {
+                        window.location.href = ctx + 'common/downloads?fileName=' + fileName + "&path=" + reportId + "&delete=true";
+                    } else {
+                        layer.msg(result.msg);
+                    }
+                }
+            });
+
+        }
+    </script>
+</body>
+
+</html>

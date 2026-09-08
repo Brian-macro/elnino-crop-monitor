@@ -1,0 +1,111 @@
+{
+ "crop": "corn",
+ "target_year": 2026,
+ "countries": [
+  {
+   "country": "United States",
+   "forecast": 406.75,
+   "yoy": -5.9
+  },
+  {
+   "country": "China",
+   "forecast": 307.0,
+   "yoy": 1.9
+  },
+  {
+   "country": "Brazil",
+   "forecast": 139.0,
+   "yoy": -0.7
+  },
+  {
+   "country": "Argentina",
+   "forecast": 55.0,
+   "yoy": -12.7
+  },
+  {
+   "country": "India",
+   "forecast": 52.0,
+   "yoy": -5.6
+  },
+  {
+   "country": "European Union",
+   "forecast": 50.2,
+   "yoy": -11.6
+  },
+  {
+   "country": "Ukraine",
+   "forecast": 31.8,
+   "yoy": 2.9
+  },
+  {
+   "country": "Mexico",
+   "forecast": 24.6,
+   "yoy": -0.4
+  },
+  {
+   "country": "Russia",
+   "forecast": 17.2,
+   "yoy": 16.2
+  },
+  {
+   "country": "South Africa",
+   "forecast": 16.5,
+   "yoy": -8.3
+  },
+  {
+   "country": "Canada",
+   "forecast": 16.5,
+   "yoy": 11.0
+  },
+  {
+   "country": "Indonesia",
+   "forecast": 13.5,
+   "yoy": 1.5
+  },
+  {
+   "country": "Pakistan",
+   "forecast": 9.8,
+   "yoy": 11.4
+  },
+  {
+   "country": "Philippines",
+   "forecast": 8.3,
+   "yoy": 1.2
+  },
+  {
+   "country": "Turkey",
+   "forecast": 7.4,
+   "yoy": -6.3
+  },
+  {
+   "country": "Bangladesh",
+   "forecast": 5.7,
+   "yoy": -1.7
+  },
+  {
+   "country": "Thailand",
+   "forecast": 5.3,
+   "yoy": -1.9
+  },
+  {
+   "country": "Paraguay",
+   "forecast": 5.2,
+   "yoy": -18.8
+  },
+  {
+   "country": "Vietnam",
+   "forecast": 4.1,
+   "yoy": -2.4
+  },
+  {
+   "country": "Kazakhstan",
+   "forecast": 1.55,
+   "yoy": 54.8
+  },
+  {
+   "country": "Australia",
+   "forecast": 0.38,
+   "yoy": 5.3
+  }
+ ]
+}

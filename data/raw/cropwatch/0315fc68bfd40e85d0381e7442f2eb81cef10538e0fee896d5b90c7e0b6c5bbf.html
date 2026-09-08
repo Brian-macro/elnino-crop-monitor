@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta http-equiv="Content-Type" Content="text/html;charset=utf8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CropWatch Cloud</title>
+    <link rel="stylesheet" href="/web/layui-v2.8.11/css/layui.css">
+    <link rel="stylesheet" href="/web/style/common.min.css">
+    <link rel="stylesheet" href="/web/style/css.min.css">
+    <link rel="stylesheet" href="/web/style/add.min.css">
+</head>
+
+<body class="page kuaibao">
+    
+	<script> var ctx = "\/"; var captchaType = null; </script>
+	<header class="pa w100p" style="z-index: 100;">
+		<div class="layui-container">
+			<div class="logo--box df aic jcsb">
+				<a href="/"><img src="/web/images/logo.webp" class="db h100p" alt=""></a>
+				<div class="r df fdc aife jcsb f1">
+					<div class="df aic fs13">
+						<a class="df aic mr25" href="/web/login/">
+							<svg t="1692522806508" class="icon" viewBox="0 0 1024 1024" version="1.1"
+								 xmlns="http://www.w3.org/2000/svg" p-id="2912" width="16" height="16">
+								<path
+										d="M870.314316 877.390274 870.314316 877.390274C870.314316 877.390274 870.314316 877.390274 870.314316 877.390274 777.938121 967.974532 651.551687 1024 512 1024 229.239611 1024 0.017919 794.741738 0.017919 511.98135 0.017919 229.22096 229.239611-0.000731 512-0.000731 794.760389-0.000731 1023.982081 229.22096 1023.982081 511.98135 1023.982081 655.190051 965.067572 784.465527 870.314316 877.390274ZM512 950.859703C615.932362 950.859703 711.30731 914.545545 786.495536 854.131659 746.451223 740.398497 639.446968 658.261944 512 658.261944 384.553032 658.261944 277.548777 740.398497 237.504464 854.131659 312.69269 914.545545 408.067638 950.859703 512 950.859703ZM512 73.176136C269.649625 73.176136 73.158216 269.667545 73.158216 512.017919 73.158216 621.545515 113.53166 721.41859 179.869911 798.325613 237.723886 672.597442 364.512591 585.158216 512 585.158216 659.450839 585.158216 786.276114 672.597442 844.130089 798.325613 910.46834 721.45516 950.841784 621.545515 950.841784 512.017919 950.841784 269.667545 754.350375 73.176136 512 73.176136ZM512 548.588068C410.993249 548.588068 329.149257 466.707505 329.149257 365.737325 329.149257 264.730574 410.993249 182.886582 512 182.886582 612.97018 182.886582 694.850743 264.730574 694.850743 365.737325 694.850743 466.707505 612.97018 548.588068 512 548.588068ZM512 256.026879C451.403264 256.026879 402.289554 305.140589 402.289554 365.700754 402.289554 426.297491 451.403264 475.411201 512 475.411201 572.596736 475.411201 621.710446 426.297491 621.710446 365.700754 621.710446 305.140589 572.596736 256.026879 512 256.026879Z"
+										fill="#ffffff" p-id="2913"></path>
+							</svg>
+							<span class="ml6 white">Login</span>
+						</a>
+						
+						
+						<div class="pr">
+							<a href="javascript:;" class="white active  df aic" onclick="showDrop(this)"><img style="margin-right:5px;height:24px!important;" src="/profile/avatar/2023/04/15/us_20230415184657A001.png" >English</a>
+							<div class="drop bg-white br5 pa">
+								<a class="df aic" style="padding-left: 10px;cursor: pointer;" onclick="changeLanguage(&quot;en_US&quot;)"><img style="margin-right:5px;height:20px!important;" src="/profile/avatar/2023/04/15/us_20230415184657A001.png" >English</a><a class="df aic" style="padding-left: 10px;cursor: pointer;" onclick="changeLanguage(&quot;zh_CN&quot;)"><img style="margin-right:5px;height:20px!important;" src="/profile/avatar/2023/04/15/zh_20230415184706A002.png" >中文</a>
+							</div>
+						</div>
+<!--						<em class="h10 w1 bg-white ml10 mr10"></em>-->
+<!--						<a href="javascript:;" class="white">EN</a>-->
+						<span class="menu ml25 layui-hide-sm" onclick="showNav(this)"></span>
+					</div>
+					<div class="nav df aic jcsb fs15">
+						<a href="/">Home</a>
+						<a href="/web/about">About</a>
+						<a href="/web/report/kuai">Update</a>
+						<a href="/web/report" class="active">Bulletin</a>
+						<a href="/web/method">Methodology</a>
+						<a href="/web/publications">Publications</a>
+						<a href="/web/contact">Contact Us</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<script src="/web/js/jquery-2.1.1.min.js"></script>
+	<script>
+		function showDrop(is){
+			$('.drop').toggleClass('open')
+		}
+
+		function changeLanguage(lang) {
+			console.log(lang)
+			$.ajax({
+				type: "post",
+				url: ctx + "web/common/changeLang",
+				data: {
+					"lang": lang
+				},
+				success: function(result) {
+					window.location.reload();
+				}
+			});
+		}
+	</script>
+
+    <main>
+        <div class="b">
+            <img src="/web/images/bg-kb.jpg" class="w100p db" alt="">
+            <div class="tac white df aic jcc fdc info pa">
+                <h2>Bulletin</h2>
+                <strong>CropWatch bulletin</strong>
+            </div>
+        </div>
+        <div class="box1">
+            <div class="layui-container">
+                <div class="layui-row aifs layui-col-space25">
+                    <div class="layui-col-md3">
+                        <h3 class="fs18 fw500 lh24">Menu</h3>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Key Message</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7817" class="db bbse c6">
+                                        Key Message
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Chapter 1: Global Outlook</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7776" class="db bbse c6">
+                                        1.1 Global Crop Production Situation and Stress
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7777" class="db bbse c6">
+                                        1.2 Global Crop Production Situation
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7778" class="db bbse c6">
+                                        1.3 Wheat production in the Northern Hemisphere
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7779" class="db bbse c6">
+                                        1.4 Maize production in the Southern Hemisphere
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7780" class="db bbse c6">
+                                        1.5 Rice production in the equatorial region
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7781" class="db bbse c6">
+                                        1.6 Soybeans production in Southern Hemisphere
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7812" class="db bbse c6">
+                                        1.7 Outlook
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Chapter 2: Countries Outlook</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7782" class="db bbse c6">
+                                        2.1 Argentina
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7783" class="db bbse c6">
+                                        2.2 Australia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7784" class="db bbse c6">
+                                        2.3 Bangladesh
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7785" class="db bbse c6">
+                                        2.4 Brazil
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7786" class="db bbse c6">
+                                        2.5 Canada
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7787" class="db bbse c6">
+                                        2.6 China
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7788" class="db bbse c6">
+                                        2.7 Ethiopia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7789" class="db bbse c6">
+                                        2.8 France
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7790" class="db bbse c6">
+                                        2.9 German
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7791" class="db bbse c6">
+                                        2.10 India
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7792" class="db bbse c6">
+                                        2.11 Indonesia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7793" class="db bbse c6">
+                                        2.12 Mexico
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7794" class="db bbse c6">
+                                        2.13 Nigeria
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7795" class="db bbse c6">
+                                        2.14 Pakistan
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7796" class="db bbse c6">
+                                        2.15 Russia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7797" class="db bbse c6">
+                                        2.16 South Africa
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7798" class="db bbse c6">
+                                        2.17 Ukraine
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7799" class="db bbse c6">
+                                        2.18 USA
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7800" class="db bbse c6">
+                                        2.19 Vietnam
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7801" class="db bbse c6">
+                                        2.20 Thailand
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Online Country Analysis</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7802" class="db bbse c6">
+                                        3.1 Online Resouces for Country Analysis
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7803" class="db bbse c6">
+                                        3.2 CropWatch GPT for Analysis
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Appendix A: Indicators</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7804" class="db bbse c6">
+                                        A.1 Global Crop Production
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7805" class="db bbse c6">
+                                        A.2 Agro-climatic indicators
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7806" class="db bbse c6">
+                                        A.3 Agronomic Indicators
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Appendix B. Methodology, Data and Online Resources</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7807" class="db bbse c6">
+                                        The CropWatch Monitoring System
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7808" class="db bbse c6">
+                                        Indicators and Methods
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7809" class="db bbse c6">
+                                        Online Resources
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Afterword</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7818" class="db bbse c6">
+                                        Afterword
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">Acknowledgments</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7810" class="db bbse c6">
+                                        Acknowledgements
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/web/report/detail?id=320&amp;sectionId=7811" class="db bbse c6">
+                                        Disclaimer
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="t df aic lh32 bbse mt6" onclick="showUl(this)">
+                                <svg t="1692596451661" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg" p-id="7148" width="16" height="16">
+                                    <path
+                                            d="M802.1 943.3H228c-70.5 0-127.9-57.4-127.9-127.9V271.6c0-70.5 57.4-127.9 127.9-127.9h574.1c70.5 0 127.9 57.4 127.9 127.9v543.8c0 70.5-57.4 127.9-127.9 127.9zM228 229.9c-23 0-41.7 18.7-41.7 41.7v543.8c0 23 18.7 41.7 41.7 41.7h574.1c23 0 41.7-18.7 41.7-41.7V271.6c0-23-18.7-41.7-41.7-41.7H228z"
+                                            fill="#01c685" p-id="7149"></path>
+                                    <path
+                                            d="M329 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM711.5 292.2c-23.8 0-43.1-19.3-43.1-43.1V124.4c0-23.8 19.3-43.1 43.1-43.1s43.1 19.3 43.1 43.1V249c0 23.9-19.3 43.2-43.1 43.2zM886.9 448.1H143.2c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h743.7c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM536.3 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM732.7 614.2h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.2 43.1-43.1 43.1zM536.3 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1h42.6c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1zM335 762.8h-42.6c-23.8 0-43.1-19.3-43.1-43.1s19.3-43.1 43.1-43.1H335c23.8 0 43.1 19.3 43.1 43.1s-19.3 43.1-43.1 43.1z"
+                                            fill="#01c685" p-id="7150"></path>
+                                </svg>
+                                <strong class="fw500 fs15 ml5 f1">AI</strong>
+                                <i class="layui-icon layui-icon-down layui-hide-md"></i>
+                            </div>
+                            <ul class="lh40 fs13 dn layui-show-md-block">
+                                
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="layui-col-md9">
+                        <div class="t df aifs jcsb lh24">
+                            <strong class="fs18">1.1 Global Crop Production Situation and Stress<span class="bsc fs14 fw400 ml10 dib lh20 pl6 pr6 c6 br4">Chapter 1: Global Outlook</span>
+                            </strong>
+                        </div>
+                        <p class="fs13 c8 lh20 mt12">
+                        <span class="secClass" data="7776" data2="1.1 Global Crop Production Situation and Stress">
+                            Authors: qinxl,lirui | Edit: lirui
+                            
+                        </span>
+						<div class="df jcfe aic"><a href="javascript:;" class="bg-jianbian !white df aic pt8 pb8 fs14 pl20 pr20 br-3xl mt25 mt15"
+                                 style="height: 20px;margin-left: auto" lay-on="showForm">
+                                <span>Subscribe</span>
+                            </a></div>
+                            <!--<span class="ml15">编辑:yangld</span>-->
+                            </p>
+                        <div class="bg-white fs15 content pr25 pl25 pb20 pt20 mt15" style="line-height: 2;"><p node="[object Object]" style="margin: 1.3em 0px 5px; box-sizing: border-box; border: 0px solid oklch(0.92 0.004 286.32); padding: 0px; outline-color: oklab(0.705 0.00415142 -0.0144141 / 0.5); -webkit-tap-highlight-color: transparent; white-space-collapse: preserve; line-height: 1.6; font-family: &quot;&quot;, Ubuntu, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, system-ui, Roboto, Oxygen, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; background-color: rgb(255, 255, 255);"><strong style="font-size: 18px;"><span style="font-family: arial, helvetica, sans-serif; color: rgba(0, 0, 0, 0.9);">1.1.1 Global Agrometeorological Conditions and Outlook</span></strong></p><p><span style="font-family: &quot;&quot;, &quot;Twemoji Country Flags&quot;, Ubuntu, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, system-ui, Roboto, Oxygen, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; white-space: pre-wrap; background-color: #FFFFFF;">During the monitoring period, global agrometeorological conditions showed marked regional differentiation. In terms of precipitation, the main deficit areas included south-central North America, the Sahel belt, most of South Asia, the Indochina Peninsula and Malay Archipelago in Southeast Asia, parts of Eastern Europe, and eastern to southwestern Australia. Above-average precipitation was observed in the East African Highlands and equatorial East Africa, Western Europe, most of the Mediterranean region, the Caribbean, localized areas of eastern South Asia, parts of the high-latitude areas of Northeast Asia, and localized areas of North China. In terms of temperature, the central-western and southern parts of North America were broadly warmer than average, forming the most prominent warm anomaly worldwide. Northern Eurasia, northern Central Asia, and Eastern Europe were mainly cooler than average, while temperatures across most of Africa, South America, Southeast Asia, Oceania, and the Mediterranean region were generally close to normal. Overall, the global agrometeorological pattern was characterized by “pronounced regional differentiation in precipitation, prominent warming in North America, marked cooling in northern Eurasia, and intensified moisture stress in some major producing areas.” In some regions, below-average PAR also exerted a certain inhibitory effect on photosynthetic accumulation and the formation of potential biomass (Figure 1.1).</span></p><p><strong>East Africa</strong></p><p>Precipitation was above to significantly above average across most of the East African Highlands and equatorial East Africa, with anomalies mostly ranging from +10% to +30%, and locally exceeding +30%. In northern East Africa and some coastal arid areas, precipitation was close to average or slightly below average. Temperatures were generally close to normal, with anomalies mainly within −0.5°C to +0.5°C, indicating relatively stable thermal conditions. Overall, moisture conditions in the inland highlands and equatorial belt were favorable for crop growth and pasture recovery. However, locally excessive rainfall may increase the risks of waterlogging, pest and disease outbreaks, and difficulties in harvesting and post-harvest drying. In areas with below-average PAR, attention should be paid to the impact of insufficient radiation on photosynthetic conversion efficiency.</p><p><br/></p><p><strong>West Africa and the Sahel</strong></p><p>Precipitation across the Sahel belt was generally below average, with anomalies mostly ranging from −30% to −10%, and falling below −30% in some areas, forming a relatively continuous precipitation deficit belt. Along the Gulf of Guinea coast, precipitation varied markedly: localized western coastal areas received above-average rainfall, while the central coast and inland transition zones were mostly below or significantly below average. Temperatures were generally close to normal, with anomalies mostly between −0.5°C and +0.5°C, and only localized areas slightly warmer than average. At present, the drought signal is most pronounced in the Sahel, where dry-season soil moisture reserves remain weak. If the onset of the subsequent rainy season is delayed, the risks of delayed spring sowing and uneven early crop emergence will increase.</p><p><br/></p><p><strong>Southern Africa</strong></p><p>Precipitation in Southern Africa showed large spatial differences. In some central and eastern areas, rainfall was close to average to above average, locally exceeding +30%. By contrast, southwestern areas, southern coastal areas, and parts of island regions experienced below to significantly below-average precipitation, with local anomalies below −30%. Temperatures were mostly close to normal, mainly within the range of −0.5°C to +0.5°C. Southwestern and inland areas were locally slightly cooler, while southeastern and island regions were locally slightly warmer. Overall, the region showed a pattern of relatively wet conditions in the central-eastern areas and drier conditions in the southern and southwestern areas. Moisture conditions in the central and eastern parts were generally favorable for crop growth, but agricultural areas in the south and southwest need to monitor the adverse impacts of persistent rainfall deficits on soil moisture and later-stage yield formation.</p><p><br/></p><p><strong>North America</strong></p><p>Precipitation deficits were widespread across south-central North America. The southern Great Plains, southern inland areas, and the southwest recorded severe precipitation deficits, with anomalies below −30%. The central Great Plains, inland agro-pastoral transition zones, and parts of the southeastern United States also experienced below-average precipitation, mostly within −30% to −10%. Above-average precipitation occurred in the northern Great Lakes region and some high-latitude areas of the northern Great Plains, locally reaching +10% to +30% or above. Temperature anomalies were particularly prominent: large parts of the central, western, and southern regions were significantly warmer than average, with most areas recording temperature anomalies of +0.5°C to +1.5°C, and parts of the Plains and Southwest exceeding +1.5°C. Some northern and northeastern high-latitude areas were cooler than average or close to normal. The combination of warm and dry conditions accelerated the depletion of antecedent soil moisture in the southern Great Plains and southwestern United States, raising the risk of moisture stress during the green-up to jointing stages of winter wheat. If spring precipitation remains below average, drought may further expand and affect spring sowing operations and pasture recovery.</p><p><br/></p><p><strong>South America</strong></p><p>Precipitation in South America showed clear regional variation. Below-average rainfall occurred in the central-western tropical interior and some southern agricultural areas, with anomalies mostly ranging from −30% to −10%, and locally below −30%. Above-average precipitation was observed along the eastern coast and in parts of the eastern tropical region, locally exceeding +30%. In the Southern Cone agricultural areas, precipitation was mostly close to average to below average, with evident deficits in the southeast. Temperatures were mostly close to normal, generally within −0.5°C to +0.5°C. Localized inland areas were slightly cooler, while western mountainous areas and parts of the south showed cool anomalies of −1.5°C to −0.5°C. Overall, no widespread significant cold or warm anomalies occurred in South America, and agrometeorological risks mainly originated from insufficient precipitation. In central-western Brazil and parts of the Southern Cone, attention should be paid to changes in moisture conditions during grain filling, maturity, and harvest. In the wetter eastern coastal areas, rainfall-related impacts on harvest progress and field operations should be monitored.</p><p><br/></p><p><strong>Caribbean</strong></p><p>Precipitation in the Caribbean showed large spatial variation. Some islands recorded significantly above-average rainfall, with local anomalies exceeding +30%. A few islands and nearby coastal areas had rainfall close to normal or slightly below average, but no large-scale continuous precipitation deficit formed. Temperature differentiation was also evident, with the western, southern, and northeastern areas slightly cooler than average, while the southeastern areas were slightly warmer.</p><p><br/></p><p><strong>Northeast Asia</strong></p><p>Precipitation in Northeast Asia showed marked spatial differentiation. Rainfall was generally below average in the middle and lower reaches of the Yangtze River and severely deficient in South China. In North China, most of Hebei, northern Henan, and areas along the Taihang Mountains recorded above to significantly above-average precipitation, with local anomalies exceeding +30%. Most of Shandong had precipitation close to normal, with localized slight deficits. The southern Huang-Huai region, Jianghuai region, and parts of the eastern coastal areas experienced below-average rainfall, mostly within −30% to −10%, and locally below −30%. In the high-latitude areas of Northeast China, precipitation was mostly close to average to above average, locally significantly above average, whereas Jilin, Liaoning, and the Korean Peninsula experienced significant precipitation deficits.</p><p>In terms of temperature, Northeast Asia also showed clear differentiation. Northern and inland high-latitude areas were markedly cooler than average, with temperature anomalies below −1.5°C in some areas. In mid- and low-latitude agricultural areas, temperatures were mostly close to normal to slightly warmer, with some areas ranging from +0.5°C to +1.5°C. Eastern coastal and island areas were generally normal to slightly warmer, while northeastern agricultural areas were mostly close to normal or slightly cooler. Overall, South China, the middle and lower Yangtze River region, and parts of the southern Huang-Huai to Jianghuai regions face risks of insufficient moisture. Attention should be paid to water supply for spring sowing, early rice transplanting, and late-stage winter wheat growth. Soil moisture improved significantly in some wetter areas of North China, but localized heavy rainfall may also affect field management. In Northeast China and the Korean Peninsula, where precipitation deficits occurred, spring soil moisture replenishment should be closely monitored.</p><p><br/></p><p><strong>Southeast Asia</strong></p><p>Precipitation on the Indochina Peninsula was markedly to severely below average, mostly within −30% to −10%, and below −30% in some areas. Rainfall across the Malay Archipelago and equatorial islands was mostly severely deficient, with only a few islands close to average or above average. Temperatures were mostly close to normal, with anomalies generally between −0.5°C and +0.5°C. Localized areas of the Indochina Peninsula were slightly warmer, reaching +0.5°C to +1.5°C in some places, while the southern islands were generally close to normal. Regional thermal conditions were generally stable, but precipitation deficits were widespread. Dry-season rice on the Indochina Peninsula and cash crops in the Malay Archipelago may face moisture stress. In the next monitoring period, particular attention should be paid to moisture reserves and irrigation support before the establishment of the southwest monsoon.</p><p><br/></p><p><strong>South Asia</strong></p><p>Most of South Asia experienced significant precipitation deficits. Rainfall in the northwestern, central, southern, and western plains of the subcontinent was generally severely below average, with anomalies mostly below −30%. In contrast, the lower Ganges Basin, northeastern mountainous areas, and some island regions recorded significantly above-average precipitation. Temperatures were generally close to normal to slightly warmer. Warming was more evident in the northwest and foothill regions, locally reaching +0.5°C to +1.5°C or higher, while most agricultural areas in the central and eastern regions remained within −0.5°C to +0.5°C. Overall, the region was broadly dry, with relatively favorable precipitation only in the east and some island areas. Rabi-season crops such as winter wheat and rapeseed in the northwest and central-western areas faced moisture stress during green-up, jointing, and the early grain-filling stage, increasing irrigation demand. In the wetter eastern areas, localized heavy rainfall may affect field management and disease occurrence.</p><p><br/></p><p><strong>Central Asia</strong></p><p>Precipitation in Central Asia showed localized differentiation. Rainfall was below average in the southern Turan Lowland and the northern foothills of the Pamirs, with anomalies of −30% to −10%. The northern Kazakh Uplands and the southern margin of Western Siberia were close to normal, while localized areas of the Fergana Valley were slightly wetter than average. Temperature anomalies showed a clear north-south contrast. Large parts of the north and central region were cooler than average, with temperature anomalies below −1.5°C in some areas, indicating strong cold anomalies. By contrast, southern foothill and lower-latitude areas were warmer than average, locally reaching +0.5°C to +1.5°C or above. Overall, Central Asia was a region of pronounced interaction between cold and warm anomalies, with cold anomalies dominating in the north. Cooler areas may experience slower accumulated temperature accumulation and delayed spring farming activities, while the drier southern foothill areas should monitor irrigation water availability and spring sowing soil moisture.</p><p><br/></p><p><strong>Western Europe</strong></p><p>Most of Western Europe recorded above-average precipitation. The western coast, areas around the Channel, and northern to western Iberia had precipitation anomalies mostly between +10% and +30%, locally exceeding +30%. Some central areas had precipitation close to normal or slightly below average. Temperatures were generally close to normal to slightly warmer, with western coastal areas, some plains, and peninsular areas mostly within +0.5°C to +1.5°C, while northern and inland marginal areas were locally slightly cooler. Overall, wet signals were evident in the west and southwest. Moisture conditions were favorable for the regrowth of winter crops, but in areas with excessive rainfall, attention should be paid to overly wet farmland, hindered field operations, and disease risks.</p><p><br/></p><p><strong>Eastern Europe</strong></p><p>Precipitation in Eastern Europe showed significant spatial differentiation. Overall, rainfall was below average, but internal differences were large. In the central-western part of European Russia, especially the Central Black Earth region and surrounding areas, precipitation was severely below average, with anomalies below −30%, forming the most prominent deficit core in the region. Along the Baltic coast, in Poland, and in parts of Central Europe, precipitation was below average, mostly within −30% to −10%. The northern coast of the Black Sea, including southern Ukraine and Moldova, was generally dry, with anomalies mostly between −10% and −30%. The northwestern Caspian region and the North Caucasus also experienced significantly below-average precipitation, locally below −30%, forming another dry center. Localized areas in northern Eastern Europe and parts of the southeastern Balkans had precipitation close to normal.</p><p>In terms of temperature, Eastern Europe was mainly cooler than average, especially in the north and east, where cold anomalies were pronounced and temperature anomalies fell below −1.5°C in some areas. Localized central and southern areas ranged from −1.5°C to −0.5°C, indicating a broad influence of cold air. Overall, central-western Russia, the North Caucasus, and the northern Black Sea region formed a continuous precipitation deficit belt, while cooler conditions may delay winter wheat green-up and spring accumulated temperature accumulation. The combination of cool and dry conditions will increase uncertainty for spring recovery growth in some major producing areas of Eastern Europe.</p><p><br/></p><p><strong>Mediterranean Region</strong></p><p>Precipitation in the Mediterranean region was generally above average. The pattern was characterized by wetter-than-average conditions in many areas of the western, central, and northern eastern Mediterranean, while areas around the Aegean Sea and the southern Balkans were close to normal. Along the western Mediterranean coast, most of the Iberian Peninsula, and northwestern North Africa, precipitation was clearly above average, locally exceeding +30%. In the central Mediterranean, the Apennine Peninsula, surrounding islands, and the central-western coast of North Africa generally recorded above-average rainfall, mostly between +10% and +30%. Around the Aegean Sea, the southern Balkans, and some islands, precipitation was broadly close to normal, with localized slight surpluses or deficits. Along the northern coast of the eastern Mediterranean, especially the southern coast of Anatolia, precipitation was most prominently above average, locally exceeding +30%. Northern Levant and parts of the eastern Mediterranean coast also showed above-average rainfall signals.</p><p>Temperatures were generally close to normal to slightly warmer. Western and central coastal areas were mostly within −0.5°C to +0.5°C or +0.5°C to +1.5°C, while localized eastern areas were slightly cooler. Overall, wet conditions covered a broad area of the Mediterranean, with wet centers mainly located in the Iberian Peninsula, northwestern North Africa, the central Mediterranean, and the southern coast of Anatolia. Moisture conditions were generally favorable for winter crop growth and soil moisture improvement, but locally excessive precipitation may increase the risks of waterlogging, disease, and delays in field operations.</p><p><br/></p><p><strong>Oceania</strong></p><p>Precipitation differences in Oceania were pronounced. Southwestern Australia, southeastern islands, and eastern Australia experienced below to significantly below-average rainfall, locally below −30%. Localized areas along the northeastern and southern coasts recorded above-average precipitation, with some areas exceeding +30%. Most of New Zealand had precipitation above average or close to normal. Temperatures were mostly close to normal. Eastern and southeastern areas were locally slightly warmer, with anomalies mostly between +0.5°C and +1.5°C. Parts of western and southern Australia were close to normal, with localized slight cooling. Overall, moisture deficits in eastern and southwestern Australia remained the main agrometeorological risk. Attention should be paid to pasture recovery, dryland crop growth, and changes in soil moisture. Moisture conditions were relatively favorable in New Zealand and localized wetter areas.</p><p><br/></p><p style="line-height: 26px; font-size: 16px; font-family: Arial, sans-serif; background: white; vertical-align: baseline; text-align: center;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;"><img src="http://cloud.cropwatch.com.cn/profile/upload/2026/04/26/Global_Departure_Map_environment_district_1_rainfall_departure_percent_2026_P2_20260426093416A283.png" width="400" height="169" border="0" vspace="0" alt="" style="width: 400px; height: 169px;"/><strong style="font-family: Arial, sans-serif; font-size: 19px;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;"><img src="http://cloud.cropwatch.com.cn/profile/upload/2026/04/26/Global_Departure_Map_environment_district_1_air_temperature_departure_2026_P2_20260426093416A280.png" width="400" height="169" border="0" vspace="0" alt="" style="width: 400px; height: 169px;"/></span></strong><strong style="font-family: Arial, sans-serif; font-size: 19px;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;"><strong><img src="http://cloud.cropwatch.com.cn/profile/upload/2026/04/26/Global_Departure_Map_environment_district_1_radpar_departure_percent_2026_P2_20260426093416A282.png" width="400" height="169" border="0" vspace="0" alt="" style="width: 400px; height: 169px;"/></strong></span></strong><strong style="font-family: Arial, sans-serif; font-size: 19px;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;"><img src="http://cloud.cropwatch.com.cn/profile/upload/2026/04/26/Global_Departure_Map_environment_district_1_biomass_departure_percent_2026_P2_20260426093416A281.png" width="400" height="169" border="0" vspace="0" alt="" style="width: 400px; height: 169px;"/></span></strong></span></p><p style="line-height: 24px; font-size: 16px; font-family: Arial, sans-serif; text-align: center;"><strong><span style="font-family: arial, helvetica, sans-serif;">Figure 1.1</span></strong><span style="font-family: arial, helvetica, sans-serif;"> Departure Anomalies of Global Agrometeorological Indicators from the 15-Year Average, January–March 2026: Cumulative Precipitation, Average Temperature, Photosynthetically Active Radiation, and Potential Biomass</span></p><p style="line-height: 24px; font-size: 16px; font-family: Arial, sans-serif;"><strong style="font-family: sans-serif;"><span style="font-family: arial, helvetica, sans-serif;"><br/></span></strong></p><p style="line-height: 24px; font-size: 16px; font-family: Arial, sans-serif;"><strong style="font-family: sans-serif;"><span style="font-family: arial, helvetica, sans-serif;">1.1.2 Global Agrometeorological Stress</span></strong></p><p><strong>Global croplands experienced overall drier-than-average conditions</strong></p><p>Based on root-zone soil moisture monitoring, global soil moisture anomalies showed an improving trend from February to March 2026. However, drought conditions in a large proportion of regions, accounting for about 45% of the global area, only improved slightly. Clear recovery was observed in eastern Brazil in South America, eastern Africa, and southeastern Australia (Figure 1.2a). Global soil moisture anomalies in March 2026 showed that, except for the Huang-Huai-Hai region of China, Spain, eastern Africa, eastern Brazil, and localized areas of southeastern Australia, soil moisture remained in deficit across more than half of the global land area. Drought conditions were relatively severe in parts of Eastern Europe and the southeastern United States (Figure 1.2b). CropWatch monitoring indicates that from January to March 2026, global water stress in cropland generally followed an evolution pattern of “initial intensification followed by mitigation” (Figure 1.3). The global cropland stress level reached its peak in mid-to-late February, with an intensity approximately equivalent to a 3.6-year return period. Crop water stress risks showed marked regional differentiation. Low-risk areas with a return period of less than 2 years were mainly concentrated in central Europe, India, eastern Brazil, and eastern Africa. High-risk areas with a return period of 10 years or more were scattered in localized regions of the southeastern United States, northwestern China, Central Asia, and Iran (Figure 1.4b). Subsequently, the situation tended to ease. By the end of March, the global level had recovered to approximately a 2.4-year return period. High-risk areas with a return period of 10 years or more shifted northward in the interior of Asia and North America (Figure 1.4c). As crops in these regions had not yet entered the growing season in late March, close attention should be paid to the persistence of low pre-sowing soil moisture in these areas.</p><p><br/></p><p style="text-align: center;"><img src="http://cloud.cropwatch.com.cn//profile/avatar/2026/04/20/soil_moisture_departure_recovery_20260420162851A245.png" alt="soil_moisture_departure_recovery.png" width="808" height="356" style="width: 808px; height: 356.764px;"/></p><p style="text-align: center;"><span style="color: #323232; font-family: arial, helvetica, sans-serif; font-size: 15px; text-align: center; background-color: #FFFFFF;">(a) Changes in root-zone soil moisture anomalies from February to March 2026</span></p><p style="text-align: center;"><span style="color: #323232; font-family: arial, helvetica, sans-serif; font-size: 15px; text-align: center; background-color: #FFFFFF;"><img src="http://cloud.cropwatch.com.cn//profile/avatar/2026/04/20/soil_moisture_departure_20260420162917A246.png" alt="soil_moisture_departure.png" width="811" height="358" style="width: 811px; height: 358.089px;"/></span></p><p style="text-align: center;"><span style="color: #323232; font-size: 15px; text-align: center; background-color: #FFFFFF; font-family: arial, helvetica, sans-serif;">(b) Root-zone soil moisture anomalies in March 2026</span></p><p style="text-align: center;"><strong>Figure 1.2</strong> Global Cropland Root-Zone Soil Moisture Anomalies Relative to the 2010–2025 Multi-Year Average</p><p style="text-align: center;"><span style="color: #323232; font-size: 15px; text-align: center; background-color: #FFFFFF; font-family: arial, helvetica, sans-serif;"><img src="http://cloud.cropwatch.com.cn//profile/avatar/2026/04/29/image_20260429110608A340.png" alt="image.png" width="732" height="354" style="width: 732px; height: 354.944px;"/></span></p><p style="text-align: center;"><strong>Figure 1.3&nbsp;&nbsp;</strong>Proportion<strong><strong>&nbsp;</strong></strong>Changes of Crop Water Stress Risk in croplands across Global Agro-Ecological Zones</p><p><br/></p><p style="text-align: center;"><span style="color: #323232; font-size: 15px; text-align: center; background-color: #FFFFFF; font-family: arial, helvetica, sans-serif;"><br/></span></p><p style="text-align: center;"><img src="http://cloud.cropwatch.com.cn//profile/avatar/2026/04/20/Global_CWSI_Risk_Map_2026_P33_20260420212035A249.png" alt="Global_CWSI_Risk_Map_2026_P33.png" width="792" height="350" style="width: 792px; height: 350.287px;"/></p><p style="text-align: center;"><span style="font-family: arial, helvetica, sans-serif;">(a) February 2–9, 2026</span></p><p style="text-align: center;"><img src="http://cloud.cropwatch.com.cn//profile/avatar/2026/04/21/Global_CWSI_Risk_Map_2026_P49_20260421121849A253.png" alt="Global_CWSI_Risk_Map_2026_P49.png" width="791" height="349" style="width: 791px; height: 349.845px;"/></p><p style="text-align: center;"><span style="font-family: arial, helvetica, sans-serif;">(b) February 18–25, 2026</span></p><p style="text-align: center;"><img src="http://cloud.cropwatch.com.cn//profile/avatar/2026/04/20/Global_CWSI_Risk_Map_2026_P81_20260420204857A247.png" alt="Global_CWSI_Risk_Map_2026_P81.png" width="804" height="355" style="width: 804px; height: 355.595px;"/></p><p style="text-align: center;"><span style="font-family: arial, helvetica, sans-serif;">(c) March 22–29, 2026</span></p><p style="text-align: center;">Figure 1.4 Spatial pattern of Global Cropland Water Stress Risk across Agro-Ecological Zones</p><p><span style="font-family: arial, helvetica, sans-serif;"></span></p><h3 id="heading-9c3b6be7-fa9e-4b7a-9822-39a21f8deb12--cropland-temperatures-were-above-average-in-many-regions-in-march-2026-0" style="box-sizing: border-box; border: 0px solid oklch(0.92 0.004 286.32); margin: 1.5em 0px 1em; padding: 0px; outline-color: oklab(0.705 0.00415142 -0.0144141 / 0.5); font-size: 1.2em; -webkit-tap-highlight-color: transparent; line-height: 1.3; font-family: &quot;&quot;, &quot;Twemoji Country Flags&quot;, Ubuntu, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, system-ui, Roboto, Oxygen, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; background-color: rgb(255, 255, 255);">Above-average temperatures across croplands in March 2026</h3><p node="[object Object]">According to a bulletin released by the Copernicus Climate Change Service of the European Union, the global mean sea surface temperature in March 2026 reached the second-highest level on record for the same period (<a href="https://climate.copernicus.eu/" target="_blank" rel="noreferrer" aria-describedby="_r_7jc_">https://climate.copernicus.eu/</a>). Data released by the U.S. National Oceanic and Atmospheric Administration also showed that the contiguous United States experienced its warmest March on record (<a href="https://www.ncei.noaa.gov/news/national-climate-202603" target="_blank" rel="noreferrer" aria-describedby="_r_7je_">https://www.ncei.noaa.gov/news/national-climate-202603</a>). Based on monitoring of the Temperature Condition Index (TCI) for cropland (Figure 1.5), the share of global cropland affected by high-temperature stress, defined as TCI ≤ 40, reached 48.8% in March 2026. This represents a significant increase of 5.89 percentage points from the 42.91% reported in January, indicating that the area affected by high-temperature stress continued to expand across global croplands. The TCI pattern in March showed clear latitudinal zonality and differences in land-sea response. Areas severely affected by high-temperature stress were mainly concentrated in the mid- and high-latitude regions of the Northern Hemisphere, including the central-western United States, most of Europe, and eastern and northern Asia, as well as in the Southern Hemisphere, including central-southern South America and southern Australia. By contrast, temperatures were lower than in previous years in eastern Africa, the Indian subcontinent, the Philippine Islands, and high-latitude areas of northern North America.</p><p><br/></p><p style="text-align: center;"><img src="http://cloud.cropwatch.com.cn//profile/avatar/2026/04/28/TCI_march_nan_20260428112149A319.png" alt="TCI_march_nan.png" width="1011" height="446" style="width: 1011px; height: 446.397px;"/></p><p style="text-align: center;"><span style="color: #323232; font-family: arial, helvetica, sans-serif; font-size: 16px; text-align: center; text-indent: 30px; background-color: #FFFFFF;"><strong style="box-sizing: border-box; font-weight: bold; border: 0px solid oklch(0.92 0.004 286.32); margin: 0px; padding: 0px; outline-color: oklab(0.705 0.00415142 -0.0144141 / 0.5); -webkit-tap-highlight-color: transparent; font-family: &quot;&quot;, &quot;Twemoji Country Flags&quot;, Ubuntu, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, system-ui, Roboto, Oxygen, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; white-space: pre-wrap; background-color: rgb(255, 255, 255);">Figure 1.5 Global Cropland Temperature Condition Index in March 2026</strong></span></p><p><span style="font-family: arial, helvetica, sans-serif;"></span></p><h3 id="heading-9c3b6be7-fa9e-4b7a-9822-39a21f8deb12--low-water-levels-in-some-reservoirs-began-to-recover-0" style="box-sizing: border-box; border: 0px solid oklch(0.92 0.004 286.32); margin: 1.5em 0px 1em; padding: 0px; outline-color: oklab(0.705 0.00415142 -0.0144141 / 0.5); font-size: 1.2em; -webkit-tap-highlight-color: transparent; line-height: 1.3; font-family: &quot;&quot;, &quot;Twemoji Country Flags&quot;, Ubuntu, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, system-ui, Roboto, Oxygen, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; background-color: rgb(255, 255, 255);">Low water levels in some reservoirs began to recover</h3><p node="[object Object]">According to reservoir water level data from DAHITI satellite altimetry for January–March 2026 (Figure 1.6), water shortages in Central Asia, such as the Toktogul Reservoir in Kyrgyzstan, and in Europe, such as the Söse Reservoir in Germany and the Kurakhove Reservoir in Ukraine, continued to intensify or remained near low points, indicating a high drought risk. In North America, the Sam Rayburn Reservoir in the United States, and in the Middle East, the Doroudzan Reservoir in Iran, showed signs of marginal improvement, with water levels rebounding slightly at the beginning of the year, although they remained below historical averages overall. In addition, the water level of the Pires Ferreira Reservoir in Brazil, South America, stabilized with low-level fluctuations, while the Jebba Reservoir in Nigeria, Africa, shifted from positive to negative anomalies at the beginning of the year and entered a water-deficit stage. The current pattern suggests that agricultural and ecological water-use pressures will be relatively prominent in parts of Central Asia and Europe in spring 2026.</p><p style="text-align: center;"><img src="http://cloud.cropwatch.com.cn//profile/avatar/2026/04/21/%E6%B0%B4%E5%BA%93%E7%BB%BC%E5%90%88_20260421091626A252.jpg" alt="水库综合.jpg" width="896" height="423" style="width: 896px; height: 423.921px;"/></p><p><span style="color: #323232; font-size: 15px; text-align: center; background-color: #FFFFFF; font-family: arial, helvetica, sans-serif;"><strong style="box-sizing: border-box; font-weight: bold; border: 0px solid oklch(0.92 0.004 286.32); margin: 0px; padding: 0px; outline-color: oklab(0.705 0.00415142 -0.0144141 / 0.5); -webkit-tap-highlight-color: transparent; font-family: &quot;&quot;, &quot;Twemoji Country Flags&quot;, Ubuntu, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, system-ui, Roboto, Oxygen, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; white-space: pre-wrap; background-color: rgb(255, 255, 255);">Figure 1.6 Remote-Sensing Monitoring of Water Level Anomalies in Typical Global Reservoirs, January–March 2026 (Relative to the 2020–2025 Multi-Year Average)</strong></span></p><p style="line-height: 26px; font-size: 16px; font-family: Arial, sans-serif; background: white; vertical-align: baseline;"><br/></p><p style="line-height: 26px; font-size: 16px; font-family: Arial, sans-serif; background: white; vertical-align: baseline;"><span style="font-size: 18px;"><strong><span style="font-family: &quot;&quot;, Ubuntu, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, system-ui, Roboto, Oxygen, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; white-space-collapse: preserve;">1.1.3 Global Crop Production Situation</span></strong></span></p><p>January to March 2026 coincided with the grain-filling, maturity, and harvest stages of soybean and maize in major producing areas of the Southern Hemisphere, as well as the key overwintering to green-up period for winter wheat in the Northern Hemisphere. Based on the integrated assessment of CroPI-1, global crop production conditions generally remained around the baseline, but spatial differentiation was significant. The global pattern showed a “patchy mosaic structure,” with high-value and low-value areas interlaced. The degree of spatial heterogeneity was among the most prominent observed in recent monitoring periods (Figure 1.8). Historical comparison of the CroPI-1 time series for the same period shows that the global CroPI from January to March 2026 was 1.00, exactly at the baseline and at a relatively low level for the past five years. The Northern Hemisphere CroPI was 0.98, reaching the lower limit of the normal range, while the Southern Hemisphere CroPI was 1.03 and the tropical zone CroPI was 1.02, both located in the upper part of the normal range (Figure 1.7). Compared with the historical average and the previous monitoring period, current conditions fluctuated slightly downward overall, shifting from a relatively balanced pattern in the previous period to a highly fragmented pattern characterized by “significantly favorable conditions in Southeast Asia and the equatorial belt, alongside multiple low-value corridors in the subtropics.”</p><p style="line-height: 26px; font-size: 16px; font-family: Arial, sans-serif; background: white; vertical-align: baseline;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;"><span style="font-family: &quot;&quot;, Ubuntu, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, system-ui, Roboto, Oxygen, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; white-space-collapse: preserve;"></span></span></p><p style="line-height: 26px; font-size: 16px; font-family: Arial, sans-serif; background: white; vertical-align: baseline; text-align: center;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;"><img src="http://cloud.cropwatch.com.cn//profile/avatar/2026/04/29/image_20260429131622A347.png" alt="image.png" width="576" height="343" style="width: 576px; height: 343.491px;"/></span></p><p style="text-align: center;"><span style="color: #323232; font-family: -apple-system, &quot;system-ui&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, Arial, Roboto, &quot;PingFang SC&quot;, miui, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei&quot;, sans-serif; font-size: 15px; text-align: center; background-color: #FFFFFF;">Figure 1.7 Time Series of Global and Regional CroPI-1, January–March, 2021–2026</span></p><p style="line-height: 26px; font-size: 16px; font-family: Arial, sans-serif; background: white; vertical-align: baseline; text-indent: 2em; text-align: center;"><span style="font-family: arial, helvetica, sans-serif; font-size: 14px;"><img src="http://cloud.cropwatch.com.cn/profile/upload/2026/04/26/CroPIDistribution2026P2_20260426093416A279.jpg" width="500"/></span></p><p style="text-align: center;"><span style="color: #323232; font-family: -apple-system, &quot;system-ui&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, Arial, Roboto, &quot;PingFang SC&quot;, miui, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei&quot;, sans-serif; font-size: 15px; text-align: center; background-color: #FFFFFF;">Figure 1.8 Global Spatial Distribution of CroPI-1, January–March 2026</span></p><p><span style="color: #323232; font-family: -apple-system, &quot;system-ui&quot;, &quot;Helvetica Neue&quot;, Helvetica, &quot;Segoe UI&quot;, Arial, Roboto, &quot;PingFang SC&quot;, miui, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei&quot;, sans-serif; font-size: 15px; text-align: center; background-color: #FFFFFF;"><br/></span></p><p><strong>East Africa: Local differentiation, with favorable conditions in humid belts and pressure in short-rainfall-season areas</strong></p><p>CroPI-1 in East Africa showed clear spatial differentiation. In the Ethiopian Highlands and some agricultural areas of Kenya and Tanzania, CroPI-1 mostly ranged between 0.85 and 1.05, indicating overall near-normal conditions. However, low-value patches of 0.75–0.85 occurred in parts of Kenya and Ethiopia. In the Great Lakes region and parts of equatorial East Africa, CroPI conditions were relatively favorable, locally reaching 1.05–1.25. Overall, food production conditions in East Africa were mainly normal, but local instability was evident. Below-average areas may be associated with impeded field operations, insufficient sunlight, and localized wet damage caused by excessive rainfall, while favorable areas reflected the support provided by improved moisture conditions for crop and pasture growth.</p><p><br/></p><p><strong>West Africa and the Sahel: Patchy mosaic pattern, with localized pressure in the Sahel belt</strong></p><p>CroPI-1 in West Africa and the Sahel displayed a pronounced patchy distribution. Southern coastal areas and some northern marginal areas were generally favorable, mostly ranging from 0.95 to 1.15, and locally exceeding 1.15. However, many low-value patches of 0.75–0.95 appeared in the western and central Sahel belt and in the inland transition zones of the Gulf of Guinea, with local values below 0.75. The region did not show a simple north-south gradient, but rather an interlaced mosaic of high- and low-value areas. Locally low CroPI values in the Sahel were related to earlier precipitation deficits and insufficient soil moisture reserves. If the subsequent rainy season starts late, risks to spring sowing and early crop growth may increase.</p><p><br/></p><p><strong>Southern Africa: Stable conditions in the central-eastern region and weaker conditions along the southern margins</strong></p><p>CroPI-1 varied considerably across Southern Africa. In central-eastern agricultural areas, including Zambia, Zimbabwe, Mozambique, and Malawi, CroPI was mainly between 0.95 and 1.15, locally reaching 1.15–1.25, indicating relatively favorable production conditions. In contrast, parts of the grain-producing areas in eastern and southern South Africa, areas around Lesotho, and parts of Madagascar recorded lower CroPI values, mostly between 0.75 and 0.95, and locally below 0.75. Overall, Southern Africa showed a pattern of “relatively stable or favorable conditions in the central-eastern areas and locally weaker conditions in the southern and southwestern areas.” Low-value areas in the south and southwest were mainly associated with episodic moisture shortages, and attention should be paid to yield formation during crop maturity and harvest.</p><p><br/></p><p><strong>North America: Deep pressure in the central-southern region, with localized resilience in the north</strong></p><p>North America was one of the regions with the most concentrated low CroPI-1 values during this monitoring period. CroPI values were significantly below average in the southern Great Plains, southern inland areas of the United States, and northern Mexico, mostly ranging from 0.50 to 0.85. Local values fell below 0.75 in parts of Texas, Oklahoma, Kansas, and northern Mexico. In the central Great Plains, inland agro-pastoral transition zones, and parts of the southeastern United States, CroPI values were also mostly between 0.75 and 0.95, indicating that winter wheat green-up and early spring crop growth were somewhat suppressed. In contrast, CroPI was higher in the northwestern United States, southwestern Canada, and parts of the northern Great Lakes region, locally reaching 1.15–1.50. The Canadian Prairie Provinces were generally close to normal, mostly ranging from 0.95 to 1.15. Low CroPI values in south-central North America were mainly associated with compound warm-dry stress caused by precipitation deficits combined with warmer-than-average temperatures. If spring precipitation remains insufficient, risks to winter wheat during the green-up to jointing stages and to subsequent spring sowing operations in the U.S. Great Plains will remain high.</p><p><br/></p><p><strong>South America: Major producing areas generally stable, with local differentiation in southern Brazil and the Southern Cone</strong></p><p>CroPI-1 in South America was generally within the normal to slightly favorable range. In the main soybean and maize producing areas of central-western Brazil, CroPI was mostly between 0.95 and 1.05, indicating overall near-normal conditions, although slight negative anomalies of 0.85–0.95 occurred locally. However, conditions were weaker in southern Brazil, especially in Mato Grosso do Sul and Paraná, where CroPI in some agricultural areas declined to 0.75–0.95, indicating some suppression of crop production. In the Argentine Pampas, CroPI generally remained between 0.95 and 1.15. Conditions were favorable in parts of the northern and central Pampas, while localized areas in the south and southeast, especially Buenos Aires, declined to 0.85–0.95. Uruguay and Paraguay were generally close to normal, with localized favorable conditions.</p><p>Overall, food production conditions in South America remained mainly normal to slightly favorable, but the negative signal in southern Brazil was relatively prominent. Mato Grosso do Sul and Paraná require particular attention regarding crop conditions during late grain filling, maturity, and harvest. Mild downside risks were also present in the southern and southeastern Argentine Pampas.</p><p><br/></p><p><strong>Caribbean: Overall stable, with slight local fluctuations</strong></p><p>CroPI-1 in the Caribbean generally remained at a normal level. Most islands were within the range of 0.95–1.15, while some islands and coastal agricultural areas exceeded 1.15, indicating generally favorable regional production conditions. Slightly low-value areas of 0.85–0.95 occurred on some northwestern and northern islands, but the extent was limited and no continuous low-value belt formed. Overall, crop production conditions in the Caribbean were relatively stable. In localized low-value areas, attention should be paid to short-term impacts caused by excessive moisture or impeded field operations.</p><p><br/></p><p><strong>Northeast Asia: Significant north-south differentiation, with localized pressure in North China and the Huang-Huai region</strong></p><p>CroPI-1 in Northeast Asia showed pronounced spatial differentiation. High-latitude areas of Northeast China and some agricultural areas of Japan generally performed well, mostly ranging from 1.05 to 1.25, and locally exceeding 1.25. However, low-value areas of 0.85–0.95 and even 0.75–0.85 occurred in Jilin, Liaoning, and parts of the Korean Peninsula. CroPI conditions varied considerably in the North China–Huang-Huai-Hai agricultural region. In Hebei, northern Henan, and parts of the areas along the Taihang Mountains, CroPI was close to normal or slightly favorable. By contrast, CroPI was lower in the southern Huang-Huai region, Jianghuai region, and parts of the eastern coastal areas, mostly between 0.75 and 0.95, and locally below 0.75. In the middle and lower reaches of the Yangtze River and parts of South China, CroPI mostly ranged from 0.85 to 1.05, indicating normal-to-weak or slightly below-average conditions.</p><p>Overall, production conditions in Northeast Asia showed a pattern of “favorable conditions in high-latitude areas and localized coastal regions, but weaker conditions in parts of North China, Huang-Huai, and Jianghuai.” Low CroPI areas in North China, Huang-Huai, and Jianghuai were mainly related to episodic moisture shortages. Attention should be paid to water supply for winter wheat green-up, rapeseed growth, and early spring crops.</p><p><br/></p><p>Southeast Asia: Peninsula-island differentiation, with marked pressure on the Indochina Peninsula</p><p>CroPI-1 in Southeast Asia showed a pattern of “pressure on the Indochina Peninsula and relatively favorable conditions in island areas.” In Thailand, eastern Myanmar, Laos, and parts of Vietnam, CroPI values were relatively low, mostly between 0.75 and 0.95. In northeastern Thailand, localized areas of Laos, and some agricultural areas of Myanmar, CroPI declined to 0.50–0.75. Central and southern Vietnam and parts of Cambodia mostly ranged from 0.95 to 1.05, close to normal. The Malay Archipelago and the Philippines generally performed better, with CroPI in parts of Sumatra, Kalimantan, Java, and the Philippines mostly between 1.00 and 1.25, and locally exceeding 1.25. Low-value areas on the Indochina Peninsula were closely related to episodic precipitation deficits, which suppressed dry-season rice and upland crop production to some extent. Although CroPI in island areas was mostly normal to favorable at present, cash crops and seasonal crops will still require monitoring if low rainfall persists.</p><p><br/></p><p><strong>South Asia: Severe regional differentiation</strong></p><p>CroPI-1 in northern India and Pakistan was mostly between 0.75 and 0.85, locally declining to 0.50–0.75. This was directly related to compound stress from severe precipitation deficits below −30%, above-average temperatures, and low PAR, which significantly suppressed winter wheat growth during the Rabi-season green-up to jointing stages. In central and southern India, CroPI-1 ranged from 0.85 to 0.95, while Bangladesh remained within the normal range of 0.95–1.05.</p><p><br/></p><p><strong>Central Asia: Significant differentiation in inland agricultural areas, with locally weaker conditions in foothill oases and basin farming zones</strong></p><p>CroPI-1 in Central Asia showed clear spatial differentiation, with interlaced high- and low-value areas. In northern and northwestern Kazakhstan, some agricultural areas were mostly within 0.95–1.15, generally close to normal. In south-central Kazakhstan, some oasis areas of Uzbekistan, and foothill and basin agricultural areas around the border areas of Kyrgyzstan and Tajikistan, CroPI was lower, mostly between 0.75 and 0.95, and locally below 0.75. Southwestern Central Asia also showed obvious differences. The southern Turkmenistan–northeastern Iran foothill belt had relatively favorable CroPI, mostly between 1.05 and 1.25. In contrast, western Iran, eastern Iraq, and parts of the Mesopotamian agricultural areas were lower, mostly between 0.75 and 0.95. Agricultural areas along the western Caspian coast and parts of the Transcaucasus generally performed well. Overall, the region showed a pattern of “normal conditions in the north, weaker conditions in foothill oases and basin areas, and localized favorable conditions in the southwest.” Attention should be paid to spring sowing soil moisture, irrigation water availability, and the impact of cool conditions on accumulated temperature.</p><p><br/></p><p><strong>Western Europe: Improved moisture conditions and favorable winter crop growth</strong></p><p>CroPI-1 in Western Europe was generally within the normal to favorable range. Major agricultural areas in France, Germany, the Low Countries, and southern Britain mostly ranged from 1.05 to 1.25, locally exceeding 1.25, indicating favorable regrowth of winter crops. High-value patches were relatively continuous in northern and central France, western Germany, and the Low Countries, reflecting the support provided by moisture conditions for overwintering crops such as winter wheat and rapeseed. In the United Kingdom, Ireland, and coastal agricultural areas, CroPI mostly ranged from 0.95 to 1.15, indicating conditions close to normal to favorable. Only a few inland and mountain-margin agricultural areas were slightly lower, but the affected area was limited. Overall, production conditions in Western Europe were stable and favorable. However, in areas with excessive rainfall, attention should still be paid to overly wet farmland, delayed field operations, and disease risks.</p><p><br/></p><p><strong>Eastern Europe: Stable conditions around the Black Sea, with pressure in northern high-latitude areas</strong></p><p>CroPI-1 in Eastern Europe showed a clear north-south contrast. Agricultural areas along the western and southern northern Black Sea coast, western and southern Ukraine, Moldova, Romania, and Bulgaria generally showed favorable CroPI values, mostly between 0.95 and 1.15, and locally reaching 1.15–1.25, indicating relatively stable production conditions for overwintering crops such as winter wheat. By contrast, northern Eastern Europe, the Baltic coastal areas, Belarus, and central-western agricultural areas of European Russia had lower CroPI values, mostly between 0.75 and 0.95, and locally below 0.75. High-latitude agricultural areas of Northern Europe were also generally weak. Overall, Eastern Europe showed a pattern of “better conditions around the Black Sea and in parts of the Balkans, but weaker conditions in the north and in European Russia.” In low-value areas, attention should be paid to spring accumulated temperature recovery, the quality of overwintering crop green-up, and subsequent soil moisture replenishment.</p><p><br/></p><p><strong>Mediterranean Region: Favorable conditions in the west and southern coast, with localized pressure in peninsular areas</strong></p><p>CroPI-1 in the Mediterranean region showed clear differentiation. Along the western Mediterranean coast, in southern and eastern Iberia, northern Morocco, northern Algeria, and parts of Tunisia, conditions were generally favorable, mostly ranging from 1.05 to 1.25, and locally exceeding 1.25. However, parts of Portugal and western Spain were slightly lower, mostly between 0.85 and 1.00. Weak conditions were more evident in the central Mediterranean, where the Italian Peninsula and surrounding agricultural areas mostly ranged from 0.75 to 0.95, and locally below 0.75. The Greek Peninsula and areas around the Aegean Sea were also mostly between 0.85 and 0.95. In the eastern Mediterranean, the southern coast of Türkiye performed well, mostly ranging from 1.05 to 1.25. The Nile Delta and some plain agricultural areas were slightly lower, mostly between 0.85 and 1.00. Overall, the region showed a pattern of “favorable conditions in the west and northwestern North Africa, but locally weaker conditions in Italy, Greece, and the Nile Plain.” Attention should be paid to the impacts of wet damage, insufficient radiation, or episodic moisture stress.</p><p><br/></p><p><strong>Oceania: Pressure in the east, stability in the west</strong></p><p>In Oceania, low CroPI-1 values were most evident in eastern Australia. Southern Queensland, northern New South Wales, and eastern coastal agro-pastoral areas mostly ranged from 0.75 to 0.95, locally below 0.75, indicating that pasture recovery, dryland crop growth, and soil moisture conditions were suppressed. In the southeastern Australian grain belt, including southern New South Wales, Victoria, and parts of South Australia, CroPI mostly ranged from 0.95 to 1.05, indicating generally stable conditions. Major agricultural areas in Western Australia mostly ranged from 0.95 to 1.15, performing better than the east. Most agricultural areas in New Zealand were within 0.95–1.15, locally exceeding 1.15, with no widespread continuous low-value areas observed. Overall, Oceania showed a pattern of “pressure in eastern Australia, stable conditions in the south and west, and steady conditions in New Zealand.” Attention should be paid to soil moisture replenishment in eastern Australia and changes in soil moisture before autumn sowing.</p><p><br/></p><p><br/></p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+	<footer>
+		<div class="layui-container" style="padding: 4vh 0 4vh;">
+			<div class="df box">
+				<a href="" class="mt15">
+					<img src="/web/images/logo.webp" alt="">
+				</a>
+				<div class="w120 layui-hide-xs layui-show-md-block"></div>
+				<div class="white f1 mt15">
+					<h3>Contact Us</h3>
+					<p>Olympic Village Science Park, West Beichen Road, Chaoyang District, Beijing</p>
+					<p>+8610-64842375/6</p>
+					<p>+8610-64858721(Fax)</p>
+					<p>cropwatch@aircas.ac.cn</p>
+				</div>
+				<a href="" target="_blank" class="white mt15">
+					<div class="df aic jcc">
+						<img src="/web/images/icon-5.jpg" class="h56 w56 br-3xl" alt="">
+						<div class="w30"></div>
+						<img src="/web/images/icon-6.jpg" class="h56 w56 br-3xl" alt="">
+					</div>
+					<p class="mt10">中国科学院空天信息创新研究院(AIRCAS)</p>
+				</a>
+			</div>
+		</div>
+		<div class="beian">
+			<div class="layui-container df aic jcsb">
+				<span>Copyright © 2025 中国科学院空天信息创新研究院生态系统遥感研究室</span>
+				<!--<a class="white" href="https://beian.miit.gov.cn/" target="_blank">京ICP备05080539号-16</a>-->
+			</div>
+		</div>
+	</footer>
+
+    <script src="/web/js/jquery-2.1.1.min.js"></script>
+    <script src="/web/js/js.js"></script>
+    <script src="/web/layui-v2.8.11/layui.js"></script>
+    <script> var ctx = "\/"; var captchaType = null; </script>
+    <script>
+        var language = "en_US"
+        function showUl(is) {
+            $(is).toggleClass('open')
+        }
+
+        layui.use(function () {
+            const $ = layui.$;
+            const form = layui.form;
+            const layer = layui.layer;
+            const util = layui.util;
+
+            // 提交事件
+            form.on('submit(dingyue)', function (data) {
+                var field = data.field; // 获取表单字段值
+
+                let userName = data.field.username;
+                let email = data.field.email;
+                let org = data.field.company;
+                let lang = "en_US" ;
+                let sectionId = data.field.sectionId;
+
+                // let check = isEmail(email);
+                // // 验证通过
+                // if(!check){
+                //     layer.msg("请输入正确邮箱格式", { icon: 5, anim: 6 });
+                // }
+                $.ajax({
+                    type: "post",
+                    url: ctx + "web/webSubscribe/add",
+                    data: {"userName":userName,"email":email,"org":org,"type":2,"language":lang,"sectionId":sectionId},
+                    success: function(result) {
+                        if(result.code !=0){
+                            layer.msg(result.msg, { icon: 5, anim: 6 });
+                        }else{
+                            layer.msg("Subscribe Successfully", { icon: 6, anim: 6 });
+                            setTimeout(function(){
+                                layer.closeAll();
+                            },800)
+                        }
+                    }
+                });
+
+
+
+                // 此处可执行 Ajax 等操作
+                // …
+                return false; // 阻止默认 form 跳转
+            });
+
+            util.on('lay-on', {
+                "closeLayer": function () {
+                    layer.closeAll()
+                },
+                "showForm": function (othis) {
+                    var subscribe = "Subscribe";
+                    var Fill = "Fill In Your Information\uFF0CSubscribe To Receive Our Latest Newsletters And Other Information";
+                    var userName = "UserName";
+                    var pu = "Please Enter Your Username Or Email";
+                    var email = "Email";
+                    var Email = "Please Enter Email";
+                    var organization = "Organization";
+                    var Organization = "Please Enter Organization";
+                    console.log($(othis).parent().attr("data"))
+
+                        layer.open({
+                            type: 1,
+                            title: false,
+                            closeBtn: 0,
+                            skin: 'dingyue',
+                            //area: ['420px', '240px'], // 宽高
+                            content: `<div class="df jcfe p15">
+                                        <i class="layui-icon layui-icon-close fs18 cp" lay-on="closeLayer"></i>
+                                    </div>
+                                    <div class="box">
+                                        <div class="title">
+                                            <strong class="fs16">${subscribe}</strong>
+                                            <p class="fs13 c5 mt10 mb15" id="sectionName" style="text-align: center"></p>
+                                            <p class="fs13 c5 mt10 mb15">${Fill}</p>
+                                        </div>
+                                        <form class="layui-form">
+                                            <div class="login-container">
+                                                <div class="layui-form-item mb20">
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="username" id="username" value="" lay-verify="required" placeholder="${userName}"
+                                                            lay-reqtext="${pu}"  autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item mb20">
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="email" id="email" value="" lay-verify="email|required" placeholder="${email}"
+                                                            lay-reqtext="${Email}"  autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item mb20">
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="company" value="" lay-verify="required" placeholder="${organization}"
+                                                            lay-reqtext="${Organization}" autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+
+                                                <div class="layui-form-item mb20" hidden>
+                                                    <div class="layui-input-wrap">
+                                                        <input type="text" name="sectionId" id="sectionId" value="" lay-verify="required"
+                                                            autocomplete="off" class="layui-input" lay-affix="clear">
+                                                    </div>
+                                                </div>
+<!--                                                <div class="layui-form-item mb20">-->
+<!--                                                    <div class="layui-input-wrap">-->
+<!--                                                        <select name="country" lay-verify="required" lay-search lay-reqtext="请选择您感兴趣的国家">-->
+<!--                                                            <option value="">请选择您感兴趣的国家</option>-->
+<!--                                                            <option value="1">中国</option>-->
+<!--                                                            <option value="2">美国</option>-->
+<!--                                                            <option value="3">英国</option>-->
+<!--                                                            <option value="4">法国</option>-->
+<!--                                                        </select>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+                                                <div class="layui-form-item mb0">
+                                                    <button class="layui-btn layui-btn-fluid bg-c h42 lh42" lay-submit
+                                                        lay-filter="dingyue">${subscribe}</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>`,
+                            success: function (layero, index, that) {
+
+                                // $('#reportId').val($(othis).parent().find(".sectiondingyue").attr("data"));
+                                $('#sectionId').val($(othis).parent().attr("data"));
+                                $('#sectionName').text($(othis).parent().attr("data2"));
+                                form.render();
+                            }
+                        });
+                }
+            })
+        })
+
+
+    </script>
+</body>
+
+</html>

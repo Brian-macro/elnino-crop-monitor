@@ -1,0 +1,12 @@
+{
+  "document_id": "61a12a3ed71920005f706e7c97179ce8f4ba12f936d4fc6f1c635f9177eb608c",
+  "source": "sina_us_corn",
+  "source_url": "https://stock2.finance.sina.com.cn/futures/api/jsonp.php/var%20_S2026_9_8=/GlobalFuturesService.getGlobalFuturesDailyKLine?symbol=C&source=web",
+  "raw_path": "data/raw/sina_us_corn/991d8af9c0377af4afe239409c71702d23292ea5ba83d21219fabeb00548c751.jsonp",
+  "sha256": "991d8af9c0377af4afe239409c71702d23292ea5ba83d21219fabeb00548c751",
+  "publication_date": null,
+  "available_date": "2026-09-08",
+  "download_timestamp": "2026-09-08T13:39:27.600323+00:00",
+  "publication_date_basis": "Source publication timestamp unavailable; first observed archive date",
+  "title": "CBOT玉米"
+}

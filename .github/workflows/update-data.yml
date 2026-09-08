@@ -1,0 +1,73 @@
+name: Update Research Data
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+    inputs:
+      group:
+        description: Data source group
+        default: scheduled
+        type: choice
+        options: [scheduled, all, climate, crops, reference, prices, build]
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: research-data-writer
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    outputs:
+      data_ref: ${{ steps.persist.outputs.ref }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Validate policy and calculations
+        run: python -m pytest -q
+      - name: Restore portable database
+        run: python scripts/build_database.py --db data/processed/monitor_v2.duckdb
+      - name: Fetch, validate and publish available data
+        id: refresh
+        continue-on-error: true
+        env:
+          UPDATE_GROUP: ${{ inputs.group || 'scheduled' }}
+        run: |
+          python -c "from pathlib import Path; Path('data/last_update.json').unlink(missing_ok=True)"
+          python scripts/update_all.py --group "$UPDATE_GROUP"
+      - name: Require validated publication before deployment
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report=json.loads(Path('data/last_update.json').read_text())
+          assert report.get('publication_complete'), 'Validation/publication/export failed; do not deploy'
+          PY
+      - name: Persist source originals and all forecast vintages
+        id: persist
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/raw data/vintage data/processed/parquet data/web data/last_update.json public/api
+          if ! git diff --cached --quiet; then
+            git commit -m 'data: update research evidence and source status'
+            git push
+          fi
+          echo "ref=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: data-update-logs
+          path: data/logs/
+          retention-days: 30
+  deploy:
+    needs: update
+    uses: ./.github/workflows/deploy.yml
+    with:
+      ref: ${{ needs.update.outputs.data_ref }}

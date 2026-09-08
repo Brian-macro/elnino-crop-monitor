@@ -1,0 +1,12 @@
+{
+  "document_id": "56765a76864e6509bdd3564740a002e87c1bcd8393a6078e605cfe50ce7993e5",
+  "source": "sina_cn_corn",
+  "source_url": "https://stock2.finance.sina.com.cn/futures/api/jsonp.php/var%20_V21052021_4_12=/InnerFuturesNewService.getDailyKLine?symbol=C0&type=2021_04_12",
+  "raw_path": "data/raw/sina_cn_corn/7e8317fc1c5ecadb77f0fc891d11df4a41ce31d6f2082d553f697538436d672b.jsonp",
+  "sha256": "7e8317fc1c5ecadb77f0fc891d11df4a41ce31d6f2082d553f697538436d672b",
+  "publication_date": null,
+  "available_date": "2026-09-08",
+  "download_timestamp": "2026-09-08T13:39:23.645797+00:00",
+  "publication_date_basis": "Source publication timestamp unavailable; first observed archive date",
+  "title": "大连玉米主连"
+}

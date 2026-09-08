@@ -1,0 +1,8 @@
+node_modules
+.next
+out
+.git
+data/raw
+data/vintage
+data/processed
+test-results

@@ -1,0 +1,12 @@
+{
+  "document_id": "9e4189da81a2b922899c3c2bdcb78d09110ddf10366e209648c800e204f0db33",
+  "source": "china_prices",
+  "source_url": "https://www.stats.gov.cn/sj/zxfb/202603/t20260323_1962824.html",
+  "raw_path": "data/raw/china_prices/d5cc9c256c66958ad5f66344c0881a59bddcfde3a10c4b15a352cf8b25db60d5.html",
+  "sha256": "d5cc9c256c66958ad5f66344c0881a59bddcfde3a10c4b15a352cf8b25db60d5",
+  "publication_date": "2026-03-23",
+  "available_date": "2026-03-23",
+  "download_timestamp": "2026-09-08T08:31:16.712444+00:00",
+  "publication_date_basis": "Official release URL",
+  "title": ""
+}

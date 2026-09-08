@@ -1,0 +1,12 @@
+{
+  "document_id": "2692479d27c75bf3b8dfa4677c665ac5469467c90c6aa5b56a6f58c23aa65782",
+  "source": "noaa_oni",
+  "source_url": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
+  "raw_path": "data/raw/noaa_oni/93f8c86c7a660f46318abe33b38c0479d184812d95a479a1fe869c0c2363a9e4.txt",
+  "sha256": "93f8c86c7a660f46318abe33b38c0479d184812d95a479a1fe869c0c2363a9e4",
+  "publication_date": null,
+  "available_date": "2026-09-08",
+  "download_timestamp": "2026-09-08T06:54:33.207723+00:00",
+  "publication_date_basis": "unknown; first observed",
+  "title": ""
+}

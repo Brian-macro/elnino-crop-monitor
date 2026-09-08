@@ -1,0 +1,15 @@
+* text=auto eol=lf
+
+# Evidence files and parser vintages must remain byte-for-byte immutable.
+data/raw/** -text -whitespace
+data/vintage/** -text -whitespace
+data/processed/** -text
+*.parquet -text
+*.png -text
+*.jpg -text
+*.webp -text
+*.ico -text
+*.woff2 -text
+*.pdf -text
+*.zip -text
+public/fonts/OFL.txt -whitespace

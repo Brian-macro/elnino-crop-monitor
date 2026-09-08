@@ -1,0 +1,12 @@
+{
+  "document_id": "38d355c5c9e7333fc57038668a5b4cde62e28209f83fcf25b83a7672d7a14e7f",
+  "source": "usda_psd",
+  "source_url": "https://apps.fas.usda.gov/psdonline/downloads/psd_alldata_csv.zip",
+  "raw_path": "data/raw/usda_psd/135047822fe8c95067229d8ec9b22b789582b1578f6d9bd669832b488c3b4227.zip",
+  "sha256": "135047822fe8c95067229d8ec9b22b789582b1578f6d9bd669832b488c3b4227",
+  "publication_date": null,
+  "available_date": "2026-09-08",
+  "download_timestamp": "2026-09-08T06:54:20.992695+00:00",
+  "publication_date_basis": "unknown; first observed",
+  "title": "Legacy PSD snapshot; publication date unverified"
+}

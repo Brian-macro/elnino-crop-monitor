@@ -1,0 +1,15 @@
+node_modules/
+.next/
+out/
+__pycache__/
+.pytest_cache/
+*.tsbuildinfo
+.env
+.env.local
+.venv/
+data/.update.lock
+data/logs/
+data/processed/*.duckdb
+data/processed/*.wal
+test-results/
+playwright-report/
