@@ -39,6 +39,9 @@ type Ranked = {
   change: number | null;
   share: number;
   members: string[];
+  baseline_yoy?: number | null;
+  yoy_spread_pp?: number | null;
+  contribution_pp?: number | null;
 };
 type Snapshot = {
   target_year: number;
@@ -53,6 +56,9 @@ type Snapshot = {
   world: Ranked;
   ranking: Ranked[];
   top5_share: number;
+  mode: string;
+  local_coverage_pct: number;
+  baseline: { source: string; value: number; previous: number | null; yoy: number | null };
 };
 type Data = {
   crop: string;
@@ -411,13 +417,6 @@ export default function Dashboard({
           </div>
           <div className="world-metrics">
             <div>
-              <span>全球产量</span>
-              <strong>
-                {num(snapshot?.world.value, 1)}
-                <small> 百万吨</small>
-              </strong>
-            </div>
-            <div>
               <span>同比变化</span>
               <strong
                 className={
@@ -427,11 +426,17 @@ export default function Dashboard({
                 {pct(snapshot?.world.yoy)}
               </strong>
             </div>
+            <div>
+              <span>较 PSD 同比</span>
+              <strong>{snapshot?.world.yoy_spread_pp == null ? "—" : `${snapshot.world.yoy_spread_pp >= 0 ? "+" : ""}${num(snapshot.world.yoy_spread_pp, 2)}pp`}</strong>
+            </div>
+            <div>
+              <span>全球产量</span>
+              <strong>{num(snapshot?.world.value, 1)}<small> 百万吨</small></strong>
+            </div>
             <div className="share-metric">
-              <span>前五占比</span>
-              <strong>
-                {snapshot ? num(snapshot.top5_share, 1) + "%" : "—"}
-              </strong>
+              <span>本土数据覆盖</span>
+              <strong>{snapshot ? num(snapshot.local_coverage_pct, 1) + "%" : "—"}</strong>
             </div>
           </div>
         </div>
@@ -535,7 +540,7 @@ export default function Dashboard({
           </aside>
         </div>
         <div className="world-panel-footer">
-          <span>统一可比口径 · USDA PSD{crop === "rice" ? " · 精米" : ""}</span>
+          <span>{snapshot?.mode === "local_composite" ? "本土最新预测组合 · 同源同比" : "USDA PSD 基线"}{crop === "rice" ? " · 精米" : ""}</span>
           <details>
             <summary>口径与来源</summary>
             <p>{data.methodology}</p>

@@ -27,7 +27,10 @@ def archive_bytes(con, source, url, content, suffix='', publication_date=None, d
         result=dict(zip(names,old))
         # A descriptive issue-month label is not proof that an availability date
         # was actually recorded. Preserve the original metadata and append evidence.
-        unknown_date=result['publication_date'] is None and str(result['available_date'])==str(result['download_timestamp'])[:10]
+        unknown_date=result['publication_date'] is None and (
+            result['publication_date_basis'].lower().startswith('unknown')
+            or result['publication_date_basis'].lower().startswith('issue month only')
+        )
         has_evidence=(pub or available) and not date_basis.lower().startswith('unknown')
         if has_evidence and (unknown_date or result['publication_date_basis'].startswith('unknown')):
             correction=con.execute('SELECT count(*) FROM source_documents WHERE source=? AND source_url=? AND download_timestamp<?',[source,url,result['download_timestamp']]).fetchone()[0]>0
@@ -48,7 +51,10 @@ def archive_bytes(con, source, url, content, suffix='', publication_date=None, d
     if not path.exists():
         path.write_bytes(content)
     correction=con.execute('SELECT count(*) FROM source_documents WHERE source=? AND source_url=?',[source,url]).fetchone()[0]>0
-    effective=stamp[:10] if correction else str(available or pub or date.today())
+    # Availability is a local calendar date. UTC may still be on the previous
+    # day during the Asia/Shanghai morning even though the file was observed
+    # today on this runner/workstation.
+    effective=date.today().isoformat() if correction else str(available or pub or date.today())
     doc=dict(document_id=doc_id,source=source,source_url=url,raw_path=str(path.relative_to(ROOT)).replace('\\','/'),
              sha256=sha,publication_date=str(pub) if pub else None,
              available_date=effective,download_timestamp=stamp,

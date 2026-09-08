@@ -1,6 +1,6 @@
 """Small, comparable dashboard payload. Top five and residual share one PSD vintage."""
 from datetime import date,datetime,timezone
-from policy import POLICY,active_countries,active_regions,region_members
+from policy import POLICY,COUNTRY_SOURCES,active_countries,active_regions,region_members
 from normalize import EU_MEMBERS
 from geography import canonical_country,geography_metadata
 
@@ -24,6 +24,24 @@ def summarize_counts(current,previous,units):
     if abs(sum(r['value'] for r in ranking)-world['value'])>1e-6:raise ValueError('Dashboard residual does not reconcile')
     return dict(world=world,ranking=ranking,top5_share=sum(r['share'] or 0 for r in top))
 
+def apply_local_pairs(con,crop,year,current,previous,asof=None):
+    """Replace both years together; never calculate YoY across two sources."""
+    evidence={};asof=asof or date.today().isoformat()
+    for rule in COUNTRY_SOURCES['rules']:
+        if rule['crop']!=crop or not rule.get('eligible'):continue
+        country,source=rule['country'],rule['source']
+        rows=con.execute('''SELECT target_year,value,record_id,available_date FROM production_all
+          WHERE crop=? AND country=? AND region='' AND source=? AND metric='production'
+            AND commodity_basis=? AND target_year IN (?,?) AND available_date<=?
+          QUALIFY row_number() OVER(PARTITION BY target_year ORDER BY available_date DESC,download_timestamp DESC,record_id DESC)=1''',
+          [crop,country,source,rule['commodity_basis'],year-1,year,asof]).fetchall()
+        by_year={int(r[0]):r for r in rows}
+        if year in by_year and year-1 in by_year and country in current and country in previous:
+            current[country]=float(by_year[year][1]);previous[country]=float(by_year[year-1][1])
+            evidence[country]=dict(source=source,current_record=by_year[year][2],previous_record=by_year[year-1][2],fallback_reason=None)
+        else:evidence[country]=dict(source='usda_psd',fallback_reason='missing_local_pair')
+    return evidence
+
 def dashboard_bundle(con,crop):
     raw=con.execute('''SELECT p.*,d.publication_date_basis FROM production_all p JOIN source_documents d USING(document_id)
       WHERE p.crop=? AND p.source='usda_psd' AND p.metric='production' AND p.region='' AND p.available_date<=current_date
@@ -39,6 +57,8 @@ def dashboard_bundle(con,crop):
             if 'European Union' in set(frame.country):frame.drop(frame[frame.country.isin(EU_MEMBERS)].index,inplace=True)
         current_counts={canonical_country(r.country):float(r.value) for r in current.itertuples()}
         previous_counts={canonical_country(r.country):float(r.value) for r in previous.itertuples()}
+        baseline_current=sum(current_counts.values());baseline_previous=sum(previous_counts.values()) if previous_counts else None
+        evidence=apply_local_pairs(con,crop,int(year),current_counts,previous_counts)
         units={country:[country] for country in current_counts if country not in POLICY['excluded_entities']}
         for name in active_regions(crop):
             members=region_members(name,crop)
@@ -48,16 +68,18 @@ def dashboard_bundle(con,crop):
         # Until a validated local pair exists, expose an explicit PSD baseline
         # contract. The frontend can render the comparison fields without
         # mistaking a missing local source for a zero-difference result.
-        summary['mode'] = 'psd_baseline'
-        summary['local_coverage_pct'] = 0.0
+        replaced={c for c,e in evidence.items() if e.get('source')!='usda_psd'}
+        summary['mode'] = 'local_composite' if replaced else 'psd_baseline'
+        summary['local_coverage_pct'] = (sum(previous_counts[c] for c in replaced)/summary['world']['previous']*100 if replaced and summary['world']['previous'] else 0.0)
         summary['baseline'] = dict(
             source='usda_psd',
-            value=summary['world']['value'],
-            previous=summary['world']['previous'],
-            yoy=summary['world']['yoy'],
+            value=baseline_current,
+            previous=baseline_previous,
+            yoy=(baseline_current/baseline_previous-1)*100 if baseline_previous else None,
         )
-        summary['world']['baseline_yoy'] = summary['world']['yoy']
-        summary['world']['yoy_spread_pp'] = 0.0
+        summary['world']['baseline_yoy'] = summary['baseline']['yoy']
+        summary['world']['yoy_spread_pp'] = summary['world']['yoy']-summary['baseline']['yoy'] if summary['world']['yoy'] is not None and summary['baseline']['yoy'] is not None else None
+        summary['source_evidence']=evidence
         for row in summary['ranking']:
             row['contribution_pp'] = (
                 row['change'] / summary['world']['previous'] * 100
