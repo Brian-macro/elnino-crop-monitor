@@ -51,3 +51,16 @@ def test_missing_price_period_and_zero_consumption_remain_missing():
     assert stocks_to_use(12, 0) is None
     assert stocks_to_use(None, 100) is None
     assert stocks_to_use(12, 100) == 12
+
+def test_new_download_does_not_duplicate_unchanged_price_history():
+    from db import connect
+    from fetch_futures import insert_changed_quotes
+    c=connect(':memory:')
+    for doc in ['a','b','c']:
+        c.execute('INSERT INTO source_documents VALUES (?,?,?,?,?,?,?,?,?,?)',[doc,'sina_cn_corn','https://example.org/'+doc,'data/raw/test',doc,None,'2026-08-12','2026-08-12','fixture','fixture'])
+    row=dict(record_id='a',document_id='a',series_id='cn_corn',crop='corn',market='china',symbol='C0',date='2026-08-11',open=10,high=12,low=9,close=11,volume=100,open_interest=100,settlement=11,usable=True,currency='CNY',unit='CNY/t',commodity_basis='grain',source='sina_cn_corn',available_date='2026-08-12',roll_method='unknown')
+    assert insert_changed_quotes(c,[row])==1
+    assert insert_changed_quotes(c,[{**row,'record_id':'b','document_id':'b'}])==0
+    assert insert_changed_quotes(c,[{**row,'record_id':'c','document_id':'c','close':12}])==1
+    assert c.execute('SELECT count(*) FROM futures_prices').fetchone()[0]==2
+    c.close()

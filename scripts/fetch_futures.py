@@ -20,6 +20,56 @@ def number(value):
         return None
 
 
+QUOTE_FIELDS = (
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "open_interest",
+    "settlement",
+    "usable",
+    "currency",
+    "unit",
+    "commodity_basis",
+    "roll_method",
+)
+
+
+def _same_value(left, right):
+    if pd.isna(left) and pd.isna(right):
+        return True
+    return left == right
+
+
+def insert_changed_quotes(con, rows):
+    """Append only new dates or changed revisions; skip identical full-history rows."""
+    changed = []
+    for row in rows:
+        existing = con.execute(
+            """SELECT f.* FROM futures_prices f JOIN source_documents d USING(document_id)
+               WHERE f.series_id=? AND f.date=?
+               ORDER BY f.available_date DESC,d.download_timestamp DESC,f.document_id DESC LIMIT 1""",
+            [row["series_id"], row["date"]],
+        ).fetchone()
+        if existing:
+            names = [column[0] for column in con.description]
+            latest = dict(zip(names, existing))
+            if all(_same_value(latest[field], row.get(field)) for field in QUOTE_FIELDS):
+                continue
+        changed.append(row)
+    if not changed:
+        return 0
+    con.register("_future_rows", pd.DataFrame(changed))
+    try:
+        con.execute(
+            "INSERT INTO futures_prices BY NAME SELECT * FROM _future_rows ON CONFLICT DO NOTHING"
+        )
+    finally:
+        con.unregister("_future_rows")
+    return len(changed)
+
+
 def endpoint(contract):
     if contract["market"] == "china":
         base = "https://stock2.finance.sina.com.cn/futures/api/jsonp.php/var%20_V21052021_4_12=/InnerFuturesNewService.getDailyKLine"
@@ -138,11 +188,7 @@ def main():
                     )
                 con.execute("BEGIN")
                 try:
-                    con.register("_future_rows", pd.DataFrame(rows))
-                    con.execute(
-                        "INSERT INTO futures_prices BY NAME SELECT * FROM _future_rows ON CONFLICT DO NOTHING"
-                    )
-                    con.unregister("_future_rows")
+                    inserted = insert_changed_quotes(con, rows)
                     con.execute("COMMIT")
                 except Exception:
                     con.execute("ROLLBACK")
@@ -167,7 +213,15 @@ def main():
                         else "Zero volume/position fields treated as unavailable; not evidence of no trading."
                     ),
                 )
-                print(ident, len(rows), "last completed", last, flush=True)
+                print(
+                    ident,
+                    len(rows),
+                    "downloaded;",
+                    inserted,
+                    "new/revised; last completed",
+                    last,
+                    flush=True,
+                )
             except Exception as e:
                 failed(con, spec["source"], e)
                 errors += 1
