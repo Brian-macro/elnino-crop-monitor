@@ -272,6 +272,14 @@
       "interval_days": 7
     },
     {
+      "id": "local_forecasts",
+      "group": "crops",
+      "script": "fetch_local_sources.py",
+      "args": [],
+      "sources": ["aafc", "abares", "conab", "dafw", "cec", "ec", "bcr", "uga"],
+      "interval_days": 7
+    },
+    {
       "id": "china_outlook",
       "group": "crops",
       "script": "fetch_china_outlook.py",

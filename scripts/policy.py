@@ -6,6 +6,8 @@ from geography import geography_metadata
 
 POLICY_PATH = Path(__file__).resolve().parents[1] / "config" / "research_policy.json"
 POLICY = json.loads(POLICY_PATH.read_text(encoding="utf-8"))
+COUNTRY_SOURCE_PATH = POLICY_PATH.with_name("country_sources.json")
+COUNTRY_SOURCES = json.loads(COUNTRY_SOURCE_PATH.read_text(encoding="utf-8"))
 
 
 def validate_policy(policy=POLICY):
@@ -27,6 +29,15 @@ def validate_policy(policy=POLICY):
 
 
 validate_policy()
+
+
+def composite_rule(country, crop):
+    return next((r for r in COUNTRY_SOURCES["rules"] if r["country"] == country and r["crop"] == crop), None)
+
+
+def local_source(country, crop):
+    rule = composite_rule(country, crop)
+    return rule["source"] if rule and rule.get("eligible") else None
 
 
 def active_countries(crop):

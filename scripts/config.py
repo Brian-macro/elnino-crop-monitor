@@ -82,6 +82,15 @@ SOURCES = {
         freq="quarterly",
         script="fetch_cropwatch.py",
     ),
+    "casde": dict(name="中国农产品供需形势分析", url="https://www.agri.cn/sj/gxxs/", freq="monthly", script="fetch_casde.py"),
+    "aafc": dict(name="AAFC Canada Outlook", url="https://agriculture.canada.ca/en/sector/crops/reports-statistics", freq="monthly", script="fetch_local_sources.py"),
+    "conab": dict(name="CONAB Brazil Grain Survey", url="https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/safras/safra-de-graos", freq="monthly", script="fetch_local_sources.py"),
+    "abares": dict(name="ABARES Australian Crop Report", url="https://www.agriculture.gov.au/abares/research-topics/agricultural-outlook/australian-crop-report", freq="quarterly", script="fetch_local_sources.py"),
+    "dafw": dict(name="India DA&FW Advance Estimates", url="https://pib.gov.in/", freq="quarterly", script="fetch_local_sources.py"),
+    "cec": dict(name="South Africa Crop Estimates Committee", url="https://www.sagis.org.za/crop-estimates-committee-2/", freq="monthly", script="fetch_local_sources.py"),
+    "ec": dict(name="European Commission Short-term Outlook", url="https://agriculture.ec.europa.eu/data-and-analysis/markets/outlook/short-term_en", freq="quarterly", script="fetch_local_sources.py"),
+    "bcr": dict(name="Bolsa de Comercio de Rosario", url="https://www.bcr.com.ar/es/mercados/gea/estimaciones-nacionales-de-produccion/estimaciones", freq="monthly", script="fetch_local_sources.py"),
+    "uga": dict(name="Ukrainian Grain Association", url="https://uga.ua/en/news/", freq="monthly", script="fetch_local_sources.py"),
     "china_outlook": dict(
         name="中国农业展望报告",
         url="https://aoc.caas.cn/",
@@ -118,6 +127,8 @@ STALE_DAYS = {
     "china_outlook": 400,
     "nbs": 400,
     "china_prices": 45,
+    "casde": 45, "aafc": 65, "conab": 45, "abares": 120, "dafw": 120,
+    "cec": 65, "ec": 120, "bcr": 65, "uga": 65,
 }
 BASIS = {
     "wheat": "grain",
