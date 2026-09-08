@@ -1,5 +1,9 @@
 # Brian的厄尔尼诺看盘
 
+[在线网站](https://brian-macro.github.io/elnino-crop-monitor/) · [GitHub仓库](https://github.com/Brian-macro/elnino-crop-monitor) · [定时更新与部署记录](https://github.com/Brian-macro/elnino-crop-monitor/actions)
+
+已部署至GitHub Pages。数据库以Parquet表快照保存在仓库，Actions每天北京时间14:17检查到期来源、更新数据并重新部署；无需本机持续开机或运行数据库服务器。
+
 Global Crop Production, Climate Risk & Commodity Pricing
 
 最新研究审计见 [docs/RESEARCH_AUDIT_2026-09-08.md](docs/RESEARCH_AUDIT_2026-09-08.md)：网站定位为描述性复盘。已统一NOAA官方ONI ERSSTv6公布表、增加行情月度样本筛选、明确市场年度与自然月及PSD/WASDE全球消费差异，不能将叠图直接当作套利或因果回测。
