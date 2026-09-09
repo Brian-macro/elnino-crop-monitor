@@ -57,12 +57,13 @@ def run_steps(steps, log_dir):
     return result
 
 
-def main():
+def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument(
         "--group",
         choices=[
             "scheduled",
+            "forecasts",
             "all",
             "climate",
             "crops",
@@ -74,7 +75,7 @@ def main():
     )
     ap.add_argument("--offline", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
-    args = ap.parse_args()
+    args = ap.parse_args(argv)
     if args.offline:
         os.environ["MONITOR_OFFLINE"] = "1"
     from db import connect
@@ -90,7 +91,7 @@ def main():
         POLICY["schedule"],
         last_checked,
         group=args.group,
-        due=args.group == "scheduled",
+        due=args.group in ("scheduled", "forecasts"),
     )
     steps = [(job["id"], ["scripts/" + job["script"], *job["args"]]) for job in jobs]
     if args.dry_run:

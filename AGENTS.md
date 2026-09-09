@@ -7,7 +7,7 @@
 - 默认分支：main。GitHub Pages使用GitHub Actions部署。
 - 数据持久化：`data/processed/parquet/*.parquet`为完整数据库表快照，schema在`scripts/db.py`及`docs/schema.sql`。`data/raw`与`data/vintage`永久保留。
 - GitHub Runner通过`build_database.py`恢复DuckDB；DuckDB工作文件不提交，不需要长期运行数据库服务。页面读取`public/api/*.json`静态数据接口。
-- 自动更新：`.github/workflows/update-data.yml`每天06:17 UTC（北京时间14:17）唤醒；`config/research_policy.json`决定哪些来源到期。统一入口为`python scripts/update_all.py --group scheduled`。
+- 自动更新：`.github/workflows/update-data.yml`每天06:17 UTC（北京时间14:17）唤醒；每日只运行`python scripts/update_forecasts.py`检查预测来源；基础库手动维护。`config/research_policy.json`中`data_part`区分baseline和forecasts，同日已检查的预测来源跳过。
 - 更新必须通过数据校验、JSON发布、Parquet导出，然后提交快照并直接调用`deploy.yml`部署确切提交。单源失败保留旧数据与Stale状态，完整性失败不得发布。
 - Pages产物名包含GitHub run id与attempt，避免并行部署的artifact重名冲突。
 - `.gitattributes`对原始资料与历史解析快照禁用换行转换；不得格式化、覆盖或修改原始文件，否则会破坏证据哈希。

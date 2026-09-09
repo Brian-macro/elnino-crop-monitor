@@ -6,9 +6,9 @@ on:
     inputs:
       group:
         description: Data source group
-        default: scheduled
+        default: forecasts
         type: choice
-        options: [scheduled, all, climate, crops, reference, prices, build]
+        options: [forecasts, scheduled, all, climate, crops, reference, prices, build]
 permissions:
   contents: write
   pages: write
@@ -24,6 +24,8 @@ jobs:
       data_ref: ${{ steps.persist.outputs.ref }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -37,17 +39,27 @@ jobs:
         id: refresh
         continue-on-error: true
         env:
-          UPDATE_GROUP: ${{ inputs.group || 'scheduled' }}
+          UPDATE_GROUP: ${{ inputs.group || 'forecasts' }}
         run: |
           python -c "from pathlib import Path; Path('data/last_update.json').unlink(missing_ok=True)"
-          python scripts/update_all.py --group "$UPDATE_GROUP"
+          if [ "$UPDATE_GROUP" = "forecasts" ]; then
+            python scripts/update_forecasts.py
+          else
+            python scripts/update_all.py --group "$UPDATE_GROUP"
+          fi
       - name: Require validated publication before deployment
         run: |
           python - <<'PY'
-          import json
+          import json, os
           from pathlib import Path
           report=json.loads(Path('data/last_update.json').read_text())
           assert report.get('publication_complete'), 'Validation/publication/export failed; do not deploy'
+          failed = [s['step'] for s in report['steps'] if s['returncode']]
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+              summary.write('Data group: ' + report['group'] + '\n\n')
+              summary.write('Failed sources (previous data retained): ' + ', '.join(failed) if failed else 'All selected checks passed.')
+          if failed:
+              print('::warning::Source checks failed; previous data retained: ' + ', '.join(failed))
           PY
       - name: Persist source originals and all forecast vintages
         id: persist
@@ -63,7 +75,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: data-update-logs
+          name: data-update-logs-${{ github.run_id }}-${{ github.run_attempt }}
           path: data/logs/
           retention-days: 30
   deploy:

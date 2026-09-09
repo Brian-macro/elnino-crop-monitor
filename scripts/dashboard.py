@@ -30,15 +30,16 @@ def apply_local_pairs(con,crop,year,current,previous,asof=None):
     for rule in COUNTRY_SOURCES['rules']:
         if rule['crop']!=crop or not rule.get('eligible'):continue
         country,source=rule['country'],rule['source']
+        offset=int(rule.get('source_target_year_offset',0));source_year=year+offset
         rows=con.execute('''SELECT target_year,value,record_id,available_date FROM production_all
           WHERE crop=? AND country=? AND region='' AND source=? AND metric='production'
-            AND commodity_basis=? AND target_year IN (?,?) AND available_date<=?
+            AND commodity_basis=? AND year_basis=? AND target_year IN (?,?) AND available_date<=?
           QUALIFY row_number() OVER(PARTITION BY target_year ORDER BY available_date DESC,download_timestamp DESC,record_id DESC)=1''',
-          [crop,country,source,rule['commodity_basis'],year-1,year,asof]).fetchall()
+          [crop,country,source,rule['commodity_basis'],rule['year_basis'],source_year-1,source_year,asof]).fetchall()
         by_year={int(r[0]):r for r in rows}
-        if year in by_year and year-1 in by_year and country in current and country in previous:
-            current[country]=float(by_year[year][1]);previous[country]=float(by_year[year-1][1])
-            evidence[country]=dict(source=source,current_record=by_year[year][2],previous_record=by_year[year-1][2],fallback_reason=None)
+        if source_year in by_year and source_year-1 in by_year and country in current and country in previous:
+            current[country]=float(by_year[source_year][1]);previous[country]=float(by_year[source_year-1][1])
+            evidence[country]=dict(source=source,current_record=by_year[source_year][2],previous_record=by_year[source_year-1][2],source_target_year=source_year,fallback_reason=None)
         else:evidence[country]=dict(source='usda_psd',fallback_reason='missing_local_pair')
     return evidence
 

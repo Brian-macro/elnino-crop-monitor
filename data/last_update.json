@@ -1,28 +1,23 @@
 {
-  "started_at": "20260908T153638Z",
-  "policy_version": "2026-09-08-regions-v1",
+  "started_at": "20260909T014027Z",
+  "policy_version": "2026-09-09-local-forecast-daily-v1",
   "offline": false,
-  "group": "climate",
+  "group": "build",
   "steps": [
-    {
-      "step": "noaa",
-      "returncode": 0,
-      "seconds": 1.16
-    },
     {
       "step": "validate",
       "returncode": 0,
-      "seconds": 0.69
+      "seconds": 0.78
     },
     {
       "step": "publish",
       "returncode": 0,
-      "seconds": 27.93
+      "seconds": 31.9
     },
     {
       "step": "parquet",
       "returncode": 0,
-      "seconds": 0.64
+      "seconds": 0.75
     }
   ],
   "publication_complete": true,
