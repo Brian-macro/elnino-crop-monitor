@@ -1,6 +1,5 @@
 const { chromium } = require('playwright');
 const assert = require('node:assert/strict');
-const fs = require('node:fs');
 
 (async () => {
   const browser = await chromium.launch({ headless: true, channel: 'chrome' });
@@ -23,27 +22,20 @@ const fs = require('node:fs');
     assert((await china.innerText()).includes('PSD'));
     assert(!(await page.locator('main').innerText()).includes('海外历史与预测统一用'));
     await visit('/events/?event=2023-05&crop=corn');
-    assert.equal(await page.getByLabel('年度数据源', { exact: true }).inputValue(), 'local_composite');
-    assert((await page.locator('.balance-note').innerText()).includes('PSD 回退'));
+    assert.equal(await page.getByLabel('年度数据源', { exact: true }).inputValue(), 'actual_production');
+    assert((await page.locator('.balance-note').innerText()).includes('真实产量数据库'));
+    assert((await page.locator('.balance-note').innerText()).includes('暂无已入库的完整真实产量'));
     assert(!(await page.locator('.balance-table').innerText()).includes('库存消费比'));
     await page.getByLabel('年度数据源', { exact: true }).selectOption('usda_psd');
     assert((await page.locator('.balance-table').innerText()).includes('库存消费比'));
     assert((await page.locator('.balance-note').innerText()).includes('独立供需参考'));
-    // A synthetic event window lets the UI exercise an existing local 2025 pair.
-    const data = JSON.parse(fs.readFileSync('public/api/events_corn.json', 'utf8'));
-    data.windows['2023-05'].years.push(2025);
-    await page.route('**/api/events_corn.json*', route => route.fulfill({ json: data }));
-    await visit('/events/?event=2023-05&crop=corn');
-    await page.getByLabel('供需年度', { exact: true }).selectOption('2025');
-    assert((await page.locator('.balance-note').innerText()).includes('中国 CASDE'));
-    await page.getByText('各国实际产量来源与 PSD 回退', { exact: true }).click();
-    assert(await page.locator('.balance-note a[href*="moa.gov.cn"]').count() > 0);
+    assert.equal(await page.getByText('各国实际产量来源与 PSD 回退', { exact: true }).count(), 0);
     await page.setViewportSize({ width: 390, height: 844 });
     for (const path of ['/methodology/', '/events/', '/corn/']) {
       await visit(path);
       assert(!(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1)), path);
     }
     assert.deepEqual(errors, []);
-    console.log('Source consistency browser passed: policy, fallback, local evidence, independent balances, mobile.');
+    console.log('Source consistency browser passed: policy, actual production, independent balances, mobile.');
   } finally { await browser.close(); }
 })().catch(e => { console.error(e); process.exitCode = 1; });

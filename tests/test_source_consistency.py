@@ -5,7 +5,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 from db import connect, insert_rows
 from dashboard import dashboard_bundle
-from event_study import balance_rows
+from event_study import actual_production_rows, balance_rows
 from policy import policy_bundle
 
 
@@ -49,28 +49,22 @@ def test_dashboard_actual_composite_provenance_is_not_psd():
     con.close()
 
 
-def test_event_default_production_equals_dashboard_without_mixed_supply():
-    from event_study import local_production_rows
+def test_event_actual_production_uses_only_actual_database_rows():
     con = fixture_db()
-    dashboard = dashboard_bundle(con, 'corn')
-    rows = local_production_rows(dashboard)['2025']
-    assert rows['Global']['production'] == dashboard['years']['2025']['world']['value']
-    assert rows['China']['production'] == 130
-    assert rows['China']['source'] == 'casde'
-    assert rows['Global']['stocks_to_use'] is None
-    assert rows['Global']['consumption'] is None
-    assert rows['Global']['ending_stocks'] is None
-    assert balance_rows(con, 'corn')['usda_psd']['2025']['Global']['production'] == 220
-    con.close()
-
-
-def test_missing_prior_pair_is_explicit_psd_fallback_in_event():
-    from event_study import local_production_rows
-    con = fixture_db()
-    rows = local_production_rows(dashboard_bundle(con, 'corn'))['2024']
-    assert rows['China']['source'] == 'usda_psd'
-    assert rows['China']['fallback_reason'] == 'missing_local_pair'
-    assert rows['China']['production'] == 100
+    con.execute('INSERT INTO source_documents VALUES (?,?,?,?,?,?,?,?,?,?)',
+                ['nbs', 'NBS actual', 'https://example.org/nbs', 'data/raw/test', 'nbs',
+                 '2026-08-02', '2026-08-02', '2026-08-02', 'fixture', 'nbs'])
+    insert_rows(con, [dict(document_id='nbs', source='nbs', source_url='https://example.org/nbs',
+        publication_date='2026-08-02', available_date='2026-08-02', download_timestamp='2026-08-02',
+        crop='corn', country='China', region='', target_year=2025, year_basis='calendar_year',
+        commodity_basis='grain', metric='production', value=88, unit='Mt',
+        methodology='Official reported actual: fixture')], 'actual')
+    rows = actual_production_rows(con, 'corn')['2025']
+    assert rows['China']['production'] == 88
+    assert rows['China']['source'] == 'nbs'
+    assert rows['China']['status'] == 'actual'
+    assert rows['China']['ending_stocks'] is None
+    assert rows['Global']['production'] is None
     con.close()
 
 

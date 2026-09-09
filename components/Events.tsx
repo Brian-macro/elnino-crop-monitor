@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import Chart, { chartBase } from "./Chart";
 import { Loading } from "./Common";
 import { useData, CROPS, num, pct, day, Event, strengthZh, sources } from "@/lib/data";
-import ProductionSources, { ProductionEvidence, fallbackLabel } from './ProductionSources';
 import type { EChartsOption } from "echarts";
 const cropNames: Record<string, string> = {
   wheat: "小麦",
@@ -17,19 +16,14 @@ type Balance = {
   ending_stocks: number | null;
   consumption: number | null;
   stocks_to_use: number | null;
-  source: string;
+  source: string | null;
   source_url: string | null;
-  source_evidence?: Record<string, ProductionEvidence>;
-  fallback_reason?: string | null;
-  local_coverage_pct?: number;
-  baseline_source_url?: string;
-  yoy?: number | null;
-  document_id: string;
-  available_date: string;
+  document_id: string | null;
+  available_date: string | null;
   publication_date: string | null;
   target_year: number;
-  year_basis: string;
-  commodity_basis: string;
+  year_basis: string | null;
+  commodity_basis: string | null;
   status: string;
   derived_global: boolean;
   unit: string;
@@ -88,7 +82,7 @@ type EventData = {
   notes: string[];
 };
 const show = (v: number | null | undefined, d = 2) =>
-  v == null ? "数据缺失" : num(v, d);
+  v == null ? "N/A" : num(v, d);
 const percentage = (v: number | null | undefined) =>
   v == null ? "数据缺失" : pct(v);
 const yearName = (year: number) => `${year}/${String(year + 1).slice(2)}`;
@@ -97,7 +91,7 @@ export default function Events() {
     [eventId, setEventId] = useState(""),
     [domestic, setDomestic] = useState(""),
     [overseasMode, setOverseasMode] = useState("futures"),
-    [source, setSource] = useState("local_composite"),
+    [source, setSource] = useState("actual_production"),
     [year, setYear] = useState(0);
   const { data, error } = useData<EventData>("events_" + crop);
   useEffect(() => {
@@ -142,7 +136,7 @@ export default function Events() {
   const annualYear = window.years.includes(year)
     ? year
     : Number(event.start.slice(0, 4));
-  const localMode = source === "local_composite";
+  const actualMode = source === "actual_production";
   const balances = data.annual[source]?.[String(annualYear)] || {};
   const world = balances.Global,
     china = balances.China;
@@ -357,7 +351,7 @@ export default function Events() {
             </span>
           </div>
           <div className="event-annual-heading">
-            <span>窗口内年度产量 · {localMode ? "本土优先 / 明示回退" : "独立供需参考"}</span>
+            <span>窗口内年度产量 · {actualMode ? "真实产量数据库" : "独立供需参考"}</span>
             <small>市场年度 · 百万吨</small>
           </div>
           <div className="event-year-strip">
@@ -460,7 +454,7 @@ export default function Events() {
         <aside className="event-balance-panel">
           <div className="small-panel-heading">
             <div>
-              <span className="quiet-eyebrow">年度供需</span>
+              <span className="quiet-eyebrow">{actualMode ? "真实产量" : "年度供需"}</span>
               <h2>{yearName(annualYear)} 市场年度</h2>
             </div>
           </div>
@@ -472,7 +466,7 @@ export default function Events() {
                 value={source}
                 onChange={(e) => setSource(e.target.value)}
               >
-                <option value="local_composite">本土优先产量（与首页一致）</option>
+                <option value="actual_production">真实产量</option>
                 <option value="usda_psd">PSD 供需参考</option>
                 <option value="usda_wasde">WASDE 供需参考</option>
               </select>
@@ -506,7 +500,7 @@ export default function Events() {
                 <td>{show(world?.production)}</td>
                 <td>{show(china?.production)}</td>
               </tr>
-              {!localMode && <>
+              {!actualMode && <>
               <tr>
                 <td>期末库存</td>
                 <td>{show(world?.ending_stocks)}</td>
@@ -534,7 +528,7 @@ export default function Events() {
             </tbody>
           </table>
           <p className="balance-unit">
-            {localMode ? '产量：百万吨。本土组合尚未形成完整同源库存、消费数据，因此不显示组合库存消费比；可切换独立供需参考。' : <>
+            {actualMode ? '产量：百万吨。仅展示真实产量数据库中已有的官方实产；未覆盖的国家或年份显示 N/A，不使用预测或历史估计补齐。' : <>
               产量与库存：百万吨<br />库存消费比＝期末库存 ÷ 表列消费或用量<br />
               {source === 'usda_wasde' && ['corn', 'wheat', 'rice'].includes(crop)
                 ? 'WASDE全球用量含进出口差额调整，不能与PSD国家消费加总直接拼接。'
@@ -542,18 +536,16 @@ export default function Events() {
             </>}
           </p>
           <div className="balance-note">
-            <span>{localMode ? '本土优先产量 · 与首页一致' : `${sources[source]} · 独立供需参考`}</span>
-            {localMode ? <>
-              <p>全球：{world?.source === 'local_composite' ? `本土组合 · 上年产量覆盖 ${num(world.local_coverage_pct, 1)}%` : `PSD 回退 · ${fallbackLabel(world?.fallback_reason)}`}</p>
-              <p>中国：{sources[china?.source] || '数据缺失'}{china?.source === 'usda_psd' ? ` · PSD 回退：${fallbackLabel(china.fallback_reason)}` : ''}</p>
-              <p>同比：全球 {percentage(world?.yoy)} · 中国 {percentage(china?.yoy)}</p>
+            <span>{actualMode ? '真实产量数据库 · 官方实产' : `${sources[source]} · 独立供需参考`}</span>
+            {actualMode ? <>
+              <p>全球：{world?.production == null ? '暂无已入库的完整真实产量' : sources[world.source || '']}</p>
+              <p>中国：{china?.production == null ? '暂无真实产量' : sources[china.source || '']}</p>
               {china?.source_url && <a href={china.source_url} target="_blank" rel="noreferrer">中国产量原始来源 ↗</a>}
-              <ProductionSources evidence={world?.source_evidence || {}} baselineUrl={world?.baseline_source_url} />
-            </> : <p>{world?.derived_global ? 'PSD全球为国家合计，已剔除欧盟成员重复。' : 'WASDE全球采用报告World行。'}此表保留原机构供需口径，产量可能与本土组合不同。</p>}
-            <p>年度值为当前归档的修订后历史估计或预测，不代表事件当时市场已知版本；缺少本土历史时使用明确标注的PSD历史。</p>
+            </> : <p>{world?.derived_global ? 'PSD全球为国家合计，已剔除欧盟成员重复。' : 'WASDE全球采用报告World行。'}此表保留原机构供需口径，产量可能与真实产量数据库不同。</p>}
+            <p>{actualMode ? '真实产量会随官方终值修订更新；各国市场年度起止不同，未统一换算。' : '年度值为当前归档的修订后历史估计或预测，不代表事件当时市场已知版本。'}</p>
             <p>各国市场年度起止不同；气候与价格仅作背景对照，不据此推断因果。</p>
           </div>
-          {!localMode && (world || china) && (
+          {!actualMode && (world || china) && (
             <a
               className="source-inline"
               href={world?.source_url || china?.source_url || undefined}

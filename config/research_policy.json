@@ -220,9 +220,9 @@
     "rule": "Reference only; >=2 independent institutions, same definition and target, within 45 days. No default mean or level splice."
   },
   "splicing": {
-    "overseas": "本土机构同源本年/上年成对替换；缺少可比数据时两年回退PSD并注明原因。历史PSD修订估计保留。",
-    "china": "玉米/大豆/糖CASDE，小麦CropWatch；水稻精米转换未验证则PSD回退。NBS实产和农业展望长期独立保存。",
-    "missing": "PSD回退必须明确标注；基线也缺失时N/A，不插值、不借邻国数据。"
+    "overseas": "有本国预测数据用本国预测数据，无则用PSD；同比只在本年和上年口径可比时计算。历史PSD修订估计保留。",
+    "china": "玉米/大豆/糖CASDE，小麦CropWatch；水稻精米转换未验证时使用PSD精米。NBS实产和农业展望长期独立保存。",
+    "missing": "有本国预测数据用本国预测数据，无则用PSD；两者均缺失时N/A，不插值、不借邻国数据。"
   },
   "schedule": [
     {
@@ -367,7 +367,7 @@
     "source": "local_composite",
     "top_n": 5,
     "others": "composite_component_complement",
-    "china": "Crop-specific local pair; explicit PSD fallback",
+    "china": "Crop-specific local forecast when available; otherwise PSD",
     "presentation": "Chinese-first map; historical price/revision disclosure removed from homepage",
     "baseline": "usda_psd"
   },

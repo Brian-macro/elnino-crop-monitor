@@ -148,7 +148,7 @@ def policy_bundle():
                         else ["usda_wasde", "cropwatch"] if not china else ["usda_psd"]
                     ),
                     splice=(
-                        "本土本年/上年同源成对替换；缺少可比数据或口径未验证时，两年都明确回退PSD。"
+                        "有本国预测数据用本国预测数据，无则用PSD；同比只在本年和上年口径可比时计算。"
                     ),
                     mean=False,
                 )

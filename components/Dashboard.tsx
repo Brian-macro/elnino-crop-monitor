@@ -15,7 +15,6 @@ import {
   sources,
 } from "@/lib/data";
 import { zhCountry } from "@/lib/labels";
-import ProductionSources, { ProductionEvidence, fallbackLabel } from './ProductionSources';
 const cropNames: Record<string, string> = {
   wheat: "小麦",
   corn: "玉米",
@@ -41,6 +40,13 @@ type Ranked = {
   baseline_yoy?: number | null;
   yoy_spread_pp?: number | null;
   contribution_pp?: number | null;
+};
+type ProductionEvidence = {
+  source: string;
+  source_url?: string;
+  available_date?: string;
+  source_target_year?: number;
+  fallback_reason?: string | null;
 };
 type Snapshot = {
   target_year: number;
@@ -183,7 +189,7 @@ function ChinaSource({ crop, year }: { crop: string; year: number }) {
           : "当前年度暂无可用预测"}
       </span>
       <small>
-        {row?.source === 'usda_psd' ? `PSD 回退：${fallbackLabel(row.fallback_reason)}` : '与首页本土成对组合一致；保留机构原始证据。'}
+        {row?.source === 'usda_psd' ? 'PSD 数据：该国家暂无可用本国预测。' : '与首页本土成对组合一致；保留机构原始证据。'}
       </small>
       {row?.source_url && (
         <a href={row.source_url} target="_blank" rel="noreferrer">
@@ -527,7 +533,7 @@ export default function Dashboard({
           </aside>
         </div>
         <div className="world-panel-footer">
-          <span>{snapshot?.mode === "local_composite" ? "本土优先产量组合 · 同源同比" : "PSD 历史 / 回退基线"}{crop === "rice" ? " · 精米" : ""}</span>
+          <span>{snapshot?.mode === "local_composite" ? "本土优先产量组合 · 同源同比" : "PSD 历史基础库"}{crop === "rice" ? " · 精米" : ""}</span>
           <details>
             <summary>口径与来源</summary>
             <p>{data.methodology}</p>
@@ -544,10 +550,9 @@ export default function Dashboard({
               target="_blank"
               rel="noreferrer"
             >
-              PSD 历史与回退基线 ↗
+              PSD 历史基础库 ↗
             </a>
             <span> · 组合最近可得日期 {day(snapshot?.available_date)}</span>
-            {snapshot && <ProductionSources evidence={snapshot.source_evidence} />}
           </details>
         </div>
       </section>

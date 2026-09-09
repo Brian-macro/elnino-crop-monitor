@@ -116,4 +116,4 @@ def dashboard_bundle(con,crop):
     countries=sorted({canonical_country(c) for c in raw.country})
     return dict(crop=crop,years=years,history=history,geographies=[geography_metadata(c) for c in countries],
         updated=datetime.now(timezone.utc).isoformat(),policy_version=POLICY['version'],
-        methodology='本土机构产量优先；只有本年和上年同源、同产品且年度可对应时才成对替换。缺少可比数据或转换未验证则明确回退PSD。全球、地图和前五加其他使用同一组合；覆盖率按组合上年产量计算。历史为当前归档的修订值，不代表事件当时的预测。')
+        methodology='有本国预测数据用本国预测数据，无则用PSD；同比仅在本年和上年同源、同产品且年度可对应时计算。全球、地图和前五加其他使用同一组合；覆盖率按组合上年产量计算。历史为当前归档的修订值，不代表事件当时的预测。')

@@ -30,7 +30,7 @@ export default function SourcePolicy() {
     <section id="source-policy">
       <h2>地区与数据拼接方案</h2>
       <p>
-        国家预测优先使用本土来源的可比本年与上年产量；缺少任一侧或定义未验证，两年同时回退 PSD。全球与地区加总各国选定产量，不平均各国同比；成员缺失不缩小样本。香港、澳门、新加坡等不进入生产研究范围。
+        有本国预测数据用本国预测数据，无则用 PSD。同比只在本年与上年口径可比时计算，不跨来源计算同比。全球与地区加总各国选定产量，不平均各国同比；成员缺失不缩小样本。香港、澳门、新加坡等不进入生产研究范围。
       </p>
       <label>
         Crop
@@ -56,7 +56,7 @@ export default function SourcePolicy() {
               <th>研究地区/国家</th>
               <th>历史</th>
               <th>配置优先来源</th>
-              <th>预测选择与回退</th>
+              <th>预测选择</th>
               <th>长期预测</th>
               <th>Actual</th>
             </tr>
@@ -70,9 +70,9 @@ export default function SourcePolicy() {
                   <td>{sources[r.history] || r.history}</td>
                   <td>{r.configured_local_source ? sources[r.configured_local_source] || r.configured_local_source : r.forecast === "local_composite" ? "按成员国家选择" : "未配置本土来源"}</td>
                   <td>
-                    {r.forecast === "local_composite" ? "本土优先组合 · 含 PSD 回退成员" : r.fallback_reason ? `${sources[r.fallback] || "USDA PSD"} 回退` : `${sources[r.forecast] || r.forecast} · 可比成对值齐备才采用`}
+                    {r.forecast === "local_composite" ? "按成员国家采用本国预测或 PSD" : r.fallback_reason ? `${sources[r.fallback] || "USDA PSD"}` : `${sources[r.forecast] || r.forecast} · 可比成对值齐备才采用`}
                     <br />
-                    <small className="muted">{r.fallback_reason === "no_local_source" ? "未配置本土来源" : r.fallback_reason === "paddy_to_milled_crosswalk_unverified" ? "稻谷转精米定义未验证" : r.fallback_reason || "缺少可比本年/上年对时两年回退 PSD；实际采用见产量页"}</small>
+                    <small className="muted">{r.fallback_reason === "no_local_source" ? "未配置本土来源，使用 PSD" : r.fallback_reason === "paddy_to_milled_crosswalk_unverified" ? "稻谷转精米定义未验证，使用 PSD 精米" : r.fallback_reason || "缺少可比本年/上年对时不计算同比；实际采用见产量页"}</small>
                   </td>
                   <td>{r.long_term ? sources[r.long_term] || r.long_term : "无独立长期来源"}</td>
                   <td>
@@ -84,7 +84,7 @@ export default function SourcePolicy() {
         </table>
       </div>
       <p>
-        历史基础库保留 USDA PSD 修订后 Estimate，不冒充事件当年的预测。中国玉米、大豆、糖优先配置 CASDE，小麦配置 CropWatch；水稻的稻谷转精米定义尚未验证，使用 PSD 精米回退。NBS 实产和农业展望长期预测独立保存。配置来源不等于当前报告已可用，实际选择取决于可比成对值。
+        历史基础库保留 USDA PSD 修订后 Estimate，不冒充事件当年的预测。中国玉米、大豆、糖优先配置 CASDE，小麦配置 CropWatch；水稻的稻谷转精米定义尚未验证，使用 PSD 精米。NBS 实产和农业展望长期预测独立保存。配置来源不等于当前报告已可用，实际选择取决于可比成对值。
       </p>
       <p>
         固定名单根据2020–2024五年平均产量筛选：小麦/玉米/水稻≥0.5 Mt，大豆≥0.1
