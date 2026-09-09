@@ -32,3 +32,9 @@ GitHub Actions runner 是临时执行环境，数据库的长期保存位置是 
 手动维护：Actions 的 Run workflow 选择对应 group；仅重建页面选 build，全量刷新选 all。单源失败保留旧版并发布来源状态，数据完整性检查失败则禁止提交和部署。
 
 已知限制：部分本土适配器（例如 AAFC、CONAB、DA&FW）仍绑定已验证的具体报告URL；每日会检查该报告的内容修订，但尚不能保证自动发现下一期新URL。固定端点的报告发布日期不得随检查日期刷新；新报告需补充发现和口径验证后接入。每日检查成功不等于发现新预测。
+
+## 本次云端验收
+
+代码提交 `fe1bf99` 已推送 main；数据保存提交 `1d07145`。预测更新运行：https://github.com/Brian-macro/elnino-crop-monitor/actions/runs/34300403854 。
+
+云端92项测试通过；WASDE、CropWatch、中国农业展望返回0；CASDE与本土机构当日已检查而跳过。校验、JSON发布与Parquet导出全部成功，report.group=forecasts、publication_complete=true、ok=true。基线生产、气候与价格Parquet未改变。本地另通过快照重建、TypeScript、14页静态构建、桌面与移动端两套浏览器回归。
