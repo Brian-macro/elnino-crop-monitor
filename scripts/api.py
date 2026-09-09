@@ -151,7 +151,6 @@ def production(
         "available_date<=?",
         "metric=?",
         "country=ANY(?)",
-        "NOT (country='China' AND status='forecast' AND source NOT IN ('cropwatch','china_outlook'))",
     ]
     args = [crop, asof or date.today(), metric, allowed + aliases]
     if country:

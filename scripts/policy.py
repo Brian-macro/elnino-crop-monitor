@@ -52,7 +52,11 @@ def active_regions(crop):
     return [name for name in POLICY["regions"] if region_members(name, crop)]
 
 
-def primary_source(country, status, target_year, available_date):
+def primary_source(country, status, target_year, available_date, crop=None):
+    if crop and status == "forecast":
+        if country == "China" and target_year > int(str(available_date)[:4]) + POLICY["source_priority"]["china"]["horizon_boundary"]:
+            return "china_outlook"
+        return local_source(country, crop) or "usda_psd"
     if country in POLICY["regions"]:
         return POLICY["regions"][country]["primary"]
     if country != "China":
@@ -71,7 +75,7 @@ def primary_source(country, status, target_year, available_date):
 def annotate_rows(df):
     df = df.copy()
     df["is_primary"] = [
-        r.source == primary_source(r.country, r.status, r.target_year, r.available_date)
+        r.source == primary_source(r.country, r.status, r.target_year, r.available_date, getattr(r, "crop", None))
         for r in df.itertuples()
     ]
     return df
@@ -123,14 +127,20 @@ def policy_bundle():
     for crop in POLICY["active_countries"]:
         for unit in research_units(crop):
             china = unit == "China"
+            rule = composite_rule(unit, crop)
+            aggregate = unit == 'Global' or unit in POLICY['regions']
             matrix.append(
                 dict(
                     crop=crop,
                     unit=unit,
                     members=region_members(unit, crop),
-                    history="usda_psd (MY reference)" if china else "usda_psd",
+                    history="usda_psd",
                     actual="nbs" if china else None,
-                    forecast="cropwatch" if china else "usda_psd",
+                    forecast='local_composite' if aggregate else local_source(unit, crop) or 'usda_psd',
+                    configured_local_source=rule['source'] if rule else None,
+                    fallback='usda_psd',
+                    fallback_reason=(None if aggregate or (rule and rule.get('eligible')) else
+                                     rule.get('reason', 'definition_unverified') if rule else 'no_local_source'),
                     long_term="china_outlook" if china else None,
                     reference=(
                         []
@@ -138,15 +148,14 @@ def policy_bundle():
                         else ["usda_wasde", "cropwatch"] if not china else ["usda_psd"]
                     ),
                     splice=(
-                        "separate CY/MY segments"
-                        if china
-                        else "same-source / same-definition"
+                        "本土本年/上年同源成对替换；缺少可比数据或口径未验证时，两年都明确回退PSD。"
                     ),
                     mean=False,
                 )
             )
     return {
         **POLICY,
+        'country_sources': COUNTRY_SOURCES,
         "source_matrix": matrix,
         "research_units": {
             crop: research_units(crop) for crop in POLICY["active_countries"]

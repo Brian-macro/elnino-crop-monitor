@@ -12,11 +12,10 @@ import {
   pct,
   day,
   Overview,
-  CropData,
-  preferred,
   sources,
 } from "@/lib/data";
 import { zhCountry } from "@/lib/labels";
+import ProductionSources, { ProductionEvidence, fallbackLabel } from './ProductionSources';
 const cropNames: Record<string, string> = {
   wheat: "小麦",
   corn: "玉米",
@@ -47,7 +46,7 @@ type Snapshot = {
   target_year: number;
   status: string;
   source: string;
-  source_url: string;
+  source_url: string | null;
   available_date: string;
   publication_date: string | null;
   download_timestamp: string;
@@ -58,7 +57,9 @@ type Snapshot = {
   top5_share: number;
   mode: string;
   local_coverage_pct: number;
-  baseline: { source: string; value: number; previous: number | null; yoy: number | null };
+  baseline: { source: string; value: number; previous: number | null; yoy: number | null; source_url?: string };
+  source_evidence: Record<string, ProductionEvidence>;
+  china: ProductionEvidence & { value: number | null };
 };
 type Data = {
   crop: string;
@@ -171,34 +172,20 @@ function Change({ value }: { value: number | null | undefined }) {
   );
 }
 function ChinaSource({ crop, year }: { crop: string; year: number }) {
-  const { data } = useData<CropData>(crop);
-  const row = data
-    ? preferred(
-        data.production.filter(
-          (r) =>
-            r.country === "China" &&
-            !r.region &&
-            r.target_year === year &&
-            r.status === "forecast",
-        ),
-        "China",
-      )
-    : undefined;
+  const { data } = useData<Data>('dashboard_' + crop);
+  const row = data?.years[String(year)]?.china;
   return (
     <div className="china-note">
-      <strong>中国机构预测</strong>
+      <strong>中国实际采用的产量来源</strong>
       <span>
         {row
           ? `${sources[row.source]} · ${num(row.value)} 百万吨`
           : "当前年度暂无可用预测"}
       </span>
       <small>
-        与首页 USDA PSD 可比序列分开；
-        {row?.commodity_basis === "paddy"
-          ? "此处为稻谷口径。"
-          : "保留机构原始口径。"}
+        {row?.source === 'usda_psd' ? `PSD 回退：${fallbackLabel(row.fallback_reason)}` : '与首页本土成对组合一致；保留机构原始证据。'}
       </small>
-      {row && (
+      {row?.source_url && (
         <a href={row.source_url} target="_blank" rel="noreferrer">
           查看原报告 ↗
         </a>
@@ -540,7 +527,7 @@ export default function Dashboard({
           </aside>
         </div>
         <div className="world-panel-footer">
-          <span>{snapshot?.mode === "local_composite" ? "本土最新预测组合 · 同源同比" : "USDA PSD 基线"}{crop === "rice" ? " · 精米" : ""}</span>
+          <span>{snapshot?.mode === "local_composite" ? "本土优先产量组合 · 同源同比" : "PSD 历史 / 回退基线"}{crop === "rice" ? " · 精米" : ""}</span>
           <details>
             <summary>口径与来源</summary>
             <p>{data.methodology}</p>
@@ -552,14 +539,15 @@ export default function Dashboard({
             </p>
             <a
               href={
-                snapshot?.source_url || "https://apps.fas.usda.gov/psdonline/"
+                snapshot?.baseline.source_url || "https://apps.fas.usda.gov/psdonline/"
               }
               target="_blank"
               rel="noreferrer"
             >
-              原始来源 ↗
+              PSD 历史与回退基线 ↗
             </a>
-            <span> · 可得日期 {day(snapshot?.available_date)}</span>
+            <span> · 组合最近可得日期 {day(snapshot?.available_date)}</span>
+            {snapshot && <ProductionSources evidence={snapshot.source_evidence} />}
           </details>
         </div>
       </section>

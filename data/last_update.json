@@ -1,38 +1,23 @@
 {
-  "started_at": "20260909T014538Z",
-  "policy_version": "2026-09-09-local-forecast-daily-v1",
+  "started_at": "20260909T082822Z",
+  "policy_version": "2026-09-09-local-source-consistency-v2",
   "offline": false,
-  "group": "forecasts",
+  "group": "build",
   "steps": [
-    {
-      "step": "wasde",
-      "returncode": 0,
-      "seconds": 0.86
-    },
-    {
-      "step": "cropwatch",
-      "returncode": 0,
-      "seconds": 69.87
-    },
-    {
-      "step": "china_outlook",
-      "returncode": 0,
-      "seconds": 181.12
-    },
     {
       "step": "validate",
       "returncode": 0,
-      "seconds": 0.71
+      "seconds": 0.74
     },
     {
       "step": "publish",
       "returncode": 0,
-      "seconds": 40.01
+      "seconds": 26.21
     },
     {
       "step": "parquet",
       "returncode": 0,
-      "seconds": 0.63
+      "seconds": 0.64
     }
   ],
   "publication_complete": true,

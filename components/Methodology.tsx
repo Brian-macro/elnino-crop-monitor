@@ -69,7 +69,7 @@ export default function Methodology() {
               <h3>{s.name}</h3>
               <SourceState source={s} />
               <p>
-                频率：{s.freq} · 记录：{num(s.rows_ingested, 0)}
+                报告发布频率：{s.freq} · 记录：{num(s.rows_ingested, 0)}
                 <br />
                 最近检查：{day(s.last_checked)}
                 <br />
@@ -97,9 +97,7 @@ export default function Methodology() {
         <p>
           Actual 仅接受明确官方实产公告。Forecast
           按报告目标年和发布时点保存。PSD 历史数据是最新修订估计，保存在独立
-          Estimate 表，不能作为当年的历史预测，也不直接冒充最终实产。中国
-          独立预测详情采用 CropWatch
-          和中国农业展望；首页地图与前五排行统一用PSD可比口径。
+          Estimate 表，不能作为当年的历史预测，也不直接冒充最终实产。国家产量预测优先采用本土可比成对值，缺少本年或上年值、年度映射或产品定义未验证时，两年同时回退 PSD，并标明原因。中国玉米、大豆、糖优先 CASDE，小麦优先 CropWatch；农业展望长期预测独立保存。
           PSD近年Forecast分类是保守的年份规则，可能同时包含暂定估计和预测，不冒充源站明确的Final标签。
         </p>
         <p>
@@ -135,7 +133,7 @@ export default function Methodology() {
           Milled、早稻、冬小麦和未注明折算口径的食糖独立保存，无法匹配时不计算同比、共识或预测误差。
         </p>
         <p>
-          Global主序列与海外国家统一用PSD；Global是全部来源国家的派生合计，存在EU合计时剔除成员，地区研究篮子不重复加回Global。WASDE
+          Global与地区产量采用本土优先组合：各国本年和上年同时选择同一本土来源或同时回退 PSD，再分别加和计算同比。存在EU合计时剔除成员，地区研究篮子不重复加回Global。历史复盘默认采用该组合产量；PSD/WASDE供需表独立参考，不能把本土产量与USDA库存、消费当成同源供需表。WASDE
           World行仅作对照。共识不参与主序列拼接；对照区要求同年度、同口径、45天内至少两家独立机构，USDA
           PSD/WASDE只算一家。
         </p>
@@ -146,7 +144,7 @@ export default function Methodology() {
           ONI 暖事件使用NOAA公布的ERSSTv6一位小数表，要求≥5 个连续重叠三月季达到
           +0.5°C。历史百分位使用完整已归档指数样本的经验分布。2026 年 NOAA
           官方监测转向 RONI，本页仍保留经典 ONI
-          以便历史比较。阈值强度不是气候预测。
+          以便历史比较。NOAA气候观测独立于农业预测来源；本站“预测”指农业产量预测，ONI阈值强度不是气候预测。
         </p>
         <p>
           Yield anomaly 和产量趋势缺口采用之前 10
@@ -169,7 +167,7 @@ export default function Methodology() {
         <p>
           网络请求或解析失败保留上次有效数据并显示 Data Stale / Partial
           Coverage。过期阈值按源更新频率设置。静态 API 随 ETL
-          构建更新，运行状态以本页 Last Checked 和观测日期为准。
+          构建更新。预测来源每日北京时间14:17检查，检查不代表每日有新报告；历史产量、气候与价格基础库手动维护。运行状态以本页 Last Checked 和观测日期为准。
         </p>
       </section>
       <section>

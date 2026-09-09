@@ -1,5 +1,5 @@
 {
-  "version": "2026-09-09-local-forecast-daily-v1",
+  "version": "2026-09-09-local-source-consistency-v2",
   "source_priority": {
     "overseas": {
       "primary": "usda_psd",
@@ -16,7 +16,8 @@
       "history_reference": "usda_psd",
       "actual": "nbs",
       "horizon_boundary": 2
-    }
+    },
+    "scope": "Raw reference defaults; crop-specific production selection uses country_sources.json and source_matrix."
   },
   "excluded_entities": [
     "Hong Kong",
@@ -219,9 +220,9 @@
     "rule": "Reference only; >=2 independent institutions, same definition and target, within 45 days. No default mean or level splice."
   },
   "splicing": {
-    "overseas": "PSD history and forecast, same definition and fixed region membership; keep Estimate/Forecast separate. WASDE vintages are a separate reference series.",
-    "china": "NBS CY Actual and CropWatch CY forecasts shown separately; China Outlook long-term separate; PSD MY history is a reference series, no CY/MY join.",
-    "missing": "N/A; no country proxies, no interpolation, no shrinking basket, no source fallback."
+    "overseas": "本土机构同源本年/上年成对替换；缺少可比数据时两年回退PSD并注明原因。历史PSD修订估计保留。",
+    "china": "玉米/大豆/糖CASDE，小麦CropWatch；水稻精米转换未验证则PSD回退。NBS实产和农业展望长期独立保存。",
+    "missing": "PSD回退必须明确标注；基线也缺失时N/A，不插值、不借邻国数据。"
   },
   "schedule": [
     {
@@ -363,11 +364,12 @@
     }
   ],
   "dashboard": {
-    "source": "usda_psd",
+    "source": "local_composite",
     "top_n": 5,
-    "others": "same_snapshot_complement",
-    "china": "PSD comparable map; CropWatch/NBS/China Outlook retained in separate details",
-    "presentation": "Chinese-first map; historical price/revision disclosure removed from homepage"
+    "others": "composite_component_complement",
+    "china": "Crop-specific local pair; explicit PSD fallback",
+    "presentation": "Chinese-first map; historical price/revision disclosure removed from homepage",
+    "baseline": "usda_psd"
   },
   "quality": {
     "futures_monthly": {

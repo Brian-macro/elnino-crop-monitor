@@ -35,10 +35,10 @@ def main():
       ON CONFLICT DO NOTHING"""
     )
     for crop, _ in CROPS.values():
-        event_data = event_bundle(con, crop, climate)
+        dashboard = dashboard_bundle(con, crop)
+        event_data = event_bundle(con, crop, climate, dashboard=dashboard)
         dump(WEB / ("events_" + crop + ".json"), event_data)
         dump(ROOT / "public" / "api" / ("events_" + crop + ".json"), event_data)
-        dashboard = dashboard_bundle(con, crop)
         dump(WEB / ("dashboard_" + crop + ".json"), dashboard)
         dump(ROOT / "public" / "api" / ("dashboard_" + crop + ".json"), dashboard)
         bundle = crop_bundle(con, crop)

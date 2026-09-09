@@ -13,3 +13,9 @@
 - `.gitattributes`对原始资料与历史解析快照禁用换行转换；不得格式化、覆盖或修改原始文件，否则会破坏证据哈希。
 - 研究定义与已知限制见`docs/RESEARCH_AUDIT_2026-09-08.md`；研究范围与来源策略以`config/research_policy.json`为准，期货合约映射见`config/futures_contracts.json`。
 - 验证：`python -m pytest -q`、`python scripts/validate.py`、`npm run typecheck`、`npm run build`。浏览器验证用`tests/dashboard_browser.cjs`和`tests/event_study_browser.cjs`。
+
+- 本土来源一致性：`dashboard_bundle` 为首页与历史复盘默认产量的共同计算入口。复盘 `local_composite` 只提供产量；PSD/WASDE 完整供需表独立展示，禁止混源生成库存消费比。
+- `country_sources.json` 决定各国各作物本土来源；缺可比两年值/未验证转换时明确显示PSD回退。`policy_bundle` 导出的来源矩阵是配置，不是实际采用覆盖承诺。
+- 气候是独立NOAA归档观测；连续暖季不能跨缺月，1/3月变化按日历月。本机旧 `ElNinoCropMonitor-Update` 定时任务已停用，日更由GitHub Actions执行。
+- 文档生成器 `write_policy_docs.py` 只生成 `docs/SOURCE_MATRIX.md`，不覆盖人工审定的 `DATA_STITCHING.md`。
+- 换源回归：`tests/test_source_consistency.py`、`tests/test_climate_continuity.py`、`tests/source_consistency_browser.cjs`、`tests/climate_browser.cjs`。

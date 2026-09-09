@@ -1,4 +1,4 @@
-"""Small, comparable dashboard payload. Top five and residual share one PSD vintage."""
+"""Local paired production on a PSD baseline, with explicit component provenance."""
 from datetime import date,datetime,timezone
 from policy import POLICY,COUNTRY_SOURCES,active_countries,active_regions,region_members
 from normalize import EU_MEMBERS
@@ -28,10 +28,13 @@ def apply_local_pairs(con,crop,year,current,previous,asof=None):
     """Replace both years together; never calculate YoY across two sources."""
     evidence={};asof=asof or date.today().isoformat()
     for rule in COUNTRY_SOURCES['rules']:
-        if rule['crop']!=crop or not rule.get('eligible'):continue
+        if rule['crop']!=crop:continue
         country,source=rule['country'],rule['source']
+        if not rule.get('eligible'):
+            evidence[country]=dict(source='usda_psd',configured_source=source,fallback_reason=rule.get('reason','definition_unverified'))
+            continue
         offset=int(rule.get('source_target_year_offset',0));source_year=year+offset
-        rows=con.execute('''SELECT target_year,value,record_id,available_date FROM production_all
+        rows=con.execute('''SELECT target_year,value,record_id,available_date,source_url,publication_date,status,document_id,year_basis,download_timestamp FROM production_all
           WHERE crop=? AND country=? AND region='' AND source=? AND metric='production'
             AND commodity_basis=? AND year_basis=? AND target_year IN (?,?) AND available_date<=?
           QUALIFY row_number() OVER(PARTITION BY target_year ORDER BY available_date DESC,download_timestamp DESC,record_id DESC)=1''',
@@ -39,8 +42,11 @@ def apply_local_pairs(con,crop,year,current,previous,asof=None):
         by_year={int(r[0]):r for r in rows}
         if source_year in by_year and source_year-1 in by_year and country in current and country in previous:
             current[country]=float(by_year[source_year][1]);previous[country]=float(by_year[source_year-1][1])
-            evidence[country]=dict(source=source,current_record=by_year[source_year][2],previous_record=by_year[source_year-1][2],source_target_year=source_year,fallback_reason=None)
-        else:evidence[country]=dict(source='usda_psd',fallback_reason='missing_local_pair')
+            row=by_year[source_year]; prior=by_year[source_year-1]
+            evidence[country]=dict(source=source,current_record=row[2],previous_record=prior[2],source_target_year=source_year,fallback_reason=None,
+                source_url=row[4],available_date=str(max(row[3],prior[3]))[:10],publication_date=str(row[5])[:10] if row[5] else None,
+                status=row[6],document_id=row[7],year_basis=row[8],download_timestamp=str(max(row[9],prior[9])))
+        else:evidence[country]=dict(source='usda_psd',configured_source=source,fallback_reason='missing_local_pair')
     return evidence
 
 def dashboard_bundle(con,crop):
@@ -81,6 +87,13 @@ def dashboard_bundle(con,crop):
         summary['world']['baseline_yoy'] = summary['baseline']['yoy']
         summary['world']['yoy_spread_pp'] = summary['world']['yoy']-summary['baseline']['yoy'] if summary['world']['yoy'] is not None and summary['baseline']['yoy'] is not None else None
         summary['source_evidence']=evidence
+        china_evidence=evidence.get('China',dict(source='usda_psd',fallback_reason='no_local_source'))
+        china_current=current_counts.get('China');china_previous=previous_counts.get('China')
+        summary['china']=dict(value=china_current,previous=china_previous,
+            yoy=(china_current/china_previous-1)*100 if china_current is not None and china_previous else None,
+            source_url=latest.source_url,available_date=str(latest.available_date)[:10],status=latest.status,
+            year_basis=latest.year_basis,document_id=doc)
+        summary['china'].update(china_evidence)
         for row in summary['ranking']:
             row['contribution_pp'] = (
                 row['change'] / summary['world']['previous'] * 100
@@ -91,10 +104,16 @@ def dashboard_bundle(con,crop):
         summary.update(target_year=int(year),status=latest.status,source='usda_psd',source_url=latest.source_url,
             available_date=str(latest.available_date)[:10],publication_date=str(latest.publication_date)[:10] if str(latest.publication_date)!='NaT' else None,
             download_timestamp=str(latest.download_timestamp),document_id=doc,commodity_basis=latest.commodity_basis,year_basis=latest.year_basis)
+        summary['baseline']['source_url']=latest.source_url
+        summary['baseline']['available_date']=str(latest.available_date)[:10]
+        if replaced:
+            summary.update(source='local_composite',source_url=None,publication_date=None,document_id=None,
+                available_date=max([str(latest.available_date)[:10]]+[evidence[c]['available_date'] for c in replaced]),
+                download_timestamp=max([str(latest.download_timestamp)]+[evidence[c]['download_timestamp'] for c in replaced]))
         summary['world'].pop('members',None)
         years[str(year)]=summary
         history.append(dict(year=int(year),value=summary['world']['value'],yoy=summary['world']['yoy'],status=latest.status))
     countries=sorted({canonical_country(c) for c in raw.country})
     return dict(crop=crop,years=years,history=history,geographies=[geography_metadata(c) for c in countries],
         updated=datetime.now(timezone.utc).isoformat(),policy_version=POLICY['version'],
-        methodology='全球地图与前五排行统一为USDA PSD可比口径；其他=同一快照全球余下成员的总和。中国独立研究来源在详情中保留。历史Estimate与Forecast分开，不补缺失值。')
+        methodology='本土机构产量优先；只有本年和上年同源、同产品且年度可对应时才成对替换。缺少可比数据或转换未验证则明确回退PSD。全球、地图和前五加其他使用同一组合；覆盖率按组合上年产量计算。历史为当前归档的修订值，不代表事件当时的预测。')

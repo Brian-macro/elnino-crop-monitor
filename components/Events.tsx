@@ -2,7 +2,8 @@
 import { useEffect, useState } from "react";
 import Chart, { chartBase } from "./Chart";
 import { Loading } from "./Common";
-import { useData, CROPS, num, pct, day, Event, strengthZh } from "@/lib/data";
+import { useData, CROPS, num, pct, day, Event, strengthZh, sources } from "@/lib/data";
+import ProductionSources, { ProductionEvidence, fallbackLabel } from './ProductionSources';
 import type { EChartsOption } from "echarts";
 const cropNames: Record<string, string> = {
   wheat: "小麦",
@@ -17,7 +18,12 @@ type Balance = {
   consumption: number | null;
   stocks_to_use: number | null;
   source: string;
-  source_url: string;
+  source_url: string | null;
+  source_evidence?: Record<string, ProductionEvidence>;
+  fallback_reason?: string | null;
+  local_coverage_pct?: number;
+  baseline_source_url?: string;
+  yoy?: number | null;
   document_id: string;
   available_date: string;
   publication_date: string | null;
@@ -91,7 +97,7 @@ export default function Events() {
     [eventId, setEventId] = useState(""),
     [domestic, setDomestic] = useState(""),
     [overseasMode, setOverseasMode] = useState("futures"),
-    [source, setSource] = useState("usda_psd"),
+    [source, setSource] = useState("local_composite"),
     [year, setYear] = useState(0);
   const { data, error } = useData<EventData>("events_" + crop);
   useEffect(() => {
@@ -136,6 +142,7 @@ export default function Events() {
   const annualYear = window.years.includes(year)
     ? year
     : Number(event.start.slice(0, 4));
+  const localMode = source === "local_composite";
   const balances = data.annual[source]?.[String(annualYear)] || {};
   const world = balances.Global,
     china = balances.China;
@@ -350,7 +357,7 @@ export default function Events() {
             </span>
           </div>
           <div className="event-annual-heading">
-            <span>窗口内年度产量</span>
+            <span>窗口内年度产量 · {localMode ? "本土优先 / 明示回退" : "独立供需参考"}</span>
             <small>市场年度 · 百万吨</small>
           </div>
           <div className="event-year-strip">
@@ -465,8 +472,9 @@ export default function Events() {
                 value={source}
                 onChange={(e) => setSource(e.target.value)}
               >
-                <option value="usda_psd">USDA PSD</option>
-                <option value="usda_wasde">USDA WASDE</option>
+                <option value="local_composite">本土优先产量（与首页一致）</option>
+                <option value="usda_psd">PSD 供需参考</option>
+                <option value="usda_wasde">WASDE 供需参考</option>
               </select>
             </label>
             <label>
@@ -498,6 +506,7 @@ export default function Events() {
                 <td>{show(world?.production)}</td>
                 <td>{show(china?.production)}</td>
               </tr>
+              {!localMode && <>
               <tr>
                 <td>期末库存</td>
                 <td>{show(world?.ending_stocks)}</td>
@@ -521,38 +530,33 @@ export default function Events() {
                     : num(china.stocks_to_use, 1) + "%"}
                 </td>
               </tr>
+              </>}
             </tbody>
           </table>
           <p className="balance-unit">
-            产量与库存：百万吨
-            <br />
-            库存消费比＝期末库存 ÷ 表列消费或用量
-            <br />
-            {source === "usda_wasde" && ["corn", "wheat", "rice"].includes(crop)
-              ? "WASDE全球用量含进出口差额调整，不能与PSD国家消费加总直接拼接。"
-              : "PSD全球分母为各国国内消费合计；糖为国内总消耗。"}
+            {localMode ? '产量：百万吨。本土组合尚未形成完整同源库存、消费数据，因此不显示组合库存消费比；可切换独立供需参考。' : <>
+              产量与库存：百万吨<br />库存消费比＝期末库存 ÷ 表列消费或用量<br />
+              {source === 'usda_wasde' && ['corn', 'wheat', 'rice'].includes(crop)
+                ? 'WASDE全球用量含进出口差额调整，不能与PSD国家消费加总直接拼接。'
+                : 'PSD全球分母为各国国内消费合计；糖为国内总消耗。'}
+            </>}
           </p>
           <div className="balance-note">
-            <span>{source === "usda_psd" ? "USDA PSD" : "USDA WASDE"}</span>
-            <p>
-              {world || china
-                ? `${world?.status === "forecast" ? (source === "usda_psd" ? "暂定估计/预测" : "报告预测") : "修订后历史估计"} · ${crop === "rice" ? "精米口径" : "来源原始作物口径"}`
-                : "所选来源与年度数据缺失"}
-            </p>
-            <p>
-              {world?.derived_global
-                ? "全球值按PSD全部国家加总，剔除欧盟成员重复。"
-                : source === "usda_wasde"
-                  ? "全球采用报告World行。"
-                  : ""}
-            </p>
-            <p>年度值不是月度数据，也不代表事件当时市场已知的版本。</p>
-            <p>各国市场年度起止不同，全球库存不是同一天的可交易库存。</p>
+            <span>{localMode ? '本土优先产量 · 与首页一致' : `${sources[source]} · 独立供需参考`}</span>
+            {localMode ? <>
+              <p>全球：{world?.source === 'local_composite' ? `本土组合 · 上年产量覆盖 ${num(world.local_coverage_pct, 1)}%` : `PSD 回退 · ${fallbackLabel(world?.fallback_reason)}`}</p>
+              <p>中国：{sources[china?.source] || '数据缺失'}{china?.source === 'usda_psd' ? ` · PSD 回退：${fallbackLabel(china.fallback_reason)}` : ''}</p>
+              <p>同比：全球 {percentage(world?.yoy)} · 中国 {percentage(china?.yoy)}</p>
+              {china?.source_url && <a href={china.source_url} target="_blank" rel="noreferrer">中国产量原始来源 ↗</a>}
+              <ProductionSources evidence={world?.source_evidence || {}} baselineUrl={world?.baseline_source_url} />
+            </> : <p>{world?.derived_global ? 'PSD全球为国家合计，已剔除欧盟成员重复。' : 'WASDE全球采用报告World行。'}此表保留原机构供需口径，产量可能与本土组合不同。</p>}
+            <p>年度值为当前归档的修订后历史估计或预测，不代表事件当时市场已知版本；缺少本土历史时使用明确标注的PSD历史。</p>
+            <p>各国市场年度起止不同；气候与价格仅作背景对照，不据此推断因果。</p>
           </div>
-          {(world || china) && (
+          {!localMode && (world || china) && (
             <a
               className="source-inline"
-              href={world?.source_url || china?.source_url}
+              href={world?.source_url || china?.source_url || undefined}
               target="_blank"
               rel="noreferrer"
             >

@@ -194,24 +194,30 @@ def climate_bundle(con):
     series = {}
     for key, g in df.groupby("index_name", sort=False):
         series[key] = records(g)
+    from analytics import month_index
+
     summaries = {}
     for key, ps in series.items():
         cur = ps[-1]
         vals = [p["value"] for p in ps]
+        values_by_month = {month_index(p["date"]): p["value"] for p in ps}
+        current_month = month_index(cur["date"])
         duration = 0
-        for v in reversed(vals):
-            if v >= 0.5:
-                duration += 1
-            else:
-                break
+        while values_by_month.get(current_month - duration, float("-inf")) >= 0.5:
+            duration += 1
+        changes = {
+            lag: cur["value"] - values_by_month[current_month - lag]
+            if current_month - lag in values_by_month else None
+            for lag in (1, 3)
+        }
         summaries[key] = {
             **cur,
             "percentile": round(
                 sum(v <= cur["value"] for v in vals) / len(vals) * 100, 1
             ),
             "strength": strength(cur["value"]),
-            "chg_1m": cur["value"] - vals[-2] if len(vals) > 1 else None,
-            "chg_3m": cur["value"] - vals[-4] if len(vals) > 3 else None,
+            "chg_1m": changes[1],
+            "chg_3m": changes[3],
             "warm_seasons": duration,
             "sample_size": len(vals),
         }
@@ -362,14 +368,7 @@ def crop_bundle(con, crop, asof=None):
         df = pd.concat([df, pd.DataFrame(regional)], ignore_index=True)
     df = df.sort_values(["available_date", "download_timestamp", "record_id"])
     df = df[df.country.isin(active_countries(crop) + active_regions(crop) + ["Global"])]
-    # Enforce requested Chinese forecasting source policy, while retaining all source rows in DB.
-    df = df[
-        ~(
-            df.country.eq("China")
-            & df.status.eq("forecast")
-            & ~df.source.isin(["cropwatch", "china_outlook"])
-        )
-    ]
+    # Preserve every archived source; selection is crop-specific, not a China whitelist.
     df = annotate_rows(df)
     for optional in [
         "component_records",

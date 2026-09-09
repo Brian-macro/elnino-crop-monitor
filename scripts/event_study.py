@@ -140,8 +140,31 @@ def balance_rows(con, crop):
     return result
 
 
-def event_bundle(con, crop, climate=None):
+def local_production_rows(dashboard):
+    """Share the exact dashboard production; never synthesize a mixed-source balance."""
+    result = {}
+    for year, snap in dashboard['years'].items():
+        common = dict(ending_stocks=None, consumption=None, stocks_to_use=None,
+            target_year=int(year), commodity_basis=snap['commodity_basis'], unit='Mt',
+            publication_date=None, derived_global=False)
+        result[year] = {
+            'Global': dict(**common, production=snap['world']['value'], yoy=snap['world']['yoy'],
+                source=snap['source'], source_url=snap['source_url'], document_id=snap['document_id'],
+                available_date=snap['available_date'], year_basis=snap['year_basis'], status=snap['status'],
+                local_coverage_pct=snap['local_coverage_pct'], source_evidence=snap['source_evidence'],
+                baseline_source_url=snap['baseline'].get('source_url'),
+                fallback_reason='no_comparable_local_pairs' if snap['mode']=='psd_baseline' else None),
+            'China': dict(**common, production=snap['china']['value'], **{k:v for k,v in snap['china'].items()
+                if k in ('source','source_url','document_id','available_date','year_basis','status','fallback_reason','yoy','source_target_year')}),
+        }
+    return result
+
+
+def event_bundle(con, crop, climate=None, dashboard=None):
     climate = climate or climate_bundle(con)
+    if dashboard is None:
+        from dashboard import dashboard_bundle
+        dashboard = dashboard_bundle(con, crop)
     future = records(
         con.execute(
             """SELECT * FROM (SELECT f.*,d.source_url,d.download_timestamp FROM futures_prices f
@@ -234,7 +257,8 @@ def event_bundle(con, crop, climate=None):
         generated_at=datetime.now(timezone.utc).isoformat(),
         events=climate["events"],
         windows=windows,
-        annual=balance_rows(con, crop),
+        annual={**balance_rows(con, crop), 'local_composite': local_production_rows(dashboard)},
+        default_production_source='local_composite',
         series=metadata,
         domestic_options=domestic,
         default_domestic=domestic[0] if domestic else None,
@@ -245,6 +269,8 @@ def event_bundle(con, crop, climate=None):
             "原币种与交割品级不同，指数用于走势复盘，不代表人民币价差或套利空间。",
             "主连换月可能造成跳变；供应商未提供每期实际交割合约，不假造换月明细。",
             "年度数据为当前归档的修订后历史值或预测，不代表事件当时已知数据；MY按来源年度编号对应，实际开始月份未经逐国逐作物校验。",
+            '产量主线与首页共用本土同源成对组合；早期没有本土可比数据时明确回退PSD历史估计。当前预测不会被当作早期事件当时已知的预测。',
+            '本土组合仅用于产量。库存、消费与库存消费比只在独立的PSD/WASDE供需参考中显示，不跨机构拼造供需平衡表。',
             'T是事后识别的首个暖季中心月，不是当时确认或交易信号时点；全球产量和库存按各国本地市场年度汇总，并非同一自然年/同一期末日。',
             '内外盘按自然月对照，各自交易日与收盘时刻不同；没有进行同一时刻对齐或汇率换算。窗口变化为首末月均价比，不是首末交易日收益。',
         ],
