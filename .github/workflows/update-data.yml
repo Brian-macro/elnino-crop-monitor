@@ -80,6 +80,7 @@ jobs:
           retention-days: 30
   deploy:
     needs: update
+    if: needs.update.outputs.data_ref != ''
     uses: ./.github/workflows/deploy.yml
     with:
       ref: ${{ needs.update.outputs.data_ref }}

@@ -9,8 +9,13 @@ on:
       - "lib/**"
       - "config/**"
       - "scripts/**"
-      - "data/web/**"
-      - "public/**"
+      # Forecast snapshots are deployed by update-data.yml through workflow_call
+      # after its validation and Parquet export complete. Excluding those paths
+      # prevents a second, competing Pages deployment on the bot's data commit.
+      - "public/images/**"
+      - "public/fonts/**"
+      - "public/world.json"
+      - "public/world.source.json"
       - "package.json"
       - "package-lock.json"
       - "next.config.mjs"

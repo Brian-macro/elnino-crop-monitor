@@ -27,6 +27,8 @@
 
 每日北京时间14:17：checkout main → 恢复DuckDB → update_forecasts.py → 校验 → 生成本土拼接JSON → 导出Parquet → 提交数据 → 部署确切提交。预测组不调用 fetch_usda.py、fetch_noaa.py、fetch_nbs.py、fetch_prices.py 或 fetch_futures.py。基础库保持已有时间覆盖，新增季节需要手动维护PSD基线。
 
+Pages 的普通 `push` 只处理代码、配置和静态资产。数据提交只由 `Update Research Data` 在校验、JSON 发布和 Parquet 导出成功后通过 `workflow_call` 部署，避免同一快照被自动部署两次。
+
 GitHub Actions runner 是临时执行环境，数据库的长期保存位置是 GitHub 仓库，而非 runner 磁盘或有期限的 artifact/cache。日志 artifact 仅保留30天，不承担数据库备份职责。
 
 手动维护：Actions 的 Run workflow 选择对应 group；仅重建页面选 build，全量刷新选 all。单源失败保留旧版并发布来源状态，数据完整性检查失败则禁止提交和部署。
