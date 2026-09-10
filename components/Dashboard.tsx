@@ -39,6 +39,7 @@ type Ranked = {
   members: string[];
   baseline_yoy?: number | null;
   yoy_spread_pp?: number | null;
+  forecast_gap?: number | null;
   contribution_pp?: number | null;
 };
 type ProductionEvidence = {
@@ -176,6 +177,14 @@ function Change({ value }: { value: number | null | undefined }) {
         : `${value < 0 ? "↘" : "↗"} ${pct(value)}`}
     </span>
   );
+}
+function forecastYoyRange(snapshot: Snapshot | undefined) {
+  const values = [snapshot?.world.yoy, snapshot?.baseline.yoy].filter(
+    (value): value is number => value != null,
+  );
+  if (!values.length) return "—";
+  const [low, high] = [Math.min(...values), Math.max(...values)];
+  return low === high ? pct(low) : `${pct(low)} 至 ${pct(high)}`;
 }
 function ChinaSource({ crop, year }: { crop: string; year: number }) {
   const { data } = useData<Data>('dashboard_' + crop);
@@ -409,19 +418,27 @@ export default function Dashboard({
             </h2>
           </div>
           <div className="world-metrics">
-            <div>
-              <span>同比变化</span>
+            <div className="forecast-range-metric">
+              <span>预测同比区间</span>
               <strong
                 className={
                   (snapshot?.world.yoy || 0) < 0 ? "negative" : "positive"
                 }
               >
-                {pct(snapshot?.world.yoy)}
+                {forecastYoyRange(snapshot)}
               </strong>
+              <small>本土优先 / PSD</small>
             </div>
             <div>
-              <span>较 PSD 同比</span>
-              <strong>{snapshot?.world.yoy_spread_pp == null ? "—" : `${snapshot.world.yoy_spread_pp >= 0 ? "+" : ""}${num(snapshot.world.yoy_spread_pp, 2)}pp`}</strong>
+              <span>相对 PSD 预测产量缺口</span>
+              <strong className={
+                (snapshot?.world.forecast_gap || 0) < 0 ? "negative" : "positive"
+              }>
+                {snapshot?.world.forecast_gap == null
+                  ? "—"
+                  : `${snapshot.world.forecast_gap >= 0 ? "+" : ""}${num(snapshot.world.forecast_gap, 1)}`}
+                {snapshot?.world.forecast_gap != null && <small> 百万吨</small>}
+              </strong>
             </div>
             <div>
               <span>全球产量</span>

@@ -336,6 +336,12 @@ b,
   font-size: 11px;
   margin-bottom: 1px;
 }
+.world-metrics > div > small {
+  display: block;
+  color: #899388;
+  font-size: 9px;
+  margin-top: -2px;
+}
 .world-metrics strong {
   font-size: 24px;
   line-height: 1.4;
@@ -351,6 +357,9 @@ b,
 }
 .world-metrics > div:first-child strong {
   font-size: 26px;
+}
+.world-metrics .forecast-range-metric strong {
+  font-size: 22px;
 }
 .world-body {
   display: grid;
@@ -1497,9 +1506,13 @@ footer > div {
     font-size: 8px;
   }
   .world-metrics {
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     width: 100%;
     gap: 12px;
+  }
+  .world-metrics .forecast-range-metric strong {
+    font-size: 20px;
   }
   .world-metrics .share-metric {
     display: block;

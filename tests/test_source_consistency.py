@@ -47,6 +47,7 @@ def test_dashboard_actual_composite_provenance_is_not_psd():
     assert snap['china']['source'] == 'casde'
     assert snap['source_evidence']['China']['source_url'] == 'https://example.org/casde'
     assert snap['world']['yoy'] == pytest.approx((240 / 220 - 1) * 100)
+    assert snap['world']['forecast_gap'] == pytest.approx(20)
     con.close()
 
 

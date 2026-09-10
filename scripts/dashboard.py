@@ -84,6 +84,7 @@ def dashboard_bundle(con,crop):
             previous=baseline_previous,
             yoy=(baseline_current/baseline_previous-1)*100 if baseline_previous else None,
         )
+        summary['world']['forecast_gap'] = summary['world']['value'] - baseline_current
         summary['world']['baseline_yoy'] = summary['baseline']['yoy']
         summary['world']['yoy_spread_pp'] = summary['world']['yoy']-summary['baseline']['yoy'] if summary['world']['yoy'] is not None and summary['baseline']['yoy'] is not None else None
         summary['source_evidence']=evidence

@@ -28,6 +28,8 @@ const fs = require("node:fs");
     throw Error("Navigation should have four main links");
   if ((await p.locator(".rank-item").count()) !== 6)
     throw Error("Exactly top five plus Other expected");
+  await p.getByText("预测同比区间", { exact: true }).waitFor();
+  await p.getByText("相对 PSD 预测产量缺口", { exact: true }).waitFor();
   if (await p.locator(".advanced-research").count())
     throw Error("Detailed research must start collapsed");
   if ((await p.locator(".world-panel").boundingBox()).y > 350)
