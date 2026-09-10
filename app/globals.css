@@ -164,7 +164,7 @@ b,
   white-space: nowrap;
 }
 .site-header nav a {
-  font-size: 14px;
+  font-size: 16px;
   color: #718177;
   height: 100%;
   display: flex;
@@ -181,7 +181,7 @@ b,
   display: flex;
   gap: 9px;
   align-items: center;
-  font-size: 11px;
+  font-size: 16px;
   color: #667a6d;
 }
 .author-avatar {
@@ -1348,7 +1348,7 @@ footer > div {
     margin-top: 10px;
   }
   .site-header nav a {
-    font-size: 13px;
+    font-size: 14px;
   }
   .wrap {
     padding: 0 20px;
