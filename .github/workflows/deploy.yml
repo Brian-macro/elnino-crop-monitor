@@ -65,10 +65,30 @@ jobs:
           python scripts/build_database.py --db data/processed/monitor_v2.duckdb
           python scripts/update_all.py --group build
 
+      - name: Run data and type regressions
+        run: |
+          python -m pytest -q
+          npm run typecheck
+
       - name: Build static export
         env:
           NEXT_PUBLIC_BASE_PATH: ${{ !endsWith(github.event.repository.name, '.github.io') && format('/{0}', github.event.repository.name) || '' }}
         run: npm run build
+
+      - name: Run browser and static API regressions
+        run: |
+          python scripts/serve_static.py &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:3000/; then
+              ready=1
+              break
+            fi
+            sleep 1
+          done
+          test "${ready:-}" = "1"
+          npm run test:browser
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

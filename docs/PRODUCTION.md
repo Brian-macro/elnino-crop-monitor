@@ -22,7 +22,7 @@
 
 ## 两部分数据与每日流程（2026-09-09）
 
-1. 基础数据：PSD 历史及回退基线、NBS 实产、气候、现货、期货。保存在仓库 Parquet，不每日重新抓取。
+1. 基础数据：PSD 历史与预测基准、FAOSTAT/NBS 实产、气候、现货、期货。保存在仓库 Parquet，不每日重新抓取。
 2. 预测数据：WASDE、CropWatch、CASDE、本土机构与中国农业展望。原始报告与解析版本追加保存，预测报告中的上年可比值也保留，用于同源成对同比。
 
 每日北京时间14:17：checkout main → 恢复DuckDB → update_forecasts.py → 校验 → 生成本土拼接JSON → 导出Parquet → 提交数据 → 部署确切提交。预测组不调用 fetch_usda.py、fetch_noaa.py、fetch_nbs.py、fetch_prices.py 或 fetch_futures.py。基础库保持已有时间覆盖，新增季节需要手动维护PSD基线。

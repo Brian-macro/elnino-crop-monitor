@@ -33,7 +33,7 @@ export default function SourcePolicy() {
         有本国预测数据用本国预测数据，无则用 PSD。同比只在本年与上年口径可比时计算，不跨来源计算同比。全球与地区加总各国选定产量，不平均各国同比；成员缺失不缩小样本。香港、澳门、新加坡等不进入生产研究范围。
       </p>
       <label>
-        Crop
+        品种
         <select value={crop} onChange={(e) => setCrop(e.target.value)}>
           {CROPS.map((c) => (
             <option key={c} value={c}>
@@ -58,7 +58,7 @@ export default function SourcePolicy() {
               <th>配置优先来源</th>
               <th>预测选择</th>
               <th>长期预测</th>
-              <th>Actual</th>
+              <th>真实产量</th>
             </tr>
           </thead>
           <tbody>

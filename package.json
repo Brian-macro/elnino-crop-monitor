@@ -8,6 +8,7 @@
     "start": "python scripts/serve_static.py",
     "typecheck": "tsc --noEmit",
     "test": "python -m pytest -q",
+    "test:browser": "node tests/data_contract.cjs && node tests/dashboard_browser.cjs && node tests/event_study_browser.cjs && node tests/source_consistency_browser.cjs",
     "update-data": "python scripts/update_all.py --group all"
   },
   "dependencies": {
@@ -20,6 +21,7 @@
     "@types/node": "20.14.0",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
+    "playwright": "1.63.0",
     "typescript": "5.5.4"
   }
 }

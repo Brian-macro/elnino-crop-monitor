@@ -20,11 +20,14 @@ const rows = rice.production.filter(
     r.target_year === 2025 &&
     r.status === "forecast",
 );
-assert.equal(preferred(rows, "China").commodity_basis, "paddy");
+const chinaRice = preferred(rows, "China");
+assert.equal(chinaRice.commodity_basis, "milled");
+assert.equal(chinaRice.source, "usda_psd");
 assert.equal(
   preferred(
     rows.filter((r) => r.commodity_basis === "paddy_early"),
     "China",
+    "cropwatch",
   ).commodity_basis,
   "paddy_early",
 );

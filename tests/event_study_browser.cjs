@@ -49,6 +49,10 @@ const fs = require("node:fs");
     )
   )
     throw Error("Recent corn futures missing");
+  if (await p.getByLabel("年度数据源", { exact: true }).inputValue() !== "actual_production")
+    throw Error("Historical review must default to official actual production");
+  await p.getByLabel("年度数据源", { exact: true }).selectOption("usda_psd");
+  await p.locator(".balance-note").getByText("USDA PSD", { exact: false }).waitFor();
   if (!(await p.locator(".balance-table").innerText()).includes("1,231.51"))
     throw Error("2023 global corn balance missing");
   await p.screenshot({
@@ -70,6 +74,7 @@ const fs = require("node:fs");
   )
     throw Error("Explicit historic spot reference missing");
   await p.getByLabel("年度数据源", { exact: true }).selectOption("usda_psd");
+  await p.locator(".balance-note").getByText("USDA PSD", { exact: false }).waitFor();
   if ((await p.locator(".balance-table").innerText()).includes("数据缺失"))
     throw Error("Historic PSD corn unavailable");
   for (const crop of ["soybean", "sugar", "rice", "wheat"]) {

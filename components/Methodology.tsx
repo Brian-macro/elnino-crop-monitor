@@ -101,6 +101,9 @@ export default function Methodology() {
           PSD近年Forecast分类是保守的年份规则，可能同时包含暂定估计和预测，不冒充源站明确的Final标签。
         </p>
         <p>
+          历史复盘的真实产量优先读取 FAOSTAT：全球与中国的小麦、玉米、稻谷和大豆覆盖至2024年；中国最新稻谷、小麦、玉米终值补充自国家统计局。糖在 FAOSTAT 全球与中国记录为估计标记，不作为真实产量使用，因此显示 N/A。
+        </p>
+        <p>
           Forecast vintage 按 source document、内容
           SHA256、目标年、地区、指标与口径保存。同一 URL
           内容改变产生新版本，不能回填到旧可得日期；报告发布日期与下载时间分别记录。As
@@ -136,6 +139,9 @@ export default function Methodology() {
           Global与地区产量采用本土优先组合：各国按可用本国预测或 PSD 选择，且只在来源与口径可比时计算同比。存在EU合计时剔除成员，地区研究篮子不重复加回Global。历史复盘默认采用真实产量数据库；PSD/WASDE供需表独立参考，不能把本土产量与USDA库存、消费当成同源供需表。WASDE
           World行仅作对照。共识不参与主序列拼接；对照区要求同年度、同口径、45天内至少两家独立机构，USDA
           PSD/WASDE只算一家。
+        </p>
+        <p>
+          首页“本土优先 / PSD预测区间”是两套来源预测同比的范围，不是统计置信区间；“相对 PSD 预测产量缺口”= 本土优先组合全球产量 − PSD 全球预测产量，单位为百万吨。
         </p>
       </section>
       <section>

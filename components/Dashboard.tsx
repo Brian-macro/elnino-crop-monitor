@@ -419,7 +419,7 @@ export default function Dashboard({
           </div>
           <div className="world-metrics">
             <div className="forecast-range-metric">
-              <span>预测同比区间</span>
+              <span>本土优先 / PSD 预测区间</span>
               <strong
                 className={
                   (snapshot?.world.yoy || 0) < 0 ? "negative" : "positive"
@@ -427,7 +427,7 @@ export default function Dashboard({
               >
                 {forecastYoyRange(snapshot)}
               </strong>
-              <small>本土优先 / PSD</small>
+              <small>两套来源预测的差异范围</small>
             </div>
             <div>
               <span>相对 PSD 预测产量缺口</span>
@@ -550,7 +550,7 @@ export default function Dashboard({
           </aside>
         </div>
         <div className="world-panel-footer">
-          <span>{snapshot?.mode === "local_composite" ? "本土优先产量组合 · 同源同比" : "PSD 历史基础库"}{crop === "rice" ? " · 精米" : ""}</span>
+          <span>{snapshot?.mode === "local_composite" ? "本土优先产量组合 · 同源同比" : "PSD 预测基准"}{crop === "rice" ? " · 精米" : ""}</span>
           <details>
             <summary>口径与来源</summary>
             <p>{data.methodology}</p>
@@ -567,7 +567,7 @@ export default function Dashboard({
               target="_blank"
               rel="noreferrer"
             >
-              PSD 历史基础库 ↗
+              PSD 预测基准 ↗
             </a>
             <span> · 组合最近可得日期 {day(snapshot?.available_date)}</span>
           </details>

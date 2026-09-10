@@ -22,3 +22,14 @@ def test_asof_and_definition_contract():
     import db
     assert 'available_date' in db.DDL
     assert 'commodity_basis' in db.DDL
+
+def test_public_api_snapshots_match_the_generated_web_copies():
+    root = Path(__file__).resolve().parents[1]
+    web = root / 'data' / 'web'
+    api = root / 'public' / 'api'
+    for source in web.glob('*.json'):
+        if source.name.startswith('map_'):
+            continue  # Map research artifacts are intentionally not public API routes.
+        published = api / source.name
+        assert published.exists(), source.name
+        assert published.read_bytes() == source.read_bytes(), source.name
