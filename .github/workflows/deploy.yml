@@ -77,6 +77,7 @@ jobs:
 
       - name: Run browser and static API regressions
         run: |
+          npx playwright install chromium
           python scripts/serve_static.py &
           server_pid=$!
           trap 'kill "$server_pid"' EXIT
@@ -88,7 +89,7 @@ jobs:
             sleep 1
           done
           test "${ready:-}" = "1"
-          npm run test:browser
+          PLAYWRIGHT_CHANNEL=chromium npm run test:browser
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
