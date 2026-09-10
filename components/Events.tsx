@@ -86,6 +86,7 @@ const show = (v: number | null | undefined, d = 2) =>
 const percentage = (v: number | null | undefined) =>
   v == null ? "数据缺失" : pct(v);
 const yearName = (year: number) => `${year}/${String(year + 1).slice(2)}`;
+const actualYearName = (year: number) => `${year} 年`;
 export default function Events() {
   const [crop, setCrop] = useState("corn"),
     [eventId, setEventId] = useState(""),
@@ -137,6 +138,7 @@ export default function Events() {
     ? year
     : Number(event.start.slice(0, 4));
   const actualMode = source === "actual_production";
+  const displayedYear = actualMode ? actualYearName(annualYear) : yearName(annualYear);
   const balances = data.annual[source]?.[String(annualYear)] || {};
   const world = balances.Global,
     china = balances.China;
@@ -363,7 +365,7 @@ export default function Events() {
                   key={y}
                   onClick={() => setYear(y)}
                 >
-                  <strong>{yearName(y)}</strong>
+                  <strong>{actualMode ? actualYearName(y) : yearName(y)}</strong>
                   <span>
                     全球 <b>{show(annual?.Global?.production, 1)}</b>
                   </span>
@@ -455,7 +457,7 @@ export default function Events() {
           <div className="small-panel-heading">
             <div>
               <span className="quiet-eyebrow">{actualMode ? "真实产量" : "年度供需"}</span>
-              <h2>{yearName(annualYear)} 市场年度</h2>
+              <h2>{displayedYear}{actualMode ? "" : " 市场年度"}</h2>
             </div>
           </div>
           <div className="balance-controls">
@@ -480,7 +482,7 @@ export default function Events() {
               >
                 {window.years.map((y) => (
                   <option key={y} value={y}>
-                    {yearName(y)}
+                    {actualMode ? actualYearName(y) : yearName(y)}
                   </option>
                 ))}
               </select>
@@ -528,7 +530,7 @@ export default function Events() {
             </tbody>
           </table>
           <p className="balance-unit">
-            {actualMode ? '产量：百万吨。仅展示真实产量数据库中已有的官方实产；未覆盖的国家或年份显示 N/A，不使用预测或历史估计补齐。' : <>
+            {actualMode ? '产量：百万吨 · 日历年。仅展示真实产量数据库中已有的官方实产；未覆盖的国家或年份显示 N/A，不使用预测或历史估计补齐。' : <>
               产量与库存：百万吨<br />库存消费比＝期末库存 ÷ 表列消费或用量<br />
               {source === 'usda_wasde' && ['corn', 'wheat', 'rice'].includes(crop)
                 ? 'WASDE全球用量含进出口差额调整，不能与PSD国家消费加总直接拼接。'

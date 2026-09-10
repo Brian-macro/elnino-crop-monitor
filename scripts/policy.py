@@ -135,7 +135,7 @@ def policy_bundle():
                     unit=unit,
                     members=region_members(unit, crop),
                     history="usda_psd",
-                    actual="nbs" if china else None,
+                    actual="faostat" if unit == "Global" else "nbs" if china else None,
                     forecast='local_composite' if aggregate else local_source(unit, crop) or 'usda_psd',
                     configured_local_source=rule['source'] if rule else None,
                     fallback='usda_psd',

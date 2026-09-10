@@ -249,6 +249,17 @@
       "data_part": "baseline"
     },
     {
+      "id": "faostat",
+      "group": "crops",
+      "script": "fetch_faostat.py",
+      "args": [],
+      "sources": [
+        "faostat"
+      ],
+      "interval_days": 365,
+      "data_part": "baseline"
+    },
+    {
       "id": "wasde",
       "group": "reference",
       "script": "fetch_wasde.py",

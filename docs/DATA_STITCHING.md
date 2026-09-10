@@ -29,7 +29,7 @@
 
 1. 历史基础库：PSD 已修订历史 Estimate（通常1960起）；每次下载记录快照可得日期，不伪装成当年实时预测。
 2. 国家预测：有可用本国预测时采用本国预测，无可用本国预测时使用 PSD。同比只在本年、上年来源与产品口径可比时计算，不跨来源计算同比。
-3. 真实产量：仅从 `actual_production` 读取有官方明确证据的终值；没有记录即显示 N/A，不插值、不借邻国数据、不改用预测值。
+3. 真实产量：仅从 `actual_production` 读取有官方明确证据的终值。FAOSTAT 提供全球与中国小麦、玉米、稻谷、大豆的年度官方数据；NBS 提供中国最新终值。没有记录即显示 N/A，不插值、不借邻国数据、不改用预测值。
 4. 地区与全球：按成员选择当年产量后加总。固定成员缺失不缩小样本；Global 剔除 EU 成员重复，不再次计入地区汇总。
 5. MY是各成员市场年度起始年对齐，并非所有国家同一自然年收获；地区进出口为成员毛额，包含内部贸易，不能视为地区对外贸易。
 6. 跨机构均值默认关闭。只有同产品、同地区、同年度口径、同单位且45天内至少两家独立机构时，才可在对照区看共识；主序列不采用均值。
@@ -51,6 +51,6 @@ flowchart LR
 - `research.py`：原始记录→规范国家名→Global→地区→研究范围→输出；Global先算，绝不把地区再加进去。
 - `event_study.py`：历史复盘默认读取真实产量库；PSD/WASDE仅作供需参考。
 - `update_forecasts.py`：每日预测检查入口；`update_all.py --group all` 用于手动全源维护，`--group build` 仅重建。
-- GitHub Actions 每日北京时间 14:17（06:17 UTC）运行 `python scripts/update_forecasts.py` 检查预测来源。基础历史产量、NOAA 气候观测与价格库手动维护。
+- GitHub Actions 每日北京时间 14:17（06:17 UTC）运行 `python scripts/update_forecasts.py` 检查预测来源。FAOSTAT、NBS 等基础历史产量、NOAA 气候观测与价格库手动维护。
 
 `write_policy_docs.py` 生成 `SOURCE_MATRIX.md`。修改配置后依次执行 `python scripts/write_policy_docs.py`、`python scripts/update_all.py --group build`、`npm run build`。

@@ -31,6 +31,7 @@ def test_policy_matrix_exposes_registered_local_primary_and_fallback():
     assert rows['China', 'corn']['forecast'] == 'casde'
     assert rows['Canada', 'wheat']['forecast'] == 'aafc'
     assert rows['Global', 'corn']['forecast'] == 'local_composite'
+    assert rows['Global', 'corn']['actual'] == 'faostat'
     assert rows['China', 'rice']['forecast'] == 'usda_psd'
     assert rows['China', 'rice']['configured_local_source'] == 'cropwatch'
     assert rows['China', 'rice']['fallback_reason'] == 'paddy_to_milled_crosswalk_unverified'

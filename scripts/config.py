@@ -109,6 +109,12 @@ SOURCES = {
         freq="annual",
         script="fetch_nbs.py",
     ),
+    "faostat": dict(
+        name="FAOSTAT 年度真实产量",
+        url="https://www.fao.org/faostat/",
+        freq="annual",
+        script="fetch_faostat.py",
+    ),
     "china_prices": dict(
         name="NBS 国内现货调查",
         url="https://www.stats.gov.cn/",
@@ -126,6 +132,7 @@ STALE_DAYS = {
     "cropwatch": 150,
     "china_outlook": 400,
     "nbs": 400,
+    "faostat": 400,
     "china_prices": 45,
     "casde": 45, "aafc": 65, "conab": 45, "abares": 120, "dafw": 120,
     "cec": 65, "ec": 120, "bcr": 65, "uga": 65,

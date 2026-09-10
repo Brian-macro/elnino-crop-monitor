@@ -32,6 +32,7 @@ export const sources: Record<string, string> = {
   cropwatch: "CropWatch",
   china_outlook: "中国农业展望",
   nbs: "国家统计局",
+  faostat: "FAOSTAT",
   worldbank: "World Bank",
   china_prices: "NBS 国内现货",
 };

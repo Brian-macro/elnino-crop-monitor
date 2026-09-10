@@ -1,0 +1,12 @@
+{
+  "document_id": "859d2547e4793f59883a6784a7f03391900ba96a11e083d5dd5a259938d5bfb5",
+  "source": "faostat",
+  "source_url": "https://bulks-faostat.fao.org/production/Production_Crops_Livestock_E_All_Data_(Normalized).zip",
+  "raw_path": "data/raw/faostat/c5835418c18f9322e7decbd6800f93a216eaae3cdfa31acb08f0518c0c6d6853.zip",
+  "sha256": "c5835418c18f9322e7decbd6800f93a216eaae3cdfa31acb08f0518c0c6d6853",
+  "publication_date": null,
+  "available_date": "2026-09-10",
+  "download_timestamp": "2026-09-10T02:02:23.594329+00:00",
+  "publication_date_basis": "FAOSTAT official bulk download; first observed",
+  "title": "FAOSTAT Crops and livestock products annual production database"
+}
