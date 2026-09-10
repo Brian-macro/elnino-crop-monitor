@@ -78,18 +78,23 @@ jobs:
       - name: Run browser and static API regressions
         run: |
           npx playwright install chromium
-          python scripts/serve_static.py &
+          # The production export uses the repository name as its base path.
+          # Mirror that mount locally so browser tests load the same asset URLs
+          # that GitHub Pages serves.
+          mkdir -p .static-test/elnino-crop-monitor
+          cp -a out/. .static-test/elnino-crop-monitor/
+          python -m http.server 3000 --directory .static-test &
           server_pid=$!
           trap 'kill "$server_pid"' EXIT
           for attempt in {1..30}; do
-            if curl --fail --silent http://127.0.0.1:3000/; then
+            if curl --fail --silent http://127.0.0.1:3000/elnino-crop-monitor/; then
               ready=1
               break
             fi
             sleep 1
           done
           test "${ready:-}" = "1"
-          npm run test:browser
+          TEST_URL=http://127.0.0.1:3000/elnino-crop-monitor npm run test:browser
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
