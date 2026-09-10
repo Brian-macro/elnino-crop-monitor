@@ -1,10 +1,8 @@
 const { chromium } = require("playwright");
 const fs = require("node:fs");
 (async () => {
-  const b = await chromium.launch({
-    headless: true,
-    channel: process.env.PLAYWRIGHT_CHANNEL || "chrome",
-  });
+  const channel = process.env.CI ? undefined : "chrome";
+  const b = await chromium.launch({ headless: true, ...(channel ? { channel } : {}) });
   const p = await b.newPage({
     viewport: { width: 1440, height: 1100 },
     deviceScaleFactor: 1,

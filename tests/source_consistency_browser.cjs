@@ -2,10 +2,8 @@ const { chromium } = require('playwright');
 const assert = require('node:assert/strict');
 
 (async () => {
-  const browser = await chromium.launch({
-    headless: true,
-    channel: process.env.PLAYWRIGHT_CHANNEL || 'chrome',
-  });
+  const channel = process.env.CI ? undefined : 'chrome';
+  const browser = await chromium.launch({ headless: true, ...(channel ? { channel } : {}) });
   try {
     const page = await browser.newPage({ viewport: { width: 1440, height: 1050 } });
     const errors = [];
