@@ -40,6 +40,7 @@ type Ranked = {
   baseline_yoy?: number | null;
   yoy_spread_pp?: number | null;
   forecast_gap?: number | null;
+  forecast_gap_pct?: number | null;
   contribution_pp?: number | null;
 };
 type ProductionEvidence = {
@@ -419,7 +420,7 @@ export default function Dashboard({
           </div>
           <div className="world-metrics">
             <div className="forecast-range-metric">
-              <span>本土优先 / PSD 预测区间</span>
+              <span>预测同比范围</span>
               <strong
                 className={
                   (snapshot?.world.yoy || 0) < 0 ? "negative" : "positive"
@@ -427,17 +428,21 @@ export default function Dashboard({
               >
                 {forecastYoyRange(snapshot)}
               </strong>
-              <small>两套来源预测的差异范围</small>
             </div>
             <div>
-              <span>相对 PSD 预测产量缺口</span>
+              <span>产量缺口</span>
               <strong className={
-                (snapshot?.world.forecast_gap || 0) < 0 ? "negative" : "positive"
+                snapshot?.world.forecast_gap_pct == null
+                  ? ""
+                  : snapshot.world.forecast_gap_pct > 0
+                    ? "negative"
+                    : snapshot.world.forecast_gap_pct < 0
+                      ? "positive"
+                      : ""
               }>
-                {snapshot?.world.forecast_gap == null
+                {snapshot?.world.forecast_gap_pct == null
                   ? "—"
-                  : `${snapshot.world.forecast_gap >= 0 ? "+" : ""}${num(snapshot.world.forecast_gap, 1)}`}
-                {snapshot?.world.forecast_gap != null && <small> 百万吨</small>}
+                  : pct(snapshot.world.forecast_gap_pct, 2)}
               </strong>
             </div>
             <div>
