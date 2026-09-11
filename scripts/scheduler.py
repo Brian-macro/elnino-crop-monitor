@@ -6,7 +6,14 @@ from datetime import date
 def select_jobs(jobs, last_checked, today=None, group="all", due=False):
     today = date.fromisoformat(str(today or date.today())[:10])
     result = []
+    expanded = []
     for job in jobs:
+        if job['script'] == 'fetch_local_sources.py' and not job.get('args'):
+            expanded.extend({**job, 'id': job['id']+'_'+source,
+                'args': ['--source',source], 'sources': [source]} for source in job['sources'])
+        else:
+            expanded.append(job)
+    for job in expanded:
         if group == "forecasts" and job.get("data_part") != "forecasts":
             continue
         if group not in ("all", "scheduled", "forecasts", job["group"]):

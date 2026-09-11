@@ -6,9 +6,12 @@ URL='https://uga.ua/en/news/ukraine-could-potentially-export-52-mmt-in-my-2026-2
 def discover(): return [{'url':URL,'publication_date':'2026-08-11','date_basis':'UGA article date','title':'UGA Ukraine 2026 harvest forecast','suffix':'.html'}]
 def parse(doc):
  text=BeautifulSoup(content(doc),'html.parser').get_text(' ',strip=True); out={'forecast':[],'estimate':[]}
- for crop,label,basis in [('wheat','wheat harvest at ([0-9.]+) MMT','grain'),('corn','corn harvest at ([0-9.]+) MMT','grain'),('soybean','soybean harvest could total ([0-9.]+) MMT','oilseed')]:
-  m=re.search(label,text,re.I)
-  if m: out['forecast'].append(observation(doc,crop,'Ukraine',2026,float(m.group(1)),basis=basis,year_basis='calendar_year',methodology='UGA official association harvest forecast'))
- for crop,value,basis in [('wheat',22.5,'grain'),('corn',31.1,'grain'),('soybean',5.0,'oilseed')]:
-  out['estimate'].append(observation(doc,crop,'Ukraine',2025,value,basis=basis,year_basis='calendar_year',methodology='UGA prior-harvest comparison in the same dated release'))
+ season=re.search(r'(20\d{2}) wheat harvest',text,re.I)
+ if not season: raise ValueError('UGA harvest year missing')
+ year=int(season[1])
+ for crop,label,basis in [('wheat','wheat harvest at','grain'),('corn','corn harvest at','grain'),('soybean','soybean harvest could total','oilseed')]:
+  m=re.search(label+r'\s+([0-9.]+) MMT\s*\((?:up|down) from ([0-9.]+) MMT in (20\d{2})\)',text,re.I)
+  if not m or int(m[3]) != year-1: raise ValueError('UGA same-release crop comparison missing: '+crop)
+  out['forecast'].append(observation(doc,crop,'Ukraine',year,float(m[1]),basis=basis,year_basis='calendar_year',methodology='UGA official association harvest forecast'))
+  out['estimate'].append(observation(doc,crop,'Ukraine',year-1,float(m[2]),basis=basis,year_basis='calendar_year',methodology='UGA prior-harvest comparison in the same dated release'))
  return out

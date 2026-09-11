@@ -1,0 +1,12 @@
+{
+  "document_id": "4ee2f441704eb01cf91afb85d43ecd70c7aacdd4b29ef0d7928fed6a26f14c32",
+  "source": "mx_siap",
+  "source_url": "https://nube.agricultura.gob.mx/cierre_agricola/?xajax=reporte&xajaxargs%5B%5D=1&xajaxargs%5B%5D=2024&xajaxargs%5B%5D=5&xajaxargs%5B%5D=3&xajaxargs%5B%5D=0&xajaxargs%5B%5D=--&xajaxargs%5B%5D=--&xajaxargs%5B%5D=375&xajaxargs%5B%5D=200201&xajaxargs%5B%5D=0&xajaxargs%5B%5D=2&xajaxargs%5B%5D=0&xajaxargs%5B%5D=0&xajaxargs%5B%5D=0&xajaxargs%5B%5D=",
+  "raw_path": "data/raw/mx_siap/34efb0a3a08f402e96ccc43221361a9b253448c4491e587f668a107be35a24e7.xml",
+  "sha256": "34efb0a3a08f402e96ccc43221361a9b253448c4491e587f668a107be35a24e7",
+  "publication_date": null,
+  "available_date": "2026-09-11",
+  "download_timestamp": "2026-09-11T14:07:09.925881+00:00",
+  "publication_date_basis": "unknown annual closing database revision date; first observed",
+  "title": "SIAP Soya 2024 national agricultural year"
+}

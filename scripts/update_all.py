@@ -40,6 +40,9 @@ def run_steps(steps, log_dir):
                 for key, cfg in SOURCES.items()
                 if cfg["script"] == Path(args[0]).name
             ]
+            if '--source' in args:
+                selected_source = args[args.index('--source') + 1]
+                affected = [source for source in affected if source == selected_source]
             if affected:
                 with connect() as con:
                     for source in affected:

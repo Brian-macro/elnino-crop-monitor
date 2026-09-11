@@ -1,0 +1,12 @@
+{
+  "document_id": "6a19c83f666be3ad33345270a1801b7169e2744615f68196632f7dba464d5c4f",
+  "source": "mx_siap",
+  "source_url": "https://nube.agricultura.gob.mx/cierre_agricola/?xajax=reporte&xajaxargs%5B%5D=1&xajaxargs%5B%5D=2025&xajaxargs%5B%5D=5&xajaxargs%5B%5D=3&xajaxargs%5B%5D=0&xajaxargs%5B%5D=--&xajaxargs%5B%5D=--&xajaxargs%5B%5D=375&xajaxargs%5B%5D=200201&xajaxargs%5B%5D=0&xajaxargs%5B%5D=2&xajaxargs%5B%5D=0&xajaxargs%5B%5D=0&xajaxargs%5B%5D=0&xajaxargs%5B%5D=",
+  "raw_path": "data/raw/mx_siap/9dfe21639300fae32865d069347f0152d19816f000b2545221c5608d5ee273a3.xml",
+  "sha256": "9dfe21639300fae32865d069347f0152d19816f000b2545221c5608d5ee273a3",
+  "publication_date": null,
+  "available_date": "2026-09-11",
+  "download_timestamp": "2026-09-11T14:07:05.627453+00:00",
+  "publication_date_basis": "unknown annual closing database revision date; first observed",
+  "title": "SIAP Soya 2025 national agricultural year"
+}

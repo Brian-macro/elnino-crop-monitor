@@ -1,0 +1,12 @@
+{
+  "document_id": "021d9d84526c19e095cc397d7d6a0bb60b415c53da21234e53f32758d758ede6",
+  "source": "mx_siap",
+  "source_url": "https://nube.agricultura.gob.mx/cierre_agricola/?xajax=reporte&xajaxargs%5B%5D=1&xajaxargs%5B%5D=2024&xajaxargs%5B%5D=5&xajaxargs%5B%5D=3&xajaxargs%5B%5D=0&xajaxargs%5B%5D=--&xajaxargs%5B%5D=--&xajaxargs%5B%5D=225&xajaxargs%5B%5D=200201&xajaxargs%5B%5D=0&xajaxargs%5B%5D=2&xajaxargs%5B%5D=0&xajaxargs%5B%5D=0&xajaxargs%5B%5D=0&xajaxargs%5B%5D=",
+  "raw_path": "data/raw/mx_siap/9d487eea3ede08a084a9f41dbad4afa75c572e57a58a8d2432ef1542705eaf79.xml",
+  "sha256": "9d487eea3ede08a084a9f41dbad4afa75c572e57a58a8d2432ef1542705eaf79",
+  "publication_date": null,
+  "available_date": "2026-09-11",
+  "download_timestamp": "2026-09-11T14:07:07.051613+00:00",
+  "publication_date_basis": "unknown annual closing database revision date; first observed",
+  "title": "SIAP Maíz grano 2024 national agricultural year"
+}

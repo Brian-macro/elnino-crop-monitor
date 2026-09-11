@@ -19,12 +19,13 @@ def test_local_pair_replaces_both_years():
     assert out["components"]["China"]["source"] == "local"
 
 
-def test_missing_local_prior_uses_psd_for_both_years():
+def test_missing_local_prior_keeps_national_current_and_suppresses_yoy():
     from composite import pair_components
 
     out = pair_components({2025: {"China": 300.0}, 2026: {"China": 310.0}}, {2026: {"China": 306.0}}, 2026)
-    assert out["current"] == 310.0 and out["previous"] == 300.0
-    assert out["components"]["China"]["fallback_reason"] == "missing_local_pair"
+    assert out["current"] == 306.0 and out["previous"] is None
+    assert out['yoy'] is None
+    assert out["components"]["China"]["comparison_reason"] == "missing_local_prior"
 
 
 def test_ineligible_local_source_falls_back():

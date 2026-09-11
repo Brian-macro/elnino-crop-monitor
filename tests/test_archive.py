@@ -2,7 +2,30 @@ import sys
 from pathlib import Path
 from datetime import date
 import json
+import pytest
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
+
+
+def test_post_query_is_archived_and_offline_cannot_replay_another_query(tmp_path,monkeypatch):
+    import archive
+    from db import connect
+    monkeypatch.setattr(archive,'RAW',tmp_path/'raw')
+    monkeypatch.setattr(archive,'ROOT',tmp_path)
+    monkeypatch.delenv('MONITOR_OFFLINE',raising=False)
+    class Response:
+        content=b'year,production\n2025,12\n'
+        def raise_for_status(self): pass
+    monkeypatch.setattr(archive.requests,'post',lambda *a,**kw: Response())
+    con=connect(':memory:')
+    first=archive.download(con,'national','https://example.org/table',request_method='POST',request_json={'crop':'corn'})
+    request_path=next((tmp_path/'raw'/'national').glob('*.request-*.json'))
+    assert json.loads(request_path.read_text())['json']=={'crop':'corn'}
+    monkeypatch.setenv('MONITOR_OFFLINE','1')
+    same=archive.download(con,'national','https://example.org/table',request_method='POST',request_json={'crop':'corn'})
+    assert same['document_id']==first['document_id']
+    with pytest.raises(ValueError,match='No archived original'):
+        archive.download(con,'national','https://example.org/table',request_method='POST',request_json={'crop':'rice'})
+    con.close()
 
 def test_same_url_correction_never_backdates(tmp_path,monkeypatch):
     import archive

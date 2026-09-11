@@ -199,7 +199,7 @@ function ChinaSource({ crop, year }: { crop: string; year: number }) {
           : "当前年度暂无可用预测"}
       </span>
       <small>
-        {row?.source === 'usda_psd' ? 'PSD 数据：该国家暂无可用本国预测。' : '与首页本土成对组合一致；保留机构原始证据。'}
+        {row?.source === 'usda_psd' ? '该年度缺少可比本国产量，采用 PSD 补充。' : '采用本国权威产量；同比需要同源上年数据。'}
       </small>
       {row?.source_url && (
         <a href={row.source_url} target="_blank" rel="noreferrer">

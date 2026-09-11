@@ -1,0 +1,12 @@
+{
+  "document_id": "af65ce5978aa1cf6497a514378aafb31ab87173cdd3626d5cb967cbe740a7854",
+  "source": "jp_maff",
+  "source_url": "https://www.maff.go.jp/e/data/stat/99th/attach/xls/index-50.xls",
+  "raw_path": "data/raw/jp_maff/327c60189194854546352053b9aa1366ca15e309d7d392f9f9dea06bf90728cd.xls",
+  "sha256": "327c60189194854546352053b9aa1366ca15e309d7d392f9f9dea06bf90728cd",
+  "publication_date": null,
+  "available_date": "2026-09-11",
+  "download_timestamp": "2026-09-11T14:07:16.308473+00:00",
+  "publication_date_basis": "unknown yearbook file publication date; first observed",
+  "title": "4 Pulses and Buckwheat(EXCEL : 65KB)"
+}

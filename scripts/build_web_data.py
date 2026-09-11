@@ -27,6 +27,7 @@ def main():
     con = connect()
     summary = {}
     coverage = []
+    dashboards = {}
     climate = climate_bundle(con)
     con.execute(
         """INSERT INTO regions(country,region,parent_region,source_url)
@@ -36,6 +37,7 @@ def main():
     )
     for crop, _ in CROPS.values():
         dashboard = dashboard_bundle(con, crop)
+        dashboards[crop] = dashboard
         event_data = event_bundle(con, crop, climate, dashboard=dashboard)
         dump(WEB / ("events_" + crop + ".json"), event_data)
         dump(ROOT / "public" / "api" / ("events_" + crop + ".json"), event_data)
@@ -113,6 +115,10 @@ def main():
     dump(WEB / "asia_coverage.json", report)
     dump(ROOT / "public" / "api" / "asia_coverage.json", report)
     policy = policy_bundle()
+    from national_coverage import national_coverage
+    national = national_coverage(con, dashboards)
+    dump(WEB / 'national_coverage.json', national)
+    dump(ROOT / 'public' / 'api' / 'national_coverage.json', national)
     dump(WEB / "policy.json", policy)
     dump(ROOT / "public" / "api" / "policy.json", policy)
     con.close()

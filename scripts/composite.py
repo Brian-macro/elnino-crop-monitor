@@ -1,8 +1,4 @@
-"""Paired-source production composites.
-
-The key invariant is that a local source can replace a country only when both
-the target year and the prior year are available under the same definition.
-"""
+"""National production composites; missing national priors suppress YoY."""
 from __future__ import annotations
 
 from typing import Mapping, Any
@@ -19,36 +15,38 @@ def pair_components(
         raise ValueError("PSD must contain target and prior year")
     eligible = eligible or {}
     current: dict[str, float] = {}
-    previous: dict[str, float] = {}
+    previous: dict[str, float | None] = {}
     components: dict[str, dict[str, Any]] = {}
     for country in sorted(psd[year]):
-        has_pair = (
+        adopted = (
             eligible.get(country, True)
             and country in local.get(year, {})
-            and country in local.get(year - 1, {})
         )
-        current[country] = float(local[year][country] if has_pair else psd[year][country])
-        previous[country] = float(local[year - 1][country] if has_pair else psd[year - 1][country])
+        current[country] = float(local[year][country] if adopted else psd[year][country])
+        prior = local.get(year-1, {}).get(country) if adopted else psd[year-1].get(country)
+        previous[country] = float(prior) if prior is not None else None
         components[country] = {
-            "source": source if has_pair else "usda_psd",
+            "source": source if adopted else "usda_psd",
             "current": current[country],
             "previous": previous[country],
-            "change": current[country] - previous[country],
-            "replaced": has_pair,
-            "fallback_reason": None if has_pair else "missing_local_pair",
+            "change": current[country] - previous[country] if previous[country] is not None else None,
+            "replaced": adopted,
+            "fallback_reason": None if adopted else "missing_eligible_local_target",
+            "comparison_reason": "missing_local_prior" if adopted and prior is None else None,
         }
-    cur, prev = sum(current.values()), sum(previous.values())
+    cur = sum(current.values())
+    prev = sum(previous.values()) if all(v is not None for v in previous.values()) else None
     return {
         "current": cur,
         "previous": prev,
-        "change": cur - prev,
+        "change": cur - prev if prev is not None else None,
         "yoy": (cur / prev - 1) * 100 if prev else None,
         "components": components,
         "local_coverage_pct": (
-            sum(v["previous"] for v in components.values() if v["replaced"])
-            / sum(previous.values())
+            sum(v["current"] for country,v in components.items() if v["replaced"] or country == 'United States')
+            / cur
             * 100
-            if prev
+            if cur
             else 0.0
         ),
     }

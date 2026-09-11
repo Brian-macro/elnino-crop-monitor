@@ -1,6 +1,6 @@
 # 数据来源与历史/预测拼接方案
 
-政策版本以 `config/research_policy.json` 为准，本土来源注册表为 `config/country_sources.json`。预测选择的统一原则是：**有本国预测数据用本国预测数据，无则用PSD。** 配置不代表对应年度已有可用报告。
+政策版本以 `config/research_policy.json` 为准，本土来源注册表为 `config/country_sources.json`。统一原则是：**所有国家的权威本国产量优先；目标年和产品口径匹配即采用，缺上年只影响同比，不阻止本年替换。** 无同口径目标年记录才补充 PSD。美国 USDA 本身属于美国权威来源，其他国家不能把 USDA 称为本国数据库。配置不代表已接入，已接入也不代表覆盖所有年度。实际接入与逐年采用见 `public/api/national_coverage.json`、网站数据说明与 [NATIONAL_SOURCE_COVERAGE.md](NATIONAL_SOURCE_COVERAGE.md)。
 
 ## 研究单元与主来源
 
@@ -56,4 +56,4 @@ flowchart LR
 - `update_forecasts.py`：每日预测检查入口；`update_all.py --group all` 用于手动全源维护，`--group build` 仅重建。
 - GitHub Actions 每日北京时间 14:17（06:17 UTC）运行 `python scripts/update_forecasts.py` 检查预测来源。FAOSTAT、NBS 等基础历史产量、NOAA 气候观测与价格库手动维护。
 
-`write_policy_docs.py` 生成 `SOURCE_MATRIX.md`。修改配置后依次执行 `python scripts/write_policy_docs.py`、`python scripts/update_all.py --group build`、`npm run build`。
+`write_policy_docs.py` 生成配置矩阵 `SOURCE_MATRIX.md` 和已发布数据对应的 `NATIONAL_SOURCE_COVERAGE.md`。修改来源后依次抓取、执行 `python scripts/update_all.py --group build`、`python scripts/write_policy_docs.py`、`npm run build`；页面说明直接读取同一次发布生成的实际覆盖台账。

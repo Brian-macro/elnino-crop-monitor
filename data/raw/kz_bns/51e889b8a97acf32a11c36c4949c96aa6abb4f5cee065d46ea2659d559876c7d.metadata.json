@@ -1,0 +1,12 @@
+{
+  "document_id": "678bc5bdc8799db845f6992f129ea08c47f03c5cfd4e196404143f3bc1c04e2b",
+  "source": "kz_bns",
+  "source_url": "https://stat.gov.kz/api/iblock/element/466574/file/en/",
+  "raw_path": "data/raw/kz_bns/51e889b8a97acf32a11c36c4949c96aa6abb4f5cee065d46ea2659d559876c7d.xlsx",
+  "sha256": "51e889b8a97acf32a11c36c4949c96aa6abb4f5cee065d46ea2659d559876c7d",
+  "publication_date": "2026-02-20",
+  "available_date": "2026-02-20",
+  "download_timestamp": "2026-09-11T14:15:24.822532+00:00",
+  "publication_date_basis": "BNS dynamic table update date",
+  "title": "BNS gross harvest of major crops"
+}

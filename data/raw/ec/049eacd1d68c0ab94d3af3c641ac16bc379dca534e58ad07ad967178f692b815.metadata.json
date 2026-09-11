@@ -1,0 +1,12 @@
+{
+  "document_id": "5b67449ffefe97c725f35092511590d549658333def7cd79e8d5a23258281682",
+  "source": "ec",
+  "source_url": "https://circabc.europa.eu/sd/a/7df65463-6a2f-4561-9006-77535ac83765/Oilseeds%20and%20protein%20crops_Production%252c%20Area%20%26%20Yield.xlsx",
+  "raw_path": "data/raw/ec/049eacd1d68c0ab94d3af3c641ac16bc379dca534e58ad07ad967178f692b815.xlsx",
+  "sha256": "049eacd1d68c0ab94d3af3c641ac16bc379dca534e58ad07ad967178f692b815",
+  "publication_date": "2026-08-27",
+  "available_date": "2026-08-27",
+  "download_timestamp": "2026-09-11T14:11:23.732303+00:00",
+  "publication_date_basis": "DG AGRI workbook Update cell",
+  "title": "DG AGRI EU oilseeds and protein crops production, area and yield"
+}

@@ -1,0 +1,12 @@
+{
+  "document_id": "f0a04d95b68255faa73e9fb5c07fdb0430a62f314bdc357ec0712c4e7071665e",
+  "source": "pk_pbs",
+  "source_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Table-1-Area_production_crops.xls",
+  "raw_path": "data/raw/pk_pbs/eb89f09909623c2c41d774a0ce811e9d24a4ce93ddc0dca220eae5d92cc2e710.xls",
+  "sha256": "eb89f09909623c2c41d774a0ce811e9d24a4ce93ddc0dca220eae5d92cc2e710",
+  "publication_date": null,
+  "available_date": "2026-09-11",
+  "download_timestamp": "2026-09-11T14:07:31.248102+00:00",
+  "publication_date_basis": "unknown XLS revision date; first observed; URL upload year is not publication year",
+  "title": "PBS Area and Production of Important Crops"
+}

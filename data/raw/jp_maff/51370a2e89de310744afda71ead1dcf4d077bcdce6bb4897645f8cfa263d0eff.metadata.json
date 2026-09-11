@@ -1,0 +1,12 @@
+{
+  "document_id": "b0e5085672996bd12935d627485d8eda61446a1b93926461e8fd86d323bc757f",
+  "source": "jp_maff",
+  "source_url": "https://www.maff.go.jp/e/data/stat/99th/attach/xls/index-48.xls",
+  "raw_path": "data/raw/jp_maff/51370a2e89de310744afda71ead1dcf4d077bcdce6bb4897645f8cfa263d0eff.xls",
+  "sha256": "51370a2e89de310744afda71ead1dcf4d077bcdce6bb4897645f8cfa263d0eff",
+  "publication_date": null,
+  "available_date": "2026-09-11",
+  "download_timestamp": "2026-09-11T14:07:14.814436+00:00",
+  "publication_date_basis": "unknown yearbook file publication date; first observed",
+  "title": "2 Wheat and Barley (as Matured Grain)(EXCEL : 75KB)"
+}

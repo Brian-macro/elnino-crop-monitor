@@ -18,7 +18,10 @@
 - 本土来源一致性：`dashboard_bundle` 为首页默认预测产量计算入口；历史复盘默认只读取 `actual_production`。PSD/WASDE 完整供需表独立展示，禁止混源生成库存消费比。
 - `country_sources.json` 决定各国各作物本土来源；有本国预测数据用本国预测数据，无则用PSD。`policy_bundle` 导出的来源矩阵是配置，不是实际采用覆盖承诺。
 - 气候是独立NOAA归档观测；连续暖季不能跨缺月，1/3月变化按日历月。本机旧 `ElNinoCropMonitor-Update` 定时任务已停用，日更由GitHub Actions执行。
-- 文档生成器 `write_policy_docs.py` 只生成 `docs/SOURCE_MATRIX.md`，不覆盖人工审定的 `DATA_STITCHING.md`。
+- 文档生成器 `write_policy_docs.py` 生成 `docs/SOURCE_MATRIX.md` 和实际发布的 `docs/NATIONAL_SOURCE_COVERAGE.md`，不覆盖人工审定的 `DATA_STITCHING.md`。先重建发布数据，再生成说明文档。
 - 换源回归：`tests/test_source_consistency.py`、`tests/test_climate_continuity.py`、`tests/source_consistency_browser.cjs`、`tests/climate_browser.cjs`。
 - 乌克兰 UGA 使用收获自然年，对应同年开始的市场年度；2026/2025 同源配对用于 2026 年预测同比。阿根廷 BCR 使用市场年度起始年。
 - `fetch_local_sources.py` 单源失败已自行登记状态时返回 2，避免调度器把其他成功来源统一标记失败；解析 PDF 所需 `pypdf` 必须安装到云端。
+- 本国产量与同比分开选择：同目标年、同产品本国值可独立采用，缺本国上年值只留空同比，禁止改用PSD上年值。覆盖率按本年产量计算，美国USDA计为本国来源。
+- 所有研究国家的实际来源、已入库年份、入口与缺口从 `national_coverage.json` 展示；不能把来源配置或入口存在宣称为对应年份已替换。`national_authorities.json` 记录尚待接入入口及访问核验。
+- 各本国来源由scheduler展开为独立任务。美国NASS与现有预测来源每日检查；新增年度官方统计在 `national_statistics` 基础库组，沿用手动维护规则，不混称未来预测。

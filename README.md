@@ -10,11 +10,11 @@ Global Crop Production, Climate Risk & Commodity Pricing
 
 面向投资研究的可运行网站。保留已有 Next.js + ECharts + Python + DuckDB 架构，接通真实数据、预测版本、世界地图、国家/省级下钻、五作物价格研究、气候周期、历史事件与来源台账。
 
-中文浅色Dashboard：地图首屏、下方品种切换、前五国家/地区+其他；统一PSD可比口径。首页“查看历史、价格与预测修正”入口已移除。历史复盘页独立展示内外盘、ONI与USDA年度供需。验收脚本：`node tests/dashboard_browser.cjs`、`node tests/event_study_browser.cjs`。
+中文浅色Dashboard：地图首屏、下方品种切换、前五国家/地区+其他；本国权威产量优先，目标年与产品口径匹配即采用，缺同源上年值只影响同比。数据说明逐国、逐作物、逐年展示实际来源与缺口，并链接原始报告。历史复盘页独立展示内外盘、ONI与USDA年度供需。验收脚本：`node tests/dashboard_browser.cjs`、`node tests/event_study_browser.cjs`。
 
 本次是从半成品继续构建，接手目录没有 Git 仓库。接手基线、修复范围和验收记录见 [docs/CONTINUATION.md](docs/CONTINUATION.md)。不把尚未获得的数据当成已实现覆盖。
 
-后端现按研究地区组织：东南亚是固定成员的地区汇总，海外主序列统一PSD；非生产者和小规模作物按配置剔除。中国NBS/CropWatch/农业展望分工明确，Actual/Forecast及不同口径保持独立。完整方案见 [docs/DATA_STITCHING.md](docs/DATA_STITCHING.md)，唯一研究配置为 [config/research_policy.json](config/research_policy.json)。
+后端按研究地区组织：东南亚是固定成员的地区汇总，各国本国权威数据库优先，PSD仅补充对应目标年缺口；非生产者和小规模作物按配置剔除。Actual/Estimate/Forecast及不同产品口径保持独立。完整方案见 [docs/DATA_STITCHING.md](docs/DATA_STITCHING.md)，实际覆盖见 [docs/NATIONAL_SOURCE_COVERAGE.md](docs/NATIONAL_SOURCE_COVERAGE.md)，研究配置为 [config/research_policy.json](config/research_policy.json)，逐国来源与年度映射在 [config/country_sources.json](config/country_sources.json)。
 
 ## 启动
 
@@ -53,9 +53,9 @@ python scripts/export_database.py
 
 ## 自动运行与部署
 
-Windows：`powershell -ExecutionPolicy Bypass -File scripts/register_update_task.ps1 -Time 14:17`。
+Windows本机旧定时任务已停用，生产更新由GitHub Actions负责；无需本机持续运行。
 
-GitHub：`update-data.yml` 每日更新、持久化原始文件和vintage，直接部署新数据提交；`deploy.yml` 支持Pages根站和项目子路径。当前尚无Git远程仓库，云端工作流需要上传到用户自己的仓库后启用。
+GitHub：`update-data.yml` 每日检查预测来源、持久化原始文件和vintage，直接部署新数据提交；各本国来源独立检查，单源失败保留旧数据并显示状态。`deploy.yml` 校验数据库、运行回归及浏览器测试后发布到本文顶部的GitHub Pages地址。
 
 容器、Windows调度、API和完整部署步骤见 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)。环境变量模板见 `.env.example`，前端变量放 `.env.local`，Python变量设置在执行环境。
 
@@ -93,6 +93,6 @@ npm run build
 
 ## 研究边界
 
-PSD历史是修订后Estimate；NBS当前仅2025三谷物Actual。CropWatch已恢复656条，完整旧报告仍未覆盖；农业展望仅6条明确预测，不能插值出2027。海外为World Bank月度现货基准，国内为少量NBS旬度报价，非交易所期货。缺少同口径独立机构和足够国内价格历史时，共识/相关性N/A。事件结果为描述性关联，不能视为气候因果估计。
+PSD历史是修订后Estimate；本国产量接入不把机构估计改称最终实产。CropWatch旧报告和中国农业展望中间年度仍未完整覆盖，不能插值出2027。现货参考与已接入的内外盘期货独立保存。缺少同口径独立机构和足够价格历史时，共识/相关性N/A。事件结果为描述性关联，不能视为气候因果估计。
 
 完整覆盖、定义、单位和未接通数据见 [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md)；数据库schema见 [docs/schema.sql](docs/schema.sql)。

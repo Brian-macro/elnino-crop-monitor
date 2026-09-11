@@ -32,10 +32,11 @@ def archive_bytes(con, source, url, content, suffix='', publication_date=None, d
             or result['publication_date_basis'].lower().startswith('issue month only')
         )
         has_evidence=(pub or available) and not date_basis.lower().startswith('unknown')
-        if has_evidence and (unknown_date or result['publication_date_basis'].startswith('unknown')):
+        later_available = available and available > date.fromisoformat(str(result['available_date'])[:10])
+        if has_evidence and (unknown_date or result['publication_date_basis'].startswith('unknown') or later_available):
             correction=con.execute('SELECT count(*) FROM source_documents WHERE source=? AND source_url=? AND download_timestamp<?',[source,url,result['download_timestamp']]).fetchone()[0]>0
             correction=correction or 'content correction first observed' in result['publication_date_basis']
-            effective=str(result['available_date']) if correction else str(available or pub)
+            effective=str(max(date.fromisoformat(str(result['available_date'])[:10]),available or pub)) if correction else str(available or pub)
             updated={**result,'publication_date':str(pub) if pub else result['publication_date'],'available_date':effective,
                      'publication_date_basis':date_basis+('; content correction first observed' if correction else '')}
             payload=json.dumps({'before':result,'after':updated},default=str,ensure_ascii=False,sort_keys=True)
@@ -63,19 +64,31 @@ def archive_bytes(con, source, url, content, suffix='', publication_date=None, d
     con.execute('INSERT INTO source_documents VALUES (?,?,?,?,?,?,?,?,?,?)',list(doc.values()))
     return doc
 
-def download(con, source, url, date_resolver=None, **kwargs):
+def download(con, source, url, date_resolver=None, request_method='GET', request_json=None, **kwargs):
+    request_payload=json.dumps({'method':request_method,'url':url,'json':request_json},ensure_ascii=False,sort_keys=True)
+    request_hash=hashlib.sha256(request_payload.encode()).hexdigest()[:12]
     if os.environ.get('MONITOR_OFFLINE')=='1':
         found=[]
         for path in (RAW/source).glob('*.metadata.json'):
             meta=json.loads(path.read_text(encoding='utf-8'))
-            if meta['source_url']==url:found.append(meta)
+            query_matches = request_method != 'POST' or (RAW/source/(meta['sha256']+'.request-'+request_hash+'.json')).exists()
+            if meta['source_url']==url and query_matches:found.append(meta)
         if not found:raise ValueError('No archived original for '+url)
         meta=max(found,key=lambda x:x['download_timestamp']);payload=(ROOT/meta['raw_path']).read_bytes()
     else:
-        response=requests.get(url,timeout=(10,35))
+        if request_method == 'POST':
+            response=requests.post(url,json=request_json,timeout=(10,35))
+        elif request_method == 'GET':
+            response=requests.get(url,timeout=(10,35))
+        else:
+            raise ValueError('Unsupported source request method')
         response.raise_for_status();payload=response.content
     if date_resolver:kwargs.update(date_resolver(payload))
-    return archive_bytes(con,source,url,payload,**kwargs)
+    doc = archive_bytes(con,source,url,payload,**kwargs)
+    if request_method == 'POST':
+        request_path=RAW/source/(doc['sha256']+'.request-'+request_hash+'.json')
+        if not request_path.exists():request_path.write_text(request_payload,encoding='utf-8')
+    return doc
 
 def content(doc):
     return (ROOT/doc['raw_path']).read_bytes()

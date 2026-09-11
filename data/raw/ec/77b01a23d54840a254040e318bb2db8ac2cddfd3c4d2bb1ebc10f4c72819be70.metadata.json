@@ -1,0 +1,12 @@
+{
+  "document_id": "b5fc704dbb9903a7774b7a0e065f869ed582460af798e575468862a2ef24e95f",
+  "source": "ec",
+  "source_url": "https://circabc.europa.eu/sd/a/826456b2-1d40-456a-80a5-3665b9c7d06a/Cereals%20Production%252c%20Area%20%26%20Yield.xlsx",
+  "raw_path": "data/raw/ec/77b01a23d54840a254040e318bb2db8ac2cddfd3c4d2bb1ebc10f4c72819be70.xlsx",
+  "sha256": "77b01a23d54840a254040e318bb2db8ac2cddfd3c4d2bb1ebc10f4c72819be70",
+  "publication_date": "2026-08-27",
+  "available_date": "2026-08-27",
+  "download_timestamp": "2026-09-11T14:11:20.976389+00:00",
+  "publication_date_basis": "DG AGRI workbook Update cell",
+  "title": "DG AGRI EU cereals production, area and yield"
+}

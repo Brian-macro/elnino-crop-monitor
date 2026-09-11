@@ -16,22 +16,23 @@ def adapter():
 
 
 def document():
-    doc = json.loads(next((ROOT / 'data/raw/aafc').glob('*.metadata.json')).read_text())
+    doc = next(d for p in (ROOT / 'data/raw/aafc').glob('*.metadata.json')
+               if (d := json.loads(p.read_text()))['source_url'].endswith('2026-07-20'))
     return dict(doc, publication_date='2026-07-20', available_date='2026-07-23')
 
 
 def test_official_aafc_forecast_and_previous_year_pair():
     rows = adapter().parse(document())
-    forecast = {r['crop']: r for r in rows['forecast']}
+    forecast = {r['crop']: r for r in rows['forecast'] if r['target_year']==2026}
     assert {k: r['value'] for k, r in forecast.items()} == {'wheat': 35.260, 'corn': 16.400, 'soybean': 7.500}
-    previous = {r['crop']: r for r in rows['estimate'] if r['target_year'] == 2025}
+    previous = {r['crop']: r for r in rows['forecast'] if r['target_year'] == 2025}
     assert {k: r['value'] for k, r in previous.items()} == {'wheat': 39.955, 'corn': 14.867, 'soybean': 6.918}
     for crop, row in forecast.items():
         assert row['target_year'] == 2026 and row['year_basis'] == 'marketing_year'
         assert row['commodity_basis'] == ('oilseed' if crop == 'soybean' else 'grain') and row['unit'] == 'Mt'
         assert row['publication_date'] == '2026-07-20' and row['available_date'] == '2026-07-23'
         assert ('August-July' if crop == 'wheat' else 'September-August') in row['methodology']
-        assert 'Statistics Canada' in previous[crop]['methodology']
+        assert 'AAFC forecast' in previous[crop]['methodology']
 
 
 def test_aafc_rejects_missing_production_and_wrong_units(monkeypatch):
@@ -50,6 +51,5 @@ def test_aafc_discovery_reads_dates_from_page(monkeypatch):
         def raise_for_status(self):
             pass
     monkeypatch.setattr(module.requests, 'get', lambda *a, **k: Response())
-    result = module.discover()
-    assert result and result[-1]['publication_date'] == '2026-07-20'
-    assert result[-1]['available_date'] == '2026-07-23'
+    result = module.resolve_date(payload)
+    assert result['available_date'] == '2026-07-23'

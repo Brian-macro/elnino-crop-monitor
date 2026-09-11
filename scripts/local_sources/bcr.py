@@ -1,5 +1,6 @@
 """Dated BCR national projections and explicit prior-season production."""
 import re
+from datetime import date
 from bs4 import BeautifulSoup
 from archive import content, observation
 SOURCE = 'bcr'
@@ -11,11 +12,14 @@ def discover():
 
 def resolve_date(payload):
     text = BeautifulSoup(payload,'html.parser').get_text(' ',strip=True)
-    report = text.split('Informe de Estimación Mensual Nacional',1)[-1]
+    if 'Informe de Estimación Mensual Nacional' not in text:
+        raise ValueError('BCR national report heading missing')
+    report = text.split('Informe de Estimación Mensual Nacional',1)[1]
     match = re.search(r'(\d{1,2}) de (\w+) de (20\d{2})',report,re.I)
     if not match: raise ValueError('BCR report publication date missing')
     month = match[2].lower().replace('setiembre','septiembre')
     stamp = f'{match[3]}-{MONTHS.index(month)+1:02d}-{int(match[1]):02d}'
+    date.fromisoformat(stamp)
     return dict(publication_date=stamp,date_basis='BCR dated national report')
 
 def parse(doc):
@@ -32,7 +36,11 @@ def parse(doc):
             if not season or int(season[2])!=int(season[1])+1: raise ValueError('BCR invalid season')
             value = cells[3].get_text(' ',strip=True)
             if 'MILLONES TN' not in value: raise ValueError('BCR production unit missing')
-            number = re.match(r'(\d+(?:[.,]\d+)?)\s*MILLONES TN',value)
+            number = re.fullmatch(r'(\d+(?:[.,]\d+)?)\s*MILLONES TN',value)
+            if int(season[1]) in rows:
+                raise ValueError('BCR duplicate season')
+            if not number and value.strip() != 'MILLONES TN':
+                raise ValueError('BCR ambiguous production value')
             rows[int(season[1])] = float(number[1].replace(',','.')) if number else None
         year = max(rows)
         if rows.get(year-1) is None: raise ValueError('BCR prior production missing')

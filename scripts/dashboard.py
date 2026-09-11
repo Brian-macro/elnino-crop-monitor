@@ -1,4 +1,4 @@
-"""Local paired production on a PSD baseline, with explicit component provenance."""
+"""National production first; comparable prior observations govern YoY only."""
 from datetime import date,datetime,timezone
 from policy import POLICY,COUNTRY_SOURCES,active_countries,active_regions,region_members
 from normalize import EU_MEMBERS
@@ -25,7 +25,7 @@ def summarize_counts(current,previous,units):
     return dict(world=world,ranking=ranking,top5_share=sum(r['share'] or 0 for r in top))
 
 def apply_local_pairs(con,crop,year,current,previous,asof=None):
-    """Replace both years together; never calculate YoY across two sources."""
+    """Use a compatible national observation even when its prior year is missing."""
     evidence={};asof=asof or date.today().isoformat()
     for rule in COUNTRY_SOURCES['rules']:
         if rule['crop']!=crop:continue
@@ -40,13 +40,16 @@ def apply_local_pairs(con,crop,year,current,previous,asof=None):
           QUALIFY row_number() OVER(PARTITION BY target_year ORDER BY available_date DESC,download_timestamp DESC,record_id DESC)=1''',
           [crop,country,source,rule['commodity_basis'],rule['year_basis'],source_year-1,source_year,asof]).fetchall()
         by_year={int(r[0]):r for r in rows}
-        if source_year in by_year and source_year-1 in by_year and country in current and country in previous:
-            current[country]=float(by_year[source_year][1]);previous[country]=float(by_year[source_year-1][1])
-            row=by_year[source_year]; prior=by_year[source_year-1]
-            evidence[country]=dict(source=source,current_record=row[2],previous_record=prior[2],source_target_year=source_year,fallback_reason=None,
-                source_url=row[4],available_date=str(max(row[3],prior[3]))[:10],publication_date=str(row[5])[:10] if row[5] else None,
-                status=row[6],document_id=row[7],year_basis=row[8],download_timestamp=str(max(row[9],prior[9])))
-        else:evidence[country]=dict(source='usda_psd',configured_source=source,fallback_reason='missing_local_pair')
+        if source_year in by_year and country in current:
+            row=by_year[source_year]; prior=by_year.get(source_year-1)
+            current[country]=float(row[1])
+            if prior: previous[country]=float(prior[1])
+            else: previous.pop(country,None)
+            evidence[country]=dict(source=source,current_record=row[2],previous_record=prior[2] if prior else None,
+                source_target_year=source_year,fallback_reason=None,comparison_reason=None if prior else 'missing_local_prior',
+                source_url=row[4],available_date=str(max(row[3],prior[3]) if prior else row[3])[:10],publication_date=str(row[5])[:10] if row[5] else None,
+                status=row[6],document_id=row[7],year_basis=row[8],download_timestamp=str(max(row[9],prior[9]) if prior else row[9]))
+        else:evidence[country]=dict(source='usda_psd',configured_source=source,fallback_reason='missing_local_target_year')
     return evidence
 
 def dashboard_bundle(con,crop):
@@ -77,7 +80,8 @@ def dashboard_bundle(con,crop):
         # mistaking a missing local source for a zero-difference result.
         replaced={c for c,e in evidence.items() if e.get('source')!='usda_psd'}
         summary['mode'] = 'local_composite' if replaced else 'psd_baseline'
-        summary['local_coverage_pct'] = (sum(previous_counts[c] for c in replaced)/summary['world']['previous']*100 if replaced and summary['world']['previous'] else 0.0)
+        national = replaced | ({'United States'} if 'United States' in current_counts else set())
+        summary['local_coverage_pct'] = (sum(current_counts[c] for c in national)/summary['world']['value']*100 if summary['world']['value'] else 0.0)
         summary['baseline'] = dict(
             source='usda_psd',
             value=baseline_current,
@@ -121,4 +125,4 @@ def dashboard_bundle(con,crop):
     countries=sorted({canonical_country(c) for c in raw.country})
     return dict(crop=crop,years=years,history=history,geographies=[geography_metadata(c) for c in countries],
         updated=datetime.now(timezone.utc).isoformat(),policy_version=POLICY['version'],
-        methodology='有本国预测数据用本国预测数据，无则用PSD；同比仅在本年和上年同源、同产品且年度可对应时计算。全球、地图和前五加其他使用同一组合；覆盖率按组合上年产量计算。历史为当前归档的修订值，不代表事件当时的预测。')
+        methodology='本国权威产量优先；目标年或产品口径不匹配时回退PSD。本年本国值可单独采用，缺同源上年值则同比为空，不因此退回PSD。全球、地图和前五加其他使用同一组合；覆盖率按组合本年产量计算。历史为当前归档的修订值，不代表事件当时的预测。')

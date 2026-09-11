@@ -1,0 +1,12 @@
+{
+  "document_id": "fd2e0585e67500472817dc39b58a32274a43604b142779e754d034d0577eac6f",
+  "source": "mx_siap",
+  "source_url": "https://nube.agricultura.gob.mx/cierre_agricola/?xajax=reporte&xajaxargs%5B%5D=1&xajaxargs%5B%5D=2024&xajaxargs%5B%5D=5&xajaxargs%5B%5D=3&xajaxargs%5B%5D=0&xajaxargs%5B%5D=--&xajaxargs%5B%5D=--&xajaxargs%5B%5D=395&xajaxargs%5B%5D=200201&xajaxargs%5B%5D=0&xajaxargs%5B%5D=2&xajaxargs%5B%5D=0&xajaxargs%5B%5D=0&xajaxargs%5B%5D=0&xajaxargs%5B%5D=",
+  "raw_path": "data/raw/mx_siap/6fbb005f41a98626d7627ddce4d4845a1d09e5d68ec7c5121cd06c6db2d22991.xml",
+  "sha256": "6fbb005f41a98626d7627ddce4d4845a1d09e5d68ec7c5121cd06c6db2d22991",
+  "publication_date": null,
+  "available_date": "2026-09-11",
+  "download_timestamp": "2026-09-11T14:07:08.476761+00:00",
+  "publication_date_basis": "unknown annual closing database revision date; first observed",
+  "title": "SIAP Trigo grano 2024 national agricultural year"
+}

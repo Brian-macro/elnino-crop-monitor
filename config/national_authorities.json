@@ -1,0 +1,129 @@
+{
+  "countries": [
+    {
+      "country": "Russia",
+      "authority": "俄罗斯 Rosstat 农业统计",
+      "url": "https://rosstat.gov.ru/enterprise_economy",
+      "note": "需取得全国分作物产量表及年度口径，不能用粮食总量替代小麦。",
+      "checked_at": "2026-09-11T14:07:56.645496+00:00",
+      "access_status": "blocked",
+      "access_error": "HTTPSConnectionPool(host='rosstat.gov.ru', port=443): Max retries exceeded with url: /enterprise_economy (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1028)')))"
+    },
+    {
+      "country": "Kazakhstan",
+      "authority": "哈萨克斯坦国家统计局",
+      "url": "https://stat.gov.kz/en/industries/business-statistics/stat-forrest-village-hunt-fish/",
+      "note": "已接入全国小麦、玉米1990—2025年收获产量；该工作簿未单列大豆，不用油籽总量替代大豆。",
+      "checked_at": "2026-09-11T14:07:56.645909+00:00",
+      "http_status": 200,
+      "access_status": "verified",
+      "access_error": null
+    },
+    {
+      "country": "Paraguay",
+      "authority": "巴拉圭农业畜牧部 MAG",
+      "url": "https://www.mag.gov.py/",
+      "note": "需取得农业统计年度表；尚无通过解析的全国目标年记录。",
+      "checked_at": "2026-09-11T14:07:56.646226+00:00",
+      "http_status": 403,
+      "access_status": "blocked",
+      "access_error": "HTTP 403"
+    },
+    {
+      "country": "Turkey",
+      "authority": "土耳其 TurkStat",
+      "url": "https://data.tuik.gov.tr/Kategori/GetKategori?p=agriculture-111&dil=2",
+      "note": "需取得分作物产量数据表并核验市场年度映射。",
+      "checked_at": "2026-09-11T14:07:56.646643+00:00",
+      "http_status": 200,
+      "access_status": "verified",
+      "access_error": null
+    },
+    {
+      "country": "Thailand",
+      "authority": "泰国农业经济办公室 OAE",
+      "url": "https://www.oae.go.th/",
+      "note": "稻谷、精米及作季定义不同；需核验对应作物年度表。",
+      "checked_at": "2026-09-11T14:07:56.646862+00:00",
+      "http_status": 200,
+      "access_status": "verified",
+      "access_error": null
+    },
+    {
+      "country": "Vietnam",
+      "authority": "越南国家统计局 NSO",
+      "url": "https://www.nso.gov.vn/en/statistical-data/",
+      "note": "全国统计稻谷不能直接替换精米；分作物年度数据尚待解析。",
+      "checked_at": "2026-09-11T14:07:56.647181+00:00",
+      "access_status": "blocked",
+      "access_error": "HTTPSConnectionPool(host='www.nso.gov.vn', port=443): Max retries exceeded with url: /en/statistical-data/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)')))"
+    },
+    {
+      "country": "Indonesia",
+      "authority": "印度尼西亚 BPS",
+      "url": "https://www.bps.go.id/en",
+      "note": "公开统计表需核验稻谷/精米折算与玉米含水率；尚无通过解析的记录。",
+      "checked_at": "2026-09-11T14:07:57.814558+00:00",
+      "http_status": 403,
+      "access_status": "blocked",
+      "access_error": "HTTP 403"
+    },
+    {
+      "country": "Bangladesh",
+      "authority": "孟加拉国 BBS",
+      "url": "https://bbs.gov.bd/",
+      "note": "农业年鉴需区分季节稻米并核验单位、年度；尚无通过解析的记录。",
+      "checked_at": "2026-09-11T14:07:58.057043+00:00",
+      "access_status": "blocked",
+      "access_error": "HTTPSConnectionPool(host='bbs.gov.bd', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1028)')))"
+    },
+    {
+      "country": "Korea, South",
+      "authority": "韩国 KOSIS",
+      "url": "https://kosis.kr/eng/",
+      "note": "需核验稻米加工口径及大豆年度表；尚无通过解析的记录。",
+      "checked_at": "2026-09-11T14:07:58.402827+00:00",
+      "http_status": 200,
+      "access_status": "verified",
+      "access_error": null
+    },
+    {
+      "country": "Korea, North",
+      "authority": "朝鲜本国公开农业数据库",
+      "url": null,
+      "access_status": "not_verified",
+      "note": "未核验可直接取得的本国分作物数据库；FAOSTAT或USDA不视为本国数据库。",
+      "checked_at": "2026-09-11T14:07:58.580034+00:00"
+    },
+    {
+      "country": "Burma",
+      "authority": "缅甸中央统计组织 CSO",
+      "url": "https://www.csostat.gov.mm/",
+      "note": "需核验统计年鉴分作物产量；尚无通过解析的记录。",
+      "checked_at": "2026-09-11T14:07:58.580056+00:00",
+      "http_status": 200,
+      "access_status": "verified",
+      "access_error": null
+    },
+    {
+      "country": "Laos",
+      "authority": "老挝统计局 LSB",
+      "url": "https://www.lsb.gov.la/en/",
+      "note": "需核验全国分作物数据及稻米口径；尚无通过解析的记录。",
+      "checked_at": "2026-09-11T14:07:59.248749+00:00",
+      "http_status": 404,
+      "access_status": "blocked",
+      "access_error": "HTTP 404"
+    },
+    {
+      "country": "Cambodia",
+      "authority": "柬埔寨国家统计局 NIS",
+      "url": "https://www.nis.gov.kh/",
+      "note": "农业调查表需区分种植面积与实际产量；尚无通过解析的记录。",
+      "checked_at": "2026-09-11T14:07:59.503849+00:00",
+      "http_status": 200,
+      "access_status": "verified",
+      "access_error": null
+    }
+  ]
+}

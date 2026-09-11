@@ -1,0 +1,12 @@
+{
+  "document_id": "54319413a39da48eff59a89601a59d269b2e7c67529d3b529e353bde08ccf13e",
+  "source": "my_dosm",
+  "source_url": "https://storage.data.gov.my/agriculture/crops_state.csv",
+  "raw_path": "data/raw/my_dosm/fed8fffdee9cf98508b9beb6b0f81321870909fd726e7a51e92552b5f33b82cb.csv",
+  "sha256": "fed8fffdee9cf98508b9beb6b0f81321870909fd726e7a51e92552b5f33b82cb",
+  "publication_date": null,
+  "available_date": "2026-09-11",
+  "download_timestamp": "2026-09-11T14:07:24.503545+00:00",
+  "publication_date_basis": "unknown CSV revision date; first observed (catalogue last updated 2023-12-31)",
+  "title": "DOSM Crop Area and Production by State"
+}

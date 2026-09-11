@@ -1009,6 +1009,16 @@ input {
   overflow: auto;
   max-width: 100%;
 }
+#source-policy table {
+  min-width: 900px;
+  table-layout: fixed;
+  text-align: left;
+}
+#source-policy td {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  vertical-align: top;
+}
 table {
   width: 100%;
   border-collapse: collapse;

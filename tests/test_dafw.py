@@ -33,6 +33,8 @@ def test_dafw_preserves_2025_crop_year_and_estimate_round():
     assert previous == {'rice': 150.184, 'wheat': 117.945, 'corn': 43.409}
     assert all(r['target_year'] == 2024 for r in rows['estimate'])
     assert 'sugar' not in current
+    assert current['soybean']['value'] == 12.596
+    assert 'soybean' not in previous
 
 
 def test_dafw_rejects_missing_season_and_wrong_unit(monkeypatch):

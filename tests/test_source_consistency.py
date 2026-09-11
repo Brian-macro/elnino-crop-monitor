@@ -52,6 +52,34 @@ def test_dashboard_actual_composite_provenance_is_not_psd():
     con.close()
 
 
+def test_national_current_is_adopted_without_cross_source_prior():
+    con = fixture_db()
+    con.execute("DELETE FROM forecast_production WHERE source='casde' AND target_year=2024")
+    snap = dashboard_bundle(con, 'corn')['years']['2025']
+    assert snap['china']['source'] == 'casde'
+    assert snap['china']['value'] == 130
+    assert snap['china']['previous'] is None
+    assert snap['china']['yoy'] is None
+    assert snap['world']['value'] == 240
+    assert snap['world']['previous'] is None
+    assert snap['world']['yoy'] is None
+    assert snap['local_coverage_pct'] == 100  # USDA is the US national source.
+    assert snap['source_evidence']['China']['comparison_reason'] == 'missing_local_prior'
+    con.close()
+
+
+def test_actual_coverage_does_not_claim_configured_source_was_adopted():
+    from national_coverage import national_coverage
+    con = fixture_db()
+    coverage = national_coverage(con, {'corn': dashboard_bundle(con, 'corn')})
+    rows = {r['country']: r for r in coverage['rows']}
+    assert rows['China']['years']['2025']['source'] == 'casde'
+    assert rows['Brazil']['configured_source'] == 'conab'
+    assert rows['Brazil']['years']['2025']['adopted_national'] is False
+    assert rows['Brazil']['latest_national'] is None
+    con.close()
+
+
 @pytest.mark.parametrize('crop,basis', [('corn', 'grain'), ('wheat', 'grain'), ('soybean', 'oilseed')])
 def test_ukraine_harvest_year_pair_replaces_marketing_year_baseline(crop, basis):
     from dashboard import apply_local_pairs

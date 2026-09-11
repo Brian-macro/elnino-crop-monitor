@@ -18,4 +18,7 @@ def parse(doc):
  for crop,(v,b) in vals.items():
   out['forecast'].append(observation(doc,crop,'India',2025,v,unit='Mt',basis=b,year_basis='marketing_year',methodology='DA&FW Third Advance Estimates 2025-26'))
   out['estimate'].append(observation(doc,crop,'India',2024,prev[crop],unit='Mt',basis=b,year_basis='marketing_year',methodology='DA&FW Third Advance Estimates prior-year comparison'))
+ soybean = re.search(r'soybean production is estimated at ([0-9.]+) million tonnes',text,re.I)
+ if soybean:
+  out['forecast'].append(observation(doc,'soybean','India',2025,float(soybean[1]),basis='oilseed',year_basis='marketing_year',methodology='DA&FW Third Advance Estimates 2025-26; prior-year soybean not stated'))
  return out

@@ -15,10 +15,17 @@ const assert = require('node:assert/strict');
       await page.waitForFunction(() => !document.body.innerText.includes('正在读取已验证的研究数据'));
     };
     await visit('/methodology/');
-    await page.locator('#source-policy select').selectOption('corn');
+    await page.getByLabel('来源作物', { exact: true }).selectOption('corn');
     const china = page.locator('#source-policy tbody tr').filter({ has: page.locator('td:first-child', { hasText: /^中国$/ }) });
     assert((await china.innerText()).includes('CASDE'));
-    await page.locator('#source-policy select').selectOption('rice');
+    const brazil = page.locator('#source-policy tbody tr').filter({ has: page.locator('td:first-child', { hasText: /^巴西$/ }) });
+    await page.getByLabel('来源年度', { exact: true }).selectOption('2025');
+    assert((await brazil.locator('td').nth(3).innerText()).includes('CONAB'));
+    await page.getByLabel('来源年度', { exact: true }).selectOption('2026');
+    assert((await brazil.locator('td').nth(3).innerText()).includes('PSD'));
+    assert((await brazil.locator('td').nth(4).innerText()).includes('目标年'));
+    await page.screenshot({path:'test-results/national-methodology-desktop.png'});
+    await page.getByLabel('来源作物', { exact: true }).selectOption('rice');
     assert((await china.innerText()).includes('稻谷转精米定义未验证'));
     assert((await china.innerText()).includes('PSD'));
     assert(!(await page.locator('main').innerText()).includes('海外历史与预测统一用'));
@@ -36,6 +43,7 @@ const assert = require('node:assert/strict');
     for (const path of ['/methodology/', '/events/', '/corn/']) {
       await visit(path);
       assert(!(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1)), path);
+      if (path === '/methodology/') await page.screenshot({path:'test-results/national-methodology-mobile.png'});
     }
     assert.deepEqual(errors, []);
     console.log('Source consistency browser passed: policy, actual production, independent balances, mobile.');

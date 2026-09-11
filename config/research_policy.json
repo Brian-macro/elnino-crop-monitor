@@ -1,5 +1,5 @@
 {
-  "version": "2026-09-09-local-source-consistency-v2",
+  "version": "2026-09-11-national-databases-v3",
   "source_priority": {
     "overseas": {
       "primary": "usda_psd",
@@ -220,7 +220,7 @@
     "rule": "Reference only; >=2 independent institutions, same definition and target, within 45 days. No default mean or level splice."
   },
   "splicing": {
-    "overseas": "有本国预测数据用本国预测数据，无则用PSD；同比只在本年和上年口径可比时计算。历史PSD修订估计保留。",
+    "overseas": "本国权威数据库产量优先；同目标年同产品数据可单独采用，缺少同源上年值仅同比为空。没有该目标年的可比本国产量时补充PSD，不把上一季移作下一季。历史原始记录和PSD修订估计保留。",
     "china": "玉米/大豆/糖CASDE，小麦CropWatch；水稻精米转换未验证时使用PSD精米。NBS实产和农业展望长期独立保存。",
     "missing": "有本国预测数据用本国预测数据，无则用PSD；两者均缺失时N/A，不插值、不借邻国数据。"
   },
@@ -311,10 +311,20 @@
         "cec",
         "ec",
         "bcr",
-        "uga"
+        "uga",
+        "us_nass"
       ],
       "interval_days": 7,
       "data_part": "forecasts"
+    },
+    {
+      "id": "national_statistics",
+      "group": "crops",
+      "script": "fetch_local_sources.py",
+      "args": [],
+      "sources": ["uk_defra", "mx_siap", "jp_maff", "ph_psa", "my_dosm", "pk_pbs", "tw_afa", "kz_bns"],
+      "interval_days": 30,
+      "data_part": "baseline"
     },
     {
       "id": "china_outlook",

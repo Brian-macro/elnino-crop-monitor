@@ -1,0 +1,12 @@
+{
+  "document_id": "dc6233d360162bc98a66e132fc07639d44fe587d1afd1d2c9ccd92fc28b07b04",
+  "source": "ph_psa",
+  "source_url": "https://openstat.psa.gov.ph/PXWeb/api/v1/en/DB/2E/CS/0012E4EVCP0.px",
+  "raw_path": "data/raw/ph_psa/f0e28238435793efeb3b9eedb2c7d0b18cadf39bbe44ee7aab349ffc00ab06d6.csv",
+  "sha256": "f0e28238435793efeb3b9eedb2c7d0b18cadf39bbe44ee7aab349ffc00ab06d6",
+  "publication_date": null,
+  "available_date": "2026-09-11",
+  "download_timestamp": "2026-09-11T14:07:21.860795+00:00",
+  "publication_date_basis": "unknown PSA vintage date; query response updated timestamp is not publication evidence",
+  "title": "Palay and Corn: Volume of Production in Metric Tons by Ecosystem/Croptype, Quarter, Semester, Region and Province, 1987-2026"
+}

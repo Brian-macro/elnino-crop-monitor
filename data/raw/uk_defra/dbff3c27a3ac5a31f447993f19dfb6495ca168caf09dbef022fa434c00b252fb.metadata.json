@@ -1,0 +1,12 @@
+{
+  "document_id": "afee6ca02f65309bdddf78e9d21383efb5cc6fd3f38645cdc33ece17f79eb14a",
+  "source": "uk_defra",
+  "source_url": "https://www.gov.uk/api/content/government/statistics/agriculture-in-the-united-kingdom-2025/chapter-7-crops",
+  "raw_path": "data/raw/uk_defra/dbff3c27a3ac5a31f447993f19dfb6495ca168caf09dbef022fa434c00b252fb.json",
+  "sha256": "dbff3c27a3ac5a31f447993f19dfb6495ca168caf09dbef022fa434c00b252fb",
+  "publication_date": "2026-09-03",
+  "available_date": "2026-09-03",
+  "download_timestamp": "2026-09-11T14:06:51.209815+00:00",
+  "publication_date_basis": "GOV.UK chapter public_updated_at; current revised publication",
+  "title": "Agriculture in the United Kingdom 2025: crops"
+}

@@ -15,6 +15,15 @@ ADAPTERS = {
     "ec": "local_sources.ec",
     "bcr": "local_sources.bcr",
     "uga": "local_sources.uga",
+    "us_nass": "local_sources.us_nass",
+    "uk_defra": "local_sources.uk_defra",
+    "mx_siap": "local_sources.mx_siap",
+    "jp_maff": "local_sources.jp_maff",
+    "ph_psa": "local_sources.ph_psa",
+    "my_dosm": "local_sources.my_dosm",
+    "pk_pbs": "local_sources.pk_pbs",
+    "tw_afa": "local_sources.tw_afa",
+    "kz_bns": "local_sources.kz_bns",
 }
 
 
@@ -52,6 +61,7 @@ def run(source=None):
             try:
                 for item in module.discover():
                     doc = download(con, name, item["url"], suffix=item.get("suffix", ".html"),
+                                   request_method=item.get('method','GET'),request_json=item.get('json'),
                                    date_resolver=getattr(module, "resolve_date", None),
                                    publication_date=item.get("publication_date"),
                                    available_date=item.get("available_date"),
