@@ -2,6 +2,7 @@
 
 - 产品：Brian的厄尔尼诺看盘。
 - 仓库：https://github.com/Brian-macro/elnino-crop-monitor
+- 可见性：源码仓库保持私有，GitHub Pages 网站保持公开；用户明确要求二者分别设置，不得为修复部署而将源码仓库公开。
 - 生产站：https://brian-macro.github.io/elnino-crop-monitor/
 - 已验证云端更新闭环：https://github.com/Brian-macro/elnino-crop-monitor/actions/runs/34245791900
 - 默认分支：main。GitHub Pages使用GitHub Actions部署。
