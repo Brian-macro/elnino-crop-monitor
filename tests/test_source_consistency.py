@@ -52,6 +52,24 @@ def test_dashboard_actual_composite_provenance_is_not_psd():
     con.close()
 
 
+@pytest.mark.parametrize('crop,basis', [('corn', 'grain'), ('wheat', 'grain'), ('soybean', 'oilseed')])
+def test_ukraine_harvest_year_pair_replaces_marketing_year_baseline(crop, basis):
+    from dashboard import apply_local_pairs
+    con = fixture_db()
+    for year, value in [(2025, 31.1), (2026, 32.1)]:
+        insert_rows(con, [dict(document_id='casde', source='uga', source_url='https://uga.ua/',
+            publication_date='2026-08-11', available_date='2026-08-11',
+            download_timestamp='2026-08-11', crop=crop, country='Ukraine', region='',
+            target_year=year, year_basis='calendar_year', commodity_basis=basis,
+            metric='production', value=value, unit='Mt', methodology='fixture')], 'forecast')
+    current, previous = {'Ukraine': 30}, {'Ukraine': 29}
+    evidence = apply_local_pairs(con, crop, 2026, current, previous, asof='2026-09-11')
+    assert evidence['Ukraine']['source'] == 'uga'
+    assert current['Ukraine'] == 32.1
+    assert previous['Ukraine'] == 31.1
+    con.close()
+
+
 def test_event_actual_production_uses_only_actual_database_rows():
     con = fixture_db()
     con.execute('INSERT INTO source_documents VALUES (?,?,?,?,?,?,?,?,?,?)',

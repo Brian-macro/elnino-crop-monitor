@@ -22,8 +22,8 @@
     {"country":"Argentina","crop":"corn","source":"bcr","year_basis":"marketing_year","commodity_basis":"grain","eligible":true},
     {"country":"Argentina","crop":"soybean","source":"bcr","year_basis":"marketing_year","commodity_basis":"oilseed","eligible":true},
     {"country":"Argentina","crop":"wheat","source":"bcr","year_basis":"marketing_year","commodity_basis":"grain","eligible":true},
-    {"country":"Ukraine","crop":"corn","source":"uga","year_basis":"marketing_year","commodity_basis":"grain","eligible":true},
-    {"country":"Ukraine","crop":"soybean","source":"uga","year_basis":"marketing_year","commodity_basis":"oilseed","eligible":true},
-    {"country":"Ukraine","crop":"wheat","source":"uga","year_basis":"marketing_year","commodity_basis":"grain","eligible":true}
+    {"country":"Ukraine","crop":"corn","source":"uga","year_basis":"calendar_year","commodity_basis":"grain","eligible":true},
+    {"country":"Ukraine","crop":"soybean","source":"uga","year_basis":"calendar_year","commodity_basis":"oilseed","eligible":true},
+    {"country":"Ukraine","crop":"wheat","source":"uga","year_basis":"calendar_year","commodity_basis":"grain","eligible":true}
   ]
 }

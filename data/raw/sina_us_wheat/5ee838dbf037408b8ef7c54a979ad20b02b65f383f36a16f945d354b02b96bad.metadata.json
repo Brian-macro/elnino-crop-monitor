@@ -1,0 +1,12 @@
+{
+  "document_id": "6c999c7669b7d5d2aedaa7a4391e817e95d25bf6724a50cd09041424fec079a3",
+  "source": "sina_us_wheat",
+  "source_url": "https://stock2.finance.sina.com.cn/futures/api/jsonp.php/var%20_S2026_9_8=/GlobalFuturesService.getGlobalFuturesDailyKLine?symbol=W&source=web",
+  "raw_path": "data/raw/sina_us_wheat/5ee838dbf037408b8ef7c54a979ad20b02b65f383f36a16f945d354b02b96bad.jsonp",
+  "sha256": "5ee838dbf037408b8ef7c54a979ad20b02b65f383f36a16f945d354b02b96bad",
+  "publication_date": null,
+  "available_date": "2026-09-09",
+  "download_timestamp": "2026-09-09T06:18:19.957979+00:00",
+  "publication_date_basis": "Source publication timestamp unavailable; first observed archive date; content correction first observed",
+  "title": "CBOT小麦"
+}

@@ -71,4 +71,6 @@ def run(source=None):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(); ap.add_argument("--source", choices=sorted(ADAPTERS)); args = ap.parse_args()
-    raise SystemExit(1 if run(args.source) else 0)
+    # Exit 2 reports isolated provider failures already recorded by run().
+    # Exit 1 is reserved for crashes that require scheduler-level status repair.
+    raise SystemExit(2 if run(args.source) else 0)

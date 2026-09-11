@@ -20,3 +20,5 @@
 - 气候是独立NOAA归档观测；连续暖季不能跨缺月，1/3月变化按日历月。本机旧 `ElNinoCropMonitor-Update` 定时任务已停用，日更由GitHub Actions执行。
 - 文档生成器 `write_policy_docs.py` 只生成 `docs/SOURCE_MATRIX.md`，不覆盖人工审定的 `DATA_STITCHING.md`。
 - 换源回归：`tests/test_source_consistency.py`、`tests/test_climate_continuity.py`、`tests/source_consistency_browser.cjs`、`tests/climate_browser.cjs`。
+- 乌克兰 UGA 使用收获自然年，对应同年开始的市场年度；2026/2025 同源配对用于 2026 年预测同比。阿根廷 BCR 使用市场年度起始年。
+- `fetch_local_sources.py` 单源失败已自行登记状态时返回 2，避免调度器把其他成功来源统一标记失败；解析 PDF 所需 `pypdf` 必须安装到云端。

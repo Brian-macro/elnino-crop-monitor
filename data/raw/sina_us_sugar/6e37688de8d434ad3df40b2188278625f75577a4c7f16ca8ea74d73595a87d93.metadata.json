@@ -1,0 +1,12 @@
+{
+  "document_id": "5380f2a99fbff0ffdc4248a16304446376ad37749930ed853d582f9c874f957f",
+  "source": "sina_us_sugar",
+  "source_url": "https://stock2.finance.sina.com.cn/futures/api/jsonp.php/var%20_S2026_9_8=/GlobalFuturesService.getGlobalFuturesDailyKLine?symbol=RS&source=web",
+  "raw_path": "data/raw/sina_us_sugar/6e37688de8d434ad3df40b2188278625f75577a4c7f16ca8ea74d73595a87d93.jsonp",
+  "sha256": "6e37688de8d434ad3df40b2188278625f75577a4c7f16ca8ea74d73595a87d93",
+  "publication_date": null,
+  "available_date": "2026-09-09",
+  "download_timestamp": "2026-09-09T06:18:16.479237+00:00",
+  "publication_date_basis": "Source publication timestamp unavailable; first observed archive date; content correction first observed",
+  "title": "ICE原糖11号"
+}
