@@ -1,23 +1,23 @@
 {
-  "started_at": "20260909T112805Z",
+  "started_at": "20260911T101206Z",
   "policy_version": "2026-09-09-local-source-consistency-v2",
   "offline": false,
-  "group": "forecasts",
+  "group": "build",
   "steps": [
     {
       "step": "validate",
       "returncode": 0,
-      "seconds": 0.72
+      "seconds": 1.56
     },
     {
       "step": "publish",
       "returncode": 0,
-      "seconds": 40.82
+      "seconds": 67.91
     },
     {
       "step": "parquet",
       "returncode": 0,
-      "seconds": 0.63
+      "seconds": 1.45
     }
   ],
   "publication_complete": true,

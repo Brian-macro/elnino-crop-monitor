@@ -1,7 +1,8 @@
 import sys
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).parents[1]/'scripts'))
-def test_conab_contract():
+def test_conab_contract(monkeypatch):
+ monkeypatch.setenv('MONITOR_OFFLINE','1')
  import scripts.local_sources.conab as m
  assert m.SOURCE=='conab' and m.discover()[0]['suffix']=='.xlsx'
 def test_conab_season_mapping():
