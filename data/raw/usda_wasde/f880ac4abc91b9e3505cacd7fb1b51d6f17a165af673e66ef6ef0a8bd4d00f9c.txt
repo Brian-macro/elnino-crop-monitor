@@ -1,0 +1,9 @@
+<html>
+<head>
+	<title>USDA-Office of the Chief Economist</title>
+</head>
+<body>
+	<p style="font-size: 20px; margin-top: 20px; margin-left: 20px;">This file is not yet available. Please check back after the scheduled release date/time.</p>
+	<a style="margin-top: 20px; margin-left: 20px;" href="https://www.usda.gov/oce/commodity/wasde/">Back</a>
+</body>
+</html>
