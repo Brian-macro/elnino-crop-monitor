@@ -1,25 +1,90 @@
 {
-  "started_at": "20260911T142649Z",
+  "started_at": "20260912T105121Z",
   "policy_version": "2026-09-11-national-databases-v3",
   "offline": false,
-  "group": "build",
+  "group": "forecasts",
   "steps": [
+    {
+      "step": "wasde",
+      "returncode": 2,
+      "seconds": 1.32
+    },
+    {
+      "step": "cropwatch",
+      "returncode": 0,
+      "seconds": 96.37
+    },
+    {
+      "step": "casde",
+      "returncode": 2,
+      "seconds": 4.62
+    },
+    {
+      "step": "local_forecasts_aafc",
+      "returncode": 0,
+      "seconds": 1.28
+    },
+    {
+      "step": "local_forecasts_abares",
+      "returncode": 2,
+      "seconds": 35.69
+    },
+    {
+      "step": "local_forecasts_conab",
+      "returncode": 0,
+      "seconds": 4.37
+    },
+    {
+      "step": "local_forecasts_dafw",
+      "returncode": 0,
+      "seconds": 4.81
+    },
+    {
+      "step": "local_forecasts_cec",
+      "returncode": 0,
+      "seconds": 4.26
+    },
+    {
+      "step": "local_forecasts_ec",
+      "returncode": 0,
+      "seconds": 3.99
+    },
+    {
+      "step": "local_forecasts_bcr",
+      "returncode": 0,
+      "seconds": 3.14
+    },
+    {
+      "step": "local_forecasts_uga",
+      "returncode": 0,
+      "seconds": 1.92
+    },
+    {
+      "step": "local_forecasts_us_nass",
+      "returncode": 0,
+      "seconds": 0.99
+    },
+    {
+      "step": "china_outlook",
+      "returncode": 0,
+      "seconds": 48.39
+    },
     {
       "step": "validate",
       "returncode": 0,
-      "seconds": 0.84
+      "seconds": 0.76
     },
     {
       "step": "publish",
       "returncode": 0,
-      "seconds": 32.71
+      "seconds": 37.53
     },
     {
       "step": "parquet",
       "returncode": 0,
-      "seconds": 0.75
+      "seconds": 0.67
     }
   ],
   "publication_complete": true,
-  "ok": true
+  "ok": false
 }

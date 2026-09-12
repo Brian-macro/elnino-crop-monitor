@@ -1,0 +1,12 @@
+{
+  "document_id": "2d67cda780c3ecddcef0e541228fe6db5fb3c692056fe4211158356741eff207",
+  "source": "us_nass",
+  "source_url": "https://esmis.nal.usda.gov/sites/default/release-files/796056/crop0926.txt",
+  "raw_path": "data/raw/us_nass/175a8236a0dfe6038424da4084a95566a7f1f14428ed101bf42a31d17b4c0582.txt",
+  "sha256": "175a8236a0dfe6038424da4084a95566a7f1f14428ed101bf42a31d17b4c0582",
+  "publication_date": "2026-09-11",
+  "available_date": "2026-09-11",
+  "download_timestamp": "2026-09-12T10:54:04.049183+00:00",
+  "publication_date_basis": "official NASS Released line",
+  "title": "NASS Crop Production"
+}
