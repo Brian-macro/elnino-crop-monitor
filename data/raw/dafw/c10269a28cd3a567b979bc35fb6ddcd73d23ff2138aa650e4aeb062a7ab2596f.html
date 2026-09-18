@@ -1,0 +1,1058 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1"><title>
+	Press Release Page | Press Information Bureau
+</title><link href="css/style.css" rel="stylesheet" type="text/css" /><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="alternate stylesheet" href="css/change.css" media="screen" title="change" /><link rel="alternate stylesheet" href="css/green.css" media="screen" title="green" /><link rel="alternate stylesheet" href="css/yellow.css" media="screen" title="yellow" /><link rel="stylesheet" type="text/css" href="css/prtint.css" media="print" /><link rel="stylesheet" href="css/style3.1.css" type="text/css" /><link id="pibA11yCss" rel="stylesheet" href="/css/accessibility.css?v=3" type="text/css" />
+      <script type="text/javascript">
+        /* Stamps the saved theme on <html> before the page paints. The
+           switcher in js/accessibility.js settles the rest, but on inner
+           pages it does not run until the end of the body and inside the
+           release frame it is a separate download - either way the reader
+           would otherwise watch a light page turn dark in front of them. */
+        (function (d) {
+            var t = "";
+            try {
+                t = window.localStorage.getItem("pibStyle") || "";
+            } catch (e) {
+                t = "";
+            }
+            if (t === "orange") {
+                t = "yellow";
+            }
+            var c = t === "change" ? " pib-hc"
+                : t === "green" ? " pib-theme-green"
+                : t === "yellow" ? " pib-theme-yellow" : "";
+            d.documentElement.className += c + " pib-a11y-content";
+        }(document));
+      </script>
+
+
+      <script src="js/jquery.min.js" type="text/javascript"></script>
+      <script type="text/javascript" src="/js/accessibility.js?v=7"></script>
+      <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true" /><link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet" />
+
+      <script type="text/javascript">
+            $(document).ready(function () {
+                  function getParameterByName(name) {
+                        var url = window.location.href;
+                        name = name.replace(/[\[\]]/g, '\\$&');
+                        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                              results = regex.exec(url);
+                        if (!results) return null;
+                        if (!results[2]) return '';
+                        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+                  }
+                  // Get the IDs from the current page's URL
+                  let prid = parseInt(getParameterByName('PRID'), 10);
+
+                  if (!isNaN(prid) && prid > 0) {
+                        $.ajax({
+                              type: "POST",
+                              url: "AjaxMethod.aspx/UpdatePRHitCount",
+                              async: false,
+                              data: JSON.stringify({ 'PermId': prid }),
+                              contentType: "application/json; charset=utf-8",
+                              dataType: "json",
+                              success: function (response) {
+                                    console.log(response);
+                              },
+                              error: function (error) {
+                                    console.log("Error in AJAX request", error);
+                              }
+                        });
+                  } else {
+                        console.log("Invalid parameters:", prid);
+                  }
+
+            });
+      </script>
+      <style type="text/css">
+            .table-responsive {
+                  width: 100%;
+                  overflow-x: auto;
+            }
+
+            .banner {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  background-color: #000;
+                  color: #fff;
+                  padding: 20px;
+            }
+
+            full-width {
+                  width: 100%;
+            }
+
+            .logo-left, .logo-center, .countdown {
+                  display: flex;
+                  align-items: center;
+            }
+
+                  .logo-left img, .logo-center img {
+                        height: 70px;
+                  }
+
+            .countdown {
+                  text-align: center;
+                  background-color: #444;
+                  border-radius: 10px;
+                  padding: 10px;
+                  border: 2px solid grey;
+            }
+
+            .firstnumber {
+                  color: #000000;
+                  position: absolute;
+                  top: 50px;
+                  right: 90px;
+                  font-size: 30px;
+            }
+
+            .secondnumber {
+                  position: absolute;
+                  color: #000000;
+                  right: 45px;
+                  top: 50px;
+                  font-size: 30px;
+            }
+
+            .countdown .days {
+                  font-size: 35px;
+                  color: gold;
+            }
+
+            .countdown p {
+                  margin: 0;
+            }
+
+            .countdown .text {
+                  font-size: 16px;
+            }
+
+            a {
+                  word-break: break-all;
+            }
+
+            iframe, img {
+                  max-width: 100%;
+            }
+
+            @media(max-width:1199px) {
+                  .firstnumber {
+                        top: 40px;
+                        right: 72px;
+                        font-size: 30px;
+                  }
+
+                  .secondnumber {
+                        right: 35px;
+                        top: 40px;
+                        font-size: 30px;
+                  }
+            }
+
+            @media(max-width:990px) {
+                  .firstnumber {
+                        top: 25px;
+                        right: 54px;
+                        font-size: 30px;
+                  }
+
+                  .secondnumber {
+                        right: 25px;
+                        top: 25px;
+                        font-size: 30px;
+                  }
+            }
+
+            @media(max-width:768px) {
+                  .countdown, .days {
+                        font-size: 12px !important;
+                  }
+
+
+                  .firstnumber {
+                        top: 25%;
+                        right: 8%;
+                        font-size: 30px;
+                  }
+
+                  .secondnumber {
+                        right: 4.5%;
+                        top: 25%;
+                        font-size: 30px;
+                  }
+            }
+
+            @media(max-width:475px) {
+                  .countdown, .days {
+                        font-size: 10px !important;
+                        top: 20%;
+                  }
+
+                  .bannerimgdiv {
+                        padding: 0 !important;
+                  }
+
+                  .bannerimg {
+                        width: 108% !important;
+                  }
+            }
+      </style>
+      <script type="text/javascript">
+            $(function () {
+                  $("[id*=printPDF]").click(function () {
+                        $("[id*=hfGridHtml]").val($("#PdfDiv").html());
+                  });
+            });
+            $(function () {
+                  $("[id*=printPDFEvent]").click(function () {
+                        $("[id*=hfGridHtml]").val($("#PdfDiv").html());
+                  });
+            });
+      </script>
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-112591026-1"></script>
+      <script>
+
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() { dataLayer.push(arguments); }
+
+            gtag('js', new Date());
+
+
+
+            gtag('config', 'UA-112591026-1');
+
+      </script>
+
+<meta property="og:title" content="Third Advance Estimates Reflect India’s Agricultural Strength; Union Minister Shri Shivraj Singh Chouhan Approves Record Crop Projections" /><meta property="og:url" content="www.pib.gov.in/Pressreleaseshare.aspx?PRID=2265965" /><meta property="og:description" content="Union Minister for Agriculture &amp; Farmers Welfare and Rural Development Shri Shivraj Singh Chouhan to" /><meta property="og:image" content="https:/pib.gov.in/images/indian-emblem.png" />
+                                <script>!function(e){var n="https://s.go-mpulse.net/boomerang/";if("False"=="True")e.BOOMR_config=e.BOOMR_config||{},e.BOOMR_config.PageParams=e.BOOMR_config.PageParams||{},e.BOOMR_config.PageParams.pci=!0,n="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="C4E7H-KSCMC-422L4-W3EM5-U36MF",function(){function e(){if(!i){var e=document.createElement("script");e.id="boomr-scr-as",e.src=window.BOOMR.url,e.async=!0,o.parentNode.appendChild(e),i=!0}}function t(e){i=!0;var n,t,a,r,d=document,O=window;if(window.BOOMR.snippetMethod=e?"if":"i",t=function(e,n){var t=d.createElement("script");t.id=n||"boomr-if-as",t.src=window.BOOMR.url,BOOMR_lstart=(new Date).getTime(),e=e||d.body,e.appendChild(t)},!window.addEventListener&&window.attachEvent&&navigator.userAgent.match(/MSIE [67]\./))return window.BOOMR.snippetMethod="s",void t(o.parentNode,"boomr-async");a=document.createElement("IFRAME"),a.src="about:blank",a.title="",a.role="presentation",a.loading="eager",r=(a.frameElement||a).style,r.width=0,r.height=0,r.border=0,r.display="none",o.parentNode.appendChild(a);try{O=a.contentWindow,d=O.document.open()}catch(_){n=document.domain,a.src="javascript:var d=document.open();d.domain='"+n+"';void(0);",O=a.contentWindow,d=O.document.open()}if(n)d._boomrl=function(){this.domain=n,t()},d.write("<bo"+"dy onload='document._boomrl();'>");else if(O._boomrl=function(){t()},O.addEventListener)O.addEventListener("load",O._boomrl,!1);else if(O.attachEvent)O.attachEvent("onload",O._boomrl);d.close()}function a(e){window.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!window.BOOMR||!window.BOOMR.version&&!window.BOOMR.snippetExecuted){window.BOOMR=window.BOOMR||{},window.BOOMR.snippetStart=(new Date).getTime(),window.BOOMR.snippetExecuted=!0,window.BOOMR.snippetVersion=12,window.BOOMR.url=n+"C4E7H-KSCMC-422L4-W3EM5-U36MF";var o=document.currentScript||document.getElementsByTagName("script")[0],i=!1,r=document.createElement("link");if(r.relList&&"function"==typeof r.relList.supports&&r.relList.supports("preload")&&"as"in r)window.BOOMR.snippetMethod="p",r.href=window.BOOMR.url,r.rel="preload",r.as="script",r.addEventListener("load",e),r.addEventListener("error",function(){t(!0)}),setTimeout(function(){if(!i)t(!0)},3e3),BOOMR_lstart=(new Date).getTime(),o.parentNode.appendChild(r);else t(!1);if(window.addEventListener)window.addEventListener("load",a,!1);else if(window.attachEvent)window.attachEvent("onload",a)}}(),"".length>0)if(e&&"performance"in e&&e.performance&&"function"==typeof e.performance.setResourceTimingBufferSize)e.performance.setResourceTimingBufferSize();!function(){if(BOOMR=e.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var n=""=="true"?1:0,t="",a="jlvu6jyxzltjg2vnd34q-f-ff14c1541-clientnsv4-s.akamaihd.net",o="false"=="true"?2:1,i={"ak.v":"41","ak.cp":"1825201","ak.ai":parseInt("1215205",10),"ak.ol":"0","ak.cr":2,"ak.ipv":4,"ak.proto":"http/1.1","ak.rid":"1310de1f","ak.r":54041,"ak.a2":n,"ak.m":"dscb","ak.n":"ff","ak.cport":27648,"ak.gh":"23.206.170.83","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.0rtt.ed":"","ak.csrc":"-","ak.acc":"bbr","ak.t":"1789730553","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==ZytnpnCL5E+dxln53ABbFrkwzTtA+2U3SRHBaWRi1QwiRmy3C2laEZ1apDp6IZo6uM9N4no1ExnuF2pdzt1Js0/tQ7Y95AoAAVwwPueGhWvNR9OPqLgrmuKZHxivwvggzgxLS0ZuYZWqm9D5ZFvC5qN6zNeqD1wzVfJdx9yvjgNH19taPof9lJtUf60/jtQrZ8giSt4+1p7YlCmPVhSYarxklUVuuxzELaUr1PG1P/E/eAfT8KQ+mqrl41asR+yIy8uVWuG6B3RnciqJe/Gh75u1O3sIvF8rcMlY7M1nFJQyl1fLYhEeCWxRa0CpUAIbUqpZyVjizdWhxtGK2y/1holkU8vy506NXkwmA+tEz+aHO1uvD4VaTRSEVLNnbDNCvvGh2Ub7EDCVF+3vYPrR2SQjS06TEVh7B69o8jLxoKA=","ak.pv":"9","ak.dpoabenc":"","ak.tf":o};if(""!==t)i["ak.ruds"]=t;var r={i:!1,av:function(n){var t="http.initiator";if(n&&(!n[t]||"spa_hard"===n[t]))i["ak.feo"]=void 0!==e.aFeoApplied?1:0,BOOMR.addVar(i)},rv:function(){var e=["ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.0rtt.ed","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(e)}};BOOMR.plugins.AK={akVars:i,akDNSPreFetchDomain:a,init:function(){if(!r.i){var e=BOOMR.subscribe;e("before_beacon",r.av,null,null),e("onbeacon",r.rv,null,null),r.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head>
+<body>
+      <form method="post" action="./PressReleasePage.aspx?PRID=2265965&amp;reg=3&amp;lang=1" id="form1">
+<input type="hidden" name="sc_HiddenField" id="sc_HiddenField" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+
+
+<script src="/ScriptResource.axd?d=x6wALODbMJK5e0eRC_p1LdIxBJXt0U_WW5GWfJqHAqo6frgCmGRfEywglicTersO2OKrFhK1gAIp0Wk2al2YrpdR3uWqH6f4nfjBsCyRUfTUUVmb0&amp;t=ffffffffecf8d3f2" type="text/javascript"></script>
+<script src="/PressReleasePage.aspx?_TSM_HiddenField_=sc_HiddenField&amp;_TSM_CombinedScripts_=%3b%3bAjaxControlToolkit%2c+Version%3d3.5.7.123%2c+Culture%3dneutral%2c+PublicKeyToken%3d28f01b0e84b6d53e%3aen-US%3a5a4df314-b4a2-4da2-a207-9284f1b1e96c%3ade1feab2%3af2c8e708%3a8613aea7%3af9cec9bc%3a3202a5a2%3aab09e3fe%3a87104b7c%3a720a52bf%3a589eaa30%3aa67c2700%3abe6fb298" type="text/javascript"></script>
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="59B53027" />
+<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="MREcxqN3HCqA+AwWw/MOQmajht4lW6Lst3u5OgEWD7e6lDqrt1Y/uDWfSUwDYvP71oVQxWrA6CTIxkfHk5RWBdNow9fVOtaOn6vmXQsOFAxKabaykdgGlyWXgOIRsBKyQXD9QhUnuhhy/hAqUU9nMEBHfzAliHrcmQUa1H4c/blVw0/nGzhUFkKaHYUAz3iW09q4QPka+S0wIovPg43BCyNpkD0gwcQCmrkzxx0J4a+mC/JrwmYbFFBAUIn2voDUv0JwS8uKCAGp8gGWFPdIM/fozCU=" />
+                              
+            <div id="templateCss"></div>
+            
+            <input type="hidden" name="hfGridHtml" id="hfGridHtml" />
+            <div class="container" style='margin-bottom: 50px;'>
+                  <div id="accessories">
+
+                        
+                        <div class="pull-right" style="display: flex">
+                              <div id="voll"></div>
+                              <div id="vollDT"></div>
+                              
+                              
+<div class="print-icons">
+<input type="image" name="Print1$print" id="Print1_print" aria-label="Print" src="images/printer_icon.png" alt="print page button" style="padding: 5px 10px 5px 10px;" />
+</div>
+                        </div>
+                  </div>
+                  <input type="hidden" name="hydpermid" id="hydpermid" value="2265965" />
+                  
+
+
+
+                  <div class="innner-page-main-about-us-content-right-part">
+
+                        <div id="MinistryName" class="MinistryNameSubhead text-center">
+                              Ministry of Agriculture &
+Farmers Welfare
+                        </div>
+                        
+                        <div id="lg_g"><div class='log_oo'>  <img src='https://static.pib.gov.in/WriteReadData/specificdocs/photo/2026/sep/ph_9768_20260902_10000501.png' alt='azadi ka amrit mahotsav' /> </div></div>
+
+
+
+
+
+                        <div class="text-center event-heading-background">
+                              
+                              <h2 id="Titleh2">
+                                    Third Advance Estimates Reflect India’s Agricultural Strength; Union Minister Shri Shivraj Singh Chouhan Approves Record Crop Projections
+                              </h2>
+                              <h3 id="Subtitleh3">
+                                    <span id="ltrSubtitle">India Registers Highest-Ever Foodgrain Production; Shri Shivraj Singh Chouhan Congratulates Farmers<br/><br/>Record Foodgrain Output Estimated at 376.56 Million Tonnes, Says Union Agriculture Minister Shri Shivraj Singh Chouhan<br/><br/>Government’s Continuous Push for Farmers’ Prosperity Under PM Narendra Modi Delivering Historic Results: Shri Shivraj Singh Chouhan<br/><br/>Strong Surge in Rice, Wheat and Maize Production; Several Crops Touch Record Levels: Shri Chouhan<br/><br/><br/>Oilseeds and Sugarcane Output See Major Jump as India’s Agriculture Growth Gains Momentum: Shri Shivraj Singh<br/><br/>Historic Harvest: India’s Foodgrain Production Hits New High under PM Narendra Modi’s Farmer-Centric Vision</span>
+                              </h3>
+                        </div>
+
+                        <div id="PrDateTime" class="ReleaseDateSubHeaddateTime text-center pt20">
+                              Posted On:
+                27 MAY 2026 6:01PM by PIB Delhi
+                        </div>
+                        
+                        <div class='pt20'>
+                        </div>
+                        <input type="hidden" name="hydphotoUrl" id="hydphotoUrl" />
+                        
+                        <p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Union Minister for Agriculture &amp; Farmers Welfare and Rural Development Shri Shivraj Singh Chouhan today released the Third Advance Estimates of production of major agricultural crops for 2025&ndash;26 and said that under the leadership of Prime Minister Narendra Modi, the Government has been consistently working towards farmers&rsquo; prosperity and the growth of the agriculture sector, the positive impact of which is now visible in the form of record agricultural production.</span></span></p>
+
+<p style="text-align:center"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px"><img src="https://static.pib.gov.in/WriteReadData/userfiles/image/image001T65E.jpg" style="height:400px; width:624px" /></span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">According to the Third Advance Estimates, the country&rsquo;s total foodgrain production is estimated at 376.563 million tonnes, which is nearly 18.8 million tonnes (5.3%) higher than last year&rsquo;s production of 357.732 million tonnes. This marks the highest-ever foodgrain production in the country&rsquo;s history. Shri Chouhan congratulated the nation&rsquo;s farmers for this historic achievement.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The Third Advance Estimates released by the Ministry of Agriculture &amp; Farmers Welfare present a strong and encouraging picture of India&rsquo;s agricultural progress.&nbsp; Sharing the crop-wise summary, the Union Agriculture Minister said that rice production is estimated at a record 154.024 million tonnes, wheat at 120.657 million tonnes and maize at a record 55.093 million tonnes. Production of Shree Anna is estimated at 17.584 million tonnes, tur at 3.592 million tonnes, gram at 12.514 million tonnes and lentil at 1.762 million tonnes.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Similarly, total oilseeds production is estimated at 43.059 million tonnes. Groundnut production has reached a record 13.074 million tonnes, soybean production is estimated at 12.596 million tonnes and rapeseed &amp; mustard production is estimated at a record 13.768 million tonnes. Sugarcane production is estimated at a record 500.063 million tonnes, while cotton production is estimated at 29.024 million bales and jute production at 9.176 million bales.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Shri Chouhan further stated that detailed crop-wise figures indicate rice production at 154.024 million tonnes, compared to 150.184 million tonnes in 2024&ndash;25, registering an increase of 3.84 million tonnes. Wheat production is estimated at 120.657 million tonnes, which is 2.712 million tonnes higher than last year&rsquo;s 117.945 million tonnes. Production of Shree Anna is estimated at 17.584 million tonnes. Maize production has reached a record 55.093 million tonnes, which is 11.684 million tonnes higher than last year&rsquo;s production of 43.409 million tonnes. Production of nutritious and coarse cereals has also witnessed strong growth, with total output estimated at 74.472 million tonnes.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">In pulses, tur production is estimated at 3.592 million tonnes, almost at par with last year&rsquo;s 3.624 million tonnes. Gram production is estimated at 12.514 million tonnes, which is 1.4 million tonnes higher than last year&rsquo;s 11.114 million tonnes. Lentil production is estimated at 1.762 million tonnes.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">In oilseeds, total production is estimated at 43.059 million tonnes. Groundnut production is estimated at 13.074 million tonnes, which is 1.132 million tonnes higher than last year&rsquo;s 11.942 million tonnes. Soybean production is estimated at 12.596 million tonnes. Rapeseed and mustard production is estimated at 13.768 million tonnes, an increase of 1.101 million tonnes over last year&rsquo;s 12.667 million tonnes.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The Agriculture Minister further informed that among commercial crops, sugarcane production is estimated at 500.063 million tonnes, which is 45.452 million tonnes higher than last year&rsquo;s production of 454.611 million tonnes. Cotton production is estimated at 29.024 million bales (each bale weighing 170 kg), while jute production is estimated at 9.176 million bales (each bale weighing 180 kg).</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Shri Chouhan said the Third Advance Estimates clearly indicate that the production position of foodgrains, major cereals, oilseeds and commercial crops in the country remains robust, with several crops projected to achieve record production levels.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">He added that agricultural research undertaken by the Indian Council of Agricultural Research and its institutions has also played a crucial role in enhancing production of major crops. These efforts include development of climate-resilient crop varieties, rainfed production technologies and dissemination of research outcomes to farmers at the grassroots level.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Under the Viksit Krishi Sankalp Abhiyan conducted last year, agricultural practices across the country were further strengthened through direct outreach by scientists to farmers. Farmers were provided climate-resilient technologies, improved crop production techniques, rainfed farming practices and scientific advisory support for holistic agricultural development.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">In 2025&ndash;26, ICAR released 339 crop varieties suitable for different agro-climatic regions of the country, including cereals, oilseeds, pulses, commercial crops and fodder crops.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">During 2024&ndash;25, breeder seed production reached 109,370.2 quintals, while quality seed production stood at 433,114.7 quintals. Integrated innovations in soil and water resource management, climate-smart agriculture, digital soil intelligence and sustainable agricultural technologies have made a significant contribution towards increasing production of major agricultural crops.</span></span></p>
+
+<p style="text-align:justify">&nbsp;</p>
+
+<p style="text-align:center"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">*****</span></span></p>
+
+<p style="text-align:justify">&nbsp;</p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px"><strong>RC/MS</strong></span></span></p>
+
+
+                        
+                        <div id="reel_pic">
+                        </div>
+
+
+
+                        
+                        <br />
+                        <span id="ReleaseId">(Release ID: 2265965)</span>
+                        <span id="lblViews">Visitor Counter : 10305</span>
+                        <div>
+                              
+                        </div>
+                        
+
+                        <span id="lblRefPhoto"></span>
+
+                        <div class="BackgroundRelease">
+                              
+                        </div>
+                        <div>
+                              
+                        </div>
+                        <div class="ReleaseLang">Read this release in: 
+                        
+                                    
+                                    <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=2266043' target="_blank">
+                                          Urdu </a>
+                              
+                                    ,
+                              
+                                    
+                                    <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=2266092' target="_blank">
+                                          Marathi </a>
+                              
+                                    ,
+                              
+                                    
+                                    <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=2265939' target="_blank">
+                                          हिन्दी </a>
+                              
+                                    ,
+                              
+                                    
+                                    <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=2266453' target="_blank">
+                                          Punjabi </a>
+                              
+                                    ,
+                              
+                                    
+                                    <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=2265999' target="_blank">
+                                          Gujarati </a>
+                              
+                                    ,
+                              
+                                    
+                                    <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=2266095' target="_blank">
+                                          Tamil </a>
+                              
+                                    ,
+                              
+                                    
+                                    <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=2266096' target="_blank">
+                                          Kannada </a>
+                              
+                        </div>
+
+                        <div class="RelTag">
+                              <ul>
+                                    
+                              </ul>
+                        </div>
+                        <div class="clear">
+                        </div>
+                        <div id="RelLink" class="RelLink">
+                              <ul>
+                                    
+                                    
+                              </ul>
+                        </div>
+                        <center>
+                              
+                        </center>
+                  </div>
+
+                  <div id="update12">
+	
+                              
+                              <input type="hidden" name="Hidden" id="Hidden" />
+                              <div id="P_CategoryManagement" class="ModalWindow" style="display: none">
+		
+                                    <div>
+                                          <input type="image" name="btnClose" id="btnClose" src="images/close_flat_icon.png" />
+                                    </div>
+                                    <div id="description">
+                                    </div>
+                                    <div class="text-center">
+                                          <h2>
+                                                
+                                                <br>
+                                                
+                                          </h2>
+                                    </div>
+                                    <br />
+                                    <div class="clear">
+                                    </div>
+                                    
+                              
+	</div>
+                        
+</div>
+            </div>
+            
+            <div id="PdfDiv" style="display: none;">
+                  <table width="100%">
+                        <tr>
+                              <td style="font-weight: 200; text-align: center">
+                                    Ministry of Agriculture &
+Farmers Welfare
+                                    <div style="height: 30px; width: 100%;">
+                                    </div>
+                                    <div style="font-weight: 200; text-align: center; font-size: 30px;">
+                                          Third Advance Estimates Reflect India’s Agricultural Strength; Union Minister Shri Shivraj Singh Chouhan Approves Record Crop Projections
+                                    </div>
+                                    <div style="height: 30px; width: 100%;">
+                                    </div>
+                                    <div style="font-weight: 200; text-align: center; font-size: 30px;">
+                                          India Registers Highest-Ever Foodgrain Production; Shri Shivraj Singh Chouhan Congratulates Farmers<div style='height:30px;width:100%;'></div><div style='height:30px;width:100%;'></div>Record Foodgrain Output Estimated at 376.56 Million Tonnes, Says Union Agriculture Minister Shri Shivraj Singh Chouhan<div style='height:30px;width:100%;'></div><div style='height:30px;width:100%;'></div>Government’s Continuous Push for Farmers’ Prosperity Under PM Narendra Modi Delivering Historic Results: Shri Shivraj Singh Chouhan<div style='height:30px;width:100%;'></div><div style='height:30px;width:100%;'></div>Strong Surge in Rice, Wheat and Maize Production; Several Crops Touch Record Levels: Shri Chouhan<div style='height:30px;width:100%;'></div><div style='height:30px;width:100%;'></div><div style='height:30px;width:100%;'></div>Oilseeds and Sugarcane Output See Major Jump as India’s Agriculture Growth Gains Momentum: Shri Shivraj Singh<div style='height:30px;width:100%;'></div><div style='height:30px;width:100%;'></div>Historic Harvest: India’s Foodgrain Production Hits New High under PM Narendra Modi’s Farmer-Centric Vision
+                                    </div>
+                                    <div style="height: 30px; width: 100%;">
+                                    </div>
+                                    <div style="text-align: center; font-size: 14px;">
+                                          Posted On:
+                        27 MAY 2026 6:01PM by PIB Delhi
+                                    </div>
+                                    <div style="height: 30px; width: 100%;">
+                                    </div>
+                                    <div style="font-weight: 200; text-align: left; font-size: 16px;">
+                                          <p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Union Minister for Agriculture &amp; Farmers Welfare and Rural Development Shri Shivraj Singh Chouhan today released the Third Advance Estimates of production of major agricultural crops for 2025&ndash;26 and said that under the leadership of Prime Minister Narendra Modi, the Government has been consistently working towards farmers&rsquo; prosperity and the growth of the agriculture sector, the positive impact of which is now visible in the form of record agricultural production.</span></span></p>
+
+<p style="text-align:center"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px"><img src="https://static.pib.gov.in/WriteReadData/userfiles/image/image001T65E.jpg" style="height:400px; width:624px" /></span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">According to the Third Advance Estimates, the country&rsquo;s total foodgrain production is estimated at 376.563 million tonnes, which is nearly 18.8 million tonnes (5.3%) higher than last year&rsquo;s production of 357.732 million tonnes. This marks the highest-ever foodgrain production in the country&rsquo;s history. Shri Chouhan congratulated the nation&rsquo;s farmers for this historic achievement.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The Third Advance Estimates released by the Ministry of Agriculture &amp; Farmers Welfare present a strong and encouraging picture of India&rsquo;s agricultural progress.&nbsp; Sharing the crop-wise summary, the Union Agriculture Minister said that rice production is estimated at a record 154.024 million tonnes, wheat at 120.657 million tonnes and maize at a record 55.093 million tonnes. Production of Shree Anna is estimated at 17.584 million tonnes, tur at 3.592 million tonnes, gram at 12.514 million tonnes and lentil at 1.762 million tonnes.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Similarly, total oilseeds production is estimated at 43.059 million tonnes. Groundnut production has reached a record 13.074 million tonnes, soybean production is estimated at 12.596 million tonnes and rapeseed &amp; mustard production is estimated at a record 13.768 million tonnes. Sugarcane production is estimated at a record 500.063 million tonnes, while cotton production is estimated at 29.024 million bales and jute production at 9.176 million bales.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Shri Chouhan further stated that detailed crop-wise figures indicate rice production at 154.024 million tonnes, compared to 150.184 million tonnes in 2024&ndash;25, registering an increase of 3.84 million tonnes. Wheat production is estimated at 120.657 million tonnes, which is 2.712 million tonnes higher than last year&rsquo;s 117.945 million tonnes. Production of Shree Anna is estimated at 17.584 million tonnes. Maize production has reached a record 55.093 million tonnes, which is 11.684 million tonnes higher than last year&rsquo;s production of 43.409 million tonnes. Production of nutritious and coarse cereals has also witnessed strong growth, with total output estimated at 74.472 million tonnes.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">In pulses, tur production is estimated at 3.592 million tonnes, almost at par with last year&rsquo;s 3.624 million tonnes. Gram production is estimated at 12.514 million tonnes, which is 1.4 million tonnes higher than last year&rsquo;s 11.114 million tonnes. Lentil production is estimated at 1.762 million tonnes.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">In oilseeds, total production is estimated at 43.059 million tonnes. Groundnut production is estimated at 13.074 million tonnes, which is 1.132 million tonnes higher than last year&rsquo;s 11.942 million tonnes. Soybean production is estimated at 12.596 million tonnes. Rapeseed and mustard production is estimated at 13.768 million tonnes, an increase of 1.101 million tonnes over last year&rsquo;s 12.667 million tonnes.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The Agriculture Minister further informed that among commercial crops, sugarcane production is estimated at 500.063 million tonnes, which is 45.452 million tonnes higher than last year&rsquo;s production of 454.611 million tonnes. Cotton production is estimated at 29.024 million bales (each bale weighing 170 kg), while jute production is estimated at 9.176 million bales (each bale weighing 180 kg).</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Shri Chouhan said the Third Advance Estimates clearly indicate that the production position of foodgrains, major cereals, oilseeds and commercial crops in the country remains robust, with several crops projected to achieve record production levels.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">He added that agricultural research undertaken by the Indian Council of Agricultural Research and its institutions has also played a crucial role in enhancing production of major crops. These efforts include development of climate-resilient crop varieties, rainfed production technologies and dissemination of research outcomes to farmers at the grassroots level.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Under the Viksit Krishi Sankalp Abhiyan conducted last year, agricultural practices across the country were further strengthened through direct outreach by scientists to farmers. Farmers were provided climate-resilient technologies, improved crop production techniques, rainfed farming practices and scientific advisory support for holistic agricultural development.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">In 2025&ndash;26, ICAR released 339 crop varieties suitable for different agro-climatic regions of the country, including cereals, oilseeds, pulses, commercial crops and fodder crops.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">During 2024&ndash;25, breeder seed production reached 109,370.2 quintals, while quality seed production stood at 433,114.7 quintals. Integrated innovations in soil and water resource management, climate-smart agriculture, digital soil intelligence and sustainable agricultural technologies have made a significant contribution towards increasing production of major agricultural crops.</span></span></p>
+
+<p style="text-align:justify">&nbsp;</p>
+
+<p style="text-align:center"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">*****</span></span></p>
+
+<p style="text-align:justify">&nbsp;</p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px"><strong>RC/MS</strong></span></span></p>
+
+                                    </div>
+                                    <div style="height: 30px; width: 100%;">
+                                    </div>
+                                    <div style="height: 30px; width: 100%;">
+                                    </div>
+                                    <div style="font-weight: 100; text-align: left; font-size: 16px;">
+                                          (Release ID: 2265965)
+                                    </div>
+                                    <div style="height: 30px; width: 100%;">
+                                    </div>
+                              </td>
+                        </tr>
+                        <tr>
+                              <td style="font-weight: 200; text-align: center; font-size: 24px;"></td>
+                        </tr>
+                  </table>
+            </div>
+            <div class="clearfix">
+            </div>
+
+            
+
+            <div class="section1">
+                  <div id="frst_t">
+                        <div id="arr_rm"><div class='sticky-social_mb'><ul class='social_mb'><a href='http://www.facebook.com/share.php?u=https://pib.gov.in/PressReleasePage.aspx?PRID=2265965' target='_blank'><li class='fb_b'   ><img  src='https://static.pib.gov.in/WriteReadData/userfiles/socialmedianew/facebook.jpg' alt='Share on facebook'  width='40' /></li></a><a href='https://twitter.com/intent/tweet?url=https://pib.gov.in/PressReleasePage.aspx?PRID=2265965&text=Third Advance Estimates Reflect India’s Agricultural Strength; Union Minister Shri Shivraj Singh Chouhan Approves Record Crop Projections' target='_blank'><li class='twitter_r'  ><img  src='https://static.pib.gov.in/WriteReadData/specificdocs/photo/2023/aug/ph2023818240601.jpg' alt='Share on twitter' width='40' /> </li></a><a href='https://api.whatsapp.com/send?text=https://pib.gov.in/PressReleasePage.aspx?PRID=2265965' target='_blank'><li class='whatsapp_r'  ><img  src='https://static.pib.gov.in/WriteReadData/userfiles/socialmedianew/whatsapp1.png' alt='Share on whatsapp' width='40' /></li></a><a href='https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=Third Advance Estimates Reflect India’s Agricultural Strength; Union Minister Shri Shivraj Singh Chouhan Approves Record Crop Projections&body=https://pib.gov.in/PressReleasePage.aspx?PRID=2265965&ui=2&tf=1&pli=1' title='Share by Email' target='_blank'><li class='fa-envelope_r' ><img  src='https://static.pib.gov.in/WriteReadData/userfiles/socialmedianew/email1.png' alt='Share on email'  width='40' /></li></a><a href='https://www.linkedin.com/shareArticle?mini=true&url=https://pib.gov.in/PressReleasePage.aspx?PRID=2265965&title=Third Advance Estimates Reflect India’s Agricultural Strength; Union Minister Shri Shivraj Singh Chouhan Approves Record Crop Projections&summary=My%20favorite%20developer%20program&source=LinkedIn' target='_blank'><li class='fa-linkedin_r'  ><img  src='https://static.pib.gov.in/WriteReadData/userfiles/socialmedianew/linkedin.png' alt='Share on linkedin' width='40' /></li></a></ul></div></div>
+                  </div>
+                  <div id="second_t">
+                        <div id="sndr_rm"><div class='sticky-social'><ul class='social'><a href='http://www.facebook.com/share.php?u=https://pib.gov.in/PressReleasePage.aspx?PRID=2265965' target='_blank'><li class='fb_b'   ><img  src='https://static.pib.gov.in/WriteReadData/userfiles/socialmedianew/facebook.jpg' alt='Share on facebook'  width='35' /></li></a><a href='https://twitter.com/intent/tweet?url=https://pib.gov.in/PressReleasePage.aspx?PRID=2265965&text=Third Advance Estimates Reflect India’s Agricultural Strength; Union Minister Shri Shivraj Singh Chouhan Approves Record Crop Projections' target='_blank'><li class='twitter_r'  ><img  src='https://static.pib.gov.in/WriteReadData/specificdocs/photo/2023/aug/ph2023818240601.jpg' alt='Share on twitter' width='35' /> </li></a><a href='https://api.whatsapp.com/send?text=https://pib.gov.in/PressReleasePage.aspx?PRID=2265965' target='_blank'><li class='whatsapp_r'  ><img  src='https://static.pib.gov.in/WriteReadData/userfiles/socialmedianew/whatsapp1.png' alt='Share on whatsapp' width='35' /></li></a><a href='https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=Third Advance Estimates Reflect India’s Agricultural Strength; Union Minister Shri Shivraj Singh Chouhan Approves Record Crop Projections&body=https://pib.gov.in/PressReleasePage.aspx?PRID=2265965&ui=2&tf=1&pli=1' title='Share by Email' target='_blank'><li class='fa-envelope_r' ><img  src='https://static.pib.gov.in/WriteReadData/userfiles/socialmedianew/email1.png' alt='Share on email'  width='35' /></li></a><a href='https://www.linkedin.com/shareArticle?mini=true&url=https://pib.gov.in/PressReleasePage.aspx?PRID=2265965&title=Third Advance Estimates Reflect India’s Agricultural Strength; Union Minister Shri Shivraj Singh Chouhan Approves Record Crop Projections&summary=My%20favorite%20developer%20program&source=LinkedIn' target='_blank'><li class='fa-linkedin_r'  ><img  src='https://static.pib.gov.in/WriteReadData/userfiles/socialmedianew/linkedin.png' alt='Share on linkedin' width='35' /></li></a></ul></div></div>
+                  </div>
+            </div>
+            <input type="hidden" name="ltrTitlee" id="ltrTitlee" value="Third Advance Estimates Reflect India’s Agricultural Strength; Union Minister Shri Shivraj Singh Chouhan Approves Record Crop Projections" />
+            <input type="hidden" name="ltrSubtitlee" id="ltrSubtitlee" value="India Registers Highest-Ever Foodgrain Production; Shri Shivraj Singh Chouhan Congratulates Farmers&lt;br/>&lt;br/>Record Foodgrain Output Estimated at 376.56 Million Tonnes, Says Union Agriculture Minister Shri Shivraj Singh Chouhan&lt;br/>&lt;br/>Government’s Continuous Push for Farmers’ Prosperity Under PM Narendra Modi Delivering Historic Results: Shri Shivraj Singh Chouhan&lt;br/>&lt;br/>Strong Surge in Rice, Wheat and Maize Production; Several Crops Touch Record Levels: Shri Chouhan&lt;br/>&lt;br/>&lt;br/>Oilseeds and Sugarcane Output See Major Jump as India’s Agriculture Growth Gains Momentum: Shri Shivraj Singh&lt;br/>&lt;br/>Historic Harvest: India’s Foodgrain Production Hits New High under PM Narendra Modi’s Farmer-Centric Vision" />
+            <input type="hidden" name="ltrDescriptionn" id="ltrDescriptionn" value="&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>Union Minister for Agriculture &amp;amp; Farmers Welfare and Rural Development Shri Shivraj Singh Chouhan today released the Third Advance Estimates of production of major agricultural crops for 2025&amp;ndash;26 and said that under the leadership of Prime Minister Narendra Modi, the Government has been consistently working towards farmers&amp;rsquo; prosperity and the growth of the agriculture sector, the positive impact of which is now visible in the form of record agricultural production.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:center&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>&lt;img src=&quot;https://static.pib.gov.in/WriteReadData/userfiles/image/image001T65E.jpg&quot; style=&quot;height:400px; width:624px&quot; />&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>According to the Third Advance Estimates, the country&amp;rsquo;s total foodgrain production is estimated at 376.563 million tonnes, which is nearly 18.8 million tonnes (5.3%) higher than last year&amp;rsquo;s production of 357.732 million tonnes. This marks the highest-ever foodgrain production in the country&amp;rsquo;s history. Shri Chouhan congratulated the nation&amp;rsquo;s farmers for this historic achievement.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>The Third Advance Estimates released by the Ministry of Agriculture &amp;amp; Farmers Welfare present a strong and encouraging picture of India&amp;rsquo;s agricultural progress.&amp;nbsp; Sharing the crop-wise summary, the Union Agriculture Minister said that rice production is estimated at a record 154.024 million tonnes, wheat at 120.657 million tonnes and maize at a record 55.093 million tonnes. Production of Shree Anna is estimated at 17.584 million tonnes, tur at 3.592 million tonnes, gram at 12.514 million tonnes and lentil at 1.762 million tonnes.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>Similarly, total oilseeds production is estimated at 43.059 million tonnes. Groundnut production has reached a record 13.074 million tonnes, soybean production is estimated at 12.596 million tonnes and rapeseed &amp;amp; mustard production is estimated at a record 13.768 million tonnes. Sugarcane production is estimated at a record 500.063 million tonnes, while cotton production is estimated at 29.024 million bales and jute production at 9.176 million bales.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>Shri Chouhan further stated that detailed crop-wise figures indicate rice production at 154.024 million tonnes, compared to 150.184 million tonnes in 2024&amp;ndash;25, registering an increase of 3.84 million tonnes. Wheat production is estimated at 120.657 million tonnes, which is 2.712 million tonnes higher than last year&amp;rsquo;s 117.945 million tonnes. Production of Shree Anna is estimated at 17.584 million tonnes. Maize production has reached a record 55.093 million tonnes, which is 11.684 million tonnes higher than last year&amp;rsquo;s production of 43.409 million tonnes. Production of nutritious and coarse cereals has also witnessed strong growth, with total output estimated at 74.472 million tonnes.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>In pulses, tur production is estimated at 3.592 million tonnes, almost at par with last year&amp;rsquo;s 3.624 million tonnes. Gram production is estimated at 12.514 million tonnes, which is 1.4 million tonnes higher than last year&amp;rsquo;s 11.114 million tonnes. Lentil production is estimated at 1.762 million tonnes.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>In oilseeds, total production is estimated at 43.059 million tonnes. Groundnut production is estimated at 13.074 million tonnes, which is 1.132 million tonnes higher than last year&amp;rsquo;s 11.942 million tonnes. Soybean production is estimated at 12.596 million tonnes. Rapeseed and mustard production is estimated at 13.768 million tonnes, an increase of 1.101 million tonnes over last year&amp;rsquo;s 12.667 million tonnes.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>The Agriculture Minister further informed that among commercial crops, sugarcane production is estimated at 500.063 million tonnes, which is 45.452 million tonnes higher than last year&amp;rsquo;s production of 454.611 million tonnes. Cotton production is estimated at 29.024 million bales (each bale weighing 170 kg), while jute production is estimated at 9.176 million bales (each bale weighing 180 kg).&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>Shri Chouhan said the Third Advance Estimates clearly indicate that the production position of foodgrains, major cereals, oilseeds and commercial crops in the country remains robust, with several crops projected to achieve record production levels.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>He added that agricultural research undertaken by the Indian Council of Agricultural Research and its institutions has also played a crucial role in enhancing production of major crops. These efforts include development of climate-resilient crop varieties, rainfed production technologies and dissemination of research outcomes to farmers at the grassroots level.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>Under the Viksit Krishi Sankalp Abhiyan conducted last year, agricultural practices across the country were further strengthened through direct outreach by scientists to farmers. Farmers were provided climate-resilient technologies, improved crop production techniques, rainfed farming practices and scientific advisory support for holistic agricultural development.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>In 2025&amp;ndash;26, ICAR released 339 crop varieties suitable for different agro-climatic regions of the country, including cereals, oilseeds, pulses, commercial crops and fodder crops.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>During 2024&amp;ndash;25, breeder seed production reached 109,370.2 quintals, while quality seed production stood at 433,114.7 quintals. Integrated innovations in soil and water resource management, climate-smart agriculture, digital soil intelligence and sustainable agricultural technologies have made a significant contribution towards increasing production of major agricultural crops.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&amp;nbsp;&lt;/p>
+
+&lt;p style=&quot;text-align:center&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>*****&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&amp;nbsp;&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>&lt;strong>RC/MS&lt;/strong>&lt;/span>&lt;/span>&lt;/p>
+" />
+            <script type="text/javascript">
+                  var mPlayer = document.getElementById("background_music");
+                  var mPlayAction = document.getElementById("playbutton");
+
+                  var isPlaying = false;
+
+                  function playAudio() {
+                        mPlayer.play();
+                        isPlaying = true;
+                        document.getElementById('stopA').style.display = "block";
+                        document.getElementById('playA').style.display = "none";
+                  }
+
+                  function pauseAudio() {
+                        mPlayer.pause();
+                        isPlaying = false;
+                        document.getElementById('playA').style.display = "block";
+                        document.getElementById('stopA').style.display = "none";
+                  }
+                  //function HandleAudio() {
+                  //    if (isPlaying == true) {
+                  //        //Playing already Pause it
+                  //        pauseAudio();
+                  //    } else {
+                  //        //Play the music
+                  //        playAudio();
+                  //    }
+                  //}
+            </script>
+            <script type="text/javascript">
+                  var synth = window.speechSynthesis;
+
+            
+                  function CleanHtml(html) {
+
+                        html = html.replace(/<script[\s\S]*?<\/script>/gi, '');
+
+                        return html;
+                  }
+                  function stripHtml(html) {
+                        let tmp = document.createElement("DIV");
+                        tmp.innerHTML = CleanHtml(html);
+                        return tmp.textContent || tmp.innerText || "";
+                  }
+            </script>
+            <script type="text/javascript">
+                  $(document).ready(function () {
+                        //for responsive tables
+                        $("table").each(function () {
+                              if (!$(this).closest(".table-responsive").length) {
+                                    $(this).wrap("<div class='table-responsive'></div>");
+                              }
+                        });
+
+                        var width = $(window).width();
+                        if (width < 768) {
+
+                              // Extra Small Device
+                              document.getElementById('frst_t').style.display = "block";
+                              document.getElementById('second_t').style.display = "none";
+
+                        } else if (width < 991) {
+                              document.getElementById('frst_t').style.display = "block";
+                              document.getElementById('second_t').style.display = "none";
+                              // Small Device
+
+                        } else if (width < 1199) {
+                              document.getElementById('frst_t').style.display = "none";
+                              document.getElementById('second_t').style.display = "block";
+                              // Medium Device
+
+                        } else {
+                              document.getElementById('frst_t').style.display = "none";
+                              document.getElementById('second_t').style.display = "block";
+                              // Large Device
+
+                        }
+                  });
+            </script>
+            <script type="text/javascript">
+                  $(document).ready(function () {
+                        var width = $(window).width();
+                        if (width < 768) {
+
+                              // Extra Small Device
+                              document.getElementById('frst_t').style.display = "block";
+                              document.getElementById('second_t').style.display = "none";
+
+                        } else if (width < 991) {
+                              document.getElementById('frst_t').style.display = "block";
+                              document.getElementById('second_t').style.display = "none";
+                              // Small Device
+
+                        } else if (width < 1199) {
+                              document.getElementById('frst_t').style.display = "none";
+                              document.getElementById('second_t').style.display = "block";
+                              // Medium Device
+
+                        } else {
+                              document.getElementById('frst_t').style.display = "none";
+                              document.getElementById('second_t').style.display = "block";
+                              // Large Device
+
+                        }
+                  });
+            </script>
+            
+            <style type="text/css">
+                  @media print {
+                        .sticky-social, .sticky-social_mb, .pull-right, #printPDF {
+                              display: none !important;
+                        }
+                  }
+
+                  .f_vl {
+                        padding-right: 30px;
+                        font-size: 17px;
+                        cursor: pointer;
+                  }
+
+                  .log_oo {
+                        // width: 20%;
+                        display: flex;
+                        justify-content: space-between;
+                  }
+
+                        .log_oo img {
+                              width: 150px;
+                              /*width: 100%;
+                    height: auto;*/
+                        }
+
+                  .sticky-social_mb {
+                        position: fixed;
+                        bottom: 0px;
+                        padding: 0px;
+                        margin: 0px;
+                        width: 100%;
+                  }
+
+                  .social_mb {
+                        list-style: none;
+                        display: flex;
+                        width: 100%;
+                        margin-bottom: -8px;
+                  }
+
+                        .social_mb a {
+                              padding: 8px 0px;
+                              font-size: 30px;
+                              transition: all 0.8s ease-in-out;
+                              width: 20% !important;
+                              text-align: center;
+                        }
+            </style>
+            <style type="text/css">
+                  .section1 {
+                        position: relative;
+                        padding: 10px 0px;
+                        width: 100%;
+                  }
+
+
+
+                  .sticky-social {
+                        position: fixed;
+                        top: 20px;
+                        left: 0px;
+                        padding: 0px;
+                        margin: 0px;
+                  }
+
+                  .social {
+                        list-style: none;
+                  }
+
+                        .social a li {
+                              padding: 8px 12px;
+                              font-size: 25px;
+                              transition: all 0.8s ease-in-out;
+                        }
+
+                              .social a li:hover {
+                                    margin-right: -30px;
+                                    box-shadow: 2px 5px 10px grey;
+                              }
+
+                                    .social a li:hover .fa {
+                                          margin-left: 20px;
+                                    }
+
+                  .fb_b {
+                        /* background-color: rgb(59, 89, 152);*/
+                        background-color: rgba(65,103,178,255);
+                  }
+
+                  .twitter_r {
+                        /* background-color: rgb(29, 161, 242);*/
+                        background-color: #000000;
+                  }
+
+                  .whatsapp_r {
+                        /* background-color: rgb(77, 194, 71);*/
+                        background-color: rgba(13,191,67,255);
+                  }
+
+                  .fa-envelope_r {
+                        /* background-color: rgb(219, 68, 55);*/
+                        background-color: #e2123d;
+                  }
+
+                  .fa-linkedin_r {
+                        background-color: rgb(0, 119, 181);
+                  }
+            </style>
+            <style type="text/css">
+                  @media only screen and (max-device-width: 767px) {
+                        p span img {
+                              max-width: 90% !important;
+                              height: auto !important;
+                        }
+
+                        p img {
+                              max-width: 90% !important;
+                              height: auto !important;
+                        }
+
+                        h2 {
+                              font-size: 20px !important;
+                              font-weight: 600 !important;
+                        }
+
+                        h3 {
+                              font-size: 18px !important;
+                              font-weight: 600 !important;
+                        }
+                  }
+            </style>
+            <style type="text/css">
+                  /* === Film Roll Badge Styling(IFFI2025 countdown) === */
+                  .film-roll-badge {
+                        position: absolute;
+                        top:82%;
+                        right: 20px;
+                        width: 230px;
+                        height: 70px;
+                        background: repeating-linear-gradient( to right, #9a2375 0px, #9a2375 18px, #6e2b8b 18px, #6e2b8b 36px );
+                        border-top: 8px solid #9a2375;
+                        border-bottom: 8px solid #9a2375;
+                        border-radius: 8px;
+                        overflow: hidden;
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+                        animation: moveFilm 8s linear infinite;
+                        z-index: 10;
+                  }
+
+                        /* film sprocket holes */
+                        .film-roll-badge::before,
+                        .film-roll-badge::after {
+                              content: "";
+                              position: absolute;
+                              width: 100%;
+                              height: 10px;
+                              background: repeating-linear-gradient( to right, #9a2375 0px, #9a2375 10px, #fff 10px, #fff 20px );
+                              left: 0;
+                              z-index: 2;
+                        }
+
+                        .film-roll-badge::before {
+                              top: -4px;
+                        }
+
+                        .film-roll-badge::after {
+                              bottom: -4px;
+                        }
+
+                  .film-roll-inner {
+                        position: relative;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        animation: flicker 2s infinite ease-in-out;
+                  }
+
+                  .countdown-text {
+                        font-size: 1.3rem;
+                        font-weight: 700;
+                        color: #fff;
+                        text-shadow: 0 0 6px rgba(255, 255, 255, 0.4), 0 0 10px #000;
+                        white-space: nowrap;
+                  }
+
+                  /* === Animations === */
+                  @keyframes moveFilm {
+                        0% {
+                              background-position: 0 0;
+                        }
+
+                        100% {
+                              background-position: 120px 0;
+                        }
+                  }
+
+                  @keyframes flicker {
+                        0%, 100% {
+                              opacity: 1;
+                        }
+
+                        50% {
+                              opacity: 0.9;
+                        }
+
+                        25% {
+                              opacity: 0.95;
+                        }
+
+                        75% {
+                              opacity: 0.85;
+                        }
+                  }
+
+                  /* === Responsive Adjustments === */
+                  @media (max-width: 1500px) {
+                        .film-roll-badge {
+                              top: 68%;
+                              right: 18px;
+                              /* width: 220px; */
+                              height: 65px;
+                              font-size: 0.85rem;
+                        }
+
+                        .press-section {
+                              margin-top: 35px;
+                        }
+                  }
+
+                  @media (max-width: 992px) {
+                        .film-roll-badge {
+                              top: 52%;
+                              right: 10px;
+                               width: 200px; 
+                              height: 60px;
+                        }
+                  }
+
+                  @media (max-width: 768px) {
+                        .film-roll-badge {
+                              top: 56%;
+                              right: 10px;
+                               width: 124px; 
+                              height: 55px;
+                        }
+
+                        .countdown-text {
+                              font-size: 0.9rem;
+                        }
+                  }
+
+                  @media (max-width: 576px) {
+                        .film-roll-badge {
+                              top: 59%;
+                              right: 5px;
+                              /* width: 160px; */
+                              height: 50px;
+                        }
+
+                        .countdown-text {
+                              font-size: 0.85rem;
+                        }
+                  }
+            </style>
+          <script type="text/javascript">
+                const festivalStart = new Date("2025-11-20T00:00:00").getTime();
+                const festivalEnd = new Date("2025-11-28T23:59:59").getTime();
+
+                const countdownElement = document.getElementById("countdown");
+
+                const interval = setInterval(() => {
+                      const now = new Date().getTime();
+
+                      // BEFORE FESTIVAL — show days + hours left
+                      if (now < festivalStart) {
+                            const diff = festivalStart - now;
+                            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+                            countdownElement.innerHTML = `
+              ${days} Day${days !== 1 ? 's' : ''} 
+              ${hours} Hour${hours !== 1 ? 's' : ''} to go
+          `;
+
+                      }
+
+                      // DURING FESTIVAL — show 56th IFFI - Day X
+                      else if (now >= festivalStart && now <= festivalEnd) {
+                            const dayNumber = Math.floor((now - festivalStart) / (1000 * 60 * 60 * 24)) + 1;
+                            countdownElement.innerHTML = `56th IFFI - Day ${dayNumber}`;
+                      }
+
+                      // AFTER FESTIVAL — new message
+                      else {
+                            countdownElement.innerHTML = `✨ IFFI closes but never ends…`;
+
+                            // Width change logic
+                            const elements = document.querySelectorAll('.film-roll-badge');
+                            elements.forEach(el => el.style.width = "350px");
+
+                            clearInterval(interval);
+                      }
+
+                }, 1000);
+          </script>
+ <script type="text/javascript">
+
+               const miffStart = new Date("2026-06-15T00:00:00").getTime();
+               const miffEnd = new Date("2026-06-15T23:59:59").getTime();
+
+               const miffElement = document.getElementById("miff");
+
+               if (miffElement) {
+
+                   const miffInterval = setInterval(() => {
+
+                       const now = new Date().getTime();
+
+                       // Before MIFF
+                       if (now < miffStart) {
+
+                           const diff = miffStart - now;
+                           const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                           const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+        
+
+                   /*  miffElement.innerHTML = `${days} Day${days !== 1 ? 's' : ''} ${hours} Hour${hours !== 1 ? 's' : ''} to MIFF`;*/
+                           miffElement.innerHTML = `${days} Day${days === 1 ? '' : 's'} to MIFF ...`;
+
+
+                     }
+
+                       // During MIFF
+                       else if (now >= miffStart && now <= miffEnd) {
+
+                           const dayNumber =
+                               Math.floor((now - miffStart) / (1000 * 60 * 60 * 24)) + 1;
+
+                           miffElement.innerHTML = `19th MIFF - Day ${dayNumber}`;
+                       }
+
+                       // After MIFF
+                       else {
+
+                           miffElement.innerHTML = `✨ MIFF concludes, cinema lives on...`;
+
+                           document.querySelectorAll('.film-roll-badge')
+                               .forEach(el => el.style.width = "350px");
+
+                           clearInterval(miffInterval);
+                       }
+
+                   }, 1000);
+               }
+
+</script>
+
+      
+
+<script type="text/javascript">
+//<![CDATA[
+(function() {var fn = function() {$get("sc_HiddenField").value = '';Sys.Application.remove_init(fn);};Sys.Application.add_init(fn);})();Sys.Application.add_init(function() {
+    $create(Sys.Extended.UI.ModalPopupBehavior, {"BackgroundCssClass":"modalBackground","PopupControlID":"P_CategoryManagement","dynamicServicePath":"/PressReleasePage.aspx","id":"mpe"}, null, null, $get("Hidden"));
+});
+//]]>
+</script>
+<input type="hidden" name="__ncforminfo" value="X11hrsmA8DUMuWhM1xFx5hap1KUliqdaGdVWql4QrAYiiR3yTIxLLBX9iynObCHJaJw_YJMQuNHgZuDUkDxQGFVDaZ-4PREr"/></form>
+</body>
+</html>
+
