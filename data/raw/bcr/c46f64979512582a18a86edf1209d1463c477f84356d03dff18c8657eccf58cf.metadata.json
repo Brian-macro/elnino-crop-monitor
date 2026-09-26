@@ -1,0 +1,12 @@
+{
+  "document_id": "f4c429cec37b650ea650ea5104ea56319ec31b4be42066eeb8934d1182611b9f",
+  "source": "bcr",
+  "source_url": "https://www.bcr.com.ar/es/mercados/gea/estimaciones-nacionales-de-produccion/estimaciones",
+  "raw_path": "data/raw/bcr/c46f64979512582a18a86edf1209d1463c477f84356d03dff18c8657eccf58cf.html",
+  "sha256": "c46f64979512582a18a86edf1209d1463c477f84356d03dff18c8657eccf58cf",
+  "publication_date": "2026-09-09",
+  "available_date": "2026-09-26",
+  "download_timestamp": "2026-09-26T11:31:49.376890+00:00",
+  "publication_date_basis": "BCR dated national report; content correction first observed",
+  "title": "BCR national production estimates"
+}

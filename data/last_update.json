@@ -1,5 +1,5 @@
 {
-  "started_at": "20260925T115452Z",
+  "started_at": "20260926T112917Z",
   "policy_version": "2026-09-11-national-databases-v3",
   "offline": false,
   "group": "forecasts",
@@ -7,52 +7,52 @@
     {
       "step": "wasde",
       "returncode": 2,
-      "seconds": 1.13
+      "seconds": 1.06
     },
     {
       "step": "cropwatch",
       "returncode": 0,
-      "seconds": 82.98
+      "seconds": 84.22
     },
     {
       "step": "casde",
-      "returncode": 1,
-      "seconds": 3.37
+      "returncode": 2,
+      "seconds": 5.35
     },
     {
       "step": "local_forecasts_aafc",
       "returncode": 0,
-      "seconds": 1.35
+      "seconds": 1.55
     },
     {
       "step": "local_forecasts_abares",
       "returncode": 2,
-      "seconds": 35.8
+      "seconds": 35.62
     },
     {
       "step": "local_forecasts_conab",
       "returncode": 0,
-      "seconds": 4.58
+      "seconds": 5.64
     },
     {
       "step": "local_forecasts_dafw",
       "returncode": 0,
-      "seconds": 2.73
+      "seconds": 4.55
     },
     {
       "step": "local_forecasts_cec",
       "returncode": 0,
-      "seconds": 4.38
+      "seconds": 4.48
     },
     {
       "step": "local_forecasts_ec",
       "returncode": 0,
-      "seconds": 3.61
+      "seconds": 5.98
     },
     {
       "step": "local_forecasts_bcr",
       "returncode": 0,
-      "seconds": 3.08
+      "seconds": 4.03
     },
     {
       "step": "local_forecasts_uga",
@@ -62,27 +62,27 @@
     {
       "step": "local_forecasts_us_nass",
       "returncode": 0,
-      "seconds": 1.07
+      "seconds": 1.5
     },
     {
       "step": "china_outlook",
       "returncode": 0,
-      "seconds": 47.04
+      "seconds": 36.37
     },
     {
       "step": "validate",
       "returncode": 0,
-      "seconds": 0.78
+      "seconds": 0.61
     },
     {
       "step": "publish",
       "returncode": 0,
-      "seconds": 43.82
+      "seconds": 29.17
     },
     {
       "step": "parquet",
       "returncode": 0,
-      "seconds": 0.67
+      "seconds": 0.59
     }
   ],
   "publication_complete": true,
