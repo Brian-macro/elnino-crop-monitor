@@ -1,5 +1,5 @@
 {
-  "started_at": "20260926T112917Z",
+  "started_at": "20260927T120720Z",
   "policy_version": "2026-09-11-national-databases-v3",
   "offline": false,
   "group": "forecasts",
@@ -7,82 +7,82 @@
     {
       "step": "wasde",
       "returncode": 2,
-      "seconds": 1.06
+      "seconds": 1.14
     },
     {
       "step": "cropwatch",
       "returncode": 0,
-      "seconds": 84.22
+      "seconds": 95.43
     },
     {
       "step": "casde",
       "returncode": 2,
-      "seconds": 5.35
+      "seconds": 5.37
     },
     {
       "step": "local_forecasts_aafc",
       "returncode": 0,
-      "seconds": 1.55
+      "seconds": 1.35
     },
     {
       "step": "local_forecasts_abares",
       "returncode": 2,
-      "seconds": 35.62
+      "seconds": 35.85
     },
     {
       "step": "local_forecasts_conab",
       "returncode": 0,
-      "seconds": 5.64
+      "seconds": 4.1
     },
     {
       "step": "local_forecasts_dafw",
       "returncode": 0,
-      "seconds": 4.55
+      "seconds": 3.0
     },
     {
       "step": "local_forecasts_cec",
       "returncode": 0,
-      "seconds": 4.48
+      "seconds": 4.35
     },
     {
       "step": "local_forecasts_ec",
       "returncode": 0,
-      "seconds": 5.98
+      "seconds": 3.99
     },
     {
       "step": "local_forecasts_bcr",
       "returncode": 0,
-      "seconds": 4.03
+      "seconds": 3.51
     },
     {
       "step": "local_forecasts_uga",
       "returncode": 0,
-      "seconds": 1.91
+      "seconds": 1.84
     },
     {
       "step": "local_forecasts_us_nass",
       "returncode": 0,
-      "seconds": 1.5
+      "seconds": 1.13
     },
     {
       "step": "china_outlook",
       "returncode": 0,
-      "seconds": 36.37
+      "seconds": 51.06
     },
     {
       "step": "validate",
       "returncode": 0,
-      "seconds": 0.61
+      "seconds": 0.77
     },
     {
       "step": "publish",
       "returncode": 0,
-      "seconds": 29.17
+      "seconds": 45.09
     },
     {
       "step": "parquet",
       "returncode": 0,
-      "seconds": 0.59
+      "seconds": 0.67
     }
   ],
   "publication_complete": true,
