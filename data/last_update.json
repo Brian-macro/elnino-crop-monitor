@@ -1,88 +1,88 @@
 {
-  "started_at": "20261008T133544Z",
+  "started_at": "20261009T132222Z",
   "policy_version": "2026-09-11-national-databases-v3",
   "offline": false,
   "group": "forecasts",
   "steps": [
     {
       "step": "wasde",
-      "returncode": 0,
-      "seconds": 0.96
+      "returncode": 2,
+      "seconds": 1.13
     },
     {
       "step": "cropwatch",
       "returncode": 0,
-      "seconds": 78.16
+      "seconds": 89.17
     },
     {
       "step": "casde",
       "returncode": 2,
-      "seconds": 3.95
+      "seconds": 4.85
     },
     {
       "step": "local_forecasts_aafc",
       "returncode": 0,
-      "seconds": 1.63
+      "seconds": 1.27
     },
     {
       "step": "local_forecasts_abares",
       "returncode": 2,
-      "seconds": 35.69
+      "seconds": 35.66
     },
     {
       "step": "local_forecasts_conab",
       "returncode": 0,
-      "seconds": 5.09
+      "seconds": 5.02
     },
     {
       "step": "local_forecasts_dafw",
       "returncode": 0,
-      "seconds": 3.89
+      "seconds": 3.82
     },
     {
       "step": "local_forecasts_cec",
       "returncode": 0,
-      "seconds": 5.55
+      "seconds": 4.55
     },
     {
       "step": "local_forecasts_ec",
       "returncode": 0,
-      "seconds": 5.76
+      "seconds": 5.09
     },
     {
       "step": "local_forecasts_bcr",
       "returncode": 0,
-      "seconds": 3.59
+      "seconds": 4.51
     },
     {
       "step": "local_forecasts_uga",
       "returncode": 0,
-      "seconds": 2.0
+      "seconds": 1.76
     },
     {
       "step": "local_forecasts_us_nass",
       "returncode": 0,
-      "seconds": 1.66
+      "seconds": 1.25
     },
     {
       "step": "china_outlook",
       "returncode": 0,
-      "seconds": 133.58
+      "seconds": 183.62
     },
     {
       "step": "validate",
       "returncode": 0,
-      "seconds": 0.76
+      "seconds": 0.77
     },
     {
       "step": "publish",
       "returncode": 0,
-      "seconds": 44.35
+      "seconds": 37.49
     },
     {
       "step": "parquet",
       "returncode": 0,
-      "seconds": 0.66
+      "seconds": 0.68
     }
   ],
   "publication_complete": true,
