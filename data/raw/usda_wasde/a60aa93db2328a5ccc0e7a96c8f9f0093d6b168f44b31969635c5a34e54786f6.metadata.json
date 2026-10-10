@@ -1,0 +1,12 @@
+{
+  "document_id": "370f0deb39f10c6938467a9c11fe8edcbc12208d069360634884af112aaa623b",
+  "source": "usda_wasde",
+  "source_url": "https://www.usda.gov/oce/commodity/wasde/wasde1026.txt",
+  "raw_path": "data/raw/usda_wasde/a60aa93db2328a5ccc0e7a96c8f9f0093d6b168f44b31969635c5a34e54786f6.txt",
+  "sha256": "a60aa93db2328a5ccc0e7a96c8f9f0093d6b168f44b31969635c5a34e54786f6",
+  "publication_date": "2026-10-09",
+  "available_date": "2026-10-10",
+  "download_timestamp": "2026-10-10T12:37:02.865575+00:00",
+  "publication_date_basis": "USDA release calendar; content correction first observed",
+  "title": "WASDE 2026-10"
+}
