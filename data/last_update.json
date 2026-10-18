@@ -1,5 +1,5 @@
 {
-  "started_at": "20261017T104925Z",
+  "started_at": "20261018T111227Z",
   "policy_version": "2026-09-11-national-databases-v3",
   "offline": false,
   "group": "forecasts",
@@ -7,67 +7,67 @@
     {
       "step": "wasde",
       "returncode": 2,
-      "seconds": 1.17
+      "seconds": 1.63
     },
     {
       "step": "cropwatch",
       "returncode": 0,
-      "seconds": 88.34
+      "seconds": 88.07
     },
     {
       "step": "casde",
       "returncode": 2,
-      "seconds": 4.65
+      "seconds": 7.65
     },
     {
       "step": "local_forecasts_aafc",
       "returncode": 0,
-      "seconds": 1.41
+      "seconds": 1.51
     },
     {
       "step": "local_forecasts_abares",
       "returncode": 2,
-      "seconds": 35.7
+      "seconds": 35.94
     },
     {
       "step": "local_forecasts_conab",
       "returncode": 0,
-      "seconds": 5.01
+      "seconds": 5.34
     },
     {
       "step": "local_forecasts_dafw",
       "returncode": 0,
-      "seconds": 3.05
+      "seconds": 3.6
     },
     {
       "step": "local_forecasts_cec",
       "returncode": 0,
-      "seconds": 4.55
+      "seconds": 4.82
     },
     {
       "step": "local_forecasts_ec",
       "returncode": 0,
-      "seconds": 3.78
+      "seconds": 5.16
     },
     {
       "step": "local_forecasts_bcr",
       "returncode": 0,
-      "seconds": 3.85
+      "seconds": 3.71
     },
     {
       "step": "local_forecasts_uga",
       "returncode": 0,
-      "seconds": 1.75
+      "seconds": 2.23
     },
     {
       "step": "local_forecasts_us_nass",
       "returncode": 0,
-      "seconds": 1.0
+      "seconds": 1.31
     },
     {
       "step": "china_outlook",
       "returncode": 0,
-      "seconds": 193.28
+      "seconds": 160.78
     },
     {
       "step": "validate",
@@ -77,12 +77,12 @@
     {
       "step": "publish",
       "returncode": 0,
-      "seconds": 44.47
+      "seconds": 44.9
     },
     {
       "step": "parquet",
       "returncode": 0,
-      "seconds": 0.66
+      "seconds": 0.69
     }
   ],
   "publication_complete": true,
