@@ -1,5 +1,5 @@
 {
-  "started_at": "20261019T132345Z",
+  "started_at": "20261020T114335Z",
   "policy_version": "2026-09-11-national-databases-v3",
   "offline": false,
   "group": "forecasts",
@@ -7,82 +7,82 @@
     {
       "step": "wasde",
       "returncode": 2,
-      "seconds": 1.23
+      "seconds": 0.98
     },
     {
       "step": "cropwatch",
       "returncode": 0,
-      "seconds": 91.6
+      "seconds": 83.25
     },
     {
       "step": "casde",
-      "returncode": 1,
-      "seconds": 3.2
+      "returncode": 2,
+      "seconds": 6.39
     },
     {
       "step": "local_forecasts_aafc",
       "returncode": 0,
-      "seconds": 1.35
+      "seconds": 0.97
     },
     {
       "step": "local_forecasts_abares",
       "returncode": 2,
-      "seconds": 35.87
+      "seconds": 35.8
     },
     {
       "step": "local_forecasts_conab",
       "returncode": 0,
-      "seconds": 4.26
+      "seconds": 4.57
     },
     {
       "step": "local_forecasts_dafw",
       "returncode": 0,
-      "seconds": 3.32
+      "seconds": 3.7
     },
     {
       "step": "local_forecasts_cec",
       "returncode": 0,
-      "seconds": 4.46
+      "seconds": 4.07
     },
     {
       "step": "local_forecasts_ec",
       "returncode": 0,
-      "seconds": 3.85
+      "seconds": 4.99
     },
     {
       "step": "local_forecasts_bcr",
       "returncode": 0,
-      "seconds": 3.53
+      "seconds": 4.48
     },
     {
       "step": "local_forecasts_uga",
       "returncode": 0,
-      "seconds": 1.67
+      "seconds": 1.45
     },
     {
       "step": "local_forecasts_us_nass",
       "returncode": 0,
-      "seconds": 1.05
+      "seconds": 1.01
     },
     {
       "step": "china_outlook",
       "returncode": 0,
-      "seconds": 159.42
+      "seconds": 175.73
     },
     {
       "step": "validate",
       "returncode": 0,
-      "seconds": 0.79
+      "seconds": 0.49
     },
     {
       "step": "publish",
       "returncode": 0,
-      "seconds": 43.91
+      "seconds": 19.85
     },
     {
       "step": "parquet",
       "returncode": 0,
-      "seconds": 0.64
+      "seconds": 0.48
     }
   ],
   "publication_complete": true,
